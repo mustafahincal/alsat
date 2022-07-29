@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\musta\\Desktop\\staj-project\\project-server\\Primefor-Staj-Project\\ConsoleUI\\ConsoleUI.csproj": {}
+    "C:\\Users\\musta\\Desktop\\staj-project\\project-server\\project-server\\ConsoleUI\\ConsoleUI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\musta\\Desktop\\staj-project\\project-server\\Primefor-Staj-Project\\ConsoleUI\\ConsoleUI.csproj": {
+    "C:\\Users\\musta\\Desktop\\staj-project\\project-server\\project-server\\ConsoleUI\\ConsoleUI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\musta\\Desktop\\staj-project\\project-server\\Primefor-Staj-Project\\ConsoleUI\\ConsoleUI.csproj",
+        "projectUniqueName": "C:\\Users\\musta\\Desktop\\staj-project\\project-server\\project-server\\ConsoleUI\\ConsoleUI.csproj",
         "projectName": "ConsoleUI",
-        "projectPath": "C:\\Users\\musta\\Desktop\\staj-project\\project-server\\Primefor-Staj-Project\\ConsoleUI\\ConsoleUI.csproj",
+        "projectPath": "C:\\Users\\musta\\Desktop\\staj-project\\project-server\\project-server\\ConsoleUI\\ConsoleUI.csproj",
         "packagesPath": "C:\\Users\\musta\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\musta\\Desktop\\staj-project\\project-server\\Primefor-Staj-Project\\ConsoleUI\\obj\\",
+        "outputPath": "C:\\Users\\musta\\Desktop\\staj-project\\project-server\\project-server\\ConsoleUI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\musta\\AppData\\Roaming\\NuGet\\NuGet.Config",
