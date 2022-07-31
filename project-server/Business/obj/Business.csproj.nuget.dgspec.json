@@ -28,6 +28,9 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
+              "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\DataAccess\\DataAccess.csproj": {
+                "projectPath": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\DataAccess\\DataAccess.csproj"
+              },
               "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\Entities\\Entities.csproj": {
                 "projectPath": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\Entities\\Entities.csproj"
               }
@@ -171,6 +174,74 @@
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[6.22.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\DataAccess\\DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\DataAccess\\DataAccess.csproj",
+        "projectName": "DataAccess",
+        "projectPath": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\DataAccess\\DataAccess.csproj",
+        "packagesPath": "C:\\Users\\musta\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\DataAccess\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\musta\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\Entities\\Entities.csproj": {
+                "projectPath": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\Entities\\Entities.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.7, )"
             }
           },
           "imports": [

@@ -1,0 +1,5 @@
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\obj\Debug\net6.0\Business.csproj.AssemblyReference.cache
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\obj\Debug\net6.0\Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\obj\Debug\net6.0\Business.AssemblyInfoInputs.cache
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\obj\Debug\net6.0\Business.AssemblyInfo.cs
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\obj\Debug\net6.0\Business.csproj.CoreCompileInputs.cache

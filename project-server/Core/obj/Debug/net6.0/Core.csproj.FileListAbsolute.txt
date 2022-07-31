@@ -1,0 +1,12 @@
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Core\bin\Debug\net6.0\Core.deps.json
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Core\bin\Debug\net6.0\Core.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Core\bin\Debug\net6.0\Core.pdb
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Core\obj\Debug\net6.0\Core.csproj.AssemblyReference.cache
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Core\obj\Debug\net6.0\Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Core\obj\Debug\net6.0\Core.AssemblyInfoInputs.cache
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Core\obj\Debug\net6.0\Core.AssemblyInfo.cs
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Core\obj\Debug\net6.0\Core.csproj.CoreCompileInputs.cache
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Core\obj\Debug\net6.0\Core.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Core\obj\Debug\net6.0\refint\Core.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Core\obj\Debug\net6.0\Core.pdb
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Core\obj\Debug\net6.0\ref\Core.dll
