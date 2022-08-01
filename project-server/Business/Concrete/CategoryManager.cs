@@ -18,6 +18,24 @@ namespace Business.Concrete
             _categortDal = categortDal;
         }
 
+        public IResult Add(Category category)
+        {
+            _categortDal.Add(category);
+            return new SuccessResult("Marka eklendi");
+        }
+
+        public IResult Delete(Category category)
+        {
+            _categortDal.Delete(category);
+            return new SuccessResult("Marka silindi");
+        }
+
+        public IResult Update(Category category)
+        {
+            _categortDal.Update(category);
+            return new SuccessResult("Marka güncellendi");
+        }
+
         public IDataResult<List<Category>> GetAll()
         {
             return new SuccessDataResult<List<Category>>(_categortDal.GetAll());
