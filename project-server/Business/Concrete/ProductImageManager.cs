@@ -50,7 +50,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<ProductImage>>(_productImageDal.GetAll(), "Araba resimleri getirildi");
         }
 
-        public IDataResult<List<ProductImage>> GetByCarId(int productId)
+        public IDataResult<List<ProductImage>> GetByProductId(int productId)
         {
             var result = BusinessRules.Run(CheckCarImage(productId));
             if (result != null)
