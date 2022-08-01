@@ -15,5 +15,7 @@ namespace Business.Abstract
         IResult Add(Offer offer);
         IResult Delete(Offer offer);
         IResult Update(Offer offer);
+
+        IDataResult<List<Offer>> GetByUserId(int userId);
     }
 }

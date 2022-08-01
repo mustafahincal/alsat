@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Core.Utilities.Results;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,13 @@ namespace Business.Concrete
 {
     public class OfferManager : IOfferService
     {
-        public IResult Add(Offer offer)
+        IOfferDal _offerDal;
+        public OfferManager(IOfferDal offerDal)
+        {
+            _offerDal = offerDal;
+        }
+
+         public IResult Add(Offer offer)
         {
             throw new NotImplementedException();
         }
@@ -29,6 +36,11 @@ namespace Business.Concrete
         public IDataResult<Offer> GetById(int offerId)
         {
             throw new NotImplementedException();
+        }
+
+        public IDataResult<List<Offer>> GetByUserId(int userId)
+        {
+            return new SuccessDataResult<List<Offer>>(_offerDal.GetAll(o => o.UserId == userId));
         }
 
         public IResult Update(Offer offer)
