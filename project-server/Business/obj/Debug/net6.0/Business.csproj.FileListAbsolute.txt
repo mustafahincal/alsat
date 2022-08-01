@@ -3,3 +3,17 @@ C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\obj\Debug\net6.0\Business.AssemblyInfoInputs.cache
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\obj\Debug\net6.0\Business.AssemblyInfo.cs
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\obj\Debug\net6.0\Business.csproj.CoreCompileInputs.cache
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\bin\Debug\net6.0\Business.deps.json
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\bin\Debug\net6.0\Business.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\bin\Debug\net6.0\Business.pdb
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\bin\Debug\net6.0\Core.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\bin\Debug\net6.0\DataAccess.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\bin\Debug\net6.0\Entities.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\bin\Debug\net6.0\DataAccess.pdb
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\bin\Debug\net6.0\Entities.pdb
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\bin\Debug\net6.0\Core.pdb
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\obj\Debug\net6.0\Business.csproj.CopyComplete
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\obj\Debug\net6.0\Business.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\obj\Debug\net6.0\refint\Business.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\obj\Debug\net6.0\Business.pdb
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Business\obj\Debug\net6.0\ref\Business.dll

@@ -10,3 +10,5 @@ C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Core\obj\
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Core\obj\Debug\net6.0\refint\Core.dll
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Core\obj\Debug\net6.0\Core.pdb
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Core\obj\Debug\net6.0\ref\Core.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Core\bin\Debug\net6.0\Core.runtimeconfig.json
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\Core\obj\Debug\net6.0\Core.genruntimeconfig.cache

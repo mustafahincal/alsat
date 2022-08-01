@@ -27,13 +27,13 @@ namespace Business.Concrete
 
         public IResult Add(IFormFile file, ProductImage productImage, int productId)
         {
-            IResult result = BusinessRules.Run(CheckIfCarImageLimit(productImage.Id));
+            IResult result = BusinessRules.Run(CheckIfCarImageLimit(productImage.ProductImageId));
             if (result != null)
             {
                 return result;
             }
             productImage.ImagePath = _fileHelper.Upload(file, FilePath.ImagesPath);
-            productImage.Id = productId;
+            productImage.ProductImageId = productId;
             _productImageDal.Add(productImage);
             return new SuccessResult("Resim eklendi");
         }
@@ -57,12 +57,12 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<ProductImage>>("default image");
             }
-            return new SuccessDataResult<List<ProductImage>>(_productImageDal.GetAll(p => p.Id == productId));
+            return new SuccessDataResult<List<ProductImage>>(_productImageDal.GetAll(p => p.ProductId == productId));
         }
 
         public IDataResult<ProductImage> GetByImageId(int imageId)
         {
-            return new SuccessDataResult<ProductImage>(_productImageDal.Get(c => c.Id == imageId));
+            return new SuccessDataResult<ProductImage>(_productImageDal.Get(p => p.ProductId == imageId));
         }
 
         public IResult Update(IFormFile file, ProductImage productImage)
@@ -74,7 +74,7 @@ namespace Business.Concrete
 
         private IResult CheckIfCarImageLimit(int productId)
         {
-            var result = _productImageDal.GetAll(p => p.Id == productId).Count;
+            var result = _productImageDal.GetAll(p => p.ProductId == productId).Count;
             if (result >= 5)
             {
                 return new ErrorResult();
@@ -84,7 +84,7 @@ namespace Business.Concrete
 
         private IResult CheckCarImage(int productId)
         {
-            var result = _productImageDal.GetAll(p => p.Id == productId).Count;
+            var result = _productImageDal.GetAll(p => p.ProductId == productId).Count;
             if (result > 0)
             {
                 return new SuccessResult();
