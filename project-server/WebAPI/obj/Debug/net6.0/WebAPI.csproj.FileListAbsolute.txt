@@ -10,9 +10,12 @@ C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bi
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Autofac.Extras.DynamicProxy.dll
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Castle.Core.dll
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\FluentValidation.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Humanizer.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
@@ -73,5 +76,3 @@ C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\ob
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.pdb
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.genruntimeconfig.cache
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\ref\WebAPI.dll
-C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Humanizer.dll
-C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll

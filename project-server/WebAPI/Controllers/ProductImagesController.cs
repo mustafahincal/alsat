@@ -18,7 +18,7 @@ namespace WebAPI.Controllers
         [HttpPost("add")]
         public IActionResult Add([FromForm] IFormFile? file, [FromForm] int productId)
         {
-            var productImage = new ProductImage() { Id = productId };
+            var productImage = new ProductImage() { ProductId = productId };
             var result = _productImageService.Add(file, productImage, productId);
             if (result.Success)
             {
@@ -30,7 +30,7 @@ namespace WebAPI.Controllers
         [HttpPost("delete")]
         public IActionResult Delete(ProductImage productImage)
         {
-            var imageToDelete = _productImageService.GetByImageId(productImage.Id).Data;
+            var imageToDelete = _productImageService.GetByImageId(productImage.ProductImageId).Data;
             var result = _productImageService.Delete(imageToDelete);
             if (result.Success)
             {

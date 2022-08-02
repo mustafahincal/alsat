@@ -19,10 +19,10 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var result = from p in context.Products
                              join c in context.Categories
-                             on p.CategoryId equals c.Id
+                             on p.CategoryId equals c.CategoryId
                              select new ProductDetailDto
                              {
-                                 ProductId = p.Id,
+                                 ProductId = p.ProductId,
                                  ProductName = p.Name,
                                  CategoryName = c.Name,
                                  Price = p.Price

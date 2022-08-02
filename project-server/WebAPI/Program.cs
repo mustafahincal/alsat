@@ -1,11 +1,59 @@
-var builder = WebApplication.CreateBuilder(args);
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Business.DependencyResolvers.Autofac;
+using Core.DependencyResolvers;
+using Core.Extensions;
+using Core.Utilities.IoC;
+using Core.Utilities.Security.Encryption;
+using Core.Utilities.Security.JWT;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
+var builder = WebApplication.CreateBuilder(args);
+// zararý yok da bunu çözeriz biraz ben bakayým benim pc'de bulunca yazarým sana
+// o .vs sorununu çözdük zaten , tamam þimdi normal commit atbirlm de mi evet he bi de, biz hackathon da ayrý ayrý omluþtu, senin deðiþikleri ben görmüyordum ama bunda, client'dakini de burda göerüyrum mesela onu nasýl kurmuþtun baþta orda ben görüyordum senin deðiþiklikleri sen vs code'da sadece
+// react uygulamasýný açtýðýndan sende gözükmüyordu
 // Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Autofac
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
+builder.Host.ConfigureContainer<ContainerBuilder>(builder => {
+    builder.RegisterModule(new AutofacBusinessModule());
+});
+
+
+// JWT
+var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options => {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidIssuer = tokenOptions.Issuer,
+            ValidAudience = tokenOptions.Audience,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
+        };
+    });
+
+// IoC
+builder.Services.AddDependencyResolvers(new ICoreModule[]
+{
+    new CoreModule()
+});
+
+// Web Baðlantý:?
+builder.Services.AddCors();
+
 
 var app = builder.Build();
 
@@ -15,6 +63,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseStaticFiles();
+
+app.ConfigureCustomExceptionMiddleware();
+
+// izin
+app.UseCors(builder => builder.WithOrigins("http://localhost:3000").AllowAnyHeader());
 
 app.UseHttpsRedirection();
 
