@@ -10,7 +10,7 @@ import { useFileContext } from "../../../context/FileContext";
 import { addImage } from "../../../services/productImageService";
 import { useProductContext } from "../../../context/ProductContext";
 
-function UpdateCar() {
+function Updateproduct() {
   const { brands, setBrands } = useBrandContext();
   const { colors, setColors } = useColorContext();
   const { selectedBrand, setSelectedBrand } = useBrandContext();
@@ -33,7 +33,7 @@ function UpdateCar() {
         //   .then((response) => {
         //     if (response.success) {
         //       toast.success(response.message);
-        //       getCar(selectedProduct.productId).then((result) =>
+        //       getproduct(selectedProduct.productId).then((result) =>
         //         setselectedProduct(result.data[0])
         //       );
         //     }
@@ -176,4 +176,4 @@ function UpdateCar() {
   );
 }
 
-export default UpdateCar;
+export default Updateproduct;
