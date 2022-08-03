@@ -35,7 +35,8 @@ namespace DataAccess.Concrete.EntityFramework
                                  CategoryName = c.Name,
                                  ColorName = cl.Name,
                                  BrandName = b.Name,
-                                 Price = p.Price
+                                 Price = p.Price,
+                                 ImagePath = (from pi in context.ProductImages where pi.ProductId == p.ProductId select pi.ImagePath).FirstOrDefault()
                              };
                 return filter == null
                 ? result.ToList()

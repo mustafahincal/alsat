@@ -18,5 +18,6 @@ namespace Entities.Dtos
         public string BrandName { get; set; }
         public string ColorName { get; set; }
         public int Price { get; set; }
+        public string ImagePath { get; set; }
     }
 }
