@@ -1,10 +1,18 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { getFromLocalStorage } from "../services/localStorageService";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(true);
   const [isLogged, setIsLogged] = useState(false);
+
+  useEffect(() => {
+    if (getFromLocalStorage("isLogged")) {
+      setIsLogged(true);
+    }
+  }, []);
+
   const values = {
     isAdmin,
     setIsAdmin,

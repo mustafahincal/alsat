@@ -3,22 +3,16 @@ import {
   getProducts,
   getProductsByBrand,
   getProductsByBrandAndByColor,
+  getProductsByCategory,
   getProductsByColor,
 } from "../../services/productService";
 import { NavLink, useParams } from "react-router-dom";
 import defaultImage from "../../assets/default.png";
 import { useProductContext } from "../../context/ProductContext";
-import { useBrandContext } from "../../context/BrandContext";
-import { useColorContext } from "../../context/ColorContext";
-import { useFilterContext } from "../../context/FilterContext";
-import { useAuthContext } from "../../context/AuthContext";
 
 function Products() {
   const { products, setProducts } = useProductContext();
-  const { brandId, colorId } = useParams();
-  const { brands } = useBrandContext();
-  const { colors } = useColorContext();
-  const { isAdmin } = useAuthContext();
+  const { brandId, colorId, categoryId } = useParams();
 
   const apiImagesUrl = "https://localhost:44322/uploads/images/";
 
@@ -27,10 +21,14 @@ function Products() {
       getProductsByBrand(brandId).then((result) => setProducts(result.data));
     } else if (colorId) {
       getProductsByColor(colorId).then((result) => setProducts(result.data));
+    } else if (categoryId) {
+      getProductsByCategory(categoryId).then((result) =>
+        setProducts(result.data)
+      );
     } else {
       getProducts().then((result) => setProducts(result.data));
     }
-  }, [brandId, colorId]);
+  }, [brandId, colorId, categoryId]);
 
   return (
     <div className="bg-gray-100">

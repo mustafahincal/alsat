@@ -2,10 +2,18 @@ import { get, post } from "./request";
 const apiUrl = "https://localhost:44350/api";
 
 export const getProducts = () => get(apiUrl + "/products/getproductdetails");
+
 export const getProductsByBrand = (brandId) =>
   get(apiUrl + "/products/getproductdetailsbybrandid?brandId=" + brandId);
+
 export const getProductsByColor = (colorId) =>
   get(apiUrl + "/products/getproductdetailsbycolorid?colorId=" + colorId);
+
+export const getProductsByCategory = (categoryId) =>
+  get(
+    apiUrl + "/products/getproductdetailsbycategoryid?categoryId=" + categoryId
+  );
+
 export const getProduct = (id) =>
   get(apiUrl + "/products/getproductdetailsbyid?id=" + id);
 

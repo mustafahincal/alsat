@@ -10,6 +10,7 @@ function Navi() {
 
   const handleLogOut = () => {
     setIsLogged(false);
+    removeFromLocalStorage("isLogged");
     removeFromLocalStorage("token");
   };
 
@@ -71,7 +72,7 @@ function Navi() {
                 </NavLink>
                 <span
                   className="cursor-pointer text-sm inline-flex h-8 items-center px-3 bg-gray-200 text-red-500  rounded hover:bg-red-500 hover:text-white"
-                  onClick={() => handleLogOut(false)}
+                  onClick={() => handleLogOut()}
                 >
                   Çıkış Yap
                 </span>

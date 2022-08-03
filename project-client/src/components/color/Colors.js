@@ -3,13 +3,13 @@ import { getColors } from "../../services/colorService";
 import { NavLink } from "react-router-dom";
 import { useColorContext } from "../../context/ColorContext";
 
-function Color() {
+function Colors() {
   const { colors, setColors } = useColorContext();
   useEffect(() => {
     getColors().then((result) => setColors(result.data));
   }, []);
   return (
-    <div className="bg-white  rounded-lg flex flex-col shadow-item mt-5">
+    <div className="bg-white  rounded-lg flex flex-col shadow-item">
       <NavLink
         to="/main/products/"
         className="px-2  rounded py-2 border-b-2 font-bold"
@@ -29,4 +29,4 @@ function Color() {
   );
 }
 
-export default Color;
+export default Colors;

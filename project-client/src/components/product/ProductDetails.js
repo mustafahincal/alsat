@@ -15,7 +15,7 @@ function ProductDetails() {
   }, []);
 
   return (
-    <div className="p-16 flex justify-between">
+    <div className="py-24 flex justify-between px-36">
       <div className="w-2/5 mb-16  bg-white rounded-md shadow-item mx-auto">
         <img
           src={
@@ -23,7 +23,7 @@ function ProductDetails() {
               ? apiImagesUrl + selectedProduct.imagePath
               : defaultImage
           }
-          className="object-cover object-center rounded-t-md"
+          className="object-cover object-center rounded-t-md w-full"
           alt=""
         />
         <div>

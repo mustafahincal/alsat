@@ -28,6 +28,7 @@ function Login() {
             if (response.success) {
               toast.success(response.message);
               setToLocalStorage("token", response.data.token);
+              setToLocalStorage("isLogged", true);
               values.email = "";
               values.password = "";
 
@@ -43,7 +44,7 @@ function Login() {
               navigate("/");
             }
           })
-          .catch((err) => toast.error(err.message));
+          .catch((err) => toast.error(err.response.data.message));
       },
       validationSchema: LoginSchema,
     });

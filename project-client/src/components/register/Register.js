@@ -29,6 +29,7 @@ function Register() {
           .then(async (response) => {
             if (response.success) {
               setToLocalStorage("token", response.data.token);
+              setToLocalStorage("isLogged", true);
               toast.success("Kayıt başarılı");
 
               let decode = await jwtDecode(response.data.token);
@@ -42,8 +43,9 @@ function Register() {
               setIsLogged(true);
               navigate("/");
             }
+            console.log(response);
           })
-          .catch((err) => toast.error(err.message));
+          .catch((err) => toast.error(err.response.data.message));
       },
       validationSchema: RegisterSchema,
     });

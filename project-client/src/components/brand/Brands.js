@@ -3,7 +3,7 @@ import { getBrands } from "../../services/brandService";
 import { NavLink } from "react-router-dom";
 import { useBrandContext } from "../../context/BrandContext";
 
-function Brand() {
+function Brands() {
   const { brands, setBrands } = useBrandContext();
   useEffect(() => {
     getBrands()
@@ -11,17 +11,17 @@ function Brand() {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <div className="bg-white  rounded-lg flex flex-col shadow-item">
+    <div className="bg-white  rounded-lg flex flex-col shadow-item my-5">
       <NavLink
         to="/main/products/"
-        className="px-2 hover:bg-gray-200 rounded py-2 border-b-2 font-bold"
+        className="px-2 rounded py-2 border-b-2 font-bold"
       >
         Tüm Markalar
       </NavLink>
       {brands.map((brand) => (
         <NavLink
           to={`/main/products/brand/${brand.brandId}`}
-          className={"px-2 rounded py-2 border-b-2  hover:bg-gray-200"}
+          className={"px-2 rounded py-2 border-b-2 "}
           key={brand.brandId}
         >
           {brand.name}
@@ -31,4 +31,4 @@ function Brand() {
   );
 }
 
-export default Brand;
+export default Brands;
