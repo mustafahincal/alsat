@@ -70,6 +70,18 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpGet("getproductdetailsbycategoryid")]
+        public IActionResult GetProductDetailsByCategoryId(int categoryId)
+        {
+            var result = _productService.GetProductDetailsByBrandId(categoryId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpGet("getproductdetailsbycolorid")]
         public IActionResult GetProductDetailsByColorId(int colorId)
         {

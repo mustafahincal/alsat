@@ -70,10 +70,18 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == id));
         }
 
-
         public IDataResult<Product> GetById(int productId)
         {
             return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == productId));
+        }
+        public IDataResult<List<ProductDetailDto>> GetProductDetailsById(int id)
+        {
+            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.ProductId == id), "Ürün Listelendi");
+        }
+
+        public IDataResult<List<ProductDetailDto>> GetProductDetailsByCategoryId(int categoryId)
+        {
+            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.CategoryId == categoryId), "Ürün Listelendi");
         }
 
         public IDataResult<List<Product>> GetByUnitPrice(decimal min, decimal max)
@@ -115,9 +123,6 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        public IDataResult<List<ProductDetailDto>> GetProductDetailsById(int id)
-        {
-            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.ProductId == id), "Ürün Listelendi");
-        }
+        
     }
 }
