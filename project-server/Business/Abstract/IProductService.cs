@@ -20,8 +20,8 @@ namespace Business.Abstract
         IResult Delete(Product product);
         IResult Update(Product product);
 
+        IDataResult<List<ProductDetailDto>> GetProductDetailsById(int id);
         IDataResult<List<ProductDetailDto>> GetProductDetailsByBrandId(int brandId);
-
         IDataResult<List<ProductDetailDto>> GetProductDetailsByColorId(int colorId);
     }
 }
