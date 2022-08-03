@@ -60,6 +60,10 @@ function Products() {
                 <p>{product.categoryName}</p>
               </div>
               <div className="flex justify-between">
+                <p>Renk</p>
+                <p>{product.colorName}</p>
+              </div>
+              <div className="flex justify-between">
                 <p>Fiyat</p>
                 <p>{product.price}₺</p>
               </div>
