@@ -7,6 +7,7 @@ import { getUserById } from "../../../services/userService";
 
 function UpdateUser() {
   const { selectedUser, setSelectedUser } = useUserContext();
+  const { id } = useParams();
 
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
