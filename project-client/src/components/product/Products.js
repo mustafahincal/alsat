@@ -24,9 +24,9 @@ function Products() {
 
   useEffect(() => {
     if (brandId) {
-      getProductsByBrand(brandId).then((result) => console.log(result.data));
+      getProductsByBrand(brandId).then((result) => setProducts(result.data));
     } else if (colorId) {
-      getProductsByColor(colorId).then((result) => console.log(result.data));
+      getProductsByColor(colorId).then((result) => setProducts(result.data));
     } else {
       getProducts().then((result) => setProducts(result.data));
     }
@@ -50,10 +50,19 @@ function Products() {
               className="rounded-t-md h-2/3 object-cover object-center w-full"
               alt=""
             />
-            <div className="text-center flex flex-col justify-between h-1/3 py-2">
-              <p>{product.brandName + " " + product.modelName}</p>
-              <p>{product.colorName}</p>
-              <p className="mt-1">{product.dailyPrice}₺</p>
+            <div className="text-center flex flex-col justify-between h-1/3 py-2 px-5">
+              <div className="flex justify-between">
+                <p>Ürün</p>
+                <p>{product.productName}</p>
+              </div>
+              <div className="flex justify-between">
+                <p>Kategori</p>
+                <p>{product.categoryName}</p>
+              </div>
+              <div className="flex justify-between">
+                <p>Fiyat</p>
+                <p>{product.price}₺</p>
+              </div>
             </div>
           </NavLink>
         ))}

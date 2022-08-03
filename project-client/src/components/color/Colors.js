@@ -12,15 +12,15 @@ function Color() {
     <div className="bg-white  rounded-lg flex flex-col shadow-item mt-5">
       <NavLink
         to="/main/products/"
-        className="px-2 hover:bg-gray-200 rounded py-2 border-b-2 font-bold"
+        className="px-2  rounded py-2 border-b-2 font-bold"
       >
         Tüm Renkler
       </NavLink>
       {colors.map((color) => (
         <NavLink
-          to={`/main/products/color/${color.id}`}
+          to={`/main/products/color/${color.colorId}`}
           className="px-2  rounded py-2 border-b-2"
-          key={color.id}
+          key={color.colorId}
         >
           {color.name}
         </NavLink>
