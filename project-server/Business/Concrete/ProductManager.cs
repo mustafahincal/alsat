@@ -83,7 +83,7 @@ namespace Business.Concrete
 
         public IDataResult<List<ProductDetailDto>> GetProductDetails()
         {
-            return new ErrorDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(), "Başarısız Deneme");
+            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(), Messages.ProductsListed);
         }
 
         private IResult CheckIfProductCountOfCategoryCorrect(int categoryId)
