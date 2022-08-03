@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import { Routes, Route, NavLink } from "react-router-dom";
 import ChangePassword from "./ChangePassword";
-import ProfileRentals from "./ProfileRentals";
 import UpdateUser from "../dashboard/update/UpdateUser";
-import { useCustomerContext } from "../../context/CustomerContext";
-import { getCustomerByUserId } from "../../services/customerService";
 import { useUserContext } from "../../context/UserContext";
 
 function Profile() {
@@ -37,7 +34,6 @@ function Profile() {
           <Route path="/" element={<h2>Profile main</h2>} />
           <Route path="/changePassword" element={<ChangePassword />} />
           <Route path="/updateUser" element={<UpdateUser />} />
-          <Route path="/profileRentals" element={<ProfileRentals />} />
         </Routes>
       </div>
     </div>

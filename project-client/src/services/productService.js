@@ -9,5 +9,16 @@ export const getProductsByColor = (colorId) =>
 export const getProduct = (id) =>
   get(apiUrl + "/products/getproductdetailsbyid?id=" + id);
 
+export const getProductsByBrandAndByColor = async (brandId, colorId) => {
+  let products;
+  await get(apiUrl + "/products/getproductdetails").then(
+    (result) => (products = result.data)
+  );
+  let filteredProducts = products.filter(
+    (product) => product.brandId == brandId && product.colorId == colorId
+  );
+  return filteredProducts;
+};
+
 export const addProduct = (data) => post(apiUrl + "/products/add", data);
 export const updateProduct = (data) => post(apiUrl + "/products/update", data);

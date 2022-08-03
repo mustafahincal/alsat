@@ -15,15 +15,15 @@ function OfferForProduct() {
     useFormik({
       initialValues: {},
       onSubmit: (values) => {
-        OfferForProduct(values)
-          .then((response) => {
-            if (response.success) {
-              toast.success("Teklif verme işlemi başarılı");
-            }
-          })
-          .catch((err) =>
-            err.Errors.map((error) => toast.error(error.ErrorMessage))
-          );
+        // OfferForProduct(values)
+        //   .then((response) => {
+        //     if (response.success) {
+        //       toast.success("Teklif verme işlemi başarılı");
+        //     }
+        //   })
+        //   .catch((err) =>
+        //     err.Errors.map((error) => toast.error(error.ErrorMessage))
+        //   );
         console.log(values);
       },
       validationSchema: OfferSchema,
@@ -37,7 +37,7 @@ function OfferForProduct() {
           <h1 className="font-extrabold text-3xl text-black mb-5">
             Ürün Bilgileri
           </h1>
-          {/* <div className="w-full flex rounded-l-md">
+          <div className="w-full flex rounded-l-md">
             <div className="w-1/2">
               <img
                 src={
@@ -51,16 +51,10 @@ function OfferForProduct() {
             </div>
             <div className="bg-darkBlue w-1/2 px-5 py-5  text-gray-100">
               <div className="flex flex-col justify-between h-full">
-                <div className="font-semibold text-lg">
-                  {selectedProduct.brandName + "  " + selectedProduct.modelName}
-                </div>
-                <div>{selectedProduct.modelYear}</div>
-                <div>{selectedProduct.colorName}</div>
-                <div>{selectedProduct.dailyPrice}₺</div>
-                <div>{selectedProduct.description}</div>
+                <div>{selectedProduct.name}</div>
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
         <div className="w-1/2 text-right">
           <h1 className="font-extrabold text-3xl text-black mb-5">Teklif</h1>

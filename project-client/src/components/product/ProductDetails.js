@@ -3,7 +3,7 @@ import { NavLink, useParams } from "react-router-dom";
 import defaultImage from "../../assets/default.png";
 import { useAuthContext } from "../../context/AuthContext";
 import { useProductContext } from "../../context/ProductContext";
-import { getCar } from "../../services/productservice";
+import { getProduct } from "../../services/productService";
 
 function ProductDetails() {
   const apiImagesUrl = "https://localhost:44322/uploads/images/";
@@ -11,7 +11,7 @@ function ProductDetails() {
   const { isAdmin } = useAuthContext();
   const { id } = useParams();
   useEffect(() => {
-    getCar(id).then((result) => setselectedProduct(result.data[0]));
+    getProduct(id).then((result) => setselectedProduct(result.data[0]));
   }, []);
 
   return (
@@ -26,32 +26,12 @@ function ProductDetails() {
           className="object-cover object-center rounded-t-md"
           alt=""
         />
-        {/* <div className="">
+        <div className="">
           <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
-            <div>Marka</div>
-            <div>{selectedProduct.brandName}</div>
+            <div>İsim</div>
+            <div>{selectedProduct.name}</div>
           </div>
-          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
-            <div>Model</div>
-            <div>{selectedProduct.modelName}</div>
-          </div>
-          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
-            <div>Renk</div>
-            <div>{selectedProduct.colorName}</div>
-          </div>
-          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
-            <div>Model Yılı</div>
-            <div>{selectedProduct.modelYear}</div>
-          </div>
-          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
-            <div>Kiralama Ücreti</div>
-            <div>{selectedProduct.dailyPrice}₺</div>
-          </div>
-          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
-            <div>Açıklama</div>
-            <div>{selectedProduct.description}</div>
-          </div>
-        </div> */}
+        </div>
       </div>
       <div className="w-1/2 pt-20">
         <div className="bg-white rounded-md w-1/2 m-auto p-10 flex flex-col gap-3 shadow-item text-center">

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { ProductSchema } from "../../../validations/productSchema";
 import { toast } from "react-toastify";
-import { addProduct } from "../../../services/productservice";
+import { addProduct } from "../../../services/productService";
 import { useBrandContext } from "../../../context/BrandContext";
 import { useColorContext } from "../../../context/ColorContext";
 import { getBrands } from "../../../services/brandService";
@@ -62,7 +62,6 @@ function AddProduct() {
                 value={values.brandId}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                onClick={() => setSelectedBrand(values.brandId)}
               >
                 <option value={0}>Marka Seçiniz</option>
                 {brands.map((brand) => (

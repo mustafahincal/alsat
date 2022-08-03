@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import {
-  getproducts,
-  getproductsByBrand,
-  getproductsByBrandAndByColor,
-  getproductsByColor,
-} from "../../services/productservice";
+  getProducts,
+  getProductsByBrand,
+  getProductsByBrandAndByColor,
+  getProductsByColor,
+} from "../../services/productService";
 import { NavLink, useParams } from "react-router-dom";
 import defaultImage from "../../assets/default.png";
-import { useCarContext } from "../../context/CarContext";
+import { useProductContext } from "../../context/ProductContext";
 import { useBrandContext } from "../../context/BrandContext";
 import { useColorContext } from "../../context/ColorContext";
 import { useFilterContext } from "../../context/FilterContext";
 import { useAuthContext } from "../../context/AuthContext";
 
 function Products() {
-  const { products, setProducts } = useCarContext();
+  const { products, setProducts } = useProductContext();
   const { brandId, colorId } = useParams();
   const { brands } = useBrandContext();
   const { colors } = useColorContext();
@@ -26,19 +26,17 @@ function Products() {
 
   useEffect(() => {
     if (brandId) {
-      getProductsByBrand(brandId).then((result) => setProducts(result.data));
+      getProductsByBrand(brandId).then((result) => console.log(result.data));
     } else if (colorId) {
-      getProductsByColor(colorId).then((result) => setProducts(result.data));
+      getProductsByColor(colorId).then((result) => console.log(result.data));
     } else {
-      getproducts().then((result) => setProducts(result.data));
+      getProducts().then((result) => console.log(result.data));
     }
   }, [brandId, colorId]);
 
   const handleFilter = () => {
     getProductsByBrandAndByColor(filterByBrand, filterByColor).then((data) => {
-      setProducts(data);
-      setFilterByBrand(0);
-      setFilterByColor(0);
+      console.log(data);
     });
   };
 

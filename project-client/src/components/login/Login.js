@@ -6,9 +6,8 @@ import { useAuthContext } from "../../context/AuthContext";
 import { toast } from "react-toastify";
 import { setToLocalStorage } from "../../services/localStorageService";
 import jwtDecode from "jwt-decode";
-import { setCurrentCustomer } from "../../services/customerService";
 import { useUserContext } from "../../context/UserContext";
-import { getUserById, setUser } from "../../services/userService";
+import { getUserById } from "../../services/userService";
 import { useNavigate } from "react-router-dom";
 
 function Login() {

@@ -1,6 +1,6 @@
 import React from "react";
-import products from "../car/products";
-import Brands from "..//brand/Brands";
+import Products from "../product/Products";
+import Brands from "../brand/Brands";
 import Colors from "../color/Colors";
 import { Routes, Route } from "react-router-dom";
 
@@ -13,10 +13,10 @@ function Main() {
       </div>
       <div className="col-span-8 py-10 pl-5">
         <Routes>
-          <Route path="/" element={<products />} />
-          <Route path="/products" element={<products />} />
-          <Route path="/products/brand/:brandId" element={<products />} />
-          <Route path="/products/color/:colorId" element={<products />} />
+          <Route path="/" element={<Products />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/brand/:brandId" element={<Products />} />
+          <Route path="/products/color/:colorId" element={<Products />} />
         </Routes>
       </div>
     </div>

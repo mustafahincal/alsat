@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
-import { UserSchema } from "../../../validations/userSchema";
 import { useUserContext } from "../../../context/UserContext";
 import { useParams } from "react-router-dom";
 import { getUserById } from "../../../services/userService";
@@ -19,7 +18,6 @@ function UpdateUser() {
       onSubmit: (values) => {
         console.log(values);
       },
-      validationSchema: UserSchema,
     });
 
   return (

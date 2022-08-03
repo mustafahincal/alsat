@@ -8,6 +8,7 @@ import { getColors } from "../../../services/colorService";
 import defaultImage from "../../../assets/default.png";
 import { useFileContext } from "../../../context/FileContext";
 import { addImage } from "../../../services/productImageService";
+import { useProductContext } from "../../../context/ProductContext";
 
 function UpdateCar() {
   const { brands, setBrands } = useBrandContext();
@@ -18,15 +19,9 @@ function UpdateCar() {
   const apiImagesUrl = "https://localhost:44322/uploads/images/";
 
   useEffect(() => {
-    getBrands().then((result) => {
-      setBrands(result.data);
-    });
+    getBrands().then((result) => setBrands(result.data));
     getColors().then((result) => setColors(result.data));
   }, []);
-
-  useEffect(() => {
-    getModelsByBrandId(selectedBrand).then((result) => setModels(result.data));
-  }, [selectedBrand]);
 
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({

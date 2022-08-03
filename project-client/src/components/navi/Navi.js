@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import { useUserContext } from "../../context/UserContext";
 import { removeFromLocalStorage } from "../../services/localStorageService";
-import logo from "../../assets/logo.png";
 
 function Navi() {
   const { isAdmin, isLogged, setIsLogged } = useAuthContext();
@@ -14,20 +13,16 @@ function Navi() {
     removeFromLocalStorage("token");
   };
 
-  const test = () => {
-    console.log(selectedUser);
-  };
-
   return (
     <div>
-      <nav className="flex justify-between items-center py-2 px-12 bg-darkBlue text-white font-bold">
+      <nav className="flex justify-between items-center py-5 px-12 bg-darkBlue text-white font-bold">
         <NavLink to="/" className={({ isActive }) => "logo text-3xl"}>
-          <img src={logo} className="w-20 h-20 bg-darkBlue" />
+          LOGO
         </NavLink>
         <div className="text-xl">
           <NavLink to="/  ">Anasayfa</NavLink>
           <NavLink to="/main" className="ml-10">
-            Arabalar
+            Ürünler
           </NavLink>
         </div>
         <div className="flex  items-center">
