@@ -19,5 +19,9 @@ namespace Business.Abstract
         IResult Add(Product product);
         IResult Delete(Product product);
         IResult Update(Product product);
+
+        IDataResult<List<ProductDetailDto>> GetProductDetailsByBrandId(int brandId);
+
+        IDataResult<List<ProductDetailDto>> GetProductDetailsByColorId(int colorId);
     }
 }

@@ -49,7 +49,26 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-
+        [HttpGet("getproductdetailsbybrandid")]
+        public IActionResult GetProductDetailsByBrandId(int brandId)
+        {
+            var result = _productService.GetProductDetailsByBrandId(brandId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpGet("getproductdetailsbycolorid")]
+        public IActionResult GetProductDetailsByColorId(int colorId)
+        {
+            var result = _productService.GetProductDetailsByColorId(colorId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
 
         [HttpPost("add")]
         public IActionResult Add(Product product)

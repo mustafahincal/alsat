@@ -10,9 +10,13 @@ namespace Entities.Dtos
     public class ProductDetailDto : IDto
     {
         public int ProductId { get; set; }
+        public int CategoryId { get; set; }
+        public int BrandId { get; set; }
+        public int ColorId { get; set; }
         public string ProductName { get; set; }
         public string CategoryName { get; set; }
-        public decimal Price { get; set; }
-
+        public string BrandName { get; set; }
+        public string ColorName { get; set; }
+        public int Price { get; set; }
     }
 }

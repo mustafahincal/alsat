@@ -86,6 +86,14 @@ namespace Business.Concrete
             return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(), Messages.ProductsListed);
         }
 
+        public IDataResult<List<ProductDetailDto>> GetProductDetailsByBrandId(int brandId)
+        {
+            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.BrandId == brandId), Messages.ProductsListed);
+        }
+        public IDataResult<List<ProductDetailDto>> GetProductDetailsByColorId(int colorId)
+        {
+            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.ColorId == colorId), Messages.ProductsListed);
+        }
         private IResult CheckIfProductCountOfCategoryCorrect(int categoryId)
         {
             return new SuccessResult();
