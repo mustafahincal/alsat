@@ -1,5 +1,5 @@
 import { get, getByAxios, post } from "./request";
-const apiUrl = "https://localhost:44322/api";
+const apiUrl = "https://localhost:44350/api";
 
 export const getBrands = () => get(apiUrl + "/brands/getall");
 

@@ -28,7 +28,7 @@ function Products() {
     } else if (colorId) {
       getProductsByColor(colorId).then((result) => console.log(result.data));
     } else {
-      getProducts().then((result) => console.log(result.data));
+      getProducts().then((result) => setProducts(result.data));
     }
   }, [brandId, colorId]);
 
