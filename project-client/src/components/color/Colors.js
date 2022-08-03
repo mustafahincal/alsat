@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getColors } from "../../services/colorService";
 import { NavLink } from "react-router-dom";
 import { useColorContext } from "../../context/ColorContext";

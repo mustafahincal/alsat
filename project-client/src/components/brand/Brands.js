@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { getBrands, getBrandsByAxios } from "../../services/brandService";
+import { useEffect } from "react";
+import { getBrands } from "../../services/brandService";
 import { NavLink } from "react-router-dom";
 import { useBrandContext } from "../../context/BrandContext";
 

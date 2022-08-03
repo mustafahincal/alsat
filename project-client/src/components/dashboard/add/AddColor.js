@@ -17,15 +17,16 @@ function AddColor() {
         name: "",
       },
       onSubmit: (values) => {
-        postColor(values)
-          .then((response) => {
-            if (response.success) {
-              toast.success(response.message);
-            }
-          })
-          .catch((err) =>
-            err.Errors.map((error) => toast.error(error.ErrorMessage))
-          );
+        // postColor(values)
+        //   .then((response) => {
+        //     if (response.success) {
+        //       toast.success(response.message);
+        //     }
+        //   })
+        //   .catch((err) =>
+        //     err.Errors.map((error) => toast.error(error.ErrorMessage))
+        //   );
+        console.log(values);
       },
     });
 

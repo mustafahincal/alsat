@@ -1,8 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { ProductSchema } from "../../../validations/productSchema";
 import { toast } from "react-toastify";
-import { addCar } from "../../../services/productservice";
+import { addProduct } from "../../../services/productservice";
 import { useBrandContext } from "../../../context/BrandContext";
 import { useColorContext } from "../../../context/ColorContext";
 import { getBrands } from "../../../services/brandService";
@@ -23,15 +23,16 @@ function AddProduct() {
     useFormik({
       initialValues: {},
       onSubmit: (values) => {
-        addCar(values)
-          .then((response) => {
-            if (response.success) {
-              toast.success(response.message);
-            }
-          })
-          .catch((err) =>
-            err.Errors.map((error) => toast.error(error.ErrorMessage))
-          );
+        // addProduct(values)
+        //   .then((response) => {
+        //     if (response.success) {
+        //       toast.success(response.message);
+        //     }
+        //   })
+        //   .catch((err) =>
+        //     err.Errors.map((error) => toast.error(error.ErrorMessage))
+        //   );
+        console.log(values);
       },
       validationSchema: ProductSchema,
     });

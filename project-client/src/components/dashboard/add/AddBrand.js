@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
-import { getCreditCardById } from "../../../services/creditCardService";
 import { useBrandContext } from "../../../context/BrandContext";
 import { getBrands, postBrand } from "../../../services/brandService";
 import { toast } from "react-toastify";
@@ -17,15 +16,16 @@ function AddBrand() {
         name: "",
       },
       onSubmit: (values) => {
-        postBrand(values)
-          .then((response) => {
-            if (response.success) {
-              toast.success(response.message);
-            }
-          })
-          .catch((err) =>
-            err.Errors.map((error) => toast.error(error.ErrorMessage))
-          );
+        // postBrand(values)
+        //   .then((response) => {
+        //     if (response.success) {
+        //       toast.success(response.message);
+        //     }
+        //   })
+        //   .catch((err) =>
+        //     err.Errors.map((error) => toast.error(error.ErrorMessage))
+        //   );
+        console.log(values);
       },
     });
 
