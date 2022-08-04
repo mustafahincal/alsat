@@ -39,16 +39,40 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbyuserid")]
-        public IActionResult GetByUserId(int userId)
+
+        [HttpGet("getofferdetails")]
+        public IActionResult GetOfferDetails()
         {
-            var result = _offerService.GetByUserId(userId);
+            var result = _offerService.GetOfferDetails();
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
+
+        [HttpGet("getofferdetailsbyuserid")]
+        public IActionResult GetOfferDetailsByUserId(int userId)
+        {
+            var result = _offerService.GetOfferDetailsByUserId(userId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getofferdetailsbyownerid")]
+        public IActionResult GetOfferDetailsByOwnerId(int ownerId)
+        {
+            var result = _offerService.GetOfferDetailsByOwnerId(ownerId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
 
         [HttpPost("add")]
         public IActionResult Add(Offer offer)

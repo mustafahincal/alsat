@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Core.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,9 +21,12 @@ namespace Entities.Concrete
         public bool IsOfferable { get; set; }
         public bool IsSold { get; set; }
 
+        public int OwnerId { get; set; }
+
         public Category Category { get; set; }
         public Brand Brand { get; set; }
         public Color Color { get; set; }
+        public User Owner { get; set; }
 
 
     }

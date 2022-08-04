@@ -2,6 +2,7 @@
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,10 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
+        public IResult Update(Offer offer)
+        {
+            throw new NotImplementedException();
+        }
         public IDataResult<List<Offer>> GetAll()
         {
             throw new NotImplementedException();
@@ -43,9 +48,21 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Offer>>(_offerDal.GetAll(o => o.UserId == userId));
         }
 
-        public IResult Update(Offer offer)
+        public IDataResult<List<OfferDetailDto>> GetOfferDetails()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<OfferDetailDto>>(_offerDal.GetOfferDetails(), "Teklifler listelendi");
         }
+
+        public IDataResult<List<OfferDetailDto>> GetOfferDetailsByOwnerId(int ownerId)
+        {
+            return new SuccessDataResult<List<OfferDetailDto>>(_offerDal.GetOfferDetails(o => o.OwnerId == ownerId), "Teklifler listelendi");
+        }
+
+        public IDataResult<List<OfferDetailDto>> GetOfferDetailsByUserId(int userId)
+        {
+            return new SuccessDataResult<List<OfferDetailDto>>(_offerDal.GetOfferDetails(o => o.UserId == userId), "Teklifler listelendi");
+        }
+
+        
     }
 }
