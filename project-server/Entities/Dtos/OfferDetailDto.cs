@@ -10,11 +10,14 @@ namespace Entities.Dtos
     public class OfferDetailDto : IDto
     {
         public int OfferId { get; set; }
+        public bool IsApproved { get; set; }
         public int ProductId { get; set; }
         public int UserId { get; set; }
         public int OwnerId { get; set; }
-
         public int OfferedPrice { get; set; }
         public string ProductName { get; set; }
+        public string UserName { get; set; }
+        public string OwnerName { get; set; }
+
     }
 }

@@ -27,7 +27,6 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder => {
     builder.RegisterModule(new AutofacBusinessModule());
 });
 
-
 // JWT
 var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 

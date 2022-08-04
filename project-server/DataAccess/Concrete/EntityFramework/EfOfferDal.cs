@@ -21,13 +21,20 @@ namespace DataAccess.Concrete.EntityFramework
                 var result = from o in context.Offers
                              join p in context.Products
                              on o.ProductId equals p.ProductId
+                             join u in context.Users
+                             on p.OwnerId equals u.UserId
+                             join u2 in context.Users
+                             on o.UserId equals u2.UserId
                              select new OfferDetailDto
                              {
                                  OfferId = o.OfferId,
                                  ProductId = p.ProductId,
                                  OwnerId = p.OwnerId,
+                                 IsApproved = o.IsApproved,
                                  OfferedPrice = o.OfferedPrice,
                                  ProductName = p.Name,
+                                 OwnerName = u.FirstName + " " + u.LastName,
+                                 UserName = u2.FirstName + " " + u2.LastName,
                              };
                 return filter == null
                 ? result.ToList()
