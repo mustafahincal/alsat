@@ -66,6 +66,26 @@ function Products() {
                 <p>{product.price}₺</p>
               </div>
             </div>
+
+            {product.isOfferable ? (
+              <div className="py-0.5 bg-teal-500 rounded-b text-white text-center text-sm">
+                Teklif Verilebilir
+              </div>
+            ) : (
+              <div className="py-0.5 bg-indigo-500 rounded-b text-white text-center text-sm">
+                Teklif Verilemez
+              </div>
+            )}
+
+            {product.isSold ? (
+              <div className="py-0.5 bg-rose-500 rounded-b text-white text-center text-sm ">
+                Satıldı
+              </div>
+            ) : (
+              <div className="py-0.5 bg-lime-500 rounded-b text-white text-center text-sm">
+                Satılmadı
+              </div>
+            )}
           </NavLink>
         ))}
       </div>

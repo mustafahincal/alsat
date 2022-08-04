@@ -11,7 +11,7 @@ function Brands() {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <div className="bg-white  rounded-lg flex flex-col shadow-item my-5">
+    <div className="bg-white  rounded-lg flex flex-col shadow-item my-10">
       <NavLink
         to="/main/products/"
         className="px-2 rounded py-2 border-b-2 font-bold"
