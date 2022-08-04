@@ -7,10 +7,10 @@ import OfferForProduct from "./components/product/OfferForProduct";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import Dashboard from "./components/dashboard/Dashboard";
-import AddProduct from "./components/dashboard/add/AddProduct";
-import UpdateProduct from "./components/dashboard/update/UpdateProduct";
+import AddProduct from "./components/product/AddProduct";
+import UpdateProduct from "./components/product/UpdateProduct";
 import { ToastContainer } from "react-toastify";
-import UpdateUser from "./components/dashboard/update/UpdateUser";
+import UpdateUser from "./components/profile/UpdateUser";
 import Profile from "./components/profile/Profile";
 import Page404 from "./components/page404/Page404";
 

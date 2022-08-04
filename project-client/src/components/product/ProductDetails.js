@@ -62,6 +62,15 @@ function ProductDetails() {
               Ürünü Güncelle
             </NavLink>
           )}
+
+          {isAdmin && (
+            <NavLink
+              to={`/updateProduct/${selectedProduct.productId}`}
+              className="btn bg-red-500 font-bold py-3"
+            >
+              Ürünü Sil
+            </NavLink>
+          )}
         </div>
       </div>
     </div>

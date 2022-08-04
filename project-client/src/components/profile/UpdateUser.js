@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
-import { useUserContext } from "../../../context/UserContext";
+import { useUserContext } from "../../context/UserContext";
 import { useParams } from "react-router-dom";
-import { getUserById } from "../../../services/userService";
+import { getUserById } from "../../services/userService";
 
 function UpdateUser() {
   const { selectedUser, setSelectedUser } = useUserContext();

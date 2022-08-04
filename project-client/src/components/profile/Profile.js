@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Routes, Route, NavLink } from "react-router-dom";
 import ChangePassword from "./ChangePassword";
-import UpdateUser from "../dashboard/update/UpdateUser";
+import UpdateUser from "./UpdateUser";
 import { useUserContext } from "../../context/UserContext";
 
 function Profile() {
@@ -10,10 +10,16 @@ function Profile() {
       <div className="col-span-2 py-10 pr-5">
         <div className="bg-white  rounded-lg flex flex-col shadow-item ">
           <NavLink
-            to={"profileRentals"}
+            to={"givenOffers"}
             className="px-2  rounded py-2 border-b-2 hover:bg-gray-200"
           >
-            Kiralamalar
+            Verdiğim Teklifler
+          </NavLink>
+          <NavLink
+            to={"takenOffers"}
+            className="px-2  rounded py-2 border-b-2 hover:bg-gray-200"
+          >
+            Aldığım Teklifler
           </NavLink>
           <NavLink
             to={"changePassword"}

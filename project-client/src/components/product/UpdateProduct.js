@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
-import { useBrandContext } from "../../../context/BrandContext";
-import { useColorContext } from "../../../context/ColorContext";
-import { getBrands } from "../../../services/brandService";
-import { getColors } from "../../../services/colorService";
-import defaultImage from "../../../assets/default.png";
-import { useFileContext } from "../../../context/FileContext";
-import { addImage } from "../../../services/productImageService";
-import { useProductContext } from "../../../context/ProductContext";
+import { useBrandContext } from "../../context/BrandContext";
+import { useColorContext } from "../../context/ColorContext";
+import { getBrands } from "../../services/brandService";
+import { getColors } from "../../services/colorService";
+import defaultImage from "../../assets/default.png";
+import { useFileContext } from "../../context/FileContext";
+import { addImage } from "../../services/productImageService";
+import { useProductContext } from "../../context/ProductContext";
 
 function Updateproduct() {
   const { brands, setBrands } = useBrandContext();

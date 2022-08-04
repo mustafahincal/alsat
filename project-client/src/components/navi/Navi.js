@@ -68,7 +68,7 @@ function Navi() {
                     "text-sm inline-flex h-8 items-center px-3 rounded text-black bg-gray-200 hover:bg-black hover:text-white"
                   }
                 >
-                  Profile
+                  Hesabım
                 </NavLink>
                 <span
                   className="cursor-pointer text-sm inline-flex h-8 items-center px-3 bg-gray-200 text-red-500  rounded hover:bg-red-500 hover:text-white"
