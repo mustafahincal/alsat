@@ -3,6 +3,8 @@ import { Routes, Route, NavLink } from "react-router-dom";
 import ChangePassword from "./ChangePassword";
 import UpdateUser from "./UpdateUser";
 import { useUserContext } from "../../context/UserContext";
+import TakenOffers from "./TakenOffers";
+import GivenOffers from "./GivenOffers";
 
 function Profile() {
   return (
@@ -11,26 +13,23 @@ function Profile() {
         <div className="bg-white  rounded-lg flex flex-col shadow-item ">
           <NavLink
             to={"givenOffers"}
-            className="px-2  rounded py-2 border-b-2 hover:bg-gray-200"
+            className="px-2  rounded py-2 border-b-2 "
           >
             Verdiğim Teklifler
           </NavLink>
           <NavLink
             to={"takenOffers"}
-            className="px-2  rounded py-2 border-b-2 hover:bg-gray-200"
+            className="px-2  rounded py-2 border-b-2 "
           >
             Aldığım Teklifler
           </NavLink>
           <NavLink
             to={"changePassword"}
-            className="px-2  rounded py-2 border-b-2 hover:bg-gray-200"
+            className="px-2  rounded py-2 border-b-2  "
           >
             Şifre Değiştir
           </NavLink>
-          <NavLink
-            to={"updateUser"}
-            className="px-2 rounded py-2 border-b-2 hover:bg-gray-200"
-          >
+          <NavLink to={"updateUser"} className="px-2 rounded py-2 border-b-2 ">
             Bilgileri Değiştir
           </NavLink>
         </div>
@@ -40,6 +39,8 @@ function Profile() {
           <Route path="/" element={<h2>Profile main</h2>} />
           <Route path="/changePassword" element={<ChangePassword />} />
           <Route path="/updateUser" element={<UpdateUser />} />
+          <Route path="/takenOffers" element={<TakenOffers />} />
+          <Route path="/givenOffers" element={<GivenOffers />} />
         </Routes>
       </div>
     </div>

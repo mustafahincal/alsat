@@ -12,6 +12,7 @@ function Navi() {
     setIsLogged(false);
     removeFromLocalStorage("isLogged");
     removeFromLocalStorage("token");
+    removeFromLocalStorage("userId");
   };
 
   return (

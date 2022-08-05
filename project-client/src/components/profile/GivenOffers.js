@@ -1,52 +1,59 @@
 import React, { useEffect } from "react";
 import { getOfferDetailsByUserId } from "../../services/offerService";
-import { useOfferContext } from "../../context/UseOfferContext";
+import { useOfferContext } from "../../context/OfferContext";
 import { useUserContext } from "../../context/UserContext";
+import { getFromLocalStorage } from "../../services/localStorageService";
 
 function GivenOffers() {
-  const { offers, setOffers } = useOfferContext();
+  const { givenOffers, setGivenOffers } = useOfferContext();
   const { selectedUser } = useUserContext();
   useEffect(() => {
-    getOfferDetailsByUserId(selectedUser.id).then((result) =>
-      setOffers(result.data)
+    getOfferDetailsByUserId(getFromLocalStorage("userId")).then((result) =>
+      setGivenOffers(result.data)
     );
   }, []);
 
-  const handleApproveOffer = () => {};
-  const handleRefuseOffer = () => {};
+  const handleCancelOffer = () => {};
+  const handleIncreaseOffer = () => {};
+  const handleBuyProduct = () => {};
 
   return (
     <div>
-      {offers.map((offer, index) => (
+      {givenOffers.map((offer, index) => (
         <div
-          className="py-4 px-10 bg-white hover:bg-gray-100 rounded w-full mb-3 flex justify-between items-center text-xl"
+          className="py-4 px-10 bg-white rounded w-full mb-3 flex justify-between items-center text-xl"
           key={index}
         >
-          <div>{offer.ownerName}</div>
-          <div>{offer.userName}</div>
+          <div>Ürün Sahibi = {offer.ownerName}</div>
+          <div>Teklif Veren = {offer.userName}</div>
           <div>{offer.productName}</div>
           <div>{offer.offeredPrice}</div>
-          <div>
-            {offer.isApproved && (
+          <div className="flex">
+            {!offer.isApproved && (
               <div
-                onClick={() => handleApproveOffer()}
+                onClick={() => handleIncreaseOffer()}
                 className="btn bg-emerald-500 cursor-pointer"
               >
-                Teklifi Onayla
+                Teklifi Artır
               </div>
             )}
 
             {!offer.isApproved && (
               <div
-                onClick={() => handleRefuseOffer()}
-                className="btn bg-red-500 cursor-pointer"
+                onClick={() => handleCancelOffer()}
+                className="btn bg-red-500 ml-3 cursor-pointer"
               >
-                Teklifi Reddet
+                Teklifi Geri Çek
               </div>
             )}
 
             {offer.isApproved && (
-              <div className="btn bg-indigo-500">Satıldı</div>
+              <div
+                onClick={() => handleBuyProduct()}
+                className="btn bg-sky-500 ml-3 cursor-pointer"
+              >
+                Satın Al
+              </div>
             )}
           </div>
         </div>

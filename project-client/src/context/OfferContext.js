@@ -3,9 +3,10 @@ import { createContext, useContext, useState } from "react";
 const OfferContext = createContext();
 
 export const OfferProvider = ({ children }) => {
-  const [offers, setOffers] = useState([]);
+  const [takenOffers, setTakenOffers] = useState([]);
+  const [givenOffers, setGivenOffers] = useState([]);
 
-  const values = { offers, setOffers };
+  const values = { givenOffers, setGivenOffers, takenOffers, setTakenOffers };
 
   return (
     <OfferContext.Provider value={values}>{children}</OfferContext.Provider>

@@ -24,11 +24,11 @@ function Login() {
       onSubmit: (values) => {
         login(values)
           .then(async (response) => {
-            console.log(response);
             if (response.success) {
               toast.success(response.message);
               setToLocalStorage("token", response.data.token);
               setToLocalStorage("isLogged", true);
+
               values.email = "";
               values.password = "";
 
@@ -40,6 +40,7 @@ function Login() {
                 ]
               );
               setSelectedUser(responseUser.data);
+              setToLocalStorage("userId", responseUser.data.userId);
               setIsLogged(true);
               navigate("/");
             }
