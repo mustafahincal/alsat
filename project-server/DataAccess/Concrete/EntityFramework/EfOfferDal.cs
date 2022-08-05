@@ -29,7 +29,8 @@ namespace DataAccess.Concrete.EntityFramework
                              {
                                  OfferId = o.OfferId,
                                  ProductId = p.ProductId,
-                                 OwnerId = p.OwnerId,
+                                 OwnerId = (int)p.OwnerId,
+                                 UserId = (int)o.UserId,
                                  IsApproved = o.IsApproved,
                                  OfferedPrice = o.OfferedPrice,
                                  ProductName = p.Name,

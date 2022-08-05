@@ -20,9 +20,7 @@ namespace Entities.Concrete
         public int Price { get; set; }
         public bool IsOfferable { get; set; }
         public bool IsSold { get; set; }
-
-        public int OwnerId { get; set; }
-
+        public int? OwnerId { get; set; }
         public Category Category { get; set; }
         public Brand Brand { get; set; }
         public Color Color { get; set; }
