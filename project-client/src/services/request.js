@@ -16,11 +16,7 @@ function requestGet(url) {
 function requestPost(url, data) {
   return new Promise((resolve, reject) => {
     axios
-      .post(url, data, {
-        headers: {
-          "content-type": "application/json",
-        },
-      })
+      .post(url, data)
       .then((response) => resolve(response.data))
       .catch((error) => reject(error));
   });

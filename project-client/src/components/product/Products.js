@@ -32,11 +32,11 @@ function Products() {
 
   return (
     <div className="bg-gray-100">
-      <div className="grid grid-cols-12 gap-7">
+      <div className="grid grid-cols-12 gap-10">
         {products.map((product, index) => (
           <NavLink
             key={index}
-            className="bg-white h-80 rounded-md col-span-3 shadow-item"
+            className="bg-white rounded-md col-span-3 shadow-item mb-10"
             to={`/productdetails/${product.productId}`}
           >
             <img
@@ -48,7 +48,7 @@ function Products() {
               className="rounded-t-md h-2/3 object-cover object-center w-full"
               alt=""
             />
-            <div className="text-center flex flex-col justify-between h-1/3 py-2 px-5">
+            <div className="text-center flex flex-col justify-between py-2 px-5">
               <div className="flex justify-between">
                 <p>Ürün</p>
                 <p>{product.productName}</p>
@@ -56,6 +56,10 @@ function Products() {
               <div className="flex justify-between">
                 <p>Kategori</p>
                 <p>{product.categoryName}</p>
+              </div>
+              <div className="flex justify-between">
+                <p>Marka</p>
+                <p>{product.brandName}</p>
               </div>
               <div className="flex justify-between">
                 <p>Renk</p>
@@ -67,25 +71,27 @@ function Products() {
               </div>
             </div>
 
-            {product.isOfferable ? (
-              <div className="py-0.5 bg-teal-500 rounded-b text-white text-center text-sm">
-                Teklif Verilebilir
-              </div>
-            ) : (
-              <div className="py-0.5 bg-indigo-500 rounded-b text-white text-center text-sm">
-                Teklif Verilemez
-              </div>
-            )}
+            <div>
+              {product.isOfferable ? (
+                <div className="py-0.5 bg-teal-500 rounded-b text-white text-center text-sm">
+                  Teklif Verilebilir
+                </div>
+              ) : (
+                <div className="py-0.5 bg-indigo-500 rounded-b text-white text-center text-sm">
+                  Teklif Verilemez
+                </div>
+              )}
 
-            {product.isSold ? (
-              <div className="py-0.5 bg-rose-500 rounded-b text-white text-center text-sm ">
-                Satıldı
-              </div>
-            ) : (
-              <div className="py-0.5 bg-lime-500 rounded-b text-white text-center text-sm">
-                Satılmadı
-              </div>
-            )}
+              {product.isSold ? (
+                <div className="py-0.5 bg-rose-500 rounded-b text-white text-center text-sm ">
+                  Satıldı
+                </div>
+              ) : (
+                <div className="py-0.5 bg-lime-500 rounded-b text-white text-center text-sm">
+                  Satılmadı
+                </div>
+              )}
+            </div>
           </NavLink>
         ))}
       </div>

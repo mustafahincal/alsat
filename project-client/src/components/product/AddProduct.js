@@ -5,34 +5,43 @@ import { toast } from "react-toastify";
 import { addProduct } from "../../services/productService";
 import { useBrandContext } from "../../context/BrandContext";
 import { useColorContext } from "../../context/ColorContext";
+import { useCategoryContext } from "../../context/CategoryContext";
 import { getBrands } from "../../services/brandService";
 import { getColors } from "../../services/colorService";
 import { useFileContext } from "../../context/FileContext";
+import { getCategories } from "../../services/categoryService";
+import { getFromLocalStorage } from "../../services/localStorageService";
 
 function AddProduct() {
   const { brands, setBrands } = useBrandContext();
   const { colors, setColors } = useColorContext();
+  const { categories, setCategories } = useCategoryContext();
   const { file, setFile } = useFileContext();
 
   useEffect(() => {
     getBrands().then((result) => setBrands(result.data));
     getColors().then((result) => setColors(result.data));
+    getCategories().then((result) => setCategories(result.data));
   }, []);
 
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
-      initialValues: {},
+      initialValues: {
+        name: "",
+        categoryId: "",
+        brandId: "",
+        colorId: "",
+        price: "",
+        ownerId: getFromLocalStorage("userId"),
+      },
       onSubmit: (values) => {
-        // addProduct(values)
-        //   .then((response) => {
-        //     if (response.success) {
-        //       toast.success(response.message);
-        //     }
-        //   })
-        //   .catch((err) =>
-        //     err.Errors.map((error) => toast.error(error.ErrorMessage))
-        //   );
-        console.log(values);
+        addProduct(values)
+          .then((response) => {
+            if (response.success) {
+              toast.success(response.message);
+            }
+          })
+          .catch((err) => console.log(err));
       },
       validationSchema: ProductSchema,
     });
@@ -56,8 +65,43 @@ function AddProduct() {
           </h1>
           <form onSubmit={handleSubmit}>
             <div className="w-full flex  flex-col bg-darkBlue text-gray-100  px-14 py-14 text-lg">
+              <input
+                type="text"
+                name="name"
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="Ürün Adı"
+                className="text-darkBlue py-2 px-3 w-full mb-4"
+              />
+
+              {errors.name && touched.name && (
+                <div className="text-red-400 my-2 text-sm">{errors.name}</div>
+              )}
+
               <select
-                className="text-darkBlue py-2 px-3 w-full"
+                className="text-darkBlue py-2 px-3 w-full mb-4"
+                name="categoryId"
+                value={values.categoryId}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option value={0}>Kategori Seçiniz</option>
+                {categories.map((category) => (
+                  <option key={category.categoryId} value={category.categoryId}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+
+              {errors.categoryId && touched.categoryId && (
+                <div className="text-red-400 my-2 text-sm">
+                  {errors.categoryId}
+                </div>
+              )}
+
+              <select
+                className="text-darkBlue py-2 px-3 w-full mb-4"
                 name="brandId"
                 value={values.brandId}
                 onChange={handleChange}
@@ -65,7 +109,7 @@ function AddProduct() {
               >
                 <option value={0}>Marka Seçiniz</option>
                 {brands.map((brand) => (
-                  <option key={brand.id} value={brand.id}>
+                  <option key={brand.brandId} value={brand.brandId}>
                     {brand.name}
                   </option>
                 ))}
@@ -77,27 +121,38 @@ function AddProduct() {
                 </div>
               )}
 
-              <div className="mt-5">
-                <select
-                  className="text-darkBlue py-2 px-3 w-full"
-                  name="colorId"
-                  value={values.colorId}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                >
-                  <option value={0}>Renk Seçiniz</option>
-                  {colors.map((color) => (
-                    <option key={color.id} value={color.id}>
-                      {color.name}
-                    </option>
-                  ))}
-                </select>
-                {errors.colorId && touched.colorId && (
-                  <div className="text-red-400 my-2 text-sm">
-                    {errors.colorId}
-                  </div>
-                )}
-              </div>
+              <select
+                className="text-darkBlue py-2 px-3 w-full mb-4"
+                name="colorId"
+                value={values.colorId}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option value={0}>Renk Seçiniz</option>
+                {colors.map((color) => (
+                  <option key={color.colorId} value={color.colorId}>
+                    {color.name}
+                  </option>
+                ))}
+              </select>
+              {errors.colorId && touched.colorId && (
+                <div className="text-red-400 my-2 text-sm">
+                  {errors.colorId}
+                </div>
+              )}
+
+              <input
+                type="number"
+                name="price"
+                value={values.price}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="Fiyat"
+                className="text-darkBlue py-2 px-3 w-full mb-4"
+              />
+              {errors.price && touched.price && (
+                <div className="text-red-400 my-2 text-sm">{errors.price}</div>
+              )}
             </div>
 
             <div className="text-right mt-5">

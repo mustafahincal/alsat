@@ -1,18 +1,47 @@
 import { useEffect } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams, useNavigate } from "react-router-dom";
 import defaultImage from "../../assets/default.png";
 import { useAuthContext } from "../../context/AuthContext";
 import { useProductContext } from "../../context/ProductContext";
-import { getProduct } from "../../services/productService";
+import { useUserContext } from "../../context/UserContext";
+import {
+  getFromLocalStorage,
+  setToLocalStorage,
+} from "../../services/localStorageService";
+import { deleteProduct, getProduct } from "../../services/productService";
+import { getUserById } from "../../services/userService";
+import { toast } from "react-toastify";
 
 function ProductDetails() {
   const apiImagesUrl = "https://localhost:44322/uploads/images/";
   const { selectedProduct, setSelectedProduct } = useProductContext();
+  const { selectedUser } = useUserContext();
   const { isAdmin } = useAuthContext();
   const { id } = useParams();
+  const navigate = useNavigate();
   useEffect(() => {
-    getProduct(id).then((result) => setSelectedProduct(result.data[0]));
+    getProduct(id).then((result) => {
+      setSelectedProduct(result.data[0]);
+    });
   }, []);
+
+  const test = () => {
+    console.log(selectedProduct);
+    console.log(selectedUser);
+  };
+
+  const handleDeleteProduct = () => {
+    const data = {
+      productId: selectedProduct.productId,
+      name: selectedProduct.productName,
+    };
+    deleteProduct(data)
+      .then((response) => {
+        toast.success(response.message);
+        navigate("/main");
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="py-24 flex justify-between px-36">
@@ -32,6 +61,10 @@ function ProductDetails() {
             <div>{selectedProduct.productName}</div>
           </div>
           <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+            <div>Marka</div>
+            <div>{selectedProduct.brandName}</div>
+          </div>
+          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
             <div>Kategori</div>
             <div>{selectedProduct.categoryName}</div>
           </div>
@@ -41,7 +74,7 @@ function ProductDetails() {
           </div>
           <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
             <div>Fiyat</div>
-            <div>{selectedProduct.price}</div>
+            <div>{selectedProduct.price}₺</div>
           </div>
         </div>
       </div>
@@ -63,14 +96,17 @@ function ProductDetails() {
             </NavLink>
           )}
 
-          {isAdmin && (
-            <NavLink
-              to={`/updateProduct/${selectedProduct.productId}`}
+          {selectedProduct.ownerId == selectedUser.userId && (
+            <button
+              onClick={handleDeleteProduct}
               className="btn bg-red-500 font-bold py-3"
             >
               Ürünü Sil
-            </NavLink>
+            </button>
           )}
+          <button className="btn" onClick={test}>
+            test button
+          </button>
         </div>
       </div>
     </div>
