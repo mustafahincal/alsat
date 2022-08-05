@@ -51,12 +51,14 @@ namespace Business.Concrete
     
         public IResult Update(Product product)
         {
-            throw new NotImplementedException();
+            _productDal.Update(product);
+            return new SuccessResult(Messages.ProductUpdated);
         }
 
         public IResult Delete(Product product)
         {
-            throw new NotImplementedException();
+            _productDal.Delete(product);
+            return new SuccessResult(Messages.ProductDeleted);
         }
 
         public IDataResult<List<Product>> GetAll()

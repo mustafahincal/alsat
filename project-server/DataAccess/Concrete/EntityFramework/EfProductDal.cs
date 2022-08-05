@@ -31,6 +31,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  CategoryId = c.CategoryId,
                                  ColorId = cl.ColorId,
                                  BrandId = b.BrandId,
+                                 OwnerId = (int)p.OwnerId,
                                  ProductName = p.Name,
                                  CategoryName = c.Name,
                                  ColorName = cl.Name,

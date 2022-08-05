@@ -74,7 +74,7 @@ namespace WebAPI.Controllers
         [HttpGet("getproductdetailsbycategoryid")]
         public IActionResult GetProductDetailsByCategoryId(int categoryId)
         {
-            var result = _productService.GetProductDetailsByBrandId(categoryId);
+            var result = _productService.GetProductDetailsByCategoryId(categoryId);
             if (result.Success)
             {
                 return Ok(result);
