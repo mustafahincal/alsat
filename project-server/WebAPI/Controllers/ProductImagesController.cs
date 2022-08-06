@@ -27,6 +27,18 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpPost("update")]
+        public IActionResult Update([FromForm] IFormFile file, [FromForm] int productId, [FromForm] int productImageId)
+        {
+            var productImage = new ProductImage() { ProductId = productId, ProductImageId = productImageId };
+            var result = _productImageService.Update(file, productImage, productId, productImageId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpPost("delete")]
         public IActionResult Delete(ProductImage productImage)
         {
@@ -39,16 +51,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("update")]
-        public IActionResult Update([FromForm] IFormFile file, [FromForm] ProductImage productImage)
-        {
-            var result = _productImageService.Update(file, productImage);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
+       
 
         [HttpGet("getall")]
         public IActionResult GetAll()

@@ -27,16 +27,22 @@ namespace Business.Concrete
 
         public IResult Add(IFormFile file, ProductImage productImage, int productId)
         {
-            IResult result = BusinessRules.Run(CheckIfCarImageLimit(productImage.ProductImageId));
-            if (result != null)
-            {
-                return result;
-            }
+            
             productImage.ImagePath = _fileHelper.Upload(file, FilePath.ImagesPath);
-            productImage.ProductImageId = productId;
+            productImage.ProductId = productId;
             _productImageDal.Add(productImage);
             return new SuccessResult("Resim eklendi");
         }
+
+        public IResult Update(IFormFile file, ProductImage productImage, int productId, int productImageId)
+        {
+            productImage.ImagePath = _fileHelper.Update(file, FilePath.ImagesPath + productImage.ImagePath, FilePath.ImagesPath);
+            productImage.ProductId = productId;
+            productImage.ProductImageId = productImageId;
+            _productImageDal.Update(productImage);
+            return new SuccessResult("Resim Güncellendi");
+        }
+
 
         public IResult Delete(ProductImage productImage)
         {
@@ -65,23 +71,7 @@ namespace Business.Concrete
             return new SuccessDataResult<ProductImage>(_productImageDal.Get(p => p.ProductId == imageId));
         }
 
-        public IResult Update(IFormFile file, ProductImage productImage)
-        {
-            productImage.ImagePath = _fileHelper.Update(file, FilePath.ImagesPath + productImage.ImagePath, FilePath.ImagesPath);
-            _productImageDal.Update(productImage);
-            return new SuccessResult();
-        }
-
-        private IResult CheckIfCarImageLimit(int productId)
-        {
-            var result = _productImageDal.GetAll(p => p.ProductId == productId).Count;
-            if (result >= 5)
-            {
-                return new ErrorResult();
-            }
-            return new SuccessResult();
-        }
-
+        
         private IResult CheckCarImage(int productId)
         {
             var result = _productImageDal.GetAll(p => p.ProductId == productId).Count;

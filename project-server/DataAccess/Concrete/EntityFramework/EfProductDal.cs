@@ -39,7 +39,8 @@ namespace DataAccess.Concrete.EntityFramework
                                  Price = p.Price,
                                  IsOfferable = p.IsOfferable,
                                  IsSold = p.IsSold,
-                                 ImagePath = (from pi in context.ProductImages where pi.ProductId == p.ProductId select pi.ImagePath).FirstOrDefault()
+                                 ImagePath = (from pi in context.ProductImages where pi.ProductId == p.ProductId select pi.ImagePath).FirstOrDefault(),
+                                 ProductImageId = (from pi in context.ProductImages where pi.ProductId == p.ProductId select pi.ProductImageId).FirstOrDefault()
                              };
                 return filter == null
                 ? result.ToList()
@@ -49,3 +50,7 @@ namespace DataAccess.Concrete.EntityFramework
         }
     }
 }
+/*
+ O şeyden kaynaklanıyo sen arayüzden onu gönder dediğinde boolean veri türünün default değeri false olduğu için backend'e false gidiyor o yüzden true gelmez
+ O default true kuralını veritabanına koymak da doğru değil pek, yani, tmama öyle deiyeyim de 1 sn
+ */

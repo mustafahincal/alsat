@@ -76,3 +76,4 @@ C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\ob
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.pdb
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.genruntimeconfig.cache
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\ref\WebAPI.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\WebAPI.staticwebassets.runtime.json
