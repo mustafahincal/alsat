@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import { useColorContext } from "../../../context/ColorContext";
-import { getColors } from "../../../services/colorService";
+import { deleteColor, getColors } from "../../../services/colorService";
 import { postColor } from "../../../services/colorService";
+import { ControlSchema } from "../../../validations/controlSchema";
 
-function AddColor() {
+function ControlColors() {
   const { colors, setColors } = useColorContext();
   useEffect(() => {
     getColors().then((result) => setColors(result.data));
@@ -17,18 +18,33 @@ function AddColor() {
         name: "",
       },
       onSubmit: (values) => {
-        // postColor(values)
-        //   .then((response) => {
-        //     if (response.success) {
-        //       toast.success(response.message);
-        //     }
-        //   })
-        //   .catch((err) =>
-        //     err.Errors.map((error) => toast.error(error.ErrorMessage))
-        //   );
-        console.log(values);
+        postColor(values)
+          .then((response) => {
+            if (response.success) {
+              toast.success(response.message);
+              getColors().then((result) => setColors(result.data));
+              values.name = "";
+            }
+          })
+          .catch((err) => console.log(err));
       },
+      validationSchema: ControlSchema,
     });
+
+  const handleColorDelete = (colorId, colorName) => {
+    const colorToDelete = {
+      colorId: colorId,
+      name: colorName,
+    };
+    deleteColor(colorToDelete)
+      .then((response) => {
+        if (response.success) {
+          toast.success(response.message);
+          getColors().then((result) => setColors(result.data));
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="flex justify-between items-center p-16">
@@ -36,10 +52,16 @@ function AddColor() {
         <div className="grid grid-cols-3 gap-3">
           {colors.map((color) => (
             <div
-              className="py-2 px-3 bg-gold text-black rounded text-center"
-              key={color.id}
+              className="py-2 px-3 bg-gold text-black rounded text-center flex justify-between items-center"
+              key={color.colorId}
             >
-              {color.name}
+              <div>{color.name}</div>
+              <div
+                className="bg-red-500 text-white w-7 h-7 flex items-center justify-center rounded cursor-pointer"
+                onClick={() => handleColorDelete(color.colorId, color.name)}
+              >
+                &#215;
+              </div>
             </div>
           ))}
         </div>
@@ -77,4 +99,4 @@ function AddColor() {
   );
 }
 
-export default AddColor;
+export default ControlColors;

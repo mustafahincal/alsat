@@ -1,37 +1,38 @@
 import React from "react";
 import { Routes, Route, NavLink } from "react-router-dom";
-import AddBrand from "./add/AddBrand";
-import AddColor from "./add/AddColor";
 import Users from "./Users";
 import Products from "../product/Products";
+import ControlBrands from "./control/ControlBrands";
+import ControlColors from "./control/ControlColors";
+import ControlCategories from "./control/ControlCategories";
 
 function DashBoard() {
   return (
     <div className="grid grid-cols-10 w-11/12 m-auto">
       <div className="col-span-2 py-10 pr-5">
         <div className="bg-white  rounded-lg flex flex-col shadow-item ">
-          <NavLink
-            to={"products"}
-            className="px-2  rounded py-2 border-b-2 hover:bg-gray-200"
-          >
+          <NavLink to={"products"} className="px-2  rounded py-2 border-b-2">
             Ürünler
           </NavLink>
           <NavLink
-            to={"addBrand"}
-            className="px-2 rounded py-2 border-b-2 hover:bg-gray-200"
+            to={`controlCategories`}
+            className="px-2  rounded py-2 border-b-2"
+          >
+            Kategoriler
+          </NavLink>
+          <NavLink
+            to={"controlBrands"}
+            className="px-2 rounded py-2 border-b-2"
           >
             Markalar
           </NavLink>
           <NavLink
-            to={`addColor`}
-            className="px-2  rounded py-2 border-b-2 hover:bg-gray-200"
+            to={`controlColors`}
+            className="px-2  rounded py-2 border-b-2"
           >
             Renkler
           </NavLink>
-          <NavLink
-            to={`users`}
-            className="px-2 rounded py-2 border-b-2 hover:bg-gray-200"
-          >
+          <NavLink to={`users`} className="px-2 rounded py-2 border-b-2">
             Kullanıcılar
           </NavLink>
         </div>
@@ -40,8 +41,9 @@ function DashBoard() {
         <Routes>
           <Route path="/products" element={<Products />} />
           <Route path="/users" element={<Users />} />
-          <Route path="/addBrand" element={<AddBrand />} />
-          <Route path="/addColor" element={<AddColor />} />
+          <Route path="/controlBrands" element={<ControlBrands />} />
+          <Route path="/controlColors" element={<ControlColors />} />
+          <Route path="/controlCategories" element={<ControlCategories />} />
         </Routes>
       </div>
     </div>

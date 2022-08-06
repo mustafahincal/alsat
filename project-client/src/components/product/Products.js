@@ -14,7 +14,7 @@ function Products() {
   const { products, setProducts } = useProductContext();
   const { brandId, colorId, categoryId } = useParams();
 
-  const apiImagesUrl = "https://localhost:44322/uploads/images/";
+  const apiImagesUrl = "https://localhost:44350/uploads/images/";
 
   useEffect(() => {
     if (brandId) {

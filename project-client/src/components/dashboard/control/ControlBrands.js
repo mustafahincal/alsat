@@ -1,10 +1,15 @@
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { useBrandContext } from "../../../context/BrandContext";
-import { getBrands, postBrand } from "../../../services/brandService";
+import {
+  deleteBrand,
+  getBrands,
+  postBrand,
+} from "../../../services/brandService";
 import { toast } from "react-toastify";
+import { ControlSchema } from "../../../validations/controlSchema";
 
-function AddBrand() {
+function ControlBrands() {
   const { brands, setBrands } = useBrandContext();
   useEffect(() => {
     getBrands().then((result) => setBrands(result.data));
@@ -16,18 +21,33 @@ function AddBrand() {
         name: "",
       },
       onSubmit: (values) => {
-        // postBrand(values)
-        //   .then((response) => {
-        //     if (response.success) {
-        //       toast.success(response.message);
-        //     }
-        //   })
-        //   .catch((err) =>
-        //     err.Errors.map((error) => toast.error(error.ErrorMessage))
-        //   );
-        console.log(values);
+        postBrand(values)
+          .then((response) => {
+            if (response.success) {
+              toast.success(response.message);
+              getBrands().then((result) => setBrands(result.data));
+              values.name = "";
+            }
+          })
+          .catch((err) => console.log(err));
       },
+      validationSchema: ControlSchema,
     });
+
+  const handleBrandDelete = (brandId, brandName) => {
+    const brandToDelete = {
+      brandId: brandId,
+      name: brandName,
+    };
+    deleteBrand(brandToDelete)
+      .then((response) => {
+        if (response.success) {
+          toast.success(response.message);
+          getBrands().then((result) => setBrands(result.data));
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="flex justify-between items-center p-16">
@@ -35,10 +55,16 @@ function AddBrand() {
         <div className="grid grid-cols-3 gap-3">
           {brands.map((brand) => (
             <div
-              className="py-2 px-3 bg-gold text-black rounded text-center"
-              key={brand.id}
+              className="py-2 px-3 bg-gold text-black rounded text-center flex justify-between items-center"
+              key={brand.brandId}
             >
-              {brand.name}
+              <div>{brand.name}</div>
+              <div
+                className="bg-red-500 text-white w-7 h-7 flex items-center justify-center rounded cursor-pointer"
+                onClick={() => handleBrandDelete(brand.brandId, brand.name)}
+              >
+                &#215;
+              </div>
             </div>
           ))}
         </div>
@@ -59,6 +85,7 @@ function AddBrand() {
                 type="text"
                 className="text-darkBlue py-2 px-4 w-full"
                 placeholder="Marka"
+                required
               />
               {errors.name && touched.name && (
                 <div className="text-red-400 my-2 text-sm">{errors.name}</div>
@@ -76,4 +103,4 @@ function AddBrand() {
   );
 }
 
-export default AddBrand;
+export default ControlBrands;

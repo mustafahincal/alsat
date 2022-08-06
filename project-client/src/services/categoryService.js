@@ -5,3 +5,6 @@ export const getCategories = () => get(apiUrl + "/categories/getall");
 
 export const postCategory = (category) =>
   post(apiUrl + "/categories/add", category);
+
+export const deleteCategory = (data) =>
+  post(apiUrl + "/categories/delete", data);

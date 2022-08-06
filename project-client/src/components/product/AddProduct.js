@@ -11,12 +11,14 @@ import { getColors } from "../../services/colorService";
 import { useFileContext } from "../../context/FileContext";
 import { getCategories } from "../../services/categoryService";
 import { getFromLocalStorage } from "../../services/localStorageService";
+import { useNavigate } from "react-router-dom";
 
 function AddProduct() {
   const { brands, setBrands } = useBrandContext();
   const { colors, setColors } = useColorContext();
   const { categories, setCategories } = useCategoryContext();
   const { file, setFile } = useFileContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getBrands().then((result) => setBrands(result.data));
@@ -33,12 +35,15 @@ function AddProduct() {
         colorId: "",
         price: "",
         ownerId: getFromLocalStorage("userId"),
+        isOfferable: true,
+        isSold: false,
       },
       onSubmit: (values) => {
         addProduct(values)
           .then((response) => {
             if (response.success) {
               toast.success(response.message);
+              navigate("/main");
             }
           })
           .catch((err) => console.log(err));

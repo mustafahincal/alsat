@@ -26,9 +26,12 @@ function Navi() {
           <NavLink to="/main" className="ml-10">
             Ürünler
           </NavLink>
-          <NavLink to="/addProduct" className="ml-10">
-            Ürün Ekle
-          </NavLink>
+
+          {isLogged && (
+            <NavLink to="/addProduct" className="ml-10">
+              Ürün Ekle
+            </NavLink>
+          )}
         </div>
         <div className="flex  items-center">
           {isAdmin && (

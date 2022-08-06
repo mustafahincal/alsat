@@ -24,7 +24,7 @@ function Updateproduct() {
   const { selectedProduct, setSelectedProduct } = useProductContext();
   const { file, setFile } = useFileContext();
   const { id } = useParams();
-  const apiImagesUrl = "https://localhost:44322/uploads/images/";
+  const apiImagesUrl = "https://localhost:44350/uploads/images/";
 
   useEffect(() => {
     getBrands().then((result) => setBrands(result.data));
@@ -68,14 +68,20 @@ function Updateproduct() {
     formData.append("file", file);
     formData.append("productId", selectedProduct.productId);
 
-    // addImage(formData)
-    //   .then((response) => {
-    //     if (response.success) {
-    //       toast.success(response.message);
-    //     }
-    //   })
-    //   .catch((err) => toast.error(err.message));
-    console.log(formData);
+    const exists = selectedProduct.imagePath == null ? false : true;
+
+    if (exists) {
+      formData.append("productImageId", selectedProduct.productImageId);
+    }
+
+    addImage(formData, exists)
+      .then((response) => {
+        if (response.success) {
+          toast.success(response.message);
+          getProduct(id).then((result) => setSelectedProduct(result.data[0]));
+        }
+      })
+      .catch((err) => toast.error(err));
   };
 
   return (
@@ -87,7 +93,7 @@ function Updateproduct() {
               ? apiImagesUrl + selectedProduct.imagePath
               : defaultImage
           }
-          className="object-cover object-center rounded-t-md"
+          className="object-cover object-center rounded-t-md w-full"
           alt=""
         />
         <div className="">

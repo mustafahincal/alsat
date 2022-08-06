@@ -13,7 +13,7 @@ import { getUserById } from "../../services/userService";
 import { toast } from "react-toastify";
 
 function ProductDetails() {
-  const apiImagesUrl = "https://localhost:44322/uploads/images/";
+  const apiImagesUrl = "https://localhost:44350/uploads/images/";
   const { selectedProduct, setSelectedProduct } = useProductContext();
   const { selectedUser } = useUserContext();
   const { isAdmin } = useAuthContext();
