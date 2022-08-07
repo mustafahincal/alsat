@@ -93,6 +93,17 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getproductdetailsbyownerid")]
+        public IActionResult GetProductDetailsByOwnerId(int ownerId)
+        {
+            var result = _productService.GetProductDetailsByOwnerId(ownerId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpPost("add")]
         public IActionResult Add(Product product)
         {

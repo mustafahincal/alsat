@@ -21,7 +21,7 @@ namespace Entities.Dtos
         public int Price { get; set; }
         public bool IsOfferable { get; set; }
         public bool IsSold { get; set; }
-        public int ProductImageId { get; set; }
+        public int ProductImageId { get; set; } 
         public string ImagePath { get; set; }
     }
 }

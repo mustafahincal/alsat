@@ -104,6 +104,11 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.ColorId == colorId), Messages.ProductsListed);
         }
+
+        public IDataResult<List<ProductDetailDto>> GetProductDetailsByOwnerId(int ownerId)
+        {
+            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.OwnerId == ownerId), Messages.ProductsListed);
+        }
         private IResult CheckIfProductCountOfCategoryCorrect(int categoryId)
         {
             return new SuccessResult();

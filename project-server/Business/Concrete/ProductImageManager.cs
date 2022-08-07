@@ -43,6 +43,8 @@ namespace Business.Concrete
             return new SuccessResult("Resim Güncellendi");
         }
 
+       
+
 
         public IResult Delete(ProductImage productImage)
         {

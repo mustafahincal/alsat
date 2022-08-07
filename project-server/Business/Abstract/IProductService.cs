@@ -24,5 +24,6 @@ namespace Business.Abstract
         IDataResult<List<ProductDetailDto>> GetProductDetailsByBrandId(int brandId);
         IDataResult<List<ProductDetailDto>> GetProductDetailsByColorId(int colorId);
         IDataResult<List<ProductDetailDto>> GetProductDetailsByCategoryId(int categoryId);
+        IDataResult<List<ProductDetailDto>> GetProductDetailsByOwnerId(int ownerId);
     }
 }
