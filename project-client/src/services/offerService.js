@@ -14,3 +14,4 @@ export const offerForProduct = (data) => {
 };
 
 export const deleteOffer = (data) => post(apiUrl + "/offers/delete", data);
+export const updateOffer = (data) => post(apiUrl + "/offers/update", data);

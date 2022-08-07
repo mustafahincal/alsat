@@ -7,10 +7,12 @@ import { useOfferContext } from "../../context/OfferContext";
 import { useUserContext } from "../../context/UserContext";
 import { getFromLocalStorage } from "../../services/localStorageService";
 import { toast } from "react-toastify";
+import { useNavigate, NavLink } from "react-router-dom";
 
 function GivenOffers() {
   const { givenOffers, setGivenOffers } = useOfferContext();
   const { selectedUser } = useUserContext();
+  const navigate = useNavigate();
   useEffect(() => {
     getOfferDetailsByUserId(getFromLocalStorage("userId")).then((result) =>
       setGivenOffers(result.data)
@@ -28,7 +30,7 @@ function GivenOffers() {
       );
     });
   };
-  const handleIncreaseOffer = () => {};
+
   const handleBuyProduct = () => {};
 
   return (
@@ -41,15 +43,16 @@ function GivenOffers() {
           <div>Ürün Sahibi = {offer.ownerName}</div>
           <div>Teklif Veren = {offer.userName}</div>
           <div>{offer.productName}</div>
-          <div>{offer.offeredPrice}</div>
+          <div>Ürün Fiyatı = {offer.price}</div>
+          <div>Verdiğiniz Teklif = {offer.offeredPrice}</div>
           <div className="flex">
             {!offer.isApproved && (
-              <div
-                onClick={() => handleIncreaseOffer()}
+              <NavLink
+                to={`/offerForProduct/${offer.productId}`}
                 className="btn bg-emerald-500 cursor-pointer"
               >
                 Teklifi Artır
-              </div>
+              </NavLink>
             )}
 
             {!offer.isApproved && (

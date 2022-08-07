@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import { useUserContext } from "../../context/UserContext";
 import { removeFromLocalStorage } from "../../services/localStorageService";
@@ -7,12 +7,14 @@ import { removeFromLocalStorage } from "../../services/localStorageService";
 function Navi() {
   const { isAdmin, isLogged, setIsLogged } = useAuthContext();
   const { selectedUser } = useUserContext();
+  const navigate = useNavigate();
 
   const handleLogOut = () => {
     setIsLogged(false);
     removeFromLocalStorage("isLogged");
     removeFromLocalStorage("token");
     removeFromLocalStorage("userId");
+    navigate("/");
   };
 
   return (
