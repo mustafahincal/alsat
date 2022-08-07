@@ -14,6 +14,9 @@ export const getProductsByCategory = (categoryId) =>
     apiUrl + "/products/getproductdetailsbycategoryid?categoryId=" + categoryId
   );
 
+export const getProductsByOwner = (ownerId) =>
+  get(apiUrl + "/products/getproductdetailsbyownerid?ownerId=" + ownerId);
+
 export const getProduct = (id) =>
   get(apiUrl + "/products/getproductdetailsbyid?id=" + id);
 

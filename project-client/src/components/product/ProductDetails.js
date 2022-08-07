@@ -25,11 +25,6 @@ function ProductDetails() {
     });
   }, []);
 
-  const test = () => {
-    console.log(selectedProduct);
-    console.log(selectedUser);
-  };
-
   const handleDeleteProduct = () => {
     const data = {
       productId: selectedProduct.productId,
@@ -42,6 +37,8 @@ function ProductDetails() {
       })
       .catch((err) => console.log(err));
   };
+
+  const handleBuyProduct = () => {};
 
   return (
     <div className="py-24 flex justify-between px-36">
@@ -81,32 +78,39 @@ function ProductDetails() {
 
       <div className="w-1/2 pt-20">
         <div className="bg-white rounded-md w-1/2 m-auto p-10 flex flex-col gap-3 shadow-item text-center">
-          <NavLink
-            to={`/offerForProduct/${selectedProduct.productId}`}
-            className="btn  py-3"
-          >
-            Teklif Ver
-          </NavLink>
-          {isAdmin && (
-            <NavLink
-              to={`/updateProduct/${selectedProduct.productId}`}
-              className="btn bg-littleDarkBlue font-bold py-3"
-            >
-              Ürünü Güncelle
-            </NavLink>
+          {selectedProduct.ownerId != selectedUser.userId && (
+            <div className="flex flex-col w-full">
+              <NavLink
+                to={`/offerForProduct/${selectedProduct.productId}`}
+                className="btn  py-3"
+              >
+                Teklif Ver
+              </NavLink>
+              <div
+                className="btn  py-3 cursor-pointer mt-2"
+                onClick={handleBuyProduct}
+              >
+                Satın Al
+              </div>
+            </div>
           )}
 
           {selectedProduct.ownerId == selectedUser.userId && (
-            <button
-              onClick={handleDeleteProduct}
-              className="btn bg-red-500 font-bold py-3"
-            >
-              Ürünü Sil
-            </button>
+            <div className="flex flex-col w-full">
+              <NavLink
+                to={`/updateProduct/${selectedProduct.productId}`}
+                className="btn bg-littleDarkBlue py-3"
+              >
+                Ürünü Güncelle
+              </NavLink>
+              <button
+                onClick={handleDeleteProduct}
+                className="btn bg-red-500  py-3 mt-2"
+              >
+                Ürünü Sil
+              </button>
+            </div>
           )}
-          <button className="btn" onClick={test}>
-            test button
-          </button>
         </div>
       </div>
     </div>

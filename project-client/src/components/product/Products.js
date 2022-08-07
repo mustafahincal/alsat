@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import {
   getProducts,
   getProductsByBrand,
-  getProductsByBrandAndByColor,
   getProductsByCategory,
   getProductsByColor,
 } from "../../services/productService";
 import { NavLink, useParams } from "react-router-dom";
 import defaultImage from "../../assets/default.png";
 import { useProductContext } from "../../context/ProductContext";
+import { getProductsByOwner } from "../../services/productService";
 
 function Products() {
   const { products, setProducts } = useProductContext();
-  const { brandId, colorId, categoryId } = useParams();
+  const { brandId, colorId, categoryId, ownerId } = useParams();
 
   const apiImagesUrl = "https://localhost:44350/uploads/images/";
 
@@ -25,10 +25,12 @@ function Products() {
       getProductsByCategory(categoryId).then((result) =>
         setProducts(result.data)
       );
+    } else if (ownerId) {
+      getProductsByOwner(ownerId).then((result) => setProducts(result.data));
     } else {
       getProducts().then((result) => setProducts(result.data));
     }
-  }, [brandId, colorId, categoryId]);
+  }, [brandId, colorId, categoryId, ownerId]);
 
   return (
     <div className="bg-gray-100">
@@ -73,21 +75,21 @@ function Products() {
 
             <div>
               {product.isOfferable ? (
-                <div className="py-0.5 bg-teal-500 rounded-b text-white text-center text-sm">
+                <div className="py-1 bg-teal-500 rounded-b text-white text-center text-sm">
                   Teklif Verilebilir
                 </div>
               ) : (
-                <div className="py-0.5 bg-indigo-500 rounded-b text-white text-center text-sm">
+                <div className="py-1 bg-indigo-500 rounded-b text-white text-center text-sm">
                   Teklif Verilemez
                 </div>
               )}
 
               {product.isSold ? (
-                <div className="py-0.5 bg-rose-500 rounded-b text-white text-center text-sm ">
+                <div className="py-1 bg-rose-500 rounded-b text-white text-center text-sm ">
                   Satıldı
                 </div>
               ) : (
-                <div className="py-0.5 bg-lime-500 rounded-b text-white text-center text-sm">
+                <div className="py-1 bg-lime-500 rounded-b text-white text-center text-sm">
                   Satılmadı
                 </div>
               )}
