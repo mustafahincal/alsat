@@ -1,8 +1,12 @@
 import React, { useEffect } from "react";
-import { getOfferDetailsByUserId } from "../../services/offerService";
+import {
+  deleteOffer,
+  getOfferDetailsByUserId,
+} from "../../services/offerService";
 import { useOfferContext } from "../../context/OfferContext";
 import { useUserContext } from "../../context/UserContext";
 import { getFromLocalStorage } from "../../services/localStorageService";
+import { toast } from "react-toastify";
 
 function GivenOffers() {
   const { givenOffers, setGivenOffers } = useOfferContext();
@@ -13,7 +17,17 @@ function GivenOffers() {
     );
   }, []);
 
-  const handleCancelOffer = () => {};
+  const handleCancelOffer = (offerId) => {
+    const data = {
+      offerId,
+    };
+    deleteOffer(data).then((response) => {
+      toast.success(response.message);
+      getOfferDetailsByUserId(getFromLocalStorage("userId")).then((result) =>
+        setGivenOffers(result.data)
+      );
+    });
+  };
   const handleIncreaseOffer = () => {};
   const handleBuyProduct = () => {};
 
@@ -40,7 +54,7 @@ function GivenOffers() {
 
             {!offer.isApproved && (
               <div
-                onClick={() => handleCancelOffer()}
+                onClick={() => handleCancelOffer(offer.offerId)}
                 className="btn bg-red-500 ml-3 cursor-pointer"
               >
                 Teklifi Geri Çek

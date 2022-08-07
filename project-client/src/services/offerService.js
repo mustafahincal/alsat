@@ -12,3 +12,5 @@ export const getOfferDetailsByOwnerId = (ownerId) =>
 export const offerForProduct = (data) => {
   return post(apiUrl + "/offers/add", data);
 };
+
+export const deleteOffer = (data) => post(apiUrl + "/offers/delete", data);
