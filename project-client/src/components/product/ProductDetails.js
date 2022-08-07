@@ -22,6 +22,7 @@ function ProductDetails() {
   useEffect(() => {
     getProduct(id).then((result) => {
       setSelectedProduct(result.data[0]);
+      setToLocalStorage("productId", result.data[0].productId);
     });
   }, []);
 

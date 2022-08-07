@@ -1,35 +1,48 @@
 import React, { useEffect } from "react";
-import defaultImage from "../../assets/default.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import { useUserContext } from "../../context/UserContext";
 import { toast } from "react-toastify";
 import { useProductContext } from "../../context/ProductContext";
 import { OfferSchema } from "../../validations/offerSchema";
+import defaultImage from "../../assets/default.png";
+import { getProduct } from "../../services/productService";
+import { getFromLocalStorage } from "../../services/localStorageService";
+import { offerForProduct } from "../../services/offerService";
 
 function OfferForProduct() {
-  const { selectedProduct } = useProductContext();
+  const { selectedProduct, setSelectedProduct } = useProductContext();
   const { selectedUser } = useUserContext();
+  const apiImagesUrl = "https://localhost:44350/uploads/images/";
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getProduct(id).then((result) => {
+      setSelectedProduct(result.data[0]);
+    });
+  }, []);
 
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
-      initialValues: {},
+      initialValues: {
+        productId: getFromLocalStorage("productId"),
+        userId: getFromLocalStorage("userId"),
+        offeredPrice: "",
+        isApproved: false,
+      },
       onSubmit: (values) => {
-        // OfferForProduct(values)
-        //   .then((response) => {
-        //     if (response.success) {
-        //       toast.success("Teklif verme işlemi başarılı");
-        //     }
-        //   })
-        //   .catch((err) =>
-        //     err.Errors.map((error) => toast.error(error.ErrorMessage))
-        //   );
-        console.log(values);
+        offerForProduct(values)
+          .then((response) => {
+            if (response.success) {
+              toast.success("Teklif verme işlemi başarılı");
+            }
+          })
+          .catch((err) => console.log(err));
       },
       validationSchema: OfferSchema,
     });
 
-  const apiImagesUrl = "https://localhost:44322/uploads/images/";
   return (
     <div className="py-20">
       <div className="bg-white shadow-item w-10/12 m-auto px-10 py-10 flex justify-between gap-5">
@@ -49,9 +62,26 @@ function OfferForProduct() {
                 alt=""
               />
             </div>
-            <div className="bg-darkBlue w-1/2 px-5 py-5  text-gray-100">
-              <div className="flex flex-col justify-between h-full">
-                <div>{selectedProduct.name}</div>
+            <div className="bg-darkBlue w-1/2 px-5 py-5  text-gray-100 flex flex-col justify-between">
+              <div className="w-full flex justify-between  px-5 font-bold">
+                <div>İsim</div>
+                <div>{selectedProduct.productName}</div>
+              </div>
+              <div className="w-full flex justify-between px-5 font-bold">
+                <div>Marka</div>
+                <div>{selectedProduct.brandName}</div>
+              </div>
+              <div className="w-full flex justify-between  px-5 font-bold">
+                <div>Kategori</div>
+                <div>{selectedProduct.categoryName}</div>
+              </div>
+              <div className="w-full flex justify-between  px-5 font-bold">
+                <div>Renk</div>
+                <div>{selectedProduct.colorName}</div>
+              </div>
+              <div className="w-full flex justify-between px-5 font-bold">
+                <div>Fiyat</div>
+                <div>{selectedProduct.price}₺</div>
               </div>
             </div>
           </div>
@@ -60,20 +90,30 @@ function OfferForProduct() {
           <h1 className="font-extrabold text-3xl text-black mb-5">Teklif</h1>
           <form onSubmit={handleSubmit}>
             <div className="w-full flex  flex-col bg-darkBlue text-gray-100  px-14 py-7">
-              {/* <div className="flex justify-between items-center">
-                <label htmlFor="rentDate" className="text-left">
-                  Kiralama Tarihi
+              <div className="flex justify-between items-center">
+                <label htmlFor="offeredPrice" className="text-left">
+                  Teklifinizi giriniz
                 </label>
                 <input
-                  value={values.rentDate}
+                  value={values.offeredPrice}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  name="rentDate"
-                  type="date"
-                  id="rentDate"
+                  name="offeredPrice"
+                  type="number"
+                  id="offeredPrice"
                   className="text-darkBlue py-2 px-4 w-3/5"
                 />
-              </div> */}
+              </div>
+              {errors.offeredPrice && touched.offeredPrice && (
+                <div className="text-red-400 text-sm mt-5">
+                  {errors.offeredPrice}
+                </div>
+              )}
+            </div>
+            <div>
+              <button type="submit" className="btn text-lg  py-3 mt-2">
+                Teklif ver
+              </button>
             </div>
           </form>
         </div>

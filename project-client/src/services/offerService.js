@@ -10,6 +10,5 @@ export const getOfferDetailsByOwnerId = (ownerId) =>
   get(apiUrl + "/offers/getofferdetailsbyownerid?ownerId=" + ownerId);
 
 export const offerForProduct = (data) => {
-  console.log("hey");
-  //post(apiUrl + "/brands/add", data);
+  return post(apiUrl + "/offers/add", data);
 };

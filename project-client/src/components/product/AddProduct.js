@@ -46,7 +46,9 @@ function AddProduct() {
               navigate("/main");
             }
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            toast.error(err.response.data.message);
+          });
       },
       validationSchema: ProductSchema,
     });
