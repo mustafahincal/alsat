@@ -21,21 +21,24 @@ namespace Business.Concrete
 
          public IResult Add(Offer offer)
         {
-            throw new NotImplementedException();
+            _offerDal.Add(offer);
+            return new SuccessResult("Teklif eklendi");
         }
 
         public IResult Delete(Offer offer)
         {
-            throw new NotImplementedException();
+            _offerDal.Delete(offer);
+            return new SuccessResult("Teklif silindi");
         }
 
         public IResult Update(Offer offer)
         {
-            throw new NotImplementedException();
+            _offerDal.Update(offer);
+            return new SuccessResult("Teklif güncellendi");
         }
         public IDataResult<List<Offer>> GetAll()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<Offer>>(_offerDal.GetAll(), "Teklifler listelendi");
         }
 
         public IDataResult<Offer> GetById(int offerId)
