@@ -8,6 +8,7 @@ import { useUserContext } from "../../context/UserContext";
 import { getFromLocalStorage } from "../../services/localStorageService";
 import { toast } from "react-toastify";
 import { useNavigate, NavLink } from "react-router-dom";
+import { deleteProduct } from "../../services/productService";
 
 function GivenOffers() {
   const { givenOffers, setGivenOffers } = useOfferContext();
@@ -31,7 +32,30 @@ function GivenOffers() {
     });
   };
 
-  const handleBuyProduct = () => {};
+  const handleBuyProduct = (offerId, productId, productName) => {
+    const OfferData = {
+      offerId,
+    };
+
+    const productData = {
+      productId: productId,
+      name: productName,
+    };
+
+    deleteOffer(OfferData)
+      .then((response) => {
+        toast.success("Ürün satın alma işlemi başarılı");
+
+        deleteProduct(productData)
+          .then((response) => {
+            getOfferDetailsByUserId(getFromLocalStorage("userId")).then(
+              (result) => setGivenOffers(result.data)
+            );
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div>
@@ -66,10 +90,16 @@ function GivenOffers() {
 
             {offer.isApproved && (
               <div
-                onClick={() => handleBuyProduct()}
+                onClick={() =>
+                  handleBuyProduct(
+                    offer.offerId,
+                    offer.productId,
+                    offer.productName
+                  )
+                }
                 className="btn bg-sky-500 ml-3 cursor-pointer"
               >
-                Satın Al
+                Ödeme Yap
               </div>
             )}
           </div>

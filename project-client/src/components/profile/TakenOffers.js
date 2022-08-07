@@ -9,9 +9,12 @@ import { useOfferContext } from "../../context/OfferContext";
 import { useUserContext } from "../../context/UserContext";
 import { getFromLocalStorage } from "../../services/localStorageService";
 import { toast } from "react-toastify";
+import { getProduct, updateProduct } from "../../services/productService";
+import { useProductContext } from "../../context/ProductContext";
 
 function TakenOffers() {
   const { takenOffers, setTakenOffers } = useOfferContext();
+  const { seledtedProduct, setSelectedProduct } = useProductContext();
   useEffect(() => {
     getOfferDetailsByOwnerId(getFromLocalStorage("userId")).then((result) =>
       setTakenOffers(result.data)
@@ -30,6 +33,24 @@ function TakenOffers() {
     });
   };
 
+  const updateIsOfferableIsSold = (productId) => {
+    getProduct(productId).then((result) => {
+      const data = {
+        productId: result.data[0].productId,
+        categoryId: result.data[0].categoryId,
+        brandId: result.data[0].brandId,
+        colorId: result.data[0].colorId,
+        name: result.data[0].productName,
+        price: result.data[0].price,
+        isOfferable: false,
+        isSold: true,
+        ownerId: result.data[0].ownerId,
+      };
+
+      updateProduct(data).then((response) => {});
+    });
+  };
+
   const handleApproveOffer = (offerId, productId, offeredPrice, userId) => {
     const data = {
       offerId,
@@ -43,6 +64,8 @@ function TakenOffers() {
       getOfferDetailsByOwnerId(getFromLocalStorage("userId")).then((result) =>
         setTakenOffers(result.data)
       );
+
+      updateIsOfferableIsSold(productId);
     });
   };
 
