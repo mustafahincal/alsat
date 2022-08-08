@@ -21,19 +21,19 @@ namespace Business.Concrete
         public IResult Add(Category category)
         {
             _categortDal.Add(category);
-            return new SuccessResult("Marka eklendi");
+            return new SuccessResult("Kategori eklendi");
         }
 
         public IResult Delete(Category category)
         {
             _categortDal.Delete(category);
-            return new SuccessResult("Marka silindi");
+            return new SuccessResult("Kategori silindi");
         }
 
         public IResult Update(Category category)
         {
             _categortDal.Update(category);
-            return new SuccessResult("Marka güncellendi");
+            return new SuccessResult("Kategori güncellendi");
         }
 
         public IDataResult<List<Category>> GetAll()
