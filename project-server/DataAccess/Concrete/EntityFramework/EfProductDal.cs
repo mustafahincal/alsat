@@ -37,6 +37,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  ColorName = cl.Name,
                                  BrandName = b.Name,
                                  Price = p.Price,
+                                 Description = p.Description,
                                  IsOfferable = p.IsOfferable,
                                  IsSold = p.IsSold,
                                  ImagePath = (from pi in context.ProductImages where pi.ProductId == p.ProductId select pi.ImagePath).FirstOrDefault(),
