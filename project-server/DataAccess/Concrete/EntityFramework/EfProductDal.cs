@@ -25,17 +25,21 @@ namespace DataAccess.Concrete.EntityFramework
                              on p.BrandId equals b.BrandId
                              join cl in context.Colors
                              on p.ColorId equals cl.ColorId
+                             join us in context.UsingStates
+                             on p.UsingStateId equals us.UsingStateId
                              select new ProductDetailDto
                              {
                                  ProductId = p.ProductId,
                                  CategoryId = c.CategoryId,
                                  ColorId = cl.ColorId,
                                  BrandId = b.BrandId,
+                                 UsingStateId = us.UsingStateId,
                                  OwnerId = (int)p.OwnerId,
                                  ProductName = p.Name,
                                  CategoryName = c.Name,
                                  ColorName = cl.Name,
                                  BrandName = b.Name,
+                                 UsingStateName = us.Name,
                                  Price = p.Price,
                                  Description = p.Description,
                                  IsOfferable = p.IsOfferable,

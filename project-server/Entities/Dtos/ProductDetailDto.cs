@@ -13,12 +13,14 @@ namespace Entities.Dtos
         public int CategoryId { get; set; }
         public int BrandId { get; set; }
         public int ColorId { get; set; }
+        public int UsingStateId { get; set; }
         public int OwnerId { get; set; }
         public string ProductName { get; set; }
         public string CategoryName { get; set; }
         public string BrandName { get; set; }
         public string ColorName { get; set; }
         public string Description { get; set; }
+        public string UsingStateName { get; set; }
         public int Price { get; set; }
         public bool IsOfferable { get; set; }
         public bool IsSold { get; set; }
