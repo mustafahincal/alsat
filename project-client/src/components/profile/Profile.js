@@ -5,6 +5,7 @@ import UpdateUser from "./UpdateUser";
 import { useUserContext } from "../../context/UserContext";
 import TakenOffers from "./TakenOffers";
 import GivenOffers from "./GivenOffers";
+import ProfileMain from "./ProfileMain";
 
 function Profile() {
   return (
@@ -36,7 +37,7 @@ function Profile() {
       </div>
       <div className="col-span-8 py-10 pl-5">
         <Routes>
-          <Route path="/" element={<h2>Profile main</h2>} />
+          <Route path="/" element={<ProfileMain />} />
           <Route path="/changePassword" element={<ChangePassword />} />
           <Route path="/updateUser" element={<UpdateUser />} />
           <Route path="/takenOffers" element={<TakenOffers />} />

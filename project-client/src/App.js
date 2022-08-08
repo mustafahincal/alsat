@@ -19,20 +19,22 @@ export default function App() {
     <>
       <div className="font-poppins bg-gray-100 min-h-screen">
         <Navi />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/main/*" element={<Main />} />
-          <Route path="/productDetails/:id" element={<ProductDetails />} />
-          <Route path="/offerForProduct/:id" element={<OfferForProduct />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/dashboard/*" element={<Dashboard />} />
-          <Route path="/addProduct" element={<AddProduct />} />
-          <Route path="/updateProduct/:id" element={<UpdateProduct />} />
-          <Route path="/updateUser/:id" element={<UpdateUser />} />
-          <Route path="/profile/*" element={<Profile />} />
-          <Route path="*" element={<Page404 />} />
-        </Routes>
+        <div className="py-4">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/main/*" element={<Main />} />
+            <Route path="/productDetails/:id" element={<ProductDetails />} />
+            <Route path="/offerForProduct/:id" element={<OfferForProduct />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/dashboard/*" element={<Dashboard />} />
+            <Route path="/addProduct" element={<AddProduct />} />
+            <Route path="/updateProduct/:id" element={<UpdateProduct />} />
+            <Route path="/updateUser/:id" element={<UpdateUser />} />
+            <Route path="/profile/*" element={<Profile />} />
+            <Route path="*" element={<Page404 />} />
+          </Routes>
+        </div>
       </div>
       <ToastContainer
         position="bottom-right"

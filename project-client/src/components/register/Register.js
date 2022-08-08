@@ -40,10 +40,10 @@ function Register() {
                 ]
               );
               setSelectedUser(responseUser.data);
+              setToLocalStorage("userId", responseUser.data.userId);
               setIsLogged(true);
               navigate("/");
             }
-            console.log(response);
           })
           .catch((err) => toast.error(err.response.data.message));
       },

@@ -10,7 +10,8 @@ import { postCategory } from "../../../services/categoryService";
 import { ControlSchema } from "../../../validations/controlSchema";
 
 function ControlCategories() {
-  const { categories, setCategories } = useCategoryContext();
+  const { categories, setCategories, updateStatus, setUpdateStatus } =
+    useCategoryContext();
   useEffect(() => {
     getCategories().then((result) => setCategories(result.data));
   }, []);
@@ -49,23 +50,37 @@ function ControlCategories() {
       .catch((err) => console.log(err));
   };
 
+  const handleCategoryUpdate = (categoryId, categoryName) => {
+    values.name = categoryName;
+  };
+
   return (
     <div className="flex justify-between items-center p-16">
       <div className="w-1/3  mx-auto  bg-white rounded-md shadow-item px-4 py-5">
-        <div className="grid grid-cols-3 gap-3">
+        <div className="flex flex-col gap-2">
           {categories.map((category) => (
             <div
               className="py-2 px-3 bg-gold text-black rounded text-center flex justify-between items-center"
               key={category.categoryId}
             >
               <div>{category.name}</div>
-              <div
-                className="bg-red-500 text-white w-7 h-7 flex items-center justify-center rounded cursor-pointer"
-                onClick={() =>
-                  handleCategoryDelete(category.categoryId, category.name)
-                }
-              >
-                &#215;
+              <div className="flex">
+                <div
+                  className="bg-lime-500 text-white px-2 flex items-center justify-center rounded cursor-pointer mr-2"
+                  onClick={() =>
+                    handleCategoryUpdate(category.categoryId, category.name)
+                  }
+                >
+                  Düzenle
+                </div>
+                <div
+                  className="bg-red-500 text-white w-7 h-7 flex items-center justify-center rounded cursor-pointer"
+                  onClick={() =>
+                    handleCategoryDelete(category.categoryId, category.name)
+                  }
+                >
+                  &#215;
+                </div>
               </div>
             </div>
           ))}
