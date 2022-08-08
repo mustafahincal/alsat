@@ -43,6 +43,7 @@ function Updateproduct() {
         brandId: selectedProduct.brandId,
         colorId: selectedProduct.colorId,
         price: selectedProduct.price,
+        description: selectedProduct.description,
         ownerId: getFromLocalStorage("userId"),
       },
       onSubmit: (values) => {
@@ -219,6 +220,21 @@ function Updateproduct() {
                 {errors.price && touched.price && (
                   <div className="text-red-400 my-2 text-sm">
                     {errors.price}
+                  </div>
+                )}
+
+                <textarea
+                  name="description"
+                  value={values.description}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  rows="3"
+                  placeholder="Açıklama"
+                  className="text-darkBlue py-2 px-3 w-full mb-4"
+                />
+                {errors.description && touched.description && (
+                  <div className="text-red-400 mb-2 text-sm">
+                    {errors.description}
                   </div>
                 )}
               </div>
