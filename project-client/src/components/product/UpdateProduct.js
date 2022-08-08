@@ -16,12 +16,15 @@ import { getCategories } from "../../services/categoryService";
 import { getProduct } from "../../services/productService";
 import { useParams } from "react-router-dom";
 import { updateProduct } from "../../services/productService";
+import { getUsingStates } from "../../services/usingStateService";
+import { UseUsingStateContext } from "../../context/UsingStateContext";
 
 function Updateproduct() {
   const { brands, setBrands } = useBrandContext();
   const { colors, setColors } = useColorContext();
   const { categories, setCategories } = useCategoryContext();
   const { selectedProduct, setSelectedProduct } = useProductContext();
+  const { usingStates, setUsingStates } = UseUsingStateContext();
   const { file, setFile } = useFileContext();
   const { id } = useParams();
   const apiImagesUrl = "https://localhost:44350/uploads/images/";
@@ -30,7 +33,7 @@ function Updateproduct() {
     getBrands().then((result) => setBrands(result.data));
     getColors().then((result) => setColors(result.data));
     getCategories().then((result) => setCategories(result.data));
-
+    getUsingStates().then((result) => setUsingStates(result.data));
     getProduct(id).then((result) => setSelectedProduct(result.data[0]));
   }, []);
 
@@ -42,6 +45,7 @@ function Updateproduct() {
         categoryId: selectedProduct.categoryId,
         brandId: selectedProduct.brandId,
         colorId: selectedProduct.colorId,
+        usingStateId: selectedProduct.usingStateId,
         price: selectedProduct.price,
         description: selectedProduct.description,
         ownerId: getFromLocalStorage("userId"),
@@ -118,6 +122,14 @@ function Updateproduct() {
             <div>Fiyat</div>
             <div>{selectedProduct.price}₺</div>
           </div>
+          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+            <div>Kullanım Durumu</div>
+            <div>{selectedProduct.usingStateName}</div>
+          </div>
+          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+            <div>Açıklama</div>
+            <div>{selectedProduct.description}</div>
+          </div>
         </div>
       </div>
 
@@ -185,6 +197,30 @@ function Updateproduct() {
                 {errors.brandId && touched.brandId && (
                   <div className="text-red-400 my-2 text-sm">
                     {errors.brandId}
+                  </div>
+                )}
+
+                <select
+                  className="text-darkBlue py-2 px-3 w-full mb-4"
+                  name="usingStateId"
+                  value={values.usingStateId}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                >
+                  <option value={0}>Kullanım Durumu Seçiniz</option>
+                  {usingStates.map((usingState) => (
+                    <option
+                      key={usingState.usingStateId}
+                      value={usingState.usingStateId}
+                    >
+                      {usingState.name}
+                    </option>
+                  ))}
+                </select>
+
+                {errors.usingStateId && touched.usingStateId && (
+                  <div className="text-red-400 my-2 text-sm">
+                    {errors.usingStateId}
                   </div>
                 )}
 

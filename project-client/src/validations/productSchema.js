@@ -7,4 +7,5 @@ export const ProductSchema = Yup.object().shape({
   colorId: Yup.string().required(),
   price: Yup.number().required(),
   description: Yup.string().required(),
+  usingStateId: Yup.string().required(),
 });

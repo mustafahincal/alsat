@@ -12,6 +12,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { FileProvider } from "./context/FileContext";
 import { OfferProvider } from "./context/OfferContext";
 import { CategoryProvider } from "./context/CategoryContext";
+import { UsingStateProvider } from "./context/UsingStateContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -24,7 +25,9 @@ root.render(
               <AuthProvider>
                 <FileProvider>
                   <CategoryProvider>
-                    <App />
+                    <UsingStateProvider>
+                      <App />
+                    </UsingStateProvider>
                   </CategoryProvider>
                 </FileProvider>
               </AuthProvider>

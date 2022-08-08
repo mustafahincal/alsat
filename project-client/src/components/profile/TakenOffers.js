@@ -42,6 +42,8 @@ function TakenOffers() {
         colorId: result.data[0].colorId,
         name: result.data[0].productName,
         price: result.data[0].price,
+        description: result.data[0].description,
+        usingStateId: result.data[0].usingStateId,
         isOfferable: false,
         isSold: true,
         ownerId: result.data[0].ownerId,

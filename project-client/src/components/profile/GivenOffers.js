@@ -44,15 +44,19 @@ function GivenOffers() {
 
     deleteOffer(OfferData)
       .then((response) => {
-        toast.success("Ürün satın alma işlemi başarılı");
+        if (response.success) {
+          toast.success("Ürün satın alma işlemi başarılı");
 
-        deleteProduct(productData)
-          .then((response) => {
-            getOfferDetailsByUserId(getFromLocalStorage("userId")).then(
-              (result) => setGivenOffers(result.data)
-            );
-          })
-          .catch((err) => console.log(err));
+          deleteProduct(productData)
+            .then((response) => {
+              getOfferDetailsByUserId(getFromLocalStorage("userId")).then(
+                (result) => setGivenOffers(result.data)
+              );
+            })
+            .catch((err) => console.log(err));
+        } else {
+          console.log("hata");
+        }
       })
       .catch((err) => console.log(err));
   };

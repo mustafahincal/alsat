@@ -75,6 +75,10 @@ function ProductDetails() {
             <div>{selectedProduct.price}₺</div>
           </div>
           <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+            <div>Kullanım Durumu</div>
+            <div>{selectedProduct.usingStateName}</div>
+          </div>
+          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
             <div>Açıklama</div>
             <div>{selectedProduct.description}</div>
           </div>

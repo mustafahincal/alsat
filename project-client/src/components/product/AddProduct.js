@@ -12,18 +12,22 @@ import { useFileContext } from "../../context/FileContext";
 import { getCategories } from "../../services/categoryService";
 import { getFromLocalStorage } from "../../services/localStorageService";
 import { useNavigate } from "react-router-dom";
+import { getUsingStates } from "../../services/usingStateService";
+import { UseUsingStateContext } from "../../context/UsingStateContext";
 
 function AddProduct() {
   const { brands, setBrands } = useBrandContext();
   const { colors, setColors } = useColorContext();
   const { categories, setCategories } = useCategoryContext();
   const { file, setFile } = useFileContext();
+  const { usingStates, setUsingStates } = UseUsingStateContext();
   const navigate = useNavigate();
 
   useEffect(() => {
     getBrands().then((result) => setBrands(result.data));
     getColors().then((result) => setColors(result.data));
     getCategories().then((result) => setCategories(result.data));
+    getUsingStates().then((result) => setUsingStates(result.data));
   }, []);
 
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
@@ -35,6 +39,7 @@ function AddProduct() {
         colorId: "",
         price: "",
         description: "",
+        usingStateId: "",
         ownerId: getFromLocalStorage("userId"),
         isOfferable: true,
         isSold: false,
@@ -126,6 +131,30 @@ function AddProduct() {
               {errors.brandId && touched.brandId && (
                 <div className="text-red-400 my-2 text-sm">
                   {errors.brandId}
+                </div>
+              )}
+
+              <select
+                className="text-darkBlue py-2 px-3 w-full mb-4"
+                name="usingStateId"
+                value={values.usingStateId}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option value={0}>Kullanım Durumu Seçiniz</option>
+                {usingStates.map((usingState) => (
+                  <option
+                    key={usingState.usingStateId}
+                    value={usingState.usingStateId}
+                  >
+                    {usingState.name}
+                  </option>
+                ))}
+              </select>
+
+              {errors.usingStateId && touched.usingStateId && (
+                <div className="text-red-400 my-2 text-sm">
+                  {errors.usingStateId}
                 </div>
               )}
 
