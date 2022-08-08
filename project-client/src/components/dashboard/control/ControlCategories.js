@@ -4,16 +4,24 @@ import { toast } from "react-toastify";
 import {
   deleteCategory,
   getCategories,
+  updateCategory,
 } from "../../../services/categoryService";
 import { useCategoryContext } from "../../../context/CategoryContext";
 import { postCategory } from "../../../services/categoryService";
 import { ControlSchema } from "../../../validations/controlSchema";
 
 function ControlCategories() {
-  const { categories, setCategories, updateStatus, setUpdateStatus } =
-    useCategoryContext();
+  const {
+    categories,
+    setCategories,
+    updateCategoryStatus,
+    setUpdateCategoryStatus,
+    selectedCategory,
+    setSelectedCategory,
+  } = useCategoryContext();
   useEffect(() => {
     getCategories().then((result) => setCategories(result.data));
+    setUpdateCategoryStatus(false);
   }, []);
 
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
@@ -22,20 +30,36 @@ function ControlCategories() {
         name: "",
       },
       onSubmit: (values) => {
-        postCategory(values)
-          .then((response) => {
-            if (response.success) {
-              toast.success(response.message);
-              getCategories().then((result) => setCategories(result.data));
-              values.name = "";
-            }
-          })
-          .catch((err) => console.log(err));
+        if (!updateCategoryStatus) {
+          postCategory(values)
+            .then((response) => {
+              if (response.success) {
+                toast.success(response.message);
+                getCategories().then((result) => setCategories(result.data));
+                values.name = "";
+              }
+            })
+            .catch((err) => console.log(err));
+        } else {
+          const data = {
+            categoryId: selectedCategory.categoryId,
+            name: values.name,
+          };
+          updateCategory(data)
+            .then((response) => {
+              if (response.success) {
+                toast.success(response.message);
+                getCategories().then((result) => setCategories(result.data));
+                values.name = "";
+              }
+            })
+            .catch((err) => console.log(err));
+        }
       },
       validationSchema: ControlSchema,
     });
 
-  const handleCategoryDelete = (categoryId, categoryName) => {
+  const handleDeleteCategory = (categoryId, categoryName) => {
     const categoryToDelete = {
       categoryId: categoryId,
       name: categoryName,
@@ -50,8 +74,18 @@ function ControlCategories() {
       .catch((err) => console.log(err));
   };
 
-  const handleCategoryUpdate = (categoryId, categoryName) => {
-    values.name = categoryName;
+  const handleUpdateCategory = (categoryId, categoryName) => {
+    if (!updateCategoryStatus) {
+      values.name = categoryName;
+    } else {
+      values.name = "";
+    }
+    setUpdateCategoryStatus(!updateCategoryStatus);
+    const category = {
+      categoryId: categoryId,
+      name: categoryName,
+    };
+    setSelectedCategory(category);
   };
 
   return (
@@ -65,18 +99,30 @@ function ControlCategories() {
             >
               <div>{category.name}</div>
               <div className="flex">
-                <div
-                  className="bg-lime-500 text-white px-2 flex items-center justify-center rounded cursor-pointer mr-2"
-                  onClick={() =>
-                    handleCategoryUpdate(category.categoryId, category.name)
-                  }
-                >
-                  Düzenle
-                </div>
+                {updateCategoryStatus ? (
+                  <div
+                    className="bg-indigo-500 text-white px-2 flex items-center justify-center rounded cursor-pointer mr-2"
+                    onClick={() =>
+                      handleUpdateCategory(category.categoryId, category.name)
+                    }
+                  >
+                    Düzenlemeyi Sonlandır
+                  </div>
+                ) : (
+                  <div
+                    className="bg-lime-500 text-white px-2 flex items-center justify-center rounded cursor-pointer mr-2"
+                    onClick={() =>
+                      handleUpdateCategory(category.categoryId, category.name)
+                    }
+                  >
+                    Düzenle
+                  </div>
+                )}
+
                 <div
                   className="bg-red-500 text-white w-7 h-7 flex items-center justify-center rounded cursor-pointer"
                   onClick={() =>
-                    handleCategoryDelete(category.categoryId, category.name)
+                    handleDeleteCategory(category.categoryId, category.name)
                   }
                 >
                   &#215;
@@ -90,7 +136,7 @@ function ControlCategories() {
       <div className="w-1/2 mx-auto  py-10 shadow-item  bg-white">
         <div className="w-3/4 m-auto">
           <h1 className="font-extrabold text-3xl text-black mb-5 text-center">
-            Kategori Ekle
+            {updateCategoryStatus ? "Kategori Güncelle" : "Kategori Ekle"}
           </h1>
           <form onSubmit={handleSubmit}>
             <div className="w-full flex  flex-col bg-darkBlue text-gray-100  px-14 py-14 text-lg">
@@ -108,9 +154,15 @@ function ControlCategories() {
               )}
             </div>
             <div className="text-right mt-5">
-              <button type="submit" className="btn text-lg">
-                Ekle
-              </button>
+              {updateCategoryStatus ? (
+                <button type="submit" className="btn  text-lg">
+                  Güncelle
+                </button>
+              ) : (
+                <button type="submit" className="btn text-lg">
+                  Ekle
+                </button>
+              )}
             </div>
           </form>
         </div>
