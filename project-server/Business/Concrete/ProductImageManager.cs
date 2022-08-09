@@ -31,7 +31,7 @@ namespace Business.Concrete
             productImage.ImagePath = _fileHelper.Upload(file, FilePath.ImagesPath);
             productImage.ProductId = productId;
             _productImageDal.Add(productImage);
-            return new SuccessResult("Resim eklendi");
+            return new SuccessResult("Fotoğraf eklendi");
         }
 
         public IResult Update(IFormFile file, ProductImage productImage, int productId, int productImageId)
@@ -40,7 +40,7 @@ namespace Business.Concrete
             productImage.ProductId = productId;
             productImage.ProductImageId = productImageId;
             _productImageDal.Update(productImage);
-            return new SuccessResult("Resim Güncellendi");
+            return new SuccessResult("Fotoğraf Güncellendi");
         }
 
        
@@ -50,12 +50,12 @@ namespace Business.Concrete
         {
             _fileHelper.Delete(FilePath.ImagesPath + productImage.ImagePath);
             _productImageDal.Delete(productImage);
-            return new SuccessResult();
+            return new SuccessResult("Fotoğraf Silindi");
         }
 
         public IDataResult<List<ProductImage>> GetAll()
         {
-            return new SuccessDataResult<List<ProductImage>>(_productImageDal.GetAll(), "Araba resimleri getirildi");
+            return new SuccessDataResult<List<ProductImage>>(_productImageDal.GetAll(), "Araba fotoğrafları getirildi");
         }
 
         public IDataResult<List<ProductImage>> GetByProductId(int productId)
@@ -70,7 +70,7 @@ namespace Business.Concrete
 
         public IDataResult<ProductImage> GetByImageId(int imageId)
         {
-            return new SuccessDataResult<ProductImage>(_productImageDal.Get(p => p.ProductId == imageId));
+            return new SuccessDataResult<ProductImage>(_productImageDal.Get(p => p.ProductImageId == imageId));
         }
 
         
