@@ -9,6 +9,9 @@ export const getOfferDetailsByUserId = (userId) =>
 export const getOfferDetailsByOwnerId = (ownerId) =>
   get(apiUrl + "/offers/getofferdetailsbyownerid?ownerId=" + ownerId);
 
+export const getOfferDetailsById = (id) =>
+  get(apiUrl + "/offers/getofferdetailsbyid?id=" + id);
+
 export const offerForProduct = (data) => {
   return post(apiUrl + "/offers/add", data);
 };

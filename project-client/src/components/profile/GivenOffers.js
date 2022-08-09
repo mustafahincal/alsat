@@ -13,7 +13,6 @@ import { deleteProduct } from "../../services/productService";
 function GivenOffers() {
   const { givenOffers, setGivenOffers } = useOfferContext();
   const { selectedUser } = useUserContext();
-  const navigate = useNavigate();
   useEffect(() => {
     getOfferDetailsByUserId(getFromLocalStorage("userId")).then((result) =>
       setGivenOffers(result.data)
@@ -30,35 +29,6 @@ function GivenOffers() {
         setGivenOffers(result.data)
       );
     });
-  };
-
-  const handleBuyProduct = (offerId, productId, productName) => {
-    const OfferData = {
-      offerId,
-    };
-
-    const productData = {
-      productId: productId,
-      name: productName,
-    };
-
-    deleteOffer(OfferData)
-      .then((response) => {
-        if (response.success) {
-          toast.success("Ürün satın alma işlemi başarılı");
-
-          deleteProduct(productData)
-            .then((response) => {
-              getOfferDetailsByUserId(getFromLocalStorage("userId")).then(
-                (result) => setGivenOffers(result.data)
-              );
-            })
-            .catch((err) => console.log(err));
-        } else {
-          console.log("hata");
-        }
-      })
-      .catch((err) => console.log(err));
   };
 
   return (
@@ -93,18 +63,12 @@ function GivenOffers() {
             )}
 
             {offer.isApproved && (
-              <div
-                onClick={() =>
-                  handleBuyProduct(
-                    offer.offerId,
-                    offer.productId,
-                    offer.productName
-                  )
-                }
+              <NavLink
+                to={`/payment/offer/${offer.offerId}`}
                 className="btn bg-sky-500 ml-3 cursor-pointer"
               >
                 Ödeme Yap
-              </div>
+              </NavLink>
             )}
           </div>
         </div>

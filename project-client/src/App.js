@@ -13,6 +13,7 @@ import { ToastContainer } from "react-toastify";
 import UpdateUser from "./components/profile/UpdateUser";
 import Profile from "./components/profile/Profile";
 import Page404 from "./components/page404/Page404";
+import Payment from "./components/product/Payment";
 
 export default function App() {
   return (
@@ -27,6 +28,8 @@ export default function App() {
             <Route path="/offerForProduct/:id" element={<OfferForProduct />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/payment/product/:productId" element={<Payment />} />
+            <Route path="/payment/offer/:offerId" element={<Payment />} />
             <Route path="/dashboard/*" element={<Dashboard />} />
             <Route path="/addProduct" element={<AddProduct />} />
             <Route path="/updateProduct/:id" element={<UpdateProduct />} />

@@ -39,8 +39,6 @@ function ProductDetails() {
       .catch((err) => console.log(err));
   };
 
-  const handleBuyProduct = () => {};
-
   return (
     <div className="py-24 flex justify-between px-36">
       <div className="w-2/5 mb-16  bg-white rounded-md shadow-item mx-auto">
@@ -101,12 +99,12 @@ function ProductDetails() {
                   Teklif Ver
                 </NavLink>
               )}
-              <div
+              <NavLink
+                to={`/payment/product/${selectedProduct.productId}`}
                 className="btn  py-3 cursor-pointer"
-                onClick={handleBuyProduct}
               >
                 Satın Al
-              </div>
+              </NavLink>
             </div>
           )}
 
