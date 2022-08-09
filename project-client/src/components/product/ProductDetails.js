@@ -92,7 +92,7 @@ function ProductDetails() {
           {selectedProduct.ownerId != selectedUser.userId && (
             <div className="flex flex-col w-full">
               {selectedProduct.isOfferable && (
-                <div>
+                <div className="flex flex-col w-full">
                   {!selectedProduct.isSold && (
                     <NavLink
                       to={`/offerForProduct/${selectedProduct.productId}`}
@@ -107,7 +107,7 @@ function ProductDetails() {
               {!selectedProduct.isSold ? (
                 <NavLink
                   to={`/payment/product/${selectedProduct.productId}`}
-                  className="btn  py-3 cursor-pointer"
+                  className="btn py-3 cursor-pointer mt-1"
                 >
                   Satın Al
                 </NavLink>

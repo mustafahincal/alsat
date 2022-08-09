@@ -8,7 +8,12 @@ import { OfferSchema } from "../../validations/offerSchema";
 import defaultImage from "../../assets/default.png";
 import { getProduct } from "../../services/productService";
 import { getFromLocalStorage } from "../../services/localStorageService";
-import { offerForProduct } from "../../services/offerService";
+import {
+  getOfferDetailsByUserId,
+  offerForProduct,
+  updateOffer,
+} from "../../services/offerService";
+import { useOfferContext } from "../../context/OfferContext";
 
 function OfferForProduct() {
   const { selectedProduct, setSelectedProduct } = useProductContext();
@@ -16,10 +21,17 @@ function OfferForProduct() {
   const apiImagesUrl = "https://localhost:44350/uploads/images/";
   const { id } = useParams();
   const navigate = useNavigate();
+  const { selectedOffer, setSelectedOffer } = useOfferContext();
 
   useEffect(() => {
     getProduct(id).then((result) => {
       setSelectedProduct(result.data[0]);
+    });
+    getOfferDetailsByUserId(getFromLocalStorage("userId")).then((result) => {
+      const theOffer = result.data.find(
+        (offer) => offer.productId == selectedProduct.productId
+      );
+      setSelectedOffer(theOffer);
     });
   }, []);
 
@@ -32,13 +44,56 @@ function OfferForProduct() {
         isApproved: false,
       },
       onSubmit: (values) => {
-        offerForProduct(values)
-          .then((response) => {
-            if (response.success) {
-              toast.success("Teklif verme işlemi başarılı");
-            }
-          })
-          .catch((err) => console.log(err));
+        if (
+          selectedOffer &&
+          selectedOffer.offeredPrice >= values.offeredPrice
+        ) {
+          toast.error(
+            "Ürüne daha önce verdiğiniz tekliften daha düşük veya aynı teklif veremezsiniz"
+          );
+          values.offeredPrice = "";
+        } else if (selectedOffer) {
+          const data = {
+            offerId: selectedOffer.offerId,
+            productId: selectedOffer.productId,
+            offeredPrice: values.offeredPrice,
+            isApproved: selectedOffer.isApproved,
+            userId: selectedOffer.userId,
+          };
+          updateOffer(data)
+            .then((response) => {
+              if (response.success) {
+                toast.success("Teklif güncellendi");
+                getOfferDetailsByUserId(getFromLocalStorage("userId")).then(
+                  (result) => {
+                    const theOffer = result.data.find(
+                      (offer) => offer.productId == selectedProduct.productId
+                    );
+                    setSelectedOffer(theOffer);
+                    navigate("/main");
+                  }
+                );
+              }
+            })
+            .catch((err) => console.log(err));
+        } else {
+          offerForProduct(values)
+            .then((response) => {
+              if (response.success) {
+                toast.success("Teklif verme işlemi başarılı");
+                getOfferDetailsByUserId(getFromLocalStorage("userId")).then(
+                  (result) => {
+                    const theOffer = result.data.find(
+                      (offer) => offer.productId == selectedProduct.productId
+                    );
+                    setSelectedOffer(theOffer);
+                    navigate("/main");
+                  }
+                );
+              }
+            })
+            .catch((err) => console.log(err));
+        }
       },
       validationSchema: OfferSchema,
     });
@@ -88,10 +143,16 @@ function OfferForProduct() {
         </div>
         <div className="w-1/2 text-right">
           <h1 className="font-extrabold text-3xl text-black mb-5">Teklif</h1>
+          {selectedOffer && (
+            <div className="px-5 py-5 bg-red-500 bg-opacity-60 text-2xl text-white  text-center mb-5 ">
+              Bu ürüne {selectedOffer.offeredPrice}₺ teklif verdiniz.
+            </div>
+          )}
+
           <form onSubmit={handleSubmit}>
             <div className="w-full flex  flex-col bg-darkBlue text-gray-100  px-14 py-7">
               <div className="flex justify-between items-center">
-                <label htmlFor="offeredPrice" className="text-left">
+                <label htmlFor="offeredPrice" className="text-left text-xl">
                   Teklifinizi giriniz
                 </label>
                 <input
@@ -101,7 +162,7 @@ function OfferForProduct() {
                   name="offeredPrice"
                   type="number"
                   id="offeredPrice"
-                  className="text-darkBlue py-2 px-4 w-3/5"
+                  className="text-darkBlue py-2 px-4 w-3/5 text-xl"
                 />
               </div>
               {errors.offeredPrice && touched.offeredPrice && (
