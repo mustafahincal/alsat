@@ -126,19 +126,33 @@ function ProductDetails() {
           )}
 
           {selectedProduct.ownerId == selectedUser.userId && (
-            <div className="flex flex-col w-full">
-              <NavLink
-                to={`/updateProduct/${selectedProduct.productId}`}
-                className="btn bg-littleDarkBlue py-3"
-              >
-                Ürünü Güncelle
-              </NavLink>
-              <button
-                onClick={handleDeleteProduct}
-                className="btn bg-red-500  py-3 mt-2"
-              >
-                Ürünü Sil
-              </button>
+            <div>
+              {!selectedProduct.isSold ? (
+                <div className="flex flex-col w-full">
+                  <NavLink
+                    to={`/updateProduct/${selectedProduct.productId}`}
+                    className="btn bg-littleDarkBlue py-3"
+                  >
+                    Ürünü Güncelle
+                  </NavLink>
+                  <button
+                    onClick={handleDeleteProduct}
+                    className="btn bg-red-500  py-3 mt-2"
+                  >
+                    Ürünü Sil
+                  </button>
+                </div>
+              ) : (
+                <div className="flex flex-col">
+                  <p className="text-2xl"> Ürün Satılmıştır</p>
+                  <NavLink
+                    className="btn bg-white border-4 border-darkBlue text-darkBlue hover:bg-darkBlue hover:text-white transition-all  text-2xl mt-4"
+                    to={"/main"}
+                  >
+                    Diğer Ürünler
+                  </NavLink>
+                </div>
+              )}
             </div>
           )}
         </div>

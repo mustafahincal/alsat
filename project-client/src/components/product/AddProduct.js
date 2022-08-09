@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { ProductSchema } from "../../validations/productSchema";
 import { toast } from "react-toastify";
-import { addProduct } from "../../services/productService";
+import { addProduct, getProducts } from "../../services/productService";
 import { useBrandContext } from "../../context/BrandContext";
 import { useColorContext } from "../../context/ColorContext";
 import { useCategoryContext } from "../../context/CategoryContext";
@@ -14,12 +14,15 @@ import { getFromLocalStorage } from "../../services/localStorageService";
 import { useNavigate } from "react-router-dom";
 import { getUsingStates } from "../../services/usingStateService";
 import { UseUsingStateContext } from "../../context/UsingStateContext";
+import { useProductContext } from "../../context/ProductContext";
+import { addImage } from "../../services/productImageService";
 
 function AddProduct() {
   const { brands, setBrands } = useBrandContext();
   const { colors, setColors } = useColorContext();
   const { categories, setCategories } = useCategoryContext();
   const { file, setFile } = useFileContext();
+  const { products, setProducts } = useProductContext();
   const { usingStates, setUsingStates } = UseUsingStateContext();
   const navigate = useNavigate();
 
@@ -45,52 +48,62 @@ function AddProduct() {
         isSold: false,
       },
       onSubmit: (values) => {
-        const isOfferableBool = values.isOfferable === "true" ? true : false;
-        const data = {
-          name: values.name,
-          categoryId: values.categoryId,
-          brandId:
-            values.brandId === "0" ||
-            values.brandId === 0 ||
-            values.brandId === ""
-              ? null
-              : values.brandId,
-          colorId:
-            values.colorId === "0" ||
-            values.colorId === 0 ||
-            values.colorId === ""
-              ? null
-              : values.colorId,
-          price: values.price,
-          description: values.description,
-          usingStateId: values.usingStateId,
-          ownerId: values.ownerId,
-          isSold: values.isSold,
-          isOfferable: isOfferableBool,
-        };
-        addProduct(data)
-          .then((response) => {
-            if (response.success) {
-              toast.success(response.message);
+        if (file) {
+          const isOfferableBool = values.isOfferable === "true" ? true : false;
+          const data = {
+            name: values.name,
+            categoryId: values.categoryId,
+            brandId:
+              values.brandId === "0" ||
+              values.brandId === 0 ||
+              values.brandId === ""
+                ? null
+                : values.brandId,
+            colorId:
+              values.colorId === "0" ||
+              values.colorId === 0 ||
+              values.colorId === ""
+                ? null
+                : values.colorId,
+            price: values.price,
+            description: values.description,
+            usingStateId: values.usingStateId,
+            ownerId: values.ownerId,
+            isSold: values.isSold,
+            isOfferable: isOfferableBool,
+          };
+          addProduct(data)
+            .then((response) => {
+              if (response.success) {
+                toast.success(response.message);
+                handleAddFile(response.data[0].productId);
+              }
               navigate("/main");
-            }
-          })
-          .catch((err) => {
-            toast.error(err.response.data.message);
-          });
+            })
+            .catch((err) => {
+              console.log(err);
+              toast.error(err.response.data.message);
+            });
+        } else {
+          toast.error("Lütfen ürün görseli ekleyiniz");
+        }
       },
       validationSchema: ProductSchema,
     });
 
-  // const handleAddFile = () => {
-  //   if (values.brandId == 0) {
-  //     toast.error("Lütfen eklenecek araba bilgilerini girin");
-  //   } else {
-  //     const formData = new FormData();
-  //     formData.append("image",image);
-  //     formData.append("productId",)
-  //   }
-  // };
+  const handleAddFile = (productId) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("productId", productId);
+
+    addImage(formData, false)
+      .then((response) => {
+        if (response.success) {
+          toast.success(response.message);
+        }
+      })
+      .catch((err) => toast.error(err));
+  };
 
   return (
     <div className="flex justify-between items-start min-h-screen">
@@ -241,7 +254,7 @@ function AddProduct() {
                 className="text-darkBlue py-2 px-3 w-full mt-4"
               />
               {errors.description && touched.description && (
-                <div className="text-red-400 mb-2 text-sm">
+                <div className="text-red-400 my-2 text-sm">
                   {errors.description}
                 </div>
               )}
@@ -256,7 +269,7 @@ function AddProduct() {
         </div>
       </div>
       <div className="w-1/3 mx-auto py-3 px-14 shadow-item mt-14 bg-white">
-        <div className="mx-auto text-center py-8">
+        <div className="mx-auto text-center pt-10 pb-14">
           <h1 className="font-extrabold text-3xl text-black mb-5 text-center">
             Fotoğraf Ekle
           </h1>
@@ -272,9 +285,6 @@ function AddProduct() {
                     hover:file:bg-violet-300 hover:file:text-black
                     file:cursor-pointer cursor-pointer"
             />
-          </div>
-          <div className="text-right mt-5">
-            <button className="btn text-lg">Ekle</button>
           </div>
         </div>
       </div>

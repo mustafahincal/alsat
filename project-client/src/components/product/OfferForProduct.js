@@ -117,24 +117,24 @@ function OfferForProduct() {
                 alt=""
               />
             </div>
-            <div className="bg-darkBlue w-1/2 px-5 py-5  text-gray-100 flex flex-col justify-between">
-              <div className="w-full flex justify-between  px-5 font-bold">
+            <div className="bg-darkBlue w-1/2 px-7 py-10  text-gray-100 flex flex-col justify-between text-xl">
+              <div className="w-full flex justify-between  px-5">
                 <div>İsim</div>
                 <div>{selectedProduct.productName}</div>
               </div>
-              <div className="w-full flex justify-between px-5 font-bold">
+              <div className="w-full flex justify-between px-5">
                 <div>Marka</div>
                 <div>{selectedProduct.brandName}</div>
               </div>
-              <div className="w-full flex justify-between  px-5 font-bold">
+              <div className="w-full flex justify-between  px-5">
                 <div>Kategori</div>
                 <div>{selectedProduct.categoryName}</div>
               </div>
-              <div className="w-full flex justify-between  px-5 font-bold">
+              <div className="w-full flex justify-between  px-5">
                 <div>Renk</div>
                 <div>{selectedProduct.colorName}</div>
               </div>
-              <div className="w-full flex justify-between px-5 font-bold">
+              <div className="w-full flex justify-between px-5">
                 <div>Fiyat</div>
                 <div>{selectedProduct.price}₺</div>
               </div>
