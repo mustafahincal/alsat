@@ -25,9 +25,9 @@ namespace Business.Concrete
             return new SuccessResult("Kullanıcı eklendi");
         }
 
-        public IResult Delete(User user)
+        public IResult Delete(int id)
         {
-            _userDal.Delete(user);
+            _userDal.DeleteUserById(id);
             return new SuccessResult("Kullanıcı silindi");
         }
 

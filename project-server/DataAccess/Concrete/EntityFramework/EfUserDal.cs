@@ -12,6 +12,20 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfUserDal : EfEntityRepositoryBase<User, PrimeforContext>, IUserDal
     {
+       
+            public void DeleteUserById(int id)
+            {
+                using (PrimeforContext context = new PrimeforContext())
+                {
+
+                    User user = new User() { UserId = id };
+                    context.Users.Attach(user);
+                    context.Users.Remove(user);
+                    context.SaveChanges();
+                }
+            }
+        
+
         public List<OperationClaim> GetClaims(User user)
         {
             using (var context = new PrimeforContext())
@@ -25,5 +39,7 @@ namespace DataAccess.Concrete.EntityFramework
 
             }
         }
+
+        
     }
 }
