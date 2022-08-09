@@ -7,7 +7,7 @@ import { getBrands } from "../../services/brandService";
 import { getColors } from "../../services/colorService";
 import defaultImage from "../../assets/default.png";
 import { useFileContext } from "../../context/FileContext";
-import { addImage } from "../../services/productImageService";
+import { addImage, deleteImage } from "../../services/productImageService";
 import { useProductContext } from "../../context/ProductContext";
 import { ProductSchema } from "../../validations/productSchema";
 import { getFromLocalStorage } from "../../services/localStorageService";
@@ -111,6 +111,20 @@ function Updateproduct() {
         }
       })
       .catch((err) => toast.error(err));
+  };
+
+  const handleDeleteImage = () => {
+    const data = {
+      productImageId: selectedProduct.productImageId,
+      productId: selectedProduct.productId,
+      imagePath: selectedProduct.imagePath,
+    };
+    deleteImage(data).then((result) => {
+      if (result.success) {
+        toast.success(result.message);
+      }
+      getProduct(id).then((result) => setSelectedProduct(result.data[0]));
+    });
   };
 
   return (
@@ -341,7 +355,7 @@ function Updateproduct() {
         <div className="w-4/5 mx-auto py-3 px-14 shadow-item mt-14 bg-white">
           <div className="mx-auto text-center py-8">
             <h1 className="font-extrabold text-3xl text-black mb-5 text-center">
-              Resim Ekle
+              Fotoğraf Ekle
             </h1>
             <div className=" bg-darkBlue text-gray-100  p-10 text-lg flex justify-center items-center">
               <input
@@ -356,10 +370,20 @@ function Updateproduct() {
                     file:cursor-pointer cursor-pointer"
               />
             </div>
-            <div className="text-right mt-5">
-              <button onClick={() => handleAddFile()} className="btn text-lg">
-                Ekle
-              </button>
+            <div className="flex justify-between mt-5">
+              {selectedProduct.imagePath && (
+                <button
+                  className="btn border-2 bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white"
+                  onClick={handleDeleteImage}
+                >
+                  Fotoğrafı Sil
+                </button>
+              )}
+              <div className="text-right">
+                <button onClick={handleAddFile} className="btn text-lg">
+                  Ekle
+                </button>
+              </div>
             </div>
           </div>
         </div>

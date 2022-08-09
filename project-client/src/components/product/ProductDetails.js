@@ -92,19 +92,36 @@ function ProductDetails() {
           {selectedProduct.ownerId != selectedUser.userId && (
             <div className="flex flex-col w-full">
               {selectedProduct.isOfferable && (
-                <NavLink
-                  to={`/offerForProduct/${selectedProduct.productId}`}
-                  className="btn  py-3 mb-2"
-                >
-                  Teklif Ver
-                </NavLink>
+                <div>
+                  {!selectedProduct.isSold && (
+                    <NavLink
+                      to={`/offerForProduct/${selectedProduct.productId}`}
+                      className="btn  py-3 mb-2"
+                    >
+                      Teklif Ver
+                    </NavLink>
+                  )}
+                </div>
               )}
-              <NavLink
-                to={`/payment/product/${selectedProduct.productId}`}
-                className="btn  py-3 cursor-pointer"
-              >
-                Satın Al
-              </NavLink>
+
+              {!selectedProduct.isSold ? (
+                <NavLink
+                  to={`/payment/product/${selectedProduct.productId}`}
+                  className="btn  py-3 cursor-pointer"
+                >
+                  Satın Al
+                </NavLink>
+              ) : (
+                <div className="flex flex-col">
+                  <p className="text-2xl"> Ürün Satılmıştır</p>
+                  <NavLink
+                    className="btn bg-white border-4 border-darkBlue text-darkBlue hover:bg-darkBlue hover:text-white transition-all  text-2xl mt-4"
+                    to={"/main"}
+                  >
+                    Diğer Ürünler
+                  </NavLink>
+                </div>
+              )}
             </div>
           )}
 

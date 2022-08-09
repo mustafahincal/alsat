@@ -108,7 +108,7 @@ function AddProduct() {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 placeholder="Ürün Adı"
-                className="text-darkBlue py-2 px-3 w-full mb-4"
+                className="text-darkBlue py-2 px-3 w-full"
               />
 
               {errors.name && touched.name && (
@@ -116,7 +116,7 @@ function AddProduct() {
               )}
 
               <select
-                className="text-darkBlue py-2 px-3 w-full mb-4"
+                className="text-darkBlue py-2 px-3 w-full mt-4 gruop"
                 name="categoryId"
                 value={values.categoryId}
                 onChange={handleChange}
@@ -137,7 +137,7 @@ function AddProduct() {
               )}
 
               <select
-                className="text-darkBlue py-2 px-3 w-full mb-4"
+                className="text-darkBlue py-2 px-3 w-full mt-4"
                 name="brandId"
                 value={values.brandId}
                 onChange={handleChange}
@@ -158,7 +158,7 @@ function AddProduct() {
               )}
 
               <select
-                className="text-darkBlue py-2 px-3 w-full mb-4"
+                className="text-darkBlue py-2 px-3 w-full mt-4"
                 name="colorId"
                 value={values.colorId}
                 onChange={handleChange}
@@ -178,7 +178,7 @@ function AddProduct() {
               )}
 
               <select
-                className="text-darkBlue py-2 px-3 w-full mb-4"
+                className="text-darkBlue py-2 px-3 w-full mt-4"
                 name="usingStateId"
                 value={values.usingStateId}
                 onChange={handleChange}
@@ -202,7 +202,7 @@ function AddProduct() {
               )}
 
               <select
-                className="text-darkBlue py-2 px-3 w-full mb-4"
+                className="text-darkBlue py-2 px-3 w-full mt-4"
                 name="isOfferable"
                 value={values.isOfferable}
                 onChange={handleChange}
@@ -225,7 +225,7 @@ function AddProduct() {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 placeholder="Fiyat"
-                className="text-darkBlue py-2 px-3 w-full mb-4"
+                className="text-darkBlue py-2 px-3 w-full mt-4"
               />
               {errors.price && touched.price && (
                 <div className="text-red-400 my-2 text-sm">{errors.price}</div>
@@ -238,7 +238,7 @@ function AddProduct() {
                 onBlur={handleBlur}
                 rows="3"
                 placeholder="Açıklama"
-                className="text-darkBlue py-2 px-3 w-full mb-4"
+                className="text-darkBlue py-2 px-3 w-full mt-4"
               />
               {errors.description && touched.description && (
                 <div className="text-red-400 mb-2 text-sm">
@@ -258,7 +258,7 @@ function AddProduct() {
       <div className="w-1/3 mx-auto py-3 px-14 shadow-item mt-14 bg-white">
         <div className="mx-auto text-center py-8">
           <h1 className="font-extrabold text-3xl text-black mb-5 text-center">
-            Resim Ekle
+            Fotoğraf Ekle
           </h1>
           <div className=" bg-darkBlue text-gray-100  p-10 text-lg flex justify-center items-center">
             <input
