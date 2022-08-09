@@ -4,12 +4,16 @@ const UsingStateContext = createContext();
 
 export const UsingStateProvider = ({ children }) => {
   const [usingStates, setUsingStates] = useState([]);
-  //   const [selectedBrand, setSelectedBrand] = useState(0);
-  //   const [updateBrandStatus, setUpdateBrandStatus] = useState(false);
+  const [selectedUsingState, setSelectedUsingState] = useState(0);
+  const [updateUsingStateStatus, setUpdateUsingStateStatus] = useState(false);
 
   const values = {
     usingStates,
     setUsingStates,
+    selectedUsingState,
+    setSelectedUsingState,
+    updateUsingStateStatus,
+    setUpdateUsingStateStatus,
   };
 
   return (

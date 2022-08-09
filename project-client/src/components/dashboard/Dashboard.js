@@ -5,6 +5,7 @@ import Products from "../product/Products";
 import ControlBrands from "./control/ControlBrands";
 import ControlColors from "./control/ControlColors";
 import ControlCategories from "./control/ControlCategories";
+import ControlUsingStates from "./control/ControlUsingStates";
 
 function DashBoard() {
   return (
@@ -32,6 +33,12 @@ function DashBoard() {
           >
             Renkler
           </NavLink>
+          <NavLink
+            to={`controlUsingStates`}
+            className="px-2  rounded py-2 border-b-2"
+          >
+            Kullanım Durumları
+          </NavLink>
           <NavLink to={`users`} className="px-2 rounded py-2 border-b-2">
             Kullanıcılar
           </NavLink>
@@ -44,6 +51,7 @@ function DashBoard() {
           <Route path="/controlBrands" element={<ControlBrands />} />
           <Route path="/controlColors" element={<ControlColors />} />
           <Route path="/controlCategories" element={<ControlCategories />} />
+          <Route path="/controlUsingStates" element={<ControlUsingStates />} />
         </Routes>
       </div>
     </div>
