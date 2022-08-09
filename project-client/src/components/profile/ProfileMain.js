@@ -23,10 +23,7 @@ function ProfileMain() {
   }, []);
 
   const handleDeleteAccount = () => {
-    const data = {
-      userId: selectedUser.userId,
-    };
-    deleteAccount(data)
+    deleteAccount(selectedUser.userId)
       .then((response) => {
         if (response.success) {
           toast.success(response.message);
@@ -34,6 +31,7 @@ function ProfileMain() {
           removeFromLocalStorage("isLogged");
           removeFromLocalStorage("token");
           removeFromLocalStorage("userId");
+          removeFromLocalStorage("productId");
           navigate("/");
         }
       })

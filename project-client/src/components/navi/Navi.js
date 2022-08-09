@@ -14,6 +14,7 @@ function Navi() {
     removeFromLocalStorage("isLogged");
     removeFromLocalStorage("token");
     removeFromLocalStorage("userId");
+    removeFromLocalStorage("productId");
     navigate("/");
   };
 
