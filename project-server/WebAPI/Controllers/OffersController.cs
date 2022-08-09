@@ -73,6 +73,17 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getofferdetailsbyid")]
+        public IActionResult GetOfferDetailsById(int id)
+        {
+            var result = _offerService.GetOfferDetailsById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
 
         [HttpPost("add")]
         public IActionResult Add(Offer offer)

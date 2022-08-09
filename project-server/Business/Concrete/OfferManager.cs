@@ -66,6 +66,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<OfferDetailDto>>(_offerDal.GetOfferDetails(o => o.UserId == userId), "Teklifler listelendi");
         }
 
-        
+        public IDataResult<List<OfferDetailDto>> GetOfferDetailsById(int id)
+        {
+            return new SuccessDataResult<List<OfferDetailDto>>(_offerDal.GetOfferDetails(o => o.OfferId == id), "Teklifler getirildi");
+        }
     }
 }

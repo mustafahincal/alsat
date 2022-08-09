@@ -19,7 +19,7 @@ namespace Entities.Concrete
         public int UsingStateId { get; set; }
         public string Name { get; set; }
         public int Price { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public bool IsOfferable { get; set; }
         public bool IsSold { get; set; }
         public int? OwnerId { get; set; }

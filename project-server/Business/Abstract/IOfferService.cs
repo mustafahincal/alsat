@@ -22,5 +22,6 @@ namespace Business.Abstract
         IDataResult<List<OfferDetailDto>> GetOfferDetails();
         IDataResult<List<OfferDetailDto>> GetOfferDetailsByUserId(int userId);
         IDataResult<List<OfferDetailDto>> GetOfferDetailsByOwnerId(int ownerId);
+        IDataResult<List<OfferDetailDto>> GetOfferDetailsById(int id);
     }
 }
