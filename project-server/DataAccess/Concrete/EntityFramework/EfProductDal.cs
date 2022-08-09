@@ -21,24 +21,20 @@ namespace DataAccess.Concrete.EntityFramework
                 var result = from p in context.Products
                              join c in context.Categories
                              on p.CategoryId equals c.CategoryId
-                             join b in context.Brands
-                             on p.BrandId equals b.BrandId
-                             join cl in context.Colors
-                             on p.ColorId equals cl.ColorId
                              join us in context.UsingStates
                              on p.UsingStateId equals us.UsingStateId
                              select new ProductDetailDto
                              {
                                  ProductId = p.ProductId,
                                  CategoryId = c.CategoryId,
-                                 ColorId = cl.ColorId,
-                                 BrandId = b.BrandId,
+                                 ColorId = (from cl in context.Colors where cl.ColorId == p.ColorId select cl.ColorId).FirstOrDefault(),
+                                 BrandId = (from b in context.Brands where b.BrandId == p.BrandId select b.BrandId).FirstOrDefault(),
                                  UsingStateId = us.UsingStateId,
                                  OwnerId = (int)p.OwnerId,
                                  ProductName = p.Name,
                                  CategoryName = c.Name,
-                                 ColorName = cl.Name,
-                                 BrandName = b.Name,
+                                 ColorName = (from cl in context.Colors where cl.ColorId == p.ColorId select cl.Name).FirstOrDefault(),
+                                 BrandName = (from b in context.Brands where b.BrandId == p.BrandId select b.Name).FirstOrDefault(),
                                  UsingStateName = us.Name,
                                  Price = p.Price,
                                  Description = p.Description,
