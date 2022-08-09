@@ -45,7 +45,20 @@ function AddProduct() {
         isSold: false,
       },
       onSubmit: (values) => {
-        addProduct(values)
+        const isOfferableBool = values.isOfferable === "true" ? true : false;
+        const data = {
+          name: values.name,
+          categoryId: values.categoryId,
+          brandId: values.brandId,
+          colorId: values.colorId,
+          price: values.price,
+          description: values.description,
+          usingStateId: values.usingStateId,
+          ownerId: values.ownerId,
+          isSold: values.isSold,
+          isOfferable: isOfferableBool,
+        };
+        addProduct(data)
           .then((response) => {
             if (response.success) {
               toast.success(response.message);
@@ -175,6 +188,23 @@ function AddProduct() {
               {errors.colorId && touched.colorId && (
                 <div className="text-red-400 my-2 text-sm">
                   {errors.colorId}
+                </div>
+              )}
+
+              <select
+                className="text-darkBlue py-2 px-3 w-full mb-4"
+                name="isOfferable"
+                value={values.isOfferable}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option value={true}>Teklif Durumu</option>
+                <option value={false}>Teklif verilemez</option>
+                <option value={true}>Teklif verilebilir</option>
+              </select>
+              {errors.isOfferable && touched.isOfferable && (
+                <div className="text-red-400 my-2 text-sm">
+                  {errors.isOfferable}
                 </div>
               )}
 

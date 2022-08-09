@@ -89,14 +89,16 @@ function ProductDetails() {
         <div className="bg-white rounded-md w-1/2 m-auto p-10 flex flex-col gap-3 shadow-item text-center">
           {selectedProduct.ownerId != selectedUser.userId && (
             <div className="flex flex-col w-full">
-              <NavLink
-                to={`/offerForProduct/${selectedProduct.productId}`}
-                className="btn  py-3"
-              >
-                Teklif Ver
-              </NavLink>
+              {selectedProduct.isOfferable && (
+                <NavLink
+                  to={`/offerForProduct/${selectedProduct.productId}`}
+                  className="btn  py-3 mb-2"
+                >
+                  Teklif Ver
+                </NavLink>
+              )}
               <div
-                className="btn  py-3 cursor-pointer mt-2"
+                className="btn  py-3 cursor-pointer"
                 onClick={handleBuyProduct}
               >
                 Satın Al
