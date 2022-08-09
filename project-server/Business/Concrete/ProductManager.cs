@@ -29,7 +29,7 @@ namespace Business.Concrete
             this._categoryService = categoryService;
         }
 
-        public IDataResult<List<Product>> Add(Product product)
+        public IResult Add(Product product)
         {
 
             IResult result = BusinessRules.Run(
@@ -40,14 +40,12 @@ namespace Business.Concrete
 
             if (result != null)
             {
-                //return result
-                return new ErrorDataResult<List<Product>>("Validation hata");
+                return result;
             }
 
 
             _productDal.Add(product);
-            var productInfo = _productDal.GetAll(p => p.Name == product.Name);
-            return new SuccessDataResult<List<Product>>(productInfo, Messages.ProductAdded);
+            return new SuccessResult(Messages.ProductAdded);
         }
 
     
