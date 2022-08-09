@@ -59,17 +59,21 @@ function ProductDetails() {
             <div>{selectedProduct.productName}</div>
           </div>
           <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
-            <div>Marka</div>
-            <div>{selectedProduct.brandName}</div>
-          </div>
-          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
             <div>Kategori</div>
             <div>{selectedProduct.categoryName}</div>
           </div>
-          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
-            <div>Renk</div>
-            <div>{selectedProduct.colorName}</div>
-          </div>
+          {selectedProduct.brandName && (
+            <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+              <div>Marka</div>
+              <div>{selectedProduct.brandName}</div>
+            </div>
+          )}
+          {selectedProduct.colorName && (
+            <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+              <div>Renk</div>
+              <div>{selectedProduct.colorName}</div>
+            </div>
+          )}
           <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
             <div>Fiyat</div>
             <div>{selectedProduct.price}₺</div>

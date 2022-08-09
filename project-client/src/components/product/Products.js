@@ -59,14 +59,18 @@ function Products() {
                 <p>Kategori</p>
                 <p>{product.categoryName}</p>
               </div>
-              <div className="flex justify-between">
-                <p>Marka</p>
-                <p>{product.brandName}</p>
-              </div>
-              <div className="flex justify-between">
-                <p>Renk</p>
-                <p>{product.colorName}</p>
-              </div>
+              {product.brandName && (
+                <div className="flex justify-between">
+                  <p>Marka</p>
+                  <p>{product.brandName}</p>
+                </div>
+              )}
+              {product.colorName && (
+                <div className="flex justify-between">
+                  <p>Renk</p>
+                  <p>{product.colorName}</p>
+                </div>
+              )}
               <div className="flex justify-between">
                 <p>Fiyat</p>
                 <p>{product.price}₺</p>

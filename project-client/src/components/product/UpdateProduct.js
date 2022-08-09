@@ -48,10 +48,35 @@ function Updateproduct() {
         usingStateId: selectedProduct.usingStateId,
         price: selectedProduct.price,
         description: selectedProduct.description,
+        isOfferable: selectedProduct.isOfferable,
         ownerId: getFromLocalStorage("userId"),
       },
       onSubmit: (values) => {
-        updateProduct(values)
+        const isOfferableBool = values.isOfferable === "true" ? true : false;
+        const data = {
+          productId: selectedProduct.productId,
+          name: values.name,
+          categoryId: values.categoryId,
+          brandId:
+            values.brandId === "0" ||
+            values.brandId === 0 ||
+            values.brandId === ""
+              ? null
+              : values.brandId,
+          colorId:
+            values.colorId === "0" ||
+            values.colorId === 0 ||
+            values.colorId === ""
+              ? null
+              : values.colorId,
+          price: values.price,
+          description: values.description,
+          usingStateId: values.usingStateId,
+          ownerId: values.ownerId,
+          isSold: selectedProduct.isSold,
+          isOfferable: isOfferableBool,
+        };
+        updateProduct(data)
           .then((response) => {
             if (response.success) {
               toast.success(response.message);
@@ -63,7 +88,6 @@ function Updateproduct() {
           .catch((err) =>
             err.Errors.map((error) => toast.error(error.ErrorMessage))
           );
-        console.log(values);
       },
       validationSchema: ProductSchema,
     });
@@ -106,18 +130,25 @@ function Updateproduct() {
             <div>İsim</div>
             <div>{selectedProduct.productName}</div>
           </div>
-          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
-            <div>Marka</div>
-            <div>{selectedProduct.brandName}</div>
-          </div>
+
           <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
             <div>Kategori</div>
             <div>{selectedProduct.categoryName}</div>
           </div>
-          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
-            <div>Renk</div>
-            <div>{selectedProduct.colorName}</div>
-          </div>
+
+          {selectedProduct.brandName && (
+            <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+              <div>Marka</div>
+              <div>{selectedProduct.brandName}</div>
+            </div>
+          )}
+          {selectedProduct.colorName && (
+            <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+              <div>Renk</div>
+              <div>{selectedProduct.colorName}</div>
+            </div>
+          )}
+
           <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
             <div>Fiyat</div>
             <div>{selectedProduct.price}₺</div>
@@ -179,24 +210,52 @@ function Updateproduct() {
                   </div>
                 )}
 
-                <select
-                  className="text-darkBlue py-2 px-3 w-full mb-4"
-                  name="brandId"
-                  value={values.brandId}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                >
-                  <option value={0}>Marka Seçiniz</option>
-                  {brands.map((brand) => (
-                    <option key={brand.brandId} value={brand.brandId}>
-                      {brand.name}
-                    </option>
-                  ))}
-                </select>
+                {selectedProduct.brandName && (
+                  <div>
+                    <select
+                      className="text-darkBlue py-2 px-3 w-full mb-4"
+                      name="brandId"
+                      value={values.brandId}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    >
+                      <option value={0}>Marka Seçiniz</option>
+                      {brands.map((brand) => (
+                        <option key={brand.brandId} value={brand.brandId}>
+                          {brand.name}
+                        </option>
+                      ))}
+                    </select>
 
-                {errors.brandId && touched.brandId && (
-                  <div className="text-red-400 my-2 text-sm">
-                    {errors.brandId}
+                    {errors.brandId && touched.brandId && (
+                      <div className="text-red-400 my-2 text-sm">
+                        {errors.brandId}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {selectedProduct.colorName && (
+                  <div>
+                    <select
+                      className="text-darkBlue py-2 px-3 w-full mb-4"
+                      name="colorId"
+                      value={values.colorId}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    >
+                      <option value={0}>Renk Seçiniz</option>
+                      {colors.map((color) => (
+                        <option key={color.colorId} value={color.colorId}>
+                          {color.name}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.colorId && touched.colorId && (
+                      <div className="text-red-400 my-2 text-sm">
+                        {errors.colorId}
+                      </div>
+                    )}
                   </div>
                 )}
 
@@ -226,21 +285,18 @@ function Updateproduct() {
 
                 <select
                   className="text-darkBlue py-2 px-3 w-full mb-4"
-                  name="colorId"
-                  value={values.colorId}
+                  name="isOfferable"
+                  value={values.isOfferable}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 >
-                  <option value={0}>Renk Seçiniz</option>
-                  {colors.map((color) => (
-                    <option key={color.colorId} value={color.colorId}>
-                      {color.name}
-                    </option>
-                  ))}
+                  <option value={0}>Teklif Durumu</option>
+                  <option value={false}>Teklif verilemez</option>
+                  <option value={true}>Teklif verilebilir</option>
                 </select>
-                {errors.colorId && touched.colorId && (
+                {errors.isOfferable && touched.isOfferable && (
                   <div className="text-red-400 my-2 text-sm">
-                    {errors.colorId}
+                    {errors.isOfferable}
                   </div>
                 )}
 

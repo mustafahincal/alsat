@@ -41,7 +41,7 @@ function AddProduct() {
         description: "",
         usingStateId: "",
         ownerId: getFromLocalStorage("userId"),
-        isOfferable: true,
+        isOfferable: false,
         isSold: false,
       },
       onSubmit: (values) => {
@@ -49,8 +49,18 @@ function AddProduct() {
         const data = {
           name: values.name,
           categoryId: values.categoryId,
-          brandId: values.brandId,
-          colorId: values.colorId,
+          brandId:
+            values.brandId === "0" ||
+            values.brandId === 0 ||
+            values.brandId === ""
+              ? null
+              : values.brandId,
+          colorId:
+            values.colorId === "0" ||
+            values.colorId === 0 ||
+            values.colorId === ""
+              ? null
+              : values.colorId,
           price: values.price,
           description: values.description,
           usingStateId: values.usingStateId,
@@ -149,6 +159,26 @@ function AddProduct() {
 
               <select
                 className="text-darkBlue py-2 px-3 w-full mb-4"
+                name="colorId"
+                value={values.colorId}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option value={0}>Renk Seçiniz</option>
+                {colors.map((color) => (
+                  <option key={color.colorId} value={color.colorId}>
+                    {color.name}
+                  </option>
+                ))}
+              </select>
+              {errors.colorId && touched.colorId && (
+                <div className="text-red-400 my-2 text-sm">
+                  {errors.colorId}
+                </div>
+              )}
+
+              <select
+                className="text-darkBlue py-2 px-3 w-full mb-4"
                 name="usingStateId"
                 value={values.usingStateId}
                 onChange={handleChange}
@@ -173,32 +203,12 @@ function AddProduct() {
 
               <select
                 className="text-darkBlue py-2 px-3 w-full mb-4"
-                name="colorId"
-                value={values.colorId}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              >
-                <option value={0}>Renk Seçiniz</option>
-                {colors.map((color) => (
-                  <option key={color.colorId} value={color.colorId}>
-                    {color.name}
-                  </option>
-                ))}
-              </select>
-              {errors.colorId && touched.colorId && (
-                <div className="text-red-400 my-2 text-sm">
-                  {errors.colorId}
-                </div>
-              )}
-
-              <select
-                className="text-darkBlue py-2 px-3 w-full mb-4"
                 name="isOfferable"
                 value={values.isOfferable}
                 onChange={handleChange}
                 onBlur={handleBlur}
               >
-                <option value={true}>Teklif Durumu</option>
+                <option>Teklif Durumu</option>
                 <option value={false}>Teklif verilemez</option>
                 <option value={true}>Teklif verilebilir</option>
               </select>
