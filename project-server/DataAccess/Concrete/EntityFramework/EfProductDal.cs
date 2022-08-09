@@ -51,7 +51,3 @@ namespace DataAccess.Concrete.EntityFramework
         }
     }
 }
-/*
- O şeyden kaynaklanıyo sen arayüzden onu gönder dediğinde boolean veri türünün default değeri false olduğu için backend'e false gidiyor o yüzden true gelmez
- O default true kuralını veritabanına koymak da doğru değil pek, yani, tmama öyle deiyeyim de 1 sn
- */
