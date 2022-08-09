@@ -9,7 +9,11 @@ import {
 } from "../../services/offerService";
 import { useOfferContext } from "../../context/OfferContext";
 import { toast } from "react-toastify";
-import { deleteProduct, getProduct } from "../../services/productService";
+import {
+  deleteProduct,
+  getProduct,
+  updateProduct,
+} from "../../services/productService";
 import { useProductContext } from "../../context/ProductContext";
 
 function Payment() {
@@ -23,9 +27,12 @@ function Payment() {
         setSelectedProduct(result.data[0])
       );
     } else if (offerId) {
-      getOfferDetailsById(offerId).then((result) =>
-        setSelectedOffer(result.data[0])
-      );
+      getOfferDetailsById(offerId).then((result) => {
+        setSelectedOffer(result.data[0]);
+        getProduct(result.data[0].productId).then((result) =>
+          setSelectedProduct(result.data[0])
+        );
+      });
     }
   }, []);
 
@@ -45,19 +52,39 @@ function Payment() {
     });
 
   const handleBuyProduct = () => {
+    const productData = {
+      productId: selectedProduct.productId,
+      name: selectedProduct.productName,
+      categoryId: selectedProduct.categoryId,
+      brandId:
+        selectedProduct.brandId === "0" ||
+        selectedProduct.brandId === 0 ||
+        selectedProduct.brandId === ""
+          ? null
+          : selectedProduct.brandId,
+      colorId:
+        selectedProduct.colorId === "0" ||
+        selectedProduct.colorId === 0 ||
+        selectedProduct.colorId === ""
+          ? null
+          : selectedProduct.colorId,
+      price: selectedProduct.price,
+      description: selectedProduct.description,
+      usingStateId: selectedProduct.usingStateId,
+      ownerId: selectedProduct.ownerId,
+      isSold: true,
+      isOfferable: selectedProduct.isOfferable,
+    };
+
     if (offerId) {
       const OfferData = {
         offerId: selectedOffer.offerId,
-      };
-      const productData = {
-        productId: selectedOffer.productId,
-        name: selectedOffer.productName,
       };
 
       deleteOffer(OfferData)
         .then((response) => {
           if (response.success) {
-            deleteProduct(productData)
+            updateProduct(productData)
               .then((response) => {
                 toast.success("Satın Alma İşlemi Başarılı");
               })
@@ -68,12 +95,7 @@ function Payment() {
         })
         .catch((err) => console.log(err));
     } else if (productId) {
-      const productData = {
-        productId: selectedProduct.productId,
-        name: selectedProduct.productName,
-      };
-
-      deleteProduct(productData)
+      updateProduct(productData)
         .then((response) => {
           toast.success("Satın Alma işlemi Başarılı");
         })
