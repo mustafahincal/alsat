@@ -5,3 +5,6 @@ export const login = (loginDto) => post(apiUrl + "/auth/login", loginDto);
 
 export const register = (registerDto) =>
   post(apiUrl + "/auth/register", registerDto);
+
+export const changePassword = (changePasswordDto) =>
+  post(apiUrl + "/auth/changepassword", changePasswordDto);

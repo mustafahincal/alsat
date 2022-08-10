@@ -1,22 +1,45 @@
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { useUserContext } from "../../context/UserContext";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { getUserById } from "../../services/userService";
 import { ChangePasswordSchema } from "../../validations/changePasswordSchema";
+import { getFromLocalStorage } from "../../services/localStorageService";
+import { changePassword } from "../../services/authService";
+import { toast } from "react-toastify";
 
 function ChangePassword() {
   const { selectedUser, setSelectedUser } = useUserContext();
+  const navigate = useNavigate();
+  useEffect(() => {
+    getUserById(getFromLocalStorage("userId")).then((result) =>
+      setSelectedUser(result.data)
+    );
+  }, []);
 
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
       initialValues: {
-        oldPassword: "",
-        newPassword: "",
-        newPasswordConfirm: "",
+        oldPass: "",
+        newPass: "",
+        userEmail: "",
+        newPassConfirm: "",
       },
       onSubmit: (values) => {
-        console.log(values);
+        const data = {
+          userId: selectedUser.userId,
+          userEmail: values.userEmail,
+          oldPass: values.oldPass,
+          newPass: values.newPass,
+        };
+        changePassword(data)
+          .then((result) => {
+            if (result.success) {
+              toast.success(result.message);
+            }
+            navigate("/profile");
+          })
+          .catch((err) => toast.error(err.response.data.message));
       },
       validationSchema: ChangePasswordSchema,
     });
@@ -25,51 +48,62 @@ function ChangePassword() {
     <div className="w-1/2  py-10 shadow-item  bg-white mx-auto mt-14">
       <div className="w-3/4 m-auto">
         <h1 className="font-extrabold text-3xl text-black mb-5 text-center">
-          Şifre Değiştir - {selectedUser.firstName}
+          Şifre Değiştir
         </h1>
         <form onSubmit={handleSubmit}>
           <div className="w-full flex  flex-col bg-darkBlue text-gray-100  px-14 py-14 text-lg">
             <input
-              value={values.oldPassword}
+              value={values.userEmail}
               onChange={handleChange}
               onBlur={handleBlur}
-              name="oldPassword"
-              type="password"
+              name="userEmail"
+              type="text"
               className="text-darkBlue py-2 px-4 w-full"
-              placeholder="Eski Şifrenizi Giriniz"
+              placeholder="Email"
             />
-            {errors.oldPassword && touched.oldPassword && (
+            {errors.userEmail && touched.userEmail && (
               <div className="text-red-400 my-2 text-sm">
-                {errors.oldPassword}
+                {errors.userEmail}
               </div>
             )}
+
             <input
-              value={values.newPassword}
+              value={values.oldPass}
               onChange={handleChange}
               onBlur={handleBlur}
-              name="newPassword"
+              name="oldPass"
+              type="password"
+              className="text-darkBlue py-2 px-4 w-full mt-4"
+              placeholder="Eski Şifrenizi Giriniz"
+            />
+            {errors.oldPass && touched.oldPass && (
+              <div className="text-red-400 my-2 text-sm">{errors.oldPass}</div>
+            )}
+            <input
+              value={values.newPass}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="newPass"
               type="password"
               className="text-darkBlue py-2 px-4 w-full mt-5"
               placeholder="Yeni Şifreniz"
             />
-            {errors.newPassword && touched.newPassword && (
-              <div className="text-red-400 my-2 text-sm">
-                {errors.newPassword}
-              </div>
+            {errors.newPass && touched.newPass && (
+              <div className="text-red-400 my-2 text-sm">{errors.newPass}</div>
             )}
             <div className="mt-5">
               <input
-                value={values.newPasswordConfirm}
+                value={values.newPassConfirm}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                name="newPasswordConfirm"
+                name="newPassConfirm"
                 type="password"
                 className="text-darkBlue py-2 px-4 w-full"
                 placeholder="Yeni Şifrenizi Tekrar Giriniz"
               />
-              {errors.newPasswordConfirm && touched.newPasswordConfirm && (
+              {errors.newPassConfirm && touched.newPassConfirm && (
                 <div className="text-red-400 my-2 text-sm">
-                  {errors.newPasswordConfirm}
+                  {errors.newPassConfirm}
                 </div>
               )}
             </div>

@@ -6,5 +6,7 @@ export const getUsers = () => get(apiUrl + "/users/getall");
 export const getUserById = (userId) =>
   get(apiUrl + "/users/getbyid?id=" + userId);
 
+export const updateUser = (data) => post(apiUrl + "/users/update", data);
+
 export const deleteAccount = (userId) =>
   get(apiUrl + "/users/delete?id=" + userId);

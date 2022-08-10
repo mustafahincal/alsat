@@ -2,11 +2,18 @@ import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { useUserContext } from "../../context/UserContext";
 import { useParams } from "react-router-dom";
-import { getUserById } from "../../services/userService";
+import { getUserById, updateUser } from "../../services/userService";
+import { getFromLocalStorage } from "../../services/localStorageService";
+import { UpdateUserSchema } from "../../validations/updateUserSchema";
+import { toast } from "react-toastify";
 
 function UpdateUser() {
   const { selectedUser, setSelectedUser } = useUserContext();
-  const { id } = useParams();
+  useEffect(() => {
+    getUserById(getFromLocalStorage("userId")).then((result) =>
+      setSelectedUser(result.data)
+    );
+  }, []);
 
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
@@ -16,8 +23,24 @@ function UpdateUser() {
         email: "",
       },
       onSubmit: (values) => {
-        console.log(values);
+        const data = {
+          userId: selectedUser.userId,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          email: values.email,
+          passwordHash: selectedUser.passwordHash,
+          passwordSalt: selectedUser.passwordSalt,
+        };
+        updateUser(data)
+          .then((result) => {
+            toast.success(result.message);
+            getUserById(getFromLocalStorage("userId")).then((result) =>
+              setSelectedUser(result.data)
+            );
+          })
+          .catch((err) => console.log(err));
       },
+      validationSchema: UpdateUserSchema,
     });
 
   return (
