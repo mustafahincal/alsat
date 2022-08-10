@@ -38,25 +38,26 @@ function OfferForProduct() {
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
       initialValues: {
-        productId: getFromLocalStorage("productId"),
-        userId: getFromLocalStorage("userId"),
-        offeredPrice: "",
-        isApproved: false,
+        offeredPercent: 0,
       },
       onSubmit: (values) => {
-        if (
+        if (values.offeredPercent == 0) {
+          toast.error("Lütfen teklif yüzdesi seçiniz");
+        } else if (
           selectedOffer &&
-          selectedOffer.offeredPrice >= values.offeredPrice
+          selectedOffer.offeredPrice >=
+            (values.offeredPercent * selectedOffer.offeredPrice) / 100
         ) {
           toast.error(
             "Ürüne daha önce verdiğiniz tekliften daha düşük veya aynı teklif veremezsiniz"
           );
-          values.offeredPrice = "";
+          values.offeredPercent = 0;
         } else if (selectedOffer) {
           const data = {
             offerId: selectedOffer.offerId,
             productId: selectedOffer.productId,
-            offeredPrice: values.offeredPrice,
+            offeredPrice:
+              (values.offeredPercent * selectedOffer.offeredPrice) / 100,
             isApproved: selectedOffer.isApproved,
             userId: selectedOffer.userId,
           };
@@ -76,8 +77,15 @@ function OfferForProduct() {
               }
             })
             .catch((err) => console.log(err));
+          console.log(data);
         } else {
-          offerForProduct(values)
+          const data = {
+            productId: getFromLocalStorage("productId"),
+            userId: getFromLocalStorage("userId"),
+            offeredPrice: (values.offeredPercent * selectedProduct.price) / 100,
+            isApproved: false,
+          };
+          offerForProduct(data)
             .then((response) => {
               if (response.success) {
                 toast.success("Teklif verme işlemi başarılı");
@@ -113,7 +121,7 @@ function OfferForProduct() {
                     ? apiImagesUrl + selectedProduct.imagePath
                     : defaultImage
                 }
-                className="object-cover object-center rounded-t-md"
+                className="object-cover object-center rounded-t-md w-full h-full"
                 alt=""
               />
             </div>
@@ -152,24 +160,31 @@ function OfferForProduct() {
           <form onSubmit={handleSubmit}>
             <div className="w-full flex  flex-col bg-darkBlue text-gray-100  px-14 py-7">
               <div className="flex justify-between items-center">
-                <label htmlFor="offeredPrice" className="text-left text-xl">
-                  Teklifinizi giriniz
-                </label>
-                <input
-                  value={values.offeredPrice}
+                <select
+                  className="text-darkBlue py-2 px-3 w-full mt-4 gruop"
+                  name="offeredPercent"
+                  value={values.offeredPercent}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  name="offeredPrice"
-                  type="number"
-                  id="offeredPrice"
-                  className="text-darkBlue py-2 px-4 w-3/5 text-xl"
-                />
+                >
+                  <option value={0}>Teklifiniz</option>
+                  <option value={10}>%10</option>
+                  <option value={20}>%20</option>
+                  <option value={30}>%30</option>
+                  <option value={40}>%40</option>
+                  <option value={50}>%50</option>
+                  <option value={60}>%60</option>
+                  <option value={70}>%70</option>
+                  <option value={80}>%80</option>
+                  <option value={90}>%90</option>
+                </select>
+
+                {errors.offeredPercent && touched.offeredPercent && (
+                  <div className="text-red-400 my-2 text-sm">
+                    {errors.offeredPercent}
+                  </div>
+                )}
               </div>
-              {errors.offeredPrice && touched.offeredPrice && (
-                <div className="text-red-400 text-sm mt-5">
-                  {errors.offeredPrice}
-                </div>
-              )}
             </div>
             <div>
               <button type="submit" className="btn text-lg  py-3 mt-2">
