@@ -4,6 +4,8 @@ const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [soldedProducts, setSoldedProducts] = useState([]);
+  const [purchasedProducts, setPurchasedProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState({});
 
   const values = {
@@ -11,6 +13,10 @@ export const ProductProvider = ({ children }) => {
     setProducts,
     selectedProduct,
     setSelectedProduct,
+    purchasedProducts,
+    setPurchasedProducts,
+    soldedProducts,
+    setSoldedProducts,
   };
 
   return (

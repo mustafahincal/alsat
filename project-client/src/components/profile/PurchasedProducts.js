@@ -11,31 +11,34 @@ import { useNavigate, NavLink } from "react-router-dom";
 import { deleteProduct } from "../../services/productService";
 import { useProductContext } from "../../context/ProductContext";
 
-function SoldedProducts() {
-  const { soldedProducts, setSoldedProducts } = useProductContext();
+function PurchasedProducts() {
+  const { purchasedProducts, setPurchasedProducts } = useProductContext();
 
   useEffect(() => {
     getOfferDetailsByUserId(getFromLocalStorage("userId")).then((result) =>
-      setGivenOffers(result.data)
+      setPurchasedProducts(result.data)
     );
   }, []);
 
   return (
     <div>
-      {soldedProducts.map((product, index) => (
-        <div
-          className="py-4 px-10 bg-white rounded w-full mb-3 flex justify-between items-center text-xl"
-          key={index}
-        >
-          <div>Ürün Sahibi = {offer.ownerName}</div>
-          <div>Teklif Veren = {offer.userName}</div>
-          <div>{offer.productName}</div>
-          <div>Ürün Fiyatı = {offer.price}</div>
-          <div>Verdiğiniz Teklif = {offer.offeredPrice}</div>
-        </div>
-      ))}
+      {purchasedProducts.map(
+        (offer, index) =>
+          offer.isSold && (
+            <div
+              className="py-4 px-10 bg-white rounded w-full mb-3 flex justify-between items-center text-xl"
+              key={index}
+            >
+              <div>Ürün Sahibi = {offer.ownerName}</div>
+              <div>Teklif Veren = {offer.userName}</div>
+              <div>{offer.productName}</div>
+              <div>Ürün Fiyatı = {offer.price}</div>
+              <div>Satın Alınan Fiyat = {offer.offeredPrice}</div>
+            </div>
+          )
+      )}
     </div>
   );
 }
 
-export default SoldedProducts;
+export default PurchasedProducts;

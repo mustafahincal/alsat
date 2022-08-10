@@ -6,6 +6,8 @@ import { useUserContext } from "../../context/UserContext";
 import TakenOffers from "./TakenOffers";
 import GivenOffers from "./GivenOffers";
 import ProfileMain from "./ProfileMain";
+import SoldedProducts from "./SoldedProducts";
+import PurchasedProducts from "./PurchasedProducts";
 
 function Profile() {
   return (
@@ -16,13 +18,25 @@ function Profile() {
             to={"givenOffers"}
             className="px-2  rounded py-2 border-b-2 "
           >
-            Verdiğim Teklifler
+            Verilen Teklifler
           </NavLink>
           <NavLink
             to={"takenOffers"}
             className="px-2  rounded py-2 border-b-2 "
           >
-            Aldığım Teklifler
+            Alınan Teklifler
+          </NavLink>
+          <NavLink
+            to={"soldedproducts"}
+            className="px-2  rounded py-2 border-b-2 "
+          >
+            Satılan Ürünler
+          </NavLink>
+          <NavLink
+            to={"purchasedproducts"}
+            className="px-2  rounded py-2 border-b-2 "
+          >
+            Alınan Ürünler
           </NavLink>
           <NavLink
             to={"changePassword"}
@@ -42,6 +56,8 @@ function Profile() {
           <Route path="/updateUser" element={<UpdateUser />} />
           <Route path="/takenOffers" element={<TakenOffers />} />
           <Route path="/givenOffers" element={<GivenOffers />} />
+          <Route path="/soldedProducts" element={<SoldedProducts />} />
+          <Route path="/purchasedProducts" element={<PurchasedProducts />} />
         </Routes>
       </div>
     </div>

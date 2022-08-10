@@ -8,7 +8,6 @@ import { useUserContext } from "../../context/UserContext";
 import { getFromLocalStorage } from "../../services/localStorageService";
 import { toast } from "react-toastify";
 import { useNavigate, NavLink } from "react-router-dom";
-import { deleteProduct } from "../../services/productService";
 
 function GivenOffers() {
   const { givenOffers, setGivenOffers } = useOfferContext();

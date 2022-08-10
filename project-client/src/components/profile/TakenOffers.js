@@ -92,7 +92,7 @@ function TakenOffers() {
 
             {offer.isApproved && !offer.isSold && (
               <div className="btn bg-indigo-500 ml-3">
-                Satıldı, Ödeme Bekleniyor
+                Teklif Kabul Edildi, Ödeme Bekleniyor
               </div>
             )}
 
