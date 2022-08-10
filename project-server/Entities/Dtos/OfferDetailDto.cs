@@ -14,8 +14,9 @@ namespace Entities.Dtos
         public int ProductId { get; set; }
         public int UserId { get; set; }
         public int OwnerId { get; set; }
-        public double Price { get; set; }
-        public double  OfferedPrice { get; set; }
+        public int Price { get; set; }
+        public int OfferedPrice { get; set; }
+        public bool IsSold { get; set; }
         public string ProductName { get; set; }
         public string UserName { get; set; }
         public string OwnerName { get; set; }

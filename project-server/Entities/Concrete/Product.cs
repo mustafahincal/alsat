@@ -18,7 +18,7 @@ namespace Entities.Concrete
         public int? BrandId { get; set; }
         public int UsingStateId { get; set; }
         public string Name { get; set; }
-        public double Price { get; set; }
+        public int Price { get; set; }
         public string? Description { get; set; }
         public bool IsOfferable { get; set; }
         public bool IsSold { get; set; }

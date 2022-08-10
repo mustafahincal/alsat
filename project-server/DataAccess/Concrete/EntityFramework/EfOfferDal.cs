@@ -34,6 +34,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  IsApproved = o.IsApproved,
                                  Price = p.Price,
                                  OfferedPrice = o.OfferedPrice,
+                                 IsSold = p.IsSold,
                                  ProductName = p.Name,
                                  OwnerName = u.FirstName + " " + u.LastName,
                                  UserName = u2.FirstName + " " + u2.LastName,
