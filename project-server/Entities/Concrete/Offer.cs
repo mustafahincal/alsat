@@ -15,7 +15,7 @@ namespace Entities.Concrete
         public int OfferId { get; set; }
         public int ProductId { get; set; }
         public int UserId { get; set; }
-        public int OfferedPrice { get; set; }
+        public double OfferedPrice { get; set; }
         public bool IsApproved { get; set; }
         public Product? Product { get; set; }
         public User? User { get; set; }
