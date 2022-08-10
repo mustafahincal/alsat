@@ -45,7 +45,7 @@ namespace Business.Concrete
 
 
             _productDal.Add(product);
-            var productInfo = _productDal.GetAll(p => p.Name == product.Name);
+            var productInfo = _productDal.GetAll(p => p.ProductId == product.ProductId);
             return new SuccessDataResult<List<Product>>(productInfo, Messages.ProductAdded);
         }
 
