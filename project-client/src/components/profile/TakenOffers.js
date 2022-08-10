@@ -33,26 +33,6 @@ function TakenOffers() {
     });
   };
 
-  const updateIsOfferableIsSold = (productId) => {
-    getProduct(productId).then((result) => {
-      const data = {
-        productId: result.data[0].productId,
-        categoryId: result.data[0].categoryId,
-        brandId: result.data[0].brandId,
-        colorId: result.data[0].colorId,
-        name: result.data[0].productName,
-        price: result.data[0].price,
-        description: result.data[0].description,
-        usingStateId: result.data[0].usingStateId,
-        isOfferable: false,
-        isSold: true,
-        ownerId: result.data[0].ownerId,
-      };
-
-      updateProduct(data).then((response) => {});
-    });
-  };
-
   const handleApproveOffer = (offerId, productId, offeredPrice, userId) => {
     const data = {
       offerId,
@@ -66,8 +46,6 @@ function TakenOffers() {
       getOfferDetailsByOwnerId(getFromLocalStorage("userId")).then((result) =>
         setTakenOffers(result.data)
       );
-
-      updateIsOfferableIsSold(productId);
     });
   };
 
@@ -75,16 +53,18 @@ function TakenOffers() {
     <div>
       {takenOffers.map((offer, index) => (
         <div
-          className="py-4 px-10 bg-white rounded w-full mb-3 flex justify-between items-center text-xl"
+          className="py-4 px-10 bg-white rounded w-full mb-3 flex flex-col text-xl"
           key={index}
         >
-          <div>Ürün Sahibi = {offer.ownerName}</div>
-          <div>Teklif Veren = {offer.userName}</div>
-          <div>{offer.productName}</div>
-          <div>Ürün Fiyatı = {offer.price}</div>
-          <div>Verilen Teklif = {offer.offeredPrice}</div>
+          <div className="flex justify-between">
+            <div>Ürün Sahibi = {offer.ownerName}</div>
+            <div>Teklif Veren = {offer.userName}</div>
+            <div>{offer.productName}</div>
+            <div>Ürün Fiyatı = {offer.price}</div>
+            <div>Verdiğiniz Teklif = {offer.offeredPrice}</div>
+          </div>
 
-          <div className="flex">
+          <div className="flex mt-5 justify-center">
             {!offer.isApproved && (
               <div
                 onClick={() =>
@@ -110,10 +90,14 @@ function TakenOffers() {
               </div>
             )}
 
-            {offer.isApproved && (
+            {offer.isApproved && !offer.isSold && (
               <div className="btn bg-indigo-500 ml-3">
                 Satıldı, Ödeme Bekleniyor
               </div>
+            )}
+
+            {offer.isApproved && offer.isSold && (
+              <div className="btn bg-teal-500 ml-3">Ödeme Alındı</div>
             )}
           </div>
         </div>

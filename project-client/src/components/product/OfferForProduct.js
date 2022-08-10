@@ -46,7 +46,7 @@ function OfferForProduct() {
         } else if (
           selectedOffer &&
           selectedOffer.offeredPrice >=
-            (values.offeredPercent * selectedOffer.offeredPrice) / 100
+            (values.offeredPercent * selectedProduct.price) / 100
         ) {
           toast.error(
             "Ürüne daha önce verdiğiniz tekliften daha düşük veya aynı teklif veremezsiniz"
@@ -56,8 +56,9 @@ function OfferForProduct() {
           const data = {
             offerId: selectedOffer.offerId,
             productId: selectedOffer.productId,
-            offeredPrice:
-              (values.offeredPercent * selectedOffer.offeredPrice) / 100,
+            offeredPrice: Math.ceil(
+              (values.offeredPercent * selectedProduct.price) / 100
+            ),
             isApproved: selectedOffer.isApproved,
             userId: selectedOffer.userId,
           };
@@ -77,12 +78,13 @@ function OfferForProduct() {
               }
             })
             .catch((err) => console.log(err));
-          console.log(data);
         } else {
           const data = {
             productId: getFromLocalStorage("productId"),
             userId: getFromLocalStorage("userId"),
-            offeredPrice: (values.offeredPercent * selectedProduct.price) / 100,
+            offeredPrice: Math.ceil(
+              (values.offeredPercent * selectedProduct.price) / 100
+            ),
             isApproved: false,
           };
           offerForProduct(data)

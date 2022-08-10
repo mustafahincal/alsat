@@ -35,15 +35,17 @@ function GivenOffers() {
     <div>
       {givenOffers.map((offer, index) => (
         <div
-          className="py-4 px-10 bg-white rounded w-full mb-3 flex justify-between items-center text-xl"
+          className="py-4 px-10 bg-white rounded w-full mb-3 flex flex-col text-xl"
           key={index}
         >
-          <div>Ürün Sahibi = {offer.ownerName}</div>
-          <div>Teklif Veren = {offer.userName}</div>
-          <div>{offer.productName}</div>
-          <div>Ürün Fiyatı = {offer.price}</div>
-          <div>Verdiğiniz Teklif = {offer.offeredPrice}</div>
-          <div className="flex">
+          <div className="flex justify-between">
+            <div>Ürün Sahibi = {offer.ownerName}</div>
+            <div>Teklif Veren = {offer.userName}</div>
+            <div>{offer.productName}</div>
+            <div>Ürün Fiyatı = {offer.price}</div>
+            <div>Verdiğiniz Teklif = {offer.offeredPrice}</div>
+          </div>
+          <div className="flex mt-5 justify-center">
             {!offer.isApproved && (
               <NavLink
                 to={`/offerForProduct/${offer.productId}`}
@@ -62,13 +64,19 @@ function GivenOffers() {
               </div>
             )}
 
-            {offer.isApproved && (
+            {offer.isApproved && !offer.isSold && (
               <NavLink
                 to={`/payment/offer/${offer.offerId}`}
                 className="btn bg-sky-500 ml-3 cursor-pointer"
               >
                 Ödeme Yap
               </NavLink>
+            )}
+
+            {offer.isApproved && offer.isSold && (
+              <div className="btn bg-sky-500 ml-3 cursor-pointer">
+                Ürün Alındı
+              </div>
             )}
           </div>
         </div>

@@ -76,31 +76,11 @@ function Payment() {
       isOfferable: selectedProduct.isOfferable,
     };
 
-    if (offerId) {
-      const OfferData = {
-        offerId: selectedOffer.offerId,
-      };
-
-      deleteOffer(OfferData)
-        .then((response) => {
-          if (response.success) {
-            updateProduct(productData)
-              .then((response) => {
-                toast.success("Satın Alma İşlemi Başarılı");
-              })
-              .catch((err) => console.log(err));
-          } else {
-            console.log("hata");
-          }
-        })
-        .catch((err) => console.log(err));
-    } else if (productId) {
-      updateProduct(productData)
-        .then((response) => {
-          toast.success("Satın Alma işlemi Başarılı");
-        })
-        .catch((err) => console.log(err));
-    }
+    updateProduct(productData)
+      .then((response) => {
+        toast.success("Satın Alma İşlemi Başarılı");
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
