@@ -70,6 +70,7 @@ namespace Business.Concrete
 
         public IDataResult<ProductImage> GetByImageId(int imageId)
         {
+            var result = _productImageDal.Get(p => p.ProductImageId == imageId);
             return new SuccessDataResult<ProductImage>(_productImageDal.Get(p => p.ProductImageId == imageId));
         }
 
