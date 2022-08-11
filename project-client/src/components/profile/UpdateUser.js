@@ -30,6 +30,7 @@ function UpdateUser() {
           email: values.email,
           passwordHash: selectedUser.passwordHash,
           passwordSalt: selectedUser.passwordSalt,
+          status: selectedUser.status,
         };
         updateUser(data)
           .then((result) => {
@@ -37,6 +38,9 @@ function UpdateUser() {
             getUserById(getFromLocalStorage("userId")).then((result) =>
               setSelectedUser(result.data)
             );
+            values.firstName = "";
+            values.lastName = "";
+            values.email = "";
           })
           .catch((err) => console.log(err));
       },
