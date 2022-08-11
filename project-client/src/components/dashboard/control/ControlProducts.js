@@ -48,7 +48,7 @@ function ControlProducts() {
     <div>
       {products.map((product, index) => (
         <div
-          className="py-4 px-6 bg-white hover:bg-gray-100 rounded w-full mb-3 flex justify-between items-center"
+          className="py-4 px-6 bg-white hover:bg-blue-100 rounded w-full mb-3 flex justify-between items-center"
           key={index}
         >
           <div>Ürün Id : {product.productId}</div>
