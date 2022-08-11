@@ -73,7 +73,7 @@ function Payment() {
       usingStateId: selectedProduct.usingStateId,
       ownerId: selectedProduct.ownerId,
       isSold: true,
-      isOfferable: selectedProduct.isOfferable,
+      isOfferable: false,
     };
 
     updateProduct(productData)

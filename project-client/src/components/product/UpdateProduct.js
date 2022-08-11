@@ -7,7 +7,11 @@ import { getBrands } from "../../services/brandService";
 import { getColors } from "../../services/colorService";
 import defaultImage from "../../assets/default.png";
 import { useFileContext } from "../../context/FileContext";
-import { addImage, deleteImage } from "../../services/productImageService";
+import {
+  addImage,
+  deleteImage,
+  deleteProductImage,
+} from "../../services/productImageService";
 import { useProductContext } from "../../context/ProductContext";
 import { ProductSchema } from "../../validations/productSchema";
 import { getFromLocalStorage } from "../../services/localStorageService";
@@ -93,6 +97,11 @@ function Updateproduct() {
     });
 
   const handleAddFile = () => {
+    if (!file) {
+      toast.error("Lütfen fotoğraf seçiniz");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("file", file);
     formData.append("productId", selectedProduct.productId);
@@ -108,6 +117,7 @@ function Updateproduct() {
         if (response.success) {
           toast.success(response.message);
           getProduct(id).then((result) => setSelectedProduct(result.data[0]));
+          setFile(false);
         }
       })
       .catch((err) => toast.error(err));
@@ -119,7 +129,7 @@ function Updateproduct() {
       productId: selectedProduct.productId,
       imagePath: selectedProduct.imagePath,
     };
-    deleteImage(data).then((result) => {
+    deleteProductImage(data).then((result) => {
       if (result.success) {
         toast.success(result.message);
       }

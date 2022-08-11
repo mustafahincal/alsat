@@ -9,5 +9,5 @@ export const addImage = (data, exists) => {
   }
 };
 
-export const deleteImage = (data) =>
+export const deleteProductImage = (data) =>
   post(apiUrl + "/productImages/delete", data);

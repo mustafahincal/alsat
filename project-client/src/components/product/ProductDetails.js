@@ -4,13 +4,10 @@ import defaultImage from "../../assets/default.png";
 import { useAuthContext } from "../../context/AuthContext";
 import { useProductContext } from "../../context/ProductContext";
 import { useUserContext } from "../../context/UserContext";
-import {
-  getFromLocalStorage,
-  setToLocalStorage,
-} from "../../services/localStorageService";
+import { setToLocalStorage } from "../../services/localStorageService";
 import { deleteProduct, getProduct } from "../../services/productService";
-import { getUserById } from "../../services/userService";
 import { toast } from "react-toastify";
+import { deleteProductImage } from "../../services/productImageService";
 
 function ProductDetails() {
   const apiImagesUrl = "https://localhost:44350/uploads/images/";
@@ -31,10 +28,22 @@ function ProductDetails() {
       productId: selectedProduct.productId,
       name: selectedProduct.productName,
     };
-    deleteProduct(data)
-      .then((response) => {
-        toast.success(response.message);
-        navigate("/main");
+    const imageData = {
+      productImageId: selectedProduct.productImageId,
+      productId: selectedProduct.productId,
+      imagePath: selectedProduct.imagePath,
+    };
+
+    deleteProductImage(imageData)
+      .then((result) => {
+        if (result.success) {
+          deleteProduct(data)
+            .then((response) => {
+              toast.success(response.message);
+              navigate("/main");
+            })
+            .catch((err) => console.log(err));
+        }
       })
       .catch((err) => console.log(err));
   };

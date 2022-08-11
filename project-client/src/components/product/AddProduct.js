@@ -48,6 +48,7 @@ function AddProduct() {
         isSold: false,
       },
       onSubmit: (values) => {
+        //console.log(file);
         if (file) {
           const isOfferableBool = values.isOfferable === "true" ? true : false;
           const data = {
@@ -78,7 +79,6 @@ function AddProduct() {
                 toast.success(response.message);
                 handleAddFile(response.data[0].productId);
               }
-              navigate("/main");
             })
             .catch((err) => {
               console.log(err);
@@ -100,7 +100,10 @@ function AddProduct() {
       .then((response) => {
         if (response.success) {
           toast.success(response.message);
+          setFile(false);
         }
+
+        navigate("/main");
       })
       .catch((err) => toast.error(err));
   };
