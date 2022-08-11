@@ -38,7 +38,7 @@ function Products() {
         {products.map((product, index) => (
           <NavLink
             key={index}
-            className="bg-white rounded-md col-span-3 shadow-item mb-10"
+            className="bg-red-500 rounded-md col-span-3 shadow-item mb-10"
             to={`/productdetails/${product.productId}`}
           >
             <img
@@ -50,7 +50,7 @@ function Products() {
               className="rounded-t-md h-2/3 object-cover object-center w-full"
               alt=""
             />
-            <div className="text-center flex flex-col justify-between py-2 px-5">
+            <div className="text-center bg-white flex flex-col justify-between py-2 px-5">
               <div className="flex justify-between">
                 <p>Ürün</p>
                 <p>{product.productName}</p>

@@ -11,9 +11,15 @@ import PurchasedProducts from "./PurchasedProducts";
 
 function Profile() {
   return (
-    <div className="grid grid-cols-10 w-11/12 m-auto">
+    <div className="grid grid-cols-10 w-full px-14 m-auto">
       <div className="col-span-2 py-10 pr-5">
         <div className="bg-white  rounded-lg flex flex-col shadow-item ">
+          <NavLink
+            to={"profilDetails"}
+            className="px-2  rounded py-2 border-b-2 "
+          >
+            Hesabım
+          </NavLink>
           <NavLink
             to={"givenOffers"}
             className="px-2  rounded py-2 border-b-2 "
@@ -52,6 +58,7 @@ function Profile() {
       <div className="col-span-8 py-10 pl-5">
         <Routes>
           <Route path="/" element={<ProfileMain />} />
+          <Route path="/profilDetails" element={<ProfileMain />} />
           <Route path="/changePassword" element={<ChangePassword />} />
           <Route path="/updateUser" element={<UpdateUser />} />
           <Route path="/takenOffers" element={<TakenOffers />} />

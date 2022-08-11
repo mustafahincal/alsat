@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useUserContext } from "../../context/UserContext";
-import { getUsers } from "../../services/userService";
+import { useUserContext } from "../../../context/UserContext";
+import { getUsers } from "../../../services/userService";
 
-function Users() {
+function ControlUsers() {
   const { users, setUsers } = useUserContext();
   useEffect(() => {
     getUsers().then((result) => setUsers(result.data));
@@ -29,4 +29,4 @@ function Users() {
   );
 }
 
-export default Users;
+export default ControlUsers;
