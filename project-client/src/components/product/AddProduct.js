@@ -51,9 +51,9 @@ function AddProduct() {
         //console.log(file);
         if (file) {
           const isOfferableBool = values.isOfferable === "true" ? true : false;
+
           const data = {
-            name: values.name,
-            categoryId: values.categoryId,
+            ...values,
             brandId:
               values.brandId === "0" ||
               values.brandId === 0 ||
@@ -66,13 +66,9 @@ function AddProduct() {
               values.colorId === ""
                 ? null
                 : values.colorId,
-            price: values.price,
-            description: values.description,
-            usingStateId: values.usingStateId,
-            ownerId: values.ownerId,
-            isSold: values.isSold,
             isOfferable: isOfferableBool,
           };
+
           addProduct(data)
             .then((response) => {
               if (response.success) {
