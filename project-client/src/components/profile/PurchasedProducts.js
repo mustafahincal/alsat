@@ -26,7 +26,7 @@ function PurchasedProducts() {
         <div>
           {purchasedProducts.map((product, index) => (
             <div
-              className="py-4 px-10 bg-white rounded w-full mb-3 flex justify-between items-center text-xl"
+              className="py-4 px-10 rounded w-full mb-3 flex flex-col text-xl  bg-white hover:border-gray-400 border-2 border-gray-100"
               key={index}
             >
               <div>Ürün Sahibi = {product.ownerName}</div>
@@ -38,7 +38,7 @@ function PurchasedProducts() {
           ))}
         </div>
       ) : (
-        <div className="px-5 py-5 bg-indigo-400 rounded-lg text-2xl text-white  text-center">
+        <div className="px-5 py-5 bg-indigo-200 rounded-lg text-2xl text-black  text-center">
           Satın aldığınız ürün yoktur
         </div>
       )}

@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
+        dancing: ["Dancing Script", "cursive"],
       },
       colors: {
         gold: "#FFD204",
@@ -15,6 +16,7 @@ module.exports = {
       },
       boxShadow: {
         item: "1px 0px 10px 3px rgba(0, 0, 0, 0.1)",
+        item2: "0px 0px 2px 0.2px rgba(0,0,0,0.37)",
       },
     },
   },

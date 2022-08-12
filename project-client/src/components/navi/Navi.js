@@ -20,13 +20,18 @@ function Navi() {
 
   return (
     <div>
-      <nav className="flex justify-between items-center py-5 px-12 bg-darkBlue text-white font-bold">
-        <NavLink to="/" className={({ isActive }) => "logo text-3xl"}>
-          LOGO
+      <nav className="flex justify-between items-center py-5 px-14 bg-white text-black font-bold border-b-2 border-gray-300">
+        <NavLink
+          to="/"
+          className={({ isActive }) => "logo text-6xl font-dancing"}
+        >
+          alsat
         </NavLink>
         <div className="text-xl">
-          <NavLink to="/  ">Anasayfa</NavLink>
-          <NavLink to="/main" className="ml-10">
+          <NavLink to="/" className={({ isActive }) => " "}>
+            Anasayfa
+          </NavLink>
+          <NavLink to="/main" className={({ isActive }) => "ml-10"}>
             Ürünler
           </NavLink>
 
@@ -51,13 +56,17 @@ function Navi() {
           {!isLogged && (
             <>
               <NavLink
-                className={({ isActive }) => "btn bg-gold text-black mr-5"}
+                className={({ isActive }) =>
+                  "btn  bg-darkBlue shadow-item text-white mr-5"
+                }
                 to={"/login"}
               >
                 Giriş Yap
               </NavLink>
               <NavLink
-                className={({ isActive }) => "btn bg-gold text-black"}
+                className={({ isActive }) =>
+                  "btn bg-darkBlue shadow-item text-white"
+                }
                 to={"/register"}
               >
                 Kayıt Ol
@@ -66,7 +75,7 @@ function Navi() {
           )}
           {isLogged && (
             <div className="group relative">
-              <button className="flex items-center bg-gold text-black py-2 ml-5 rounded px-4">
+              <button className="flex items-center bg-darkBlue border-4 border-white shadow-item text-white py-2 ml-5 rounded-xl px-4 text-base">
                 <span>
                   {selectedUser.firstName + " " + selectedUser.lastName}
                 </span>
