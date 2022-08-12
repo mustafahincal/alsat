@@ -17,26 +17,31 @@ function SoldedProducts() {
 
   useEffect(() => {
     getOfferDetailsByOwnerId(getFromLocalStorage("userId")).then((result) =>
-      setSoldedProducts(result.data)
+      setSoldedProducts(result.data.filter((offer) => offer.isSold === true))
     );
   }, []);
 
   return (
     <div>
-      {soldedProducts.map(
-        (offer, index) =>
-          offer.isSold && (
+      {soldedProducts.length !== 0 ? (
+        <div>
+          {soldedProducts.map((product, index) => (
             <div
               className="py-4 px-10 bg-white rounded w-full mb-3 flex justify-between items-center text-xl"
               key={index}
             >
-              <div>Ürün Sahibi = {offer.ownerName}</div>
-              <div>Teklif Veren = {offer.userName}</div>
-              <div>{offer.productName}</div>
-              <div>Ürün Fiyatı = {offer.price}</div>
-              <div>Satılan Fiyat = {offer.offeredPrice}</div>
+              <div>Ürün Sahibi = {product.ownerName}</div>
+              <div>Teklif Veren = {product.userName}</div>
+              <div>{product.productName}</div>
+              <div>Ürün Fiyatı = {product.price}</div>
+              <div>Satılan Fiyat = {product.offeredPrice}</div>
             </div>
-          )
+          ))}
+        </div>
+      ) : (
+        <div className="px-5 py-5 bg-blue-300 rounded-lg text-2xl text-white  text-center">
+          Sattığınız ürün yoktur
+        </div>
       )}
     </div>
   );

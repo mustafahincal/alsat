@@ -51,57 +51,64 @@ function TakenOffers() {
 
   return (
     <div>
-      {takenOffers.map((offer, index) => (
-        <div
-          className="py-4 px-10 bg-white rounded w-full mb-3 flex flex-col text-xl"
-          key={index}
-        >
-          <div className="flex justify-between">
-            <div>Ürün Sahibi = {offer.ownerName}</div>
-            <div>Teklif Veren = {offer.userName}</div>
-            <div>{offer.productName}</div>
-            <div>Ürün Fiyatı = {offer.price}</div>
-            <div>Verdiğiniz Teklif = {offer.offeredPrice}</div>
-          </div>
-
-          <div className="flex mt-5 justify-center">
-            {!offer.isApproved && (
-              <div
-                onClick={() =>
-                  handleApproveOffer(
-                    offer.offerId,
-                    offer.productId,
-                    offer.offeredPrice,
-                    offer.userId
-                  )
-                }
-                className="btn bg-emerald-500 cursor-pointer"
-              >
-                Teklifi Onayla
+      {takenOffers.length !== 0 ? (
+        <div>
+          {takenOffers.map((offer, index) => (
+            <div
+              className="py-4 px-10 bg-white rounded w-full mb-3 flex flex-col text-xl"
+              key={index}
+            >
+              <div className="flex justify-between">
+                <div>Ürün Sahibi = {offer.ownerName}</div>
+                <div>Teklif Veren = {offer.userName}</div>
+                <div>{offer.productName}</div>
+                <div>Ürün Fiyatı = {offer.price}</div>
+                <div>Verdiğiniz Teklif = {offer.offeredPrice}</div>
               </div>
-            )}
+              <div className="flex mt-5 justify-center">
+                {!offer.isApproved && (
+                  <div
+                    onClick={() =>
+                      handleApproveOffer(
+                        offer.offerId,
+                        offer.productId,
+                        offer.offeredPrice,
+                        offer.userId
+                      )
+                    }
+                    className="btn bg-emerald-500 cursor-pointer"
+                  >
+                    Teklifi Onayla
+                  </div>
+                )}
 
-            {!offer.isApproved && (
-              <div
-                onClick={() => handleRefuseOffer()}
-                className="btn bg-red-500 cursor-pointer ml-3"
-              >
-                Teklifi Reddet
+                {!offer.isApproved && (
+                  <div
+                    onClick={() => handleRefuseOffer()}
+                    className="btn bg-red-500 cursor-pointer ml-3"
+                  >
+                    Teklifi Reddet
+                  </div>
+                )}
+
+                {offer.isApproved && !offer.isSold && (
+                  <div className="btn bg-indigo-500 ml-3">
+                    Teklif Kabul Edildi, Ödeme Bekleniyor
+                  </div>
+                )}
+
+                {offer.isApproved && offer.isSold && (
+                  <div className="btn bg-teal-500 ml-3">Ödeme Alındı</div>
+                )}
               </div>
-            )}
-
-            {offer.isApproved && !offer.isSold && (
-              <div className="btn bg-indigo-500 ml-3">
-                Teklif Kabul Edildi, Ödeme Bekleniyor
-              </div>
-            )}
-
-            {offer.isApproved && offer.isSold && (
-              <div className="btn bg-teal-500 ml-3">Ödeme Alındı</div>
-            )}
-          </div>
+            </div>
+          ))}
         </div>
-      ))}
+      ) : (
+        <div className="px-5 py-5 bg-blue-300 rounded-lg text-2xl text-white  text-center">
+          Aldığınız teklif yoktur
+        </div>
+      )}
     </div>
   );
 }
