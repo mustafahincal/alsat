@@ -63,7 +63,7 @@ function ControlProducts() {
           <div>
             <NavLink
               to={`/productDetails/${product.productId}`}
-              className="btn text-sm  border-2 border-darkBlue"
+              className="btn border-2 box-border bg-white border-teal-600 transition-all text-teal-500 hover:bg-teal-500 hover:text-white"
             >
               Ürün Detayları
             </NavLink>

@@ -38,7 +38,7 @@ function PurchasedProducts() {
           ))}
         </div>
       ) : (
-        <div className="px-5 py-5 bg-blue-300 rounded-lg text-2xl text-white  text-center">
+        <div className="px-5 py-5 bg-indigo-400 rounded-lg text-2xl text-white  text-center">
           Satın aldığınız ürün yoktur
         </div>
       )}

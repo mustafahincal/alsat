@@ -21,17 +21,17 @@ function TakenOffers() {
     );
   }, []);
 
-  const handleRefuseOffer = (offerId) => {
-    const data = {
-      offerId,
-    };
-    deleteOffer(data).then((response) => {
-      toast.success(response.message);
-      getOfferDetailsByOwnerId(getFromLocalStorage("userId")).then((result) =>
-        setTakenOffers(result.data)
-      );
-    });
-  };
+  // const handleRefuseOffer = (offerId) => {
+  //   const data = {
+  //     offerId,
+  //   };
+  //   deleteOffer(data).then((response) => {
+  //     toast.success(response.message);
+  //     getOfferDetailsByOwnerId(getFromLocalStorage("userId")).then((result) =>
+  //       setTakenOffers(result.data)
+  //     );
+  //   });
+  // };
 
   const handleApproveOffer = (offerId, productId, offeredPrice, userId) => {
     const data = {
@@ -76,36 +76,38 @@ function TakenOffers() {
                         offer.userId
                       )
                     }
-                    className="btn bg-emerald-500 cursor-pointer"
+                    className="btn border-2 box-border bg-white border-emerald-600 transition-all text-emerald-500 hover:bg-emerald-500 hover:text-white cursor-pointer"
                   >
                     Teklifi Onayla
                   </div>
                 )}
 
-                {!offer.isApproved && (
+                {/* {!offer.isApproved && (
                   <div
                     onClick={() => handleRefuseOffer()}
                     className="btn bg-red-500 cursor-pointer ml-3"
                   >
                     Teklifi Reddet
                   </div>
-                )}
+                )} */}
 
                 {offer.isApproved && !offer.isSold && (
-                  <div className="btn bg-indigo-500 ml-3">
+                  <div className="btn bg-indigo-500 ml-3 border-2 border-indigo-500">
                     Teklif Kabul Edildi, Ödeme Bekleniyor
                   </div>
                 )}
 
                 {offer.isApproved && offer.isSold && (
-                  <div className="btn bg-teal-500 ml-3">Ödeme Alındı</div>
+                  <div className="btn bg-amber-500 ml-3 border-2 border-amber-500">
+                    Ödeme Yapıldı, Ürün Satıldı
+                  </div>
                 )}
               </div>
             </div>
           ))}
         </div>
       ) : (
-        <div className="px-5 py-5 bg-blue-300 rounded-lg text-2xl text-white  text-center">
+        <div className="px-5 py-5 bg-indigo-400 rounded-lg text-2xl text-white  text-center">
           Aldığınız teklif yoktur
         </div>
       )}

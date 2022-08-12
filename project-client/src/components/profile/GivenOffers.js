@@ -50,7 +50,7 @@ function GivenOffers() {
                 {!offer.isApproved && (
                   <NavLink
                     to={`/offerForProduct/${offer.productId}`}
-                    className="btn bg-emerald-500 cursor-pointer"
+                    className="btn border-2 box-border bg-white border-emerald-600 transition-all text-emerald-500 hover:bg-emerald-500 hover:text-white cursor-pointer"
                   >
                     Teklifi Artır
                   </NavLink>
@@ -59,24 +59,29 @@ function GivenOffers() {
                 {!offer.isApproved && (
                   <div
                     onClick={() => handleCancelOffer(offer.offerId)}
-                    className="btn bg-red-500 ml-3 cursor-pointer"
+                    className="btn border-2 box-border bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white  ml-3 cursor-pointer"
                   >
                     Teklifi Geri Çek
                   </div>
                 )}
 
                 {offer.isApproved && !offer.isSold && (
-                  <NavLink
-                    to={`/payment/offer/${offer.offerId}`}
-                    className="btn bg-sky-500 ml-3 cursor-pointer"
-                  >
-                    Ödeme Yap
-                  </NavLink>
+                  <div className="flex">
+                    <div className="btn bg-teal-500 mr-2  border-2 border-sky-500">
+                      Teklif Kabul Edildi
+                    </div>
+                    <NavLink
+                      to={`/payment/offer/${offer.offerId}`}
+                      className="btn border-2 box-border bg-white border-sky-600 transition-all text-sky-500 hover:bg-sky-500 hover:text-white ml-3 cursor-pointer"
+                    >
+                      Ödeme Yap
+                    </NavLink>
+                  </div>
                 )}
 
                 {offer.isApproved && offer.isSold && (
-                  <div className="btn bg-sky-500 ml-3 cursor-pointer">
-                    Ürün Alındı
+                  <div className="btn bg-sky-500 ml-3 border-2 border-sky-500">
+                    Ürün Satın Alındı
                   </div>
                 )}
               </div>
@@ -84,7 +89,7 @@ function GivenOffers() {
           ))}
         </div>
       ) : (
-        <div className="px-5 py-5 bg-blue-300 rounded-lg text-2xl text-white  text-center">
+        <div className="px-5 py-5 bg-indigo-400 rounded-lg text-2xl text-white  text-center">
           Verdiğiniz teklif yoktur
         </div>
       )}

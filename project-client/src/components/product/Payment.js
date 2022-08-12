@@ -178,9 +178,15 @@ function Payment() {
             </div>
           </div>
           <div className="mt-5 flex justify-between">
-            <div className="bg-darkBlue px-4 py-2 text-white rounded text-lg">
-              {selectedOffer.price}₺
-            </div>
+            {offerId ? (
+              <div className="bg-darkBlue px-4 py-2 text-white rounded text-lg">
+                {selectedOffer.offeredPrice}₺
+              </div>
+            ) : (
+              <div className="bg-darkBlue px-4 py-2 text-white rounded text-lg">
+                {selectedProduct.price}₺
+              </div>
+            )}
 
             <button
               type="submit"

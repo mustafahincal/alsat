@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const OfferContext = createContext();
 
@@ -6,6 +6,10 @@ export const OfferProvider = ({ children }) => {
   const [takenOffers, setTakenOffers] = useState([]);
   const [givenOffers, setGivenOffers] = useState([]);
   const [selectedOffer, setSelectedOffer] = useState({});
+
+  // useEffect(() => {
+  //   setSelectedOffer(null);
+  // }, []);
 
   const values = {
     givenOffers,
