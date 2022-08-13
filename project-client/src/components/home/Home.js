@@ -11,12 +11,12 @@ function Home() {
   }, []);
 
   return (
-    <div className="px-14">
+    <div className="px-32 ">
       <div className="flex items-center justify-between bg-white  rounded-2xl px-10 py-3 my-5 shadow-item2">
-        <span className="text-2xl  bg-darkBlue text-white py-2 px-5 rounded-xl">
+        <span className="text-xl  bg-darkBlue text-white py-2 px-5 rounded-xl">
           Kategoriler
         </span>
-        <div className="flex justify-between w-2/3">
+        <div className="flex justify-between w-4/5">
           {categories.map((category) => (
             <NavLink
               to={`/main/products/category/${category.categoryId}`}

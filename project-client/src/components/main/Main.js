@@ -12,7 +12,7 @@ function Main() {
   const { selectedUser } = useUserContext();
 
   return (
-    <div className="grid grid-cols-10 w-full px-14 m-auto">
+    <div className="grid grid-cols-10 w-full px-32 m-auto">
       <div className="col-span-2 py-10 pr-5">
         <NavLink
           to={`products/user/${selectedUser.userId}`}

@@ -9,7 +9,16 @@
   .btn {
     @apply bg-darkBlue text-white py-2 px-5 rounded-md;
   }
+  html {
+    @apply text-[13px];
+  }
+  .nav-item {
+    @apply hover:border-b-4 border-darkBlue rounded-md transition-all duration-75;
+  }
 }
 .active {
   @apply bg-darkBlue text-white;
+}
+.active-nav {
+  @apply border-b-4 border-black rounded-md;
 }

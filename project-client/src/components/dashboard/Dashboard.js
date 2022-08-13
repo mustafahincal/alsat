@@ -10,7 +10,7 @@ import ControlProducts from "./control/ControlProducts";
 
 function DashBoard() {
   return (
-    <div className="grid grid-cols-10 w-full px-14 m-auto">
+    <div className="grid grid-cols-10 w-full px-32 m-auto">
       <div className="col-span-2 py-10 pr-5">
         <div className="bg-white  rounded-lg flex flex-col shadow-item ">
           <NavLink to={"products"} className="px-2  rounded py-2 border-b-2">

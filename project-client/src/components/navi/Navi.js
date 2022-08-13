@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import { useUserContext } from "../../context/UserContext";
 import { removeFromLocalStorage } from "../../services/localStorageService";
+import { FaBeer } from "react-icons/fa";
 
 function Navi() {
   const { isAdmin, isLogged, setIsLogged } = useAuthContext();
@@ -20,7 +21,7 @@ function Navi() {
 
   return (
     <div>
-      <nav className="flex justify-between items-center py-5 px-14 bg-white text-black font-bold border-b-2 border-gray-300">
+      <nav className="flex justify-between items-center py-3 px-32 bg-white text-black font-bold border-b-2 border-gray-300">
         <NavLink
           to="/"
           className={({ isActive }) => "logo text-6xl font-dancing"}
@@ -28,16 +29,31 @@ function Navi() {
           alsat
         </NavLink>
         <div className="text-xl">
-          <NavLink to="/" className={({ isActive }) => " "}>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `nav-item  ${isActive ? "active-nav" : ""}`
+            }
+          >
             Anasayfa
           </NavLink>
-          <NavLink to="/main" className={({ isActive }) => "ml-10"}>
+          <NavLink
+            to="/main"
+            className={({ isActive }) =>
+              `ml-10 nav-item ${isActive ? "active-nav" : ""}`
+            }
+          >
             Ürünler
           </NavLink>
 
           {isLogged && (
-            <NavLink to="/addProduct" className="ml-10">
-              Ürün Ekle
+            <NavLink
+              to="/addProduct"
+              className={({ isActive }) =>
+                `ml-10 nav-item ${isActive ? "active-nav" : ""}`
+              }
+            >
+              Ürün Sat
             </NavLink>
           )}
         </div>
@@ -45,7 +61,7 @@ function Navi() {
           {isAdmin && (
             <NavLink
               className={({ isActive }) =>
-                "btn bg-littleDarkBlue text-white mr-5"
+                "btn bg-littleDarkBlue shadow-item2 text-white mr-5"
               }
               to={"/dashboard"}
             >
@@ -75,12 +91,12 @@ function Navi() {
           )}
           {isLogged && (
             <div className="group relative">
-              <button className="flex items-center bg-darkBlue border-4 border-white shadow-item text-white py-2 ml-5 rounded-xl px-4 text-base">
+              <button className="flex items-center bg-darkBlue border-4 border-white shadow-item2 text-white py-2 ml-5 rounded-xl px-4 text-base">
                 <span>
                   {selectedUser.firstName + " " + selectedUser.lastName}
                 </span>
               </button>
-              <div className="invisible absolute top-14 right-0 w-56 rounded py-3 px-2  bg-darkBlue flex flex-col space-y-2 z-10 group-focus-within:visible group-focus-within:mt-2  transition-all dark:bg-prototurk ">
+              <div className="invisible absolute top-14 right-0 w-56 rounded py-3 px-2  bg-darkBlue flex flex-col space-y-2 z-10 group-focus-within:visible group-focus-within:mt-2  transition-all">
                 <NavLink
                   to="/profile"
                   className={({ isActive }) =>
