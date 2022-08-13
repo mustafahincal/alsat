@@ -11,10 +11,10 @@ namespace DataAccess.Concrete.EntityFramework.UnitOfWork
     {
         public void SaveChanges()
         {
-            using (PrimeforContext context = new PrimeforContext())
-            {
-                context.SaveChanges();
-            }
+            //using (PrimeforContext context = new PrimeforContext())
+            //{
+            //    context.SaveChanges();
+            //}
         }
     }
 }

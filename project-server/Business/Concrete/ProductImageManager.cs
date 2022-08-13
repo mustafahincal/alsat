@@ -4,6 +4,7 @@ using Core.Utilities.Business;
 using Core.Utilities.Helpers.FileHelper;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework.UnitOfWork;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -18,11 +19,13 @@ namespace Business.Concrete
     {
         IProductImageDal _productImageDal;
         IFileHelper _fileHelper;
+        IUnitOfWork _unitOfWork;
 
-        public ProductImageManager(IProductImageDal productImageDal, IFileHelper fileHelper)
+        public ProductImageManager(IProductImageDal productImageDal, IFileHelper fileHelper, IUnitOfWork unitOfWork)
         {
             _productImageDal = productImageDal;
             _fileHelper = fileHelper;
+            _unitOfWork = unitOfWork;
         }
 
         public IResult Add(IFormFile file, ProductImage productImage, int productId)
@@ -31,6 +34,7 @@ namespace Business.Concrete
             productImage.ImagePath = _fileHelper.Upload(file, FilePath.ImagesPath);
             productImage.ProductId = productId;
             _productImageDal.Add(productImage);
+            _unitOfWork.SaveChanges();
             return new SuccessResult("Fotoğraf eklendi");
         }
 
@@ -43,6 +47,7 @@ namespace Business.Concrete
             productImage.ProductId = productId;
             productImage.ProductImageId = productImageId;
             _productImageDal.Update(productImage);
+            _unitOfWork.SaveChanges();
             return new SuccessResult("Fotoğraf Güncellendi");
         }
 
@@ -53,6 +58,7 @@ namespace Business.Concrete
         {
             _fileHelper.Delete(FilePath.ImagesPath + productImage.ImagePath);
             _productImageDal.Delete(productImage);
+            _unitOfWork.SaveChanges();
             return new SuccessResult("Fotoğraf Silindi");
         }
 

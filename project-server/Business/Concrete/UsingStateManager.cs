@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework.UnitOfWork;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,11 @@ namespace Business.Concrete
     public class UsingStateManager : IUsingStateService
     {
         IUsingStateDal _usingStateDal;
-        public UsingStateManager(IUsingStateDal usingStateDal)
+        IUnitOfWork _unitOfWork;
+        public UsingStateManager(IUsingStateDal usingStateDal, IUnitOfWork unitOfWork)
         {
             _usingStateDal = usingStateDal;
+            _unitOfWork = unitOfWork;
         }
 
         public IDataResult<List<UsingState>> GetAll()
@@ -31,18 +34,21 @@ namespace Business.Concrete
         public IResult Add(UsingState usingState)
         {
             _usingStateDal.Add(usingState);
+            _unitOfWork.SaveChanges();
             return new SuccessResult("Renk eklendi");
         }
 
         public IResult Delete(UsingState usingState)
         {
             _usingStateDal.Delete(usingState);
+            _unitOfWork.SaveChanges();
             return new SuccessResult("Renk silindi");
         }
 
         public IResult Update(UsingState usingState)
         {
             _usingStateDal.Update(usingState);
+            _unitOfWork.SaveChanges();
             return new SuccessResult("Renk güncellendi");
         }
     }

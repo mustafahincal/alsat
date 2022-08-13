@@ -8,6 +8,7 @@ using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using DataAccess.Concrete.EntityFramework.UnitOfWork;
 using Entities.Concrete;
 using Entities.Dtos;
 using FluentValidation;
@@ -23,10 +24,12 @@ namespace Business.Concrete
     {
         IProductDal _productDal;
         ICategoryService _categoryService;
-        public ProductManager(IProductDal productDal, ICategoryService categoryService)
+        IUnitOfWork _unitOfWork;
+        public ProductManager(IProductDal productDal, ICategoryService categoryService, IUnitOfWork unitOfWork)
         {
             this._productDal = productDal;
             this._categoryService = categoryService;
+            _unitOfWork = unitOfWork;
         }
 
         public IDataResult<List<Product>> Add(Product product)
@@ -45,8 +48,8 @@ namespace Business.Concrete
 
 
             _productDal.Add(product);
-            //_unitOfWork.SaveChanges();
-            // ekleme-silme-güncelleme
+            _unitOfWork.SaveChanges();
+
             var productInfo = _productDal.GetAll(p => p.ProductId == product.ProductId);
             return new SuccessDataResult<List<Product>>(productInfo, Messages.ProductAdded);
         }
@@ -55,12 +58,14 @@ namespace Business.Concrete
         public IResult Update(Product product)
         {
             _productDal.Update(product);
+            _unitOfWork.SaveChanges();
             return new SuccessResult(Messages.ProductUpdated);
         }
 
         public IResult Delete(Product product)
         {
             _productDal.Delete(product);
+            _unitOfWork.SaveChanges();
             return new SuccessResult(Messages.ProductDeleted);
         }
 

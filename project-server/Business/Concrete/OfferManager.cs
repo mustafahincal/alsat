@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework.UnitOfWork;
 using Entities.Concrete;
 using Entities.Dtos;
 using System;
@@ -14,26 +15,31 @@ namespace Business.Concrete
     public class OfferManager : IOfferService
     {
         IOfferDal _offerDal;
-        public OfferManager(IOfferDal offerDal)
+        IUnitOfWork _unitOfWork;
+        public OfferManager(IOfferDal offerDal, IUnitOfWork unitOfWork)
         {
             _offerDal = offerDal;
+            _unitOfWork = unitOfWork;
         }
 
          public IResult Add(Offer offer)
         {
             _offerDal.Add(offer);
+            _unitOfWork.SaveChanges();
             return new SuccessResult("Teklif eklendi");
         }
 
         public IResult Delete(Offer offer)
         {
             _offerDal.Delete(offer);
+            _unitOfWork.SaveChanges();
             return new SuccessResult("Teklif silindi");
         }
 
         public IResult Update(Offer offer)
         {
             _offerDal.Update(offer);
+            _unitOfWork.SaveChanges();
             return new SuccessResult("Teklif güncellendi");
         }
         public IDataResult<List<Offer>> GetAll()

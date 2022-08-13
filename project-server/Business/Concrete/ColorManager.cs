@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework.UnitOfWork;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,11 @@ namespace Business.Concrete
     public class ColorManager : IColorService
     {
         IColorDal _colorDal;
-        public ColorManager(IColorDal colorDal)
+        IUnitOfWork _unitOfWork;
+        public ColorManager(IColorDal colorDal, IUnitOfWork unitOfWork)
         {
             _colorDal = colorDal;
+            _unitOfWork = unitOfWork;
         }
 
         public IDataResult<List<Color>> GetAll()
@@ -31,18 +34,21 @@ namespace Business.Concrete
         public IResult Add(Color color)
         {
             _colorDal.Add(color);
+            _unitOfWork.SaveChanges();
             return new SuccessResult("Renk eklendi");
         }
 
         public IResult Delete(Color color)
         {
             _colorDal.Delete(color);
+            _unitOfWork.SaveChanges();
             return new SuccessResult("Renk silindi");
         }
 
         public IResult Update(Color color)
         {
             _colorDal.Update(color);
+            _unitOfWork.SaveChanges();
             return new SuccessResult("Renk güncellendi");
         }
     }

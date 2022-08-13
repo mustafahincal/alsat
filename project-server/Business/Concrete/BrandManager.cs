@@ -34,7 +34,6 @@ namespace Business.Concrete
         public IResult Add(Brand brand)
         {
             _brandDal.Add(brand);
-            _unitOfWork.SaveChanges();
             return new SuccessResult("Marka eklendi");
         }
 

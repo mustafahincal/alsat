@@ -1,6 +1,8 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Business.DependencyResolvers.Autofac;
+using Core.DataAccess;
+using Core.DataAccess.EntityFramework;
 using Core.DependencyResolvers;
 using Core.Extensions;
 using Core.Utilities.IoC;
@@ -10,10 +12,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
-// zararý yok da bunu çözeriz biraz ben bakayým benim pc'de bulunca yazarým sana
-// o .vs sorununu çözdük zaten , tamam þimdi normal commit atbirlm de mi evet he bi de, biz hackathon da ayrý ayrý omluþtu, senin deðiþikleri ben görmüyordum ama bunda, client'dakini de burda göerüyrum mesela onu nasýl kurmuþtun baþta orda ben görüyordum senin deðiþiklikleri sen vs code'da sadece
-// react uygulamasýný açtýðýndan sende gözükmüyordu
-// Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -23,7 +21,8 @@ builder.Services.AddSwaggerGen();
 // Autofac
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
-builder.Host.ConfigureContainer<ContainerBuilder>(builder => {
+builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
+{
     builder.RegisterModule(new AutofacBusinessModule());
 });
 
@@ -31,7 +30,8 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder => {
 var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options => {
+    .AddJwtBearer(options =>
+    {
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
