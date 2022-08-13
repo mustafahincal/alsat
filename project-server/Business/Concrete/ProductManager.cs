@@ -45,6 +45,8 @@ namespace Business.Concrete
 
 
             _productDal.Add(product);
+            //_unitOfWork.SaveChanges();
+            // ekleme-silme-güncelleme
             var productInfo = _productDal.GetAll(p => p.ProductId == product.ProductId);
             return new SuccessDataResult<List<Product>>(productInfo, Messages.ProductAdded);
         }

@@ -1,11 +1,7 @@
 ﻿using Core.Entities.Concrete;
+using Core.Utilities.Configurations;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework.Context
 {
@@ -13,7 +9,7 @@ namespace DataAccess.Concrete.EntityFramework.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-QJHUFHB;Database=Primefor;Trusted_Connection=True");
+            optionsBuilder.UseSqlServer(Configuration.ConnectionString);
         }
 
         public DbSet<Product> Products { get; set; }

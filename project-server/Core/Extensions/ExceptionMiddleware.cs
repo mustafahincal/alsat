@@ -26,6 +26,7 @@ namespace Core.Extensions
             }
             catch (Exception e)
             {
+                // _logger.Log(e.Message);
                 await HandleExceptionAsync(httpContext, e);
             }
         }

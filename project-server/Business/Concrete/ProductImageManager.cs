@@ -27,7 +27,7 @@ namespace Business.Concrete
 
         public IResult Add(IFormFile file, ProductImage productImage, int productId)
         {
-            
+            var fileLength = file.Length;
             productImage.ImagePath = _fileHelper.Upload(file, FilePath.ImagesPath);
             productImage.ProductId = productId;
             _productImageDal.Add(productImage);
@@ -36,6 +36,9 @@ namespace Business.Concrete
 
         public IResult Update(IFormFile file, ProductImage productImage, int productId, int productImageId)
         {
+            //var fileLength = file.Length;
+            //if (fileLength > 400)
+            //    return new ErrorResult("dosya büyüklüğü en fazla 400kb olabilir");
             productImage.ImagePath = _fileHelper.Update(file, FilePath.ImagesPath + productImage.ImagePath, FilePath.ImagesPath);
             productImage.ProductId = productId;
             productImage.ProductImageId = productImageId;

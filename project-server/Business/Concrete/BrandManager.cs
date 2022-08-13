@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework.UnitOfWork;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,11 @@ namespace Business.Concrete
     public class BrandManager : IBrandService
     {
         IBrandDal _brandDal;
-        public BrandManager(IBrandDal brandDal)
+        IUnitOfWork _unitOfWork;
+        public BrandManager(IBrandDal brandDal, IUnitOfWork unitOfWork)
         {
             _brandDal = brandDal;
+            _unitOfWork = unitOfWork;
         }
 
         public IDataResult<List<Brand>> GetAll()
@@ -31,18 +34,21 @@ namespace Business.Concrete
         public IResult Add(Brand brand)
         {
             _brandDal.Add(brand);
+            _unitOfWork.SaveChanges();
             return new SuccessResult("Marka eklendi");
         }
 
         public IResult Delete(Brand brand)
         {
             _brandDal.Delete(brand);
+            _unitOfWork.SaveChanges();
             return new SuccessResult("Marka silindi");
         }
 
         public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
+            _unitOfWork.SaveChanges();
             return new SuccessResult("Marka güncellendi");
         }
     }

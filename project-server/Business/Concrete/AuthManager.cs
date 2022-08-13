@@ -38,6 +38,7 @@ namespace Business.Concrete
                 Status = true
             };
             _userService.Add(user);
+            //
             return new SuccessDataResult<User>(user, Messages.UserRegistered);
         }
 
@@ -56,6 +57,14 @@ namespace Business.Concrete
 
             return new SuccessDataResult<User>(userToCheck, Messages.SuccessfulLogin);
         }
+
+        //public IResult BlockUser()
+        //{
+        //    var userToCheck = _userService.GetByMail(userForLoginDto.Email).Data;
+        //    userToCheck.Status = false;
+        //    _unitOfWork.SaveChanges();
+        //    return new SuccessResult("kullanıcı bloke edildi");
+        //}
 
         public IResult ChangePassword(ChangePasswordDto changePasswordDto)
         {
