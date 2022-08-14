@@ -6,6 +6,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(true);
   const [isLogged, setIsLogged] = useState(false);
+  const [counter, setCounter] = useState(0);
 
   useEffect(() => {
     if (getFromLocalStorage("isLogged")) {
@@ -18,6 +19,8 @@ export const AuthProvider = ({ children }) => {
     setIsAdmin,
     isLogged,
     setIsLogged,
+    counter,
+    setCounter,
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

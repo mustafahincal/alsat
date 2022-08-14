@@ -36,7 +36,7 @@ function GivenOffers() {
         <div>
           {givenOffers.map((offer, index) => (
             <div
-              className="py-4 px-10 rounded w-full mb-3 flex flex-col text-xl  bg-white hover:border-gray-400 border-2 border-gray-100"
+              className="py-4 px-10 rounded w-full mb-3 flex flex-col text-xl transition-all duration-75  bg-white hover:border-gray-400 border-2 border-gray-100"
               key={index}
             >
               <div className="flex justify-between">
@@ -67,12 +67,12 @@ function GivenOffers() {
 
                 {offer.isApproved && !offer.isSold && (
                   <div className="flex">
-                    <div className="btn bg-teal-500 mr-2  border-2 border-sky-500">
+                    <div className="btn bg-teal-500 mr-2  border-2 border-teal-500">
                       Teklif Kabul Edildi
                     </div>
                     <NavLink
                       to={`/payment/offer/${offer.offerId}`}
-                      className="btn border-2 box-border bg-white border-sky-600 transition-all text-sky-500 hover:bg-sky-500 hover:text-white ml-3 cursor-pointer"
+                      className="btn border-2 box-border bg-white border-sky-500 transition-all text-sky-500 hover:bg-sky-500 hover:text-white ml-3 cursor-pointer"
                     >
                       Ödeme Yap
                     </NavLink>

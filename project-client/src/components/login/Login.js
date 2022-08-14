@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import { LoginSchema } from "../../validations/loginSchema";
-import { login } from "../../services/authService";
+import { blockUser, login } from "../../services/authService";
 import { useAuthContext } from "../../context/AuthContext";
 import { toast } from "react-toastify";
 import { setToLocalStorage } from "../../services/localStorageService";
@@ -11,7 +11,7 @@ import { getUserById } from "../../services/userService";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const { setIsLogged } = useAuthContext();
+  const { setIsLogged, counter, setCounter } = useAuthContext();
   const { setSelectedUser } = useUserContext();
   const navigate = useNavigate();
 
@@ -47,10 +47,20 @@ function Login() {
           })
           .catch((err) => {
             toast.error(err.response.data.message);
+            if (err.response.data.message === "Şifre hatalı") {
+              setCounter(counter + 1);
+            }
+            if (counter === 2) {
+              blockUserFromSystem(values);
+            }
           });
       },
       validationSchema: LoginSchema,
     });
+
+  const blockUserFromSystem = (loginDto) => {
+    blockUser(loginDto).then((result) => console.log(result.data));
+  };
 
   return (
     <div className="w-2/6 m-auto py-10 shadow-item mt-20 bg-white">
@@ -85,7 +95,7 @@ function Login() {
                 className="text-darkBlue py-2 px-4 w-full"
                 placeholder="Şifre"
               />
-              {errors.email && touched.email && (
+              {errors.password && touched.password && (
                 <div className="text-red-400 my-2 text-sm">
                   {errors.password}
                 </div>

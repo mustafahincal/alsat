@@ -24,15 +24,14 @@ function SoldedProducts() {
   return (
     <div>
       {soldedProducts.length !== 0 ? (
-        <div>
+        <div className="grid grid-cols-12 gap-7">
           {soldedProducts.map((product, index) => (
             <div
-              className="py-4 px-10 rounded w-full mb-3 flex flex-col text-xl  bg-white hover:border-gray-400 border-2 border-gray-100"
+              className="p-6 items-center rounded gap-2 w-full mb-3 flex flex-col justify-between  text-xl transition-all duration-75  bg-white hover:border-gray-400 border-2 border-gray-100 col-span-4"
               key={index}
             >
-              <div>Ürün Sahibi = {product.ownerName}</div>
-              <div>Teklif Veren = {product.userName}</div>
-              <div>{product.productName}</div>
+              <div>Ürünü Satın Alan = {product.userName}</div>
+              <div>Ürün Adı = {product.productName}</div>
               <div>Ürün Fiyatı = {product.price}</div>
               <div>Satılan Fiyat = {product.offeredPrice}</div>
             </div>

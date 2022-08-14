@@ -8,3 +8,6 @@ export const register = (registerDto) =>
 
 export const changePassword = (changePasswordDto) =>
   post(apiUrl + "/auth/changepassword", changePasswordDto);
+
+export const blockUser = (loginDto) =>
+  post(apiUrl + "/auth/blockuser", loginDto);

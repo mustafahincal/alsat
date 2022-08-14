@@ -12,7 +12,7 @@ function ControlUsers() {
     <div>
       {users.map((user, index) => (
         <div
-          className="py-5 px-6  bg-white hover:border-gray-400 border-2 border-gray-100 rounded w-full mb-4 flex justify-between items-center"
+          className="py-5 px-6  bg-white hover:border-gray-400 border-2 transition-all duration-75 border-gray-100 rounded w-full mb-4 flex justify-between items-center"
           key={index}
         >
           <div>{user.firstName + " " + user.lastName}</div>
