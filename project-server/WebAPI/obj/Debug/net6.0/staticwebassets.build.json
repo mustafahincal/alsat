@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LtChN7Ebnw6u54MSS4c0nmH1iAVaIgtdjl6H4qnuhhQ=",
+  "Hash": "wL6Z4IsL17OxjESY6Y2EEcpJPanwEK8m0Pj+/8z7gCc=",
   "Source": "WebAPI",
   "BasePath": "_content/WebAPI",
   "Mode": "Default",
@@ -16,6 +16,23 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\Uploads\\Images\\1402a919-dd10-4dad-ab8c-bd465ef4760a.jpg",
+      "SourceId": "WebAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\",
+      "BasePath": "_content/WebAPI",
+      "RelativePath": "Uploads/Images/1402a919-dd10-4dad-ab8c-bd465ef4760a.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Images\\1402a919-dd10-4dad-ab8c-bd465ef4760a.jpg"
+    },
     {
       "Identity": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\Uploads\\Images\\2c731f99-3c2f-4d56-863b-2411fe83aaa0.jpg",
       "SourceId": "WebAPI",
@@ -66,6 +83,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\Images\\bc0ad076-1693-4621-a5b1-3e10b626e4ea.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\Uploads\\Images\\ec58245a-a310-43e2-86b1-a113053ef6c2.jpg",
+      "SourceId": "WebAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\",
+      "BasePath": "_content/WebAPI",
+      "RelativePath": "Uploads/Images/ec58245a-a310-43e2-86b1-a113053ef6c2.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Images\\ec58245a-a310-43e2-86b1-a113053ef6c2.jpg"
     }
   ]
 }
