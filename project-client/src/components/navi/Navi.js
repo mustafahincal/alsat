@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import { useUserContext } from "../../context/UserContext";
 import { removeFromLocalStorage } from "../../services/localStorageService";
 import { FaBeer } from "react-icons/fa";
+import { useNaviContext } from "../../context/NaviContext";
 
 function Navi() {
   const { isAdmin, isLogged, setIsLogged } = useAuthContext();
   const { selectedUser } = useUserContext();
+  const { visible, setVisible } = useNaviContext();
   const navigate = useNavigate();
 
   const handleLogOut = () => {
@@ -16,6 +18,7 @@ function Navi() {
     removeFromLocalStorage("token");
     removeFromLocalStorage("userId");
     removeFromLocalStorage("productId");
+    setVisible(false);
     navigate("/");
   };
 
@@ -28,7 +31,7 @@ function Navi() {
         >
           alsat
         </NavLink>
-        <div className="text-xl">
+        <div className="flex  items-center text-xl">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -56,12 +59,10 @@ function Navi() {
               Ürün Sat
             </NavLink>
           )}
-        </div>
-        <div className="flex  items-center">
           {isAdmin && (
             <NavLink
               className={({ isActive }) =>
-                "btn bg-littleDarkBlue shadow-item2 text-white mr-5"
+                "btn bg-littleDarkBlue shadow-item2 text-white mr-5 ml-10 text-base"
               }
               to={"/dashboard"}
             >
@@ -73,7 +74,7 @@ function Navi() {
             <>
               <NavLink
                 className={({ isActive }) =>
-                  "btn  bg-darkBlue shadow-item text-white mr-5"
+                  "btn  bg-darkBlue shadow-item text-white mr-5 text-base"
                 }
                 to={"/login"}
               >
@@ -81,7 +82,7 @@ function Navi() {
               </NavLink>
               <NavLink
                 className={({ isActive }) =>
-                  "btn bg-darkBlue shadow-item text-white"
+                  "btn bg-darkBlue shadow-item text-white text-base"
                 }
                 to={"/register"}
               >
@@ -91,13 +92,18 @@ function Navi() {
           )}
           {isLogged && (
             <div className="group relative">
-              <button className="flex items-center bg-darkBlue border-4 border-white shadow-item2 text-white py-2 ml-5 rounded-xl px-4 text-base">
-                <span>
+              <button className="flex items-center bg-darkBlue border-4 border-white shadow-item2 text-white py-2 rounded-xl px-4 text-base">
+                <span onClick={() => setVisible(!visible)}>
                   {selectedUser.firstName + " " + selectedUser.lastName}
                 </span>
               </button>
-              <div className="invisible absolute top-full right-0 w-64 rounded p-1 bg-white flex flex-col z-10 group-focus-within:visible group-focus-within:mt-4  transition-all  font-medium shadow-item2">
+              <div
+                className={`absolute top-full right-0 w-64 rounded p-1 bg-white flex flex-col z-10 duration-75 transition-all font-medium shadow-item2 ${
+                  visible ? " visible mt-4" : " invisible mt-2"
+                } `}
+              >
                 <NavLink
+                  onClick={() => setVisible(!visible)}
                   to="/profile"
                   className={({ isActive }) =>
                     "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
@@ -106,6 +112,7 @@ function Navi() {
                   Hesabım
                 </NavLink>
                 <NavLink
+                  onClick={() => setVisible(!visible)}
                   to="/profile/takenOffers"
                   className={({ isActive }) =>
                     "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
@@ -114,6 +121,7 @@ function Navi() {
                   Aldığım Teklifler
                 </NavLink>
                 <NavLink
+                  onClick={() => setVisible(!visible)}
                   to="/profile/givenOffers"
                   className={({ isActive }) =>
                     "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
@@ -122,6 +130,7 @@ function Navi() {
                   Verdiğim Teklifler
                 </NavLink>
                 <NavLink
+                  onClick={() => setVisible(!visible)}
                   to="/profile/purchasedProducts"
                   className={({ isActive }) =>
                     "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
@@ -130,6 +139,7 @@ function Navi() {
                   Aldığım Ürünler
                 </NavLink>
                 <NavLink
+                  onClick={() => setVisible(!visible)}
                   to="/profile/soldedProducts"
                   className={({ isActive }) =>
                     "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"

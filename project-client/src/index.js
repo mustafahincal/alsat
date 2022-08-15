@@ -13,6 +13,7 @@ import { FileProvider } from "./context/FileContext";
 import { OfferProvider } from "./context/OfferContext";
 import { CategoryProvider } from "./context/CategoryContext";
 import { UsingStateProvider } from "./context/UsingStateContext";
+import { NaviProvider } from "./context/NaviContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -26,7 +27,9 @@ root.render(
                 <FileProvider>
                   <CategoryProvider>
                     <UsingStateProvider>
-                      <App />
+                      <NaviProvider>
+                        <App />
+                      </NaviProvider>
                     </UsingStateProvider>
                   </CategoryProvider>
                 </FileProvider>

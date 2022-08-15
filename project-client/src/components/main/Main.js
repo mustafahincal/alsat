@@ -7,6 +7,7 @@ import Categories from "../category/Categories";
 import { useUserContext } from "../../context/UserContext";
 import { getUserById } from "../../services/userService";
 import { getFromLocalStorage } from "../../services/localStorageService";
+import { useNaviContext } from "../../context/NaviContext";
 
 function Main() {
   const { selectedUser } = useUserContext();
