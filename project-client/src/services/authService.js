@@ -9,5 +9,6 @@ export const register = (registerDto) =>
 export const changePassword = (changePasswordDto) =>
   post(apiUrl + "/auth/changepassword", changePasswordDto);
 
-export const blockUser = (loginDto) =>
-  post(apiUrl + "/auth/blockuser", loginDto);
+export const block = (email) => get(apiUrl + "/auth/block?email=" + email);
+
+export const unBlock = (id) => get(apiUrl + "/auth/unblock?id=" + id);

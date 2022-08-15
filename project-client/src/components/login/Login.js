@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import { LoginSchema } from "../../validations/loginSchema";
-import { blockUser, login } from "../../services/authService";
+import { block, blockUser, login } from "../../services/authService";
 import { useAuthContext } from "../../context/AuthContext";
 import { toast } from "react-toastify";
 import { setToLocalStorage } from "../../services/localStorageService";
@@ -25,11 +25,6 @@ function Login() {
         login(values)
           .then(async (response) => {
             if (response.success) {
-              toast.success(response.message);
-              setToLocalStorage("token", response.data.token);
-              setToLocalStorage("isLogged", true);
-
-              values.email = "";
               values.password = "";
 
               let decode = await jwtDecode(response.data.token);
@@ -40,26 +35,32 @@ function Login() {
                 ]
               );
               setSelectedUser(responseUser.data);
-              setToLocalStorage("userId", responseUser.data.userId);
-              setIsLogged(true);
-              navigate("/");
+              if (responseUser.data.status) {
+                toast.success(response.message);
+                values.email = "";
+                setToLocalStorage("token", response.data.token);
+                setToLocalStorage("isLogged", true);
+                setToLocalStorage("userId", responseUser.data.userId);
+                setIsLogged(true);
+                navigate("/");
+              } else {
+                toast.error("Hesabınız Bloke Edilmiştir");
+              }
             }
           })
           .catch((err) => {
-            toast.error(err.response.data.message);
-            if (err.response.data.message === "Şifre hatalı") {
+            if (counter !== 2) toast.error(err.response.data.message);
+            if (err.response.data.message === "Şifre hatalı")
               setCounter(counter + 1);
-            }
-            if (counter === 2) {
-              blockUserFromSystem(values);
-            }
+            if (counter === 2) blockUser(values.email);
           });
       },
       validationSchema: LoginSchema,
     });
 
-  const blockUserFromSystem = (loginDto) => {
-    blockUser(loginDto).then((result) => console.log(result.data));
+  const blockUser = (email) => {
+    block(email).then((result) => toast.error("Hesabınız Bloke Edilmiştir"));
+    navigate("/");
   };
 
   return (
