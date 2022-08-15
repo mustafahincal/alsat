@@ -20,5 +20,7 @@ namespace Business.Abstract
         IDataResult<AccessToken> CreateAccessTokenForLogin(User user);
 
         IResult ChangePassword(ChangePasswordDto changePasswordDto);
+        IResult BlockUser(string email);
+        IResult UnBlockUser(int id);
     }
 }

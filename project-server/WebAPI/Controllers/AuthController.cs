@@ -66,5 +66,31 @@ namespace WebAPI.Controllers
 
             return BadRequest(changePasswordResult);
         }
+
+        [HttpGet("block")]
+        public ActionResult BlockUser(string email)
+        {
+            var result = _authService.BlockUser(email);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpGet("unblock")]
+        public ActionResult UnBlockUser(int id)
+        {
+            var result = _authService.UnBlockUser(id);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
     }
 }

@@ -63,14 +63,23 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(userToCheck, Messages.SuccessfulLogin);
         }
 
-        //public IResult BlockUser()
-        //{
-        //    var userToCheck = _userService.GetByMail(userForLoginDto.Email).Data;
-        //    userToCheck.Status = false;
-        //    _unitOfWork.SaveChanges();
-        //    return new SuccessResult("kullanıcı bloke edildi");
-        //}
+        public IResult BlockUser(string email)
+        {
+            var userToCheck = _userService.GetByMail(email).Data;
+            userToCheck.Status = false;
+            _userService.Update(userToCheck);
+            _unitOfWork.SaveChanges();
+            return new SuccessResult("kullanıcı bloke edildi");
+        }
 
+        public IResult UnBlockUser(int id)
+        {
+            var userToCheck = _userService.GetById(id).Data;    
+            userToCheck.Status = true;
+            _userService.Update(userToCheck);
+            _unitOfWork.SaveChanges();
+            return new SuccessResult("Kullanıcı blokesi kaldırıldı");
+        }
 
         //public void SendMessage(string server, string email)
         //{
