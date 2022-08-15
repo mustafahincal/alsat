@@ -18,6 +18,9 @@ module.exports = {
         item: "1px 0px 10px 3px rgba(0, 0, 0, 0.1)",
         item2: "0px 0px 2px 0.2px rgba(0,0,0,0.37)",
       },
+      backgroundImage: {
+        "home-bg": "url('/src/assets/home-background.png')",
+      },
     },
   },
   plugins: [],

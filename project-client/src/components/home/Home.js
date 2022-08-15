@@ -12,7 +12,7 @@ function Home() {
 
   return (
     <div className="px-32 ">
-      <div className="flex items-center justify-between bg-white  rounded-2xl px-10 py-3 my-5 shadow-item2">
+      <div className="flex items-center justify-between bg-white  rounded-2xl px-10 py-3 mb-10 shadow-item2">
         <span className="text-xl  bg-darkBlue text-white py-2 px-5 rounded-xl">
           Kategoriler
         </span>
@@ -28,8 +28,21 @@ function Home() {
           ))}
         </div>
       </div>
-      <div className="h-80 w-full  bg-white rounded-2xl p-10  shadow-item2">
-        <p className="text-5xl font-bold ">alsat </p>
+      <div className="h-[400px] w-full  bg-white rounded-2xl p-10  shadow-item2 bg-home-bg bg-cover bg-center flex items-end">
+        <div className="flex">
+          <NavLink
+            to={"/main"}
+            className="btn w-48 text-base rounded-2xl py-4 font-bold mr-6 text-center"
+          >
+            Ürün Al
+          </NavLink>
+          <NavLink
+            to={"/addProduct"}
+            className="btn w-48 text-base rounded-2xl py-4 font-bold text-center"
+          >
+            Ürün Sat
+          </NavLink>
+        </div>
       </div>
     </div>
   );
