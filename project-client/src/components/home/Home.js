@@ -13,23 +13,7 @@ function Home() {
 
   return (
     <div className="px-32 ">
-      <div className="flex items-center justify-between bg-white  rounded-2xl px-10 py-3 mb-10 shadow-item2">
-        <span className="text-xl  bg-darkBlue text-white py-2 px-5 rounded-xl">
-          Kategoriler
-        </span>
-        <div className="flex justify-between w-4/5">
-          {categories.map((category) => (
-            <NavLink
-              to={`/main/products/category/${category.categoryId}`}
-              key={category.categoryId}
-              className="hover:bg-darkBlue hover:text-white py-2 px-3 transition-all rounded-lg border-2 border-darkBlue"
-            >
-              {category.name}
-            </NavLink>
-          ))}
-        </div>
-      </div>
-      <div className="h-[400px] w-full  bg-white rounded-2xl p-10  shadow-item2 bg-home-bg bg-cover bg-center flex items-end">
+      <div className="h-[400px] w-full  bg-white rounded-2xl p-10  shadow-item2 bg-home-bg bg-cover bg-center flex items-end mt-10">
         <div className="flex">
           <NavLink
             to={"/main"}

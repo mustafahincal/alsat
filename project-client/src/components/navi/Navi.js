@@ -96,17 +96,49 @@ function Navi() {
                   {selectedUser.firstName + " " + selectedUser.lastName}
                 </span>
               </button>
-              <div className="invisible absolute top-14 right-0 w-56 rounded py-3 px-2  bg-darkBlue flex flex-col space-y-2 z-10 group-focus-within:visible group-focus-within:mt-2  transition-all">
+              <div className="invisible absolute top-full right-0 w-64 rounded p-1 bg-white flex flex-col z-10 group-focus-within:visible group-focus-within:mt-4  transition-all  font-medium shadow-item2">
                 <NavLink
                   to="/profile"
                   className={({ isActive }) =>
-                    "text-sm inline-flex h-8 items-center px-3 rounded text-black bg-gray-200 hover:bg-black hover:text-white"
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
                   }
                 >
                   Hesabım
                 </NavLink>
+                <NavLink
+                  to="/profile/takenOffers"
+                  className={({ isActive }) =>
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
+                  }
+                >
+                  Aldığım Teklifler
+                </NavLink>
+                <NavLink
+                  to="/profile/givenOffers"
+                  className={({ isActive }) =>
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
+                  }
+                >
+                  Verdiğim Teklifler
+                </NavLink>
+                <NavLink
+                  to="/profile/purchasedProducts"
+                  className={({ isActive }) =>
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
+                  }
+                >
+                  Aldığım Ürünler
+                </NavLink>
+                <NavLink
+                  to="/profile/soldedProducts"
+                  className={({ isActive }) =>
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
+                  }
+                >
+                  Sattığım Ürünler
+                </NavLink>
                 <span
-                  className="cursor-pointer text-sm inline-flex h-8 items-center px-3 bg-gray-200 text-red-500  rounded hover:bg-red-500 hover:text-white"
+                  className="border-b-2 border-red-200 cursor-pointer text-base py-2 px-2 items-center rounded  text-red-500  hover:bg-red-500 hover:text-white"
                   onClick={() => handleLogOut()}
                 >
                   Çıkış Yap

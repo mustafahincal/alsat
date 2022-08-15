@@ -89,7 +89,7 @@ function GivenOffers() {
           ))}
         </div>
       ) : (
-        <div className="px-5 py-5 bg-indigo-100 rounded-lg text-2xl text-black  text-center">
+        <div className="px-5 py-5 bg-indigo-200 rounded-lg text-2xl text-black  text-center">
           Verdiğiniz teklif yoktur
         </div>
       )}
