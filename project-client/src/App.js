@@ -14,6 +14,7 @@ import UpdateUser from "./components/profile/UpdateUser";
 import Profile from "./components/profile/Profile";
 import Page404 from "./components/page404/Page404";
 import Payment from "./components/product/Payment";
+import Footer from "./components/footer/Footer";
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
             <Route path="*" element={<Page404 />} />
           </Routes>
         </div>
+        <Footer />
       </div>
       <ToastContainer
         position="bottom-right"
