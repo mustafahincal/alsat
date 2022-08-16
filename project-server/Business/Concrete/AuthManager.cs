@@ -42,6 +42,8 @@ namespace Business.Concrete
                 PasswordSalt = passwordSalt,
                 Status = true
             };
+
+            // SendMessage(userForRegisterDto.Email);
             _userService.Add(user);
             _unitOfWork.SaveChanges();
             return new SuccessDataResult<User>(user, Messages.UserRegistered);
@@ -81,28 +83,34 @@ namespace Business.Concrete
             return new SuccessResult("Kullanıcı blokesi kaldırıldı");
         }
 
-        //public void SendMessage(string server, string email)
-        //{
-        //    string to = email;
-        //    string from = "ben@contoso.com";
-        //    MailMessage message = new MailMessage(from, to);
-        //    message.Subject = "Using the new SMTP client.";
-        //    message.Body = @"Using this new feature, you can send an email message from an application very easily.";
-        //    SmtpClient client = new SmtpClient(server);
-        //    // Credentials are necessary if the server requires the client
-        //    // to authenticate before it will send email on the client's behalf.
-        //    client.UseDefaultCredentials = true;
+        public void SendMessage(string email)
+        {
+            
+            MailMessage message = new MailMessage();
+            SmtpClient client = new SmtpClient();
+            client.Credentials = new System.Net.NetworkCredential("denemehncal@gmail.com","12345678C#+");
 
-        //    try
-        //    {
-        //        client.Send(message);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine("Exception caught in CreateTestMessage2(): {0}",
-        //            ex.ToString());
-        //    }
-        //}
+            client.Port = 587;
+            client.Host = "smtp.live.com";
+            client.EnableSsl = true;
+
+            message.To.Add(email);
+            message.From = new MailAddress("denemehncal@gmail.com", "12345678C#+");
+
+            message.Subject = "Using the new SMTP client.";
+            message.Body = @"Using this new feature, you can send an email message from an application very easily.";
+
+
+            try
+            {
+                client.Send(message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception caught in CreateTestMessage2(): {0}",
+                    ex.ToString());
+            }
+        }
 
         public IResult ChangePassword(ChangePasswordDto changePasswordDto)
         {
