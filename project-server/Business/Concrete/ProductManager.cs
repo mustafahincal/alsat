@@ -24,20 +24,22 @@ namespace Business.Concrete
     {
         IProductDal _productDal;
         ICategoryService _categoryService;
+        IProductImageService _productImageService;
         IUnitOfWork _unitOfWork;
-        public ProductManager(IProductDal productDal, ICategoryService categoryService, IUnitOfWork unitOfWork)
+        public ProductManager(IProductDal productDal, ICategoryService categoryService, IProductImageService productImageService, IUnitOfWork unitOfWork)
         {
-            this._productDal = productDal;
-            this._categoryService = categoryService;
+            _productDal = productDal;
+            _categoryService = categoryService;
+            _productImageService = productImageService;
             _unitOfWork = unitOfWork;
         }
 
-        public IDataResult<List<Product>> Add(Product product)
+        public IDataResult<List<Product>> Add(ProductForAddDto productForAddDto)
         {
 
             IResult result = BusinessRules.Run(
-                CheckIfProductCountOfCategoryCorrect(product.CategoryId),
-                CheckIfProductNameExists(product.Name),
+                CheckIfProductCountOfCategoryCorrect(productForAddDto.CategoryId),
+                CheckIfProductNameExists(productForAddDto.Name),
                 CheckIfCategoryLimitExceded()
                 );
 
@@ -46,11 +48,27 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<Product>>(result.Message);
             }
 
+            Product productToAdd = new Product();
+            productToAdd.Name = productForAddDto.Name;
+            productToAdd.CategoryId = productForAddDto.CategoryId;
+            productToAdd.BrandId = productForAddDto.BrandId;
+            productToAdd.ColorId = productForAddDto.ColorId;
+            productToAdd.Price = productForAddDto.Price;
+            productToAdd.UsingStateId = productForAddDto.UsingStateId;
+            productToAdd.Description = productForAddDto.Description;
+            productToAdd.IsOfferable = productForAddDto.IsOfferable;
+            productToAdd.IsSold = productForAddDto.IsSold;
+            productToAdd.OwnerId = productForAddDto.OwnerId;
 
-            _productDal.Add(product);
+            ProductImage productImageToAdd = new ProductImage();
+            productImageToAdd.ProductId = productToAdd.ProductId;
+
+
+            _productDal.Add(productToAdd);
+            //_productImageService.Add(productImageToAdd);
             _unitOfWork.SaveChanges();
 
-            var productInfo = _productDal.GetAll(p => p.ProductId == product.ProductId);
+            var productInfo = _productDal.GetAll(p => p.ProductId == productToAdd.ProductId);
             return new SuccessDataResult<List<Product>>(productInfo, Messages.ProductAdded);
         }
 

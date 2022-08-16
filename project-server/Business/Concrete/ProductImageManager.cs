@@ -30,7 +30,7 @@ namespace Business.Concrete
 
         public IResult Add(IFormFile file, ProductImage productImage, int productId)
         {
-            var fileLength = file.Length;
+            
             productImage.ImagePath = _fileHelper.Upload(file, FilePath.ImagesPath);
             productImage.ProductId = productId;
             _productImageDal.Add(productImage);
