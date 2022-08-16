@@ -9,6 +9,7 @@ using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,7 +44,9 @@ namespace Business.Concrete
                 Status = true
             };
 
-            // SendMessage(userForRegisterDto.Email);
+            string messageHeader = "Aramıza Hoşgeldinn..!!";
+            string messageBody = "ALSAT'a Merhaba De!";
+            SendMessage(userForRegisterDto.Email,messageBody,messageHeader);
             _userService.Add(user);
             _unitOfWork.SaveChanges();
             return new SuccessDataResult<User>(user, Messages.UserRegistered);
@@ -71,7 +74,10 @@ namespace Business.Concrete
             userToCheck.Status = false;
             _userService.Update(userToCheck);
             _unitOfWork.SaveChanges();
-            return new SuccessResult("kullanıcı bloke edildi");
+            string messageHeader = "Hesabın Bloke Edildi";
+            string messageBody = "3 kez hatalı şifre girdiğinizden dolayı hesabınız bloke edildi.";
+            SendMessage(email, messageBody, messageHeader);
+            return new SuccessResult("Kullanıcı bloke edildi");
         }
 
         public IResult UnBlockUser(int id)
@@ -83,23 +89,23 @@ namespace Business.Concrete
             return new SuccessResult("Kullanıcı blokesi kaldırıldı");
         }
 
-        public void SendMessage(string email)
+        public void SendMessage(string email, string messageBody, string messageHeader)
         {
             
             MailMessage message = new MailMessage();
-            SmtpClient client = new SmtpClient();
-            client.Credentials = new System.Net.NetworkCredential("denemehncal@gmail.com","12345678C#+");
+            message.To.Add(new MailAddress(email));
+            message.From = new MailAddress("denemehncal@gmail.com");
+            message.Subject = messageHeader;
+            message.Body = messageBody;
+            message.IsBodyHtml = true;
+            message.Priority = MailPriority.High;
 
-            client.Port = 587;
-            client.Host = "smtp.live.com";
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+            NetworkCredential AccountInfo = new NetworkCredential("denemehncal@gmail.com", "hngzfbviibonhevt");
+            client.UseDefaultCredentials = false;
+            client.Credentials = AccountInfo;
             client.EnableSsl = true;
-
-            message.To.Add(email);
-            message.From = new MailAddress("denemehncal@gmail.com", "12345678C#+");
-
-            message.Subject = "Using the new SMTP client.";
-            message.Body = @"Using this new feature, you can send an email message from an application very easily.";
-
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
 
             try
             {
