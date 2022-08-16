@@ -15,8 +15,6 @@ import Profile from "./components/profile/Profile";
 import Page404 from "./components/page404/Page404";
 import Payment from "./components/product/Payment";
 import Footer from "./components/footer/Footer";
-import { useNaviContext } from "./context/NaviContext";
-import { useEffect } from "react";
 
 export default function App() {
   return (

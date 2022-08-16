@@ -3,7 +3,9 @@ import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useUserContext } from "../../../context/UserContext";
 import { block, unBlock } from "../../../services/authService";
-import { getUsers } from "../../../services/userService";
+import { deleteAccount, getUsers } from "../../../services/userService";
+import { AiFillDelete } from "react-icons/ai";
+import { getFromLocalStorage } from "../../../services/localStorageService";
 
 function ControlUsers() {
   const { users, setUsers } = useUserContext();
@@ -25,6 +27,21 @@ function ControlUsers() {
     });
   };
 
+  const deleteUser = (userId) => {
+    if (getFromLocalStorage("userId") == userId) {
+      console.log("silemen");
+    } else {
+      deleteAccount(userId)
+        .then((response) => {
+          if (response.success) {
+            toast.success(response.message);
+            getUsers().then((result) => setUsers(result.data));
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
   return (
     <div>
       {users.map((user, index) => (
@@ -42,6 +59,12 @@ function ControlUsers() {
             >
               Güncelle
             </NavLink>
+            <div
+              className="cursor-pointer btn border-2 box-border bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white ml-3 flex justify-center items-center"
+              onClick={() => deleteUser(user.userId)}
+            >
+              <AiFillDelete className="text-2xl" />
+            </div>
             {!user.status ? (
               <div
                 className="cursor-pointer btn border-2 box-border bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white ml-3 "

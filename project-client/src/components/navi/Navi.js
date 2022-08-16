@@ -3,7 +3,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import { useUserContext } from "../../context/UserContext";
 import { removeFromLocalStorage } from "../../services/localStorageService";
-import { FaBeer } from "react-icons/fa";
+
+import { CgProfile } from "react-icons/cg";
 import { useNaviContext } from "../../context/NaviContext";
 
 function Navi() {
@@ -35,28 +36,31 @@ function Navi() {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `nav-item  ${isActive ? "active-nav" : ""}`
+              `group relative ${isActive ? "active-nav" : ""}`
             }
           >
             Anasayfa
+            <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all duration-75"></div>
           </NavLink>
           <NavLink
             to="/main"
             className={({ isActive }) =>
-              `ml-10 nav-item ${isActive ? "active-nav" : ""}`
+              `ml-10 group  relative ${isActive ? "active-nav" : ""}`
             }
           >
             Ürünler
+            <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all duration-75"></div>
           </NavLink>
 
           {isLogged && (
             <NavLink
               to="/addProduct"
               className={({ isActive }) =>
-                `ml-10 nav-item ${isActive ? "active-nav" : ""}`
+                `group relative ml-10 ${isActive ? "active-nav" : ""}`
               }
             >
               Ürün Sat
+              <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all duration-75"></div>
             </NavLink>
           )}
           {isAdmin && (
@@ -93,8 +97,16 @@ function Navi() {
           {isLogged && (
             <div className="group relative">
               <button className="flex items-center bg-darkBlue border-4 border-white shadow-item2 text-white py-2 rounded-xl px-4 text-base">
-                <span onClick={() => setVisible(!visible)}>
-                  {selectedUser.firstName + " " + selectedUser.lastName}
+                <span
+                  onClick={() => setVisible(!visible)}
+                  className="flex items-center"
+                >
+                  <div className="mr-3 flex justify-center items-center">
+                    <CgProfile className="text-2xl" />
+                  </div>
+                  <div>
+                    {selectedUser.firstName + " " + selectedUser.lastName}
+                  </div>
                 </span>
               </button>
               <div
