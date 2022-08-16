@@ -29,7 +29,7 @@ function ControlUsers() {
 
   const deleteUser = (userId) => {
     if (getFromLocalStorage("userId") == userId) {
-      console.log("silemen");
+      console.log("silemezsin");
     } else {
       deleteAccount(userId)
         .then((response) => {

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const FileContext = createContext();
 
@@ -8,6 +8,10 @@ export const FileProvider = ({ children }) => {
     file,
     setFile,
   };
+
+  useEffect(() => {
+    setFile(false);
+  }, []);
 
   return <FileContext.Provider value={values}>{children}</FileContext.Provider>;
 };

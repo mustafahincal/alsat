@@ -50,7 +50,6 @@ function AddProduct() {
       onSubmit: (values) => {
         if (file) {
           const isOfferableBool = values.isOfferable === "true" ? true : false;
-
           const data = {
             ...values,
             brandId:
@@ -66,13 +65,13 @@ function AddProduct() {
                 ? null
                 : values.colorId,
             isOfferable: isOfferableBool,
+            file: file,
           };
-
+          console.log(data);
           addProduct(data)
             .then((response) => {
               if (response.success) {
                 toast.success(response.message);
-                handleAddFile(response.data[0].productId);
               }
             })
             .catch((err) => {
