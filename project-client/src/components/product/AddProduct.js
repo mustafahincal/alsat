@@ -48,7 +48,6 @@ function AddProduct() {
         isSold: false,
       },
       onSubmit: (values) => {
-        //console.log(file);
         if (file) {
           const isOfferableBool = values.isOfferable === "true" ? true : false;
 
@@ -220,7 +219,7 @@ function AddProduct() {
                 onChange={handleChange}
                 onBlur={handleBlur}
               >
-                <option>Teklif Durumu</option>
+                <option value={0}>Teklif Durumu</option>
                 <option value={false}>Teklif verilemez</option>
                 <option value={true}>Teklif verilebilir</option>
               </select>

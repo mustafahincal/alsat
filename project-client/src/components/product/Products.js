@@ -34,7 +34,7 @@ function Products() {
 
   return (
     <div className="bg-gray-100">
-      <div className="grid grid-cols-12 gap-10">
+      <div className="grid grid-cols-12 gap-x-8 gap-y-12">
         {products.map((product, index) => (
           <NavLink
             key={index}
@@ -79,11 +79,11 @@ function Products() {
 
             <div>
               {product.isOfferable ? (
-                <div className="py-1 bg-teal-500 rounded-b text-white text-center text-sm">
+                <div className="py-1 bg-teal-500 text-white text-center text-sm">
                   Teklif Verilebilir
                 </div>
               ) : (
-                <div className="py-1 bg-indigo-500 rounded-b text-white text-center text-sm">
+                <div className="py-1 bg-indigo-500  text-white text-center text-sm">
                   Teklif Verilemez
                 </div>
               )}
