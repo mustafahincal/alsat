@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Concrete;
+using Core.Entities.Dtos;
 using Core.Utilities.Results;
 using Entities.Concrete;
 using System;
@@ -14,6 +15,8 @@ namespace Business.Abstract
         IDataResult<List<User>> GetAll();
         IDataResult<User> GetById(int userId);
         IDataResult<List<OperationClaim>> GetClaims(User user);
+        IDataResult<List<UserDetailDto>> GetUserDetails();
+        IDataResult<List<UserDetailDto>> GetUserDetailsById(int userId);
         IDataResult<User> GetByMail(string email);
         IResult Add(User user);
         IResult Delete(int id);

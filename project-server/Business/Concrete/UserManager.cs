@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Core.Entities.Concrete;
+using Core.Entities.Dtos;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.UnitOfWork;
@@ -56,6 +57,16 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
         }
+
+        public IDataResult<List<UserDetailDto>> GetUserDetails()
+        {
+            return new SuccessDataResult<List<UserDetailDto>>(_userDal.GetUserDetails(), "Kullanıcılar Listelendi");
+        }
+        public IDataResult<List<UserDetailDto>> GetUserDetailsById(int userId)
+        {
+            return new SuccessDataResult<List<UserDetailDto>>(_userDal.GetUserDetails(u => u.UserId == userId), "Kullanıcı Listelendi");
+        }
+
 
         public IResult Update(User user)
         {
