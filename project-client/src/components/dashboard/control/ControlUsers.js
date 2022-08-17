@@ -46,40 +46,56 @@ function ControlUsers() {
     <div>
       {users.map((user, index) => (
         <div
-          className="py-4 px-6  bg-white hover:border-gray-400 border-2 transition-all duration-75 border-gray-100 rounded w-full mb-4 flex justify-between items-center"
+          className={`py-4 px-6  border-2 transition-all duration-75  rounded w-full mb-4 flex justify-between items-center ${
+            user.operationClaimId == 1
+              ? "bg-gold text-black font-bold hover:border-darkBlue"
+              : " bg-white hover:border-gray-400 border-gray-100"
+          } `}
           key={index}
         >
-          <div>{user.firstName + " " + user.lastName}</div>
-          <div>{user.email}</div>
-          <div>{user.status ? "true" : "false"}</div>
-          <div className="flex">
-            <NavLink
-              to={`/updateUser/${user.userId}`}
-              className="btn border-2 box-border bg-white border-indigo-600 transition-all text-indigo-500 hover:bg-indigo-500 hover:text-white"
-            >
-              Güncelle
-            </NavLink>
-            <div
-              className="cursor-pointer btn border-2 box-border bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white ml-3 flex justify-center items-center"
-              onClick={() => deleteUser(user.userId)}
-            >
-              <AiFillDelete className="text-2xl" />
+          <div className="grid grid-cols-12 w-full items-center text-center">
+            <div className="col-span-3">
+              {user.firstName + " " + user.lastName}
             </div>
-            {!user.status ? (
-              <div
-                className="cursor-pointer btn border-2 box-border bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white ml-3 "
-                onClick={() => handleUnBlock(user.userId)}
+            <div className="col-span-3">{user.email}</div>
+            <div className="col-span-3">{user.operationClaimName}</div>
+            <div className="flex col-span-3 justify-end">
+              <NavLink
+                to={`/updateUser/${user.userId}`}
+                className={`btn border-2 box-border bg-white hover:text-white transition-all ${
+                  user.operationClaimId == 1
+                    ? " border-darkBlue  text-darkBlue hover:bg-darkBlue"
+                    : " border-indigo-600  text-indigo-500 hover:bg-indigo-500"
+                } `}
               >
-                Bloke Kaldır
-              </div>
-            ) : (
-              <div
-                className="cursor-pointer btn border-2 box-border bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white ml-3 "
-                onClick={() => handleBlock(user.email)}
-              >
-                Bloke
-              </div>
-            )}
+                Güncelle
+              </NavLink>
+              {user.operationClaimId == 2 && (
+                <div className="flex">
+                  <div
+                    className="cursor-pointer btn border-2 box-border bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white ml-3 flex justify-center items-center"
+                    onClick={() => deleteUser(user.userId)}
+                  >
+                    <AiFillDelete className="text-2xl" />
+                  </div>
+                  {!user.status ? (
+                    <div
+                      className="cursor-pointer btn border-2 box-border bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white ml-3 "
+                      onClick={() => handleUnBlock(user.userId)}
+                    >
+                      Bloke Kaldır
+                    </div>
+                  ) : (
+                    <div
+                      className="cursor-pointer btn border-2 box-border bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white ml-3 "
+                      onClick={() => handleBlock(user.email)}
+                    >
+                      Bloke
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       ))}

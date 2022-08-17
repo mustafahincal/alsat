@@ -47,7 +47,7 @@ function AddProduct() {
         isOfferable: false,
         isSold: false,
       },
-      onSubmit: (values) => {
+      onSubmit: (values, actions) => {
         if (file) {
           const isOfferableBool = values.isOfferable === "true" ? true : false;
           const data = {

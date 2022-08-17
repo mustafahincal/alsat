@@ -52,12 +52,16 @@ function Register() {
 
   const setRegisterDto = () => {
     registerDto = {
-      firstName: values.name,
-      lastName: values.surname,
+      firstName: capitalize(values.name),
+      lastName: capitalize(values.surname),
       email: values.email,
       password: values.password,
     };
     return registerDto;
+  };
+
+  const capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
   return (

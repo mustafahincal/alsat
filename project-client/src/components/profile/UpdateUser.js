@@ -9,10 +9,9 @@ import { toast } from "react-toastify";
 
 function UpdateUser() {
   const { selectedUser, setSelectedUser } = useUserContext();
+  const { id } = useParams();
   useEffect(() => {
-    getUserById(getFromLocalStorage("userId")).then((result) =>
-      setSelectedUser(result.data)
-    );
+    getUserById(id).then((result) => setSelectedUser(result.data[0]));
   }, []);
 
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
@@ -25,8 +24,8 @@ function UpdateUser() {
       onSubmit: (values) => {
         const data = {
           userId: selectedUser.userId,
-          firstName: values.firstName,
-          lastName: values.lastName,
+          firstName: capitalize(values.firstName),
+          lastName: capitalize(values.lastName),
           email: values.email,
           passwordHash: selectedUser.passwordHash,
           passwordSalt: selectedUser.passwordSalt,
@@ -35,9 +34,7 @@ function UpdateUser() {
         updateUser(data)
           .then((result) => {
             toast.success(result.message);
-            getUserById(getFromLocalStorage("userId")).then((result) =>
-              setSelectedUser(result.data)
-            );
+            getUserById(id).then((result) => setSelectedUser(result.data[0]));
             values.firstName = "";
             values.lastName = "";
             values.email = "";
@@ -46,6 +43,10 @@ function UpdateUser() {
       },
       validationSchema: UpdateUserSchema,
     });
+
+  const capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
 
   return (
     <div className="flex justify-between items-center p-16">
