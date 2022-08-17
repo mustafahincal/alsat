@@ -17,7 +17,7 @@ export const UserProvider = ({ children }) => {
         decode[
           "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
         ]
-      ).then((response) => setSelectedUser(response.data));
+      ).then((response) => setSelectedUser(response.data[0]));
     }
   }, []);
 

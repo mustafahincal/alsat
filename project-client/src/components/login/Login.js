@@ -11,7 +11,7 @@ import { getUserById } from "../../services/userService";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const { setIsLogged, counter, setCounter } = useAuthContext();
+  const { setIsLogged, counter, setCounter, setIsAdmin } = useAuthContext();
   const { setSelectedUser } = useUserContext();
   const navigate = useNavigate();
 
@@ -28,20 +28,25 @@ function Login() {
               values.password = "";
 
               let decode = await jwtDecode(response.data.token);
-
               let responseUser = await getUserById(
                 decode[
                   "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
                 ]
               );
-              setSelectedUser(responseUser.data);
-              if (responseUser.data.status) {
+              if (responseUser.data[0].status) {
                 toast.success(response.message);
                 values.email = "";
                 setToLocalStorage("token", response.data.token);
                 setToLocalStorage("isLogged", true);
-                setToLocalStorage("userId", responseUser.data.userId);
+                setToLocalStorage("userId", responseUser.data[0].userId);
                 setIsLogged(true);
+
+                if (responseUser.data[0].operationClaimId === 1) {
+                  setIsAdmin(true);
+                  setToLocalStorage("isAdmin", true);
+                }
+                setSelectedUser(responseUser.data[0]);
+
                 navigate("/");
               } else {
                 toast.error("Hesabınız Bloke Edilmiştir");

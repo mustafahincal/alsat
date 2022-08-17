@@ -7,10 +7,6 @@ export const OfferProvider = ({ children }) => {
   const [givenOffers, setGivenOffers] = useState([]);
   const [selectedOffer, setSelectedOffer] = useState({});
 
-  // useEffect(() => {
-  //   setSelectedOffer(null);
-  // }, []);
-
   const values = {
     givenOffers,
     setGivenOffers,

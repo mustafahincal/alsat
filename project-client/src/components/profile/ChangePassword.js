@@ -13,7 +13,7 @@ function ChangePassword() {
   const navigate = useNavigate();
   useEffect(() => {
     getUserById(getFromLocalStorage("userId")).then((result) =>
-      setSelectedUser(result.data)
+      setSelectedUser(result.data[0])
     );
   }, []);
 

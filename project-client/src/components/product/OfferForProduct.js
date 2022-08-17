@@ -132,18 +132,22 @@ function OfferForProduct() {
                 <div>İsim</div>
                 <div>{selectedProduct.productName}</div>
               </div>
-              <div className="w-full flex justify-between px-5">
-                <div>Marka</div>
-                <div>{selectedProduct.brandName}</div>
-              </div>
+              {selectedProduct.brandName && (
+                <div className="w-full flex justify-between  px-5">
+                  <div>Marka</div>
+                  <div>{selectedProduct.brandName}</div>
+                </div>
+              )}
               <div className="w-full flex justify-between  px-5">
                 <div>Kategori</div>
                 <div>{selectedProduct.categoryName}</div>
               </div>
-              <div className="w-full flex justify-between  px-5">
-                <div>Renk</div>
-                <div>{selectedProduct.colorName}</div>
-              </div>
+              {selectedProduct.colorName && (
+                <div className="w-full flex justify-between  px-5">
+                  <div>Renk</div>
+                  <div>{selectedProduct.colorName}</div>
+                </div>
+              )}
               <div className="w-full flex justify-between px-5">
                 <div>Fiyat</div>
                 <div>{selectedProduct.price}₺</div>

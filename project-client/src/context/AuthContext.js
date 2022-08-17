@@ -4,13 +4,16 @@ import { getFromLocalStorage } from "../services/localStorageService";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
   const [counter, setCounter] = useState(0);
 
   useEffect(() => {
     if (getFromLocalStorage("isLogged")) {
       setIsLogged(true);
+    }
+    if (getFromLocalStorage("isAdmin")) {
+      setIsAdmin(true);
     }
   }, []);
 

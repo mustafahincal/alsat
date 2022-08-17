@@ -18,7 +18,7 @@ function ProfileMain() {
 
   useEffect(() => {
     getUserById(getFromLocalStorage("userId")).then((result) =>
-      setSelectedUser(result.data)
+      setSelectedUser(result.data[0])
     );
   }, []);
 

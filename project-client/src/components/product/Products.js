@@ -30,6 +30,8 @@ function Products() {
     } else {
       getProducts().then((result) => setProducts(result.data));
     }
+
+    //return () => console.log("component kapando");
   }, [brandId, colorId, categoryId, ownerId]);
 
   return (

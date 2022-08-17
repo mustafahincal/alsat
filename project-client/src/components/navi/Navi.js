@@ -8,17 +8,19 @@ import { CgProfile } from "react-icons/cg";
 import { useNaviContext } from "../../context/NaviContext";
 
 function Navi() {
-  const { isAdmin, isLogged, setIsLogged } = useAuthContext();
+  const { isAdmin, isLogged, setIsLogged, setIsAdmin } = useAuthContext();
   const { selectedUser } = useUserContext();
   const { visible, setVisible } = useNaviContext();
   const navigate = useNavigate();
 
   const handleLogOut = () => {
     setIsLogged(false);
+    setIsAdmin(false);
     removeFromLocalStorage("isLogged");
     removeFromLocalStorage("token");
     removeFromLocalStorage("userId");
     removeFromLocalStorage("productId");
+    removeFromLocalStorage("isAdmin");
     setVisible(false);
     navigate("/");
   };
@@ -63,10 +65,10 @@ function Navi() {
               <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all duration-75"></div>
             </NavLink>
           )}
-          {isAdmin && (
+          {isLogged && isAdmin && (
             <NavLink
               className={({ isActive }) =>
-                "btn bg-littleDarkBlue shadow-item2 text-white mr-5 ml-10 text-base"
+                "btn bg-littleDarkBlue shadow-item2 text-white  ml-10 text-base"
               }
               to={"/dashboard"}
             >
@@ -75,7 +77,7 @@ function Navi() {
           )}
 
           {!isLogged && (
-            <>
+            <div className="ml-10">
               <NavLink
                 className={({ isActive }) =>
                   "btn  bg-darkBlue shadow-item text-white mr-5 text-base"
@@ -92,11 +94,11 @@ function Navi() {
               >
                 Kayıt Ol
               </NavLink>
-            </>
+            </div>
           )}
           {isLogged && (
             <div className="group relative">
-              <button className="flex items-center bg-darkBlue border-4 border-white shadow-item2 text-white py-2 rounded-xl px-4 text-base">
+              <button className="flex items-center bg-darkBlue border-4 border-white shadow-item2 text-white py-2 rounded-xl px-4 text-base ml-10">
                 <span
                   onClick={() => setVisible(!visible)}
                   className="flex items-center"
