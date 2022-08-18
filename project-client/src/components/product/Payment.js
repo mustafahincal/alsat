@@ -15,13 +15,21 @@ import {
   updateProduct,
 } from "../../services/productService";
 import { useProductContext } from "../../context/ProductContext";
+import { saveCreditCard } from "../../services/creditCardService";
+import { useUserContext } from "../../context/UserContext";
+import { getUserById } from "../../services/userService";
+import { getFromLocalStorage } from "../../services/localStorageService";
 
 function Payment() {
   const { productId, offerId } = useParams();
   const { selectedProduct, setSelectedProduct } = useProductContext();
   const { selectedOffer, setSelectedOffer } = useOfferContext();
+  const { selectedUser, setSelectedUser } = useUserContext();
 
   useEffect(() => {
+    getUserById(getFromLocalStorage("userId")).then((result) =>
+      setSelectedUser(result.data[0])
+    );
     if (productId) {
       getProduct(productId).then((result) =>
         setSelectedProduct(result.data[0])
@@ -39,6 +47,7 @@ function Payment() {
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
       initialValues: {
+        userId: selectedUser.userId,
         name: "",
         surname: "",
         cardNumber: "",
@@ -46,7 +55,14 @@ function Payment() {
         cvvCode: "",
       },
       onSubmit: (values) => {
-        console.log(values);
+        let isSaved = window.confirm(
+          "Kredi Kartı sonraki alışverişleriniz için kaydedilsin mi?"
+        );
+        if (isSaved) {
+          //saveCreditCard(values).then((result) => console.log(result));
+          console.log(values);
+        }
+        //handleBuyProduct();
       },
       validationSchema: PaymentSchema,
     });
@@ -188,11 +204,7 @@ function Payment() {
               </div>
             )}
 
-            <button
-              type="submit"
-              className="btn text-lg"
-              onClick={handleBuyProduct}
-            >
+            <button type="submit" className="btn text-lg">
               Ödemeyi Tamamla
             </button>
           </div>
