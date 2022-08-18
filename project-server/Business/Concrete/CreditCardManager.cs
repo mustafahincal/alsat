@@ -26,9 +26,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CreditCard>>(_creditCardDal.GetAll(), "Kredi Kartları getirildi");
         }
 
-        public IDataResult<CreditCard> GetById(int creditCardId)
+        public IDataResult<CreditCard> GetById(int userId)
         {
-            return new SuccessDataResult<CreditCard>(_creditCardDal.Get(cc => cc.CreditCardId == creditCardId), "Kredi Kartları getirildi");
+            return new SuccessDataResult<CreditCard>(_creditCardDal.Get(cc => cc.UserId == userId), "Kredi Kartı getirildi");
         }
 
         public IResult Add(CreditCard creditCard)
