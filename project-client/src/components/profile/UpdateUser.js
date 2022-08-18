@@ -11,7 +11,9 @@ function UpdateUser() {
   const { selectedUser, setSelectedUser } = useUserContext();
   const { id } = useParams();
   useEffect(() => {
-    getUserById(id).then((result) => setSelectedUser(result.data[0]));
+    getUserById(getFromLocalStorage("userId")).then((result) =>
+      setSelectedUser(result.data[0])
+    );
   }, []);
 
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =

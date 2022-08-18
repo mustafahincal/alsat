@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { PaymentSchema } from "../../validations/paymentSchema";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import {
   deleteOffer,
   getOfferDetailsById,
@@ -15,7 +15,11 @@ import {
   updateProduct,
 } from "../../services/productService";
 import { useProductContext } from "../../context/ProductContext";
-import { saveCreditCard } from "../../services/creditCardService";
+import {
+  getCreditCardById,
+  saveCreditCard,
+  updateCreditCard,
+} from "../../services/creditCardService";
 import { useUserContext } from "../../context/UserContext";
 import { getUserById } from "../../services/userService";
 import { getFromLocalStorage } from "../../services/localStorageService";
@@ -24,11 +28,12 @@ function Payment() {
   const { productId, offerId } = useParams();
   const { selectedProduct, setSelectedProduct } = useProductContext();
   const { selectedOffer, setSelectedOffer } = useOfferContext();
-  const { selectedUser, setSelectedUser } = useUserContext();
+  const { selectedCreditCard, setSelectedCreditCard } = useUserContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    getUserById(getFromLocalStorage("userId")).then((result) =>
-      setSelectedUser(result.data[0])
+    getCreditCardById(getFromLocalStorage("userId")).then((result) =>
+      setSelectedCreditCard(result.data)
     );
     if (productId) {
       getProduct(productId).then((result) =>
@@ -47,25 +52,49 @@ function Payment() {
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
       initialValues: {
-        userId: selectedUser.userId,
-        name: "",
-        surname: "",
+        userId: getFromLocalStorage("userId"),
+        cardHolder: "",
         cardNumber: "",
         expirationDate: "",
         cvvCode: "",
       },
       onSubmit: (values) => {
-        let isSaved = window.confirm(
-          "Kredi Kartı sonraki alışverişleriniz için kaydedilsin mi?"
-        );
-        if (isSaved) {
-          //saveCreditCard(values).then((result) => console.log(result));
-          console.log(values);
+        if (
+          values.cardNumber === selectedCreditCard.cardNumber &&
+          values.cardHolder === selectedCreditCard.cardHolder &&
+          values.expirationDate === selectedCreditCard.expirationDate &&
+          values.cvvCode === selectedCreditCard.cvvCode
+        ) {
+        } else {
+          let isSaved = window.confirm(
+            "Kredi Kartı sonraki alışverişleriniz için kaydedilsin mi?"
+          );
+          if (isSaved && selectedCreditCard) {
+            const data = {
+              ...values,
+              creditCardId: selectedCreditCard.creditCardId,
+            };
+            updateCreditCard(data);
+          } else {
+            saveCreditCard(values);
+          }
         }
         //handleBuyProduct();
+        navigate("/main");
       },
       validationSchema: PaymentSchema,
     });
+
+  const usePreviousCard = () => {
+    values.cardHolder = selectedCreditCard.cardHolder;
+    values.cardNumber = selectedCreditCard.cardNumber;
+    values.expirationDate = selectedCreditCard.expirationDate;
+    values.cvvCode = selectedCreditCard.cvvCode;
+
+    getCreditCardById(getFromLocalStorage("userId")).then((result) =>
+      setSelectedCreditCard(result.data)
+    );
+  };
 
   const handleBuyProduct = () => {
     const productData = {
@@ -106,41 +135,30 @@ function Payment() {
           <h1 className="font-extrabold text-3xl text-black mb-5 text-center">
             Ödeme Bilgileri
           </h1>
+          {selectedCreditCard && (
+            <div
+              onClick={usePreviousCard}
+              className="px-3 py-4 bg-red-500 bg-opacity-60 text-xl text-white  text-center mb-5 cursor-pointer block w-full"
+            >
+              Kayıtlı Kartınızı kullanmak isterseniz tıklayınız
+            </div>
+          )}
           <div className="w-full flex  flex-col bg-darkBlue text-gray-100  px-14 py-10">
-            <div className="flex justify-between items-center">
-              <div>
-                <input
-                  value={values.name}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  name="name"
-                  type="text"
-                  className="text-darkBlue py-2 px-4"
-                  placeholder="Ad"
-                />
-                {errors.name && touched.name && (
-                  <div className="text-red-400 my-2  text-sm">
-                    {errors.name}
-                  </div>
-                )}
-              </div>
-
-              <div>
-                <input
-                  value={values.surname}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  name="surname"
-                  type="text"
-                  className="text-darkBlue py-2 px-4"
-                  placeholder="Soyad"
-                />
-                {errors.surname && touched.surname && (
-                  <div className="text-red-400 my-2 text-sm">
-                    {errors.surname}
-                  </div>
-                )}
-              </div>
+            <div className="w-full">
+              <input
+                value={values.cardHolder}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="cardHolder"
+                type="text"
+                className="text-darkBlue py-2 px-4 w-full"
+                placeholder="Kart üzerindeki isim"
+              />
+              {errors.cardHolder && touched.cardHolder && (
+                <div className="text-red-400 my-2  text-sm">
+                  {errors.cardHolder}
+                </div>
+              )}
             </div>
             <div className="mt-5">
               <input
@@ -158,39 +176,37 @@ function Payment() {
                 </div>
               )}
             </div>
-            <div className="flex justify-between items-center mt-5">
-              <div>
-                <input
-                  value={values.expirationDate}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  name="expirationDate"
-                  type="text"
-                  className="text-darkBlue py-2 px-4 "
-                  placeholder="Son Kullanım Tarihi"
-                />
-                {errors.expirationDate && touched.expirationDate && (
-                  <div className="text-red-400 my-2 text-sm">
-                    {errors.expirationDate}
-                  </div>
-                )}
-              </div>
-              <div>
-                <input
-                  value={values.cvvCode}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  name="cvvCode"
-                  type="text"
-                  className="text-darkBlue py-2 px-4 "
-                  placeholder="CVV/CVC"
-                />
-                {errors.cvvCode && touched.cvvCode && (
-                  <div className="text-red-400 my-2 text-sm">
-                    {errors.cvvCode}
-                  </div>
-                )}
-              </div>
+            <div className="mt-5">
+              <input
+                value={values.expirationDate}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="expirationDate"
+                type="text"
+                className="text-darkBlue py-2 px-4 w-1/2"
+                placeholder="Son Kullanım Tarihi - aa/yy"
+              />
+              {errors.expirationDate && touched.expirationDate && (
+                <div className="text-red-400 my-2 text-sm">
+                  {errors.expirationDate}
+                </div>
+              )}
+            </div>
+            <div className="mt-5">
+              <input
+                value={values.cvvCode}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="cvvCode"
+                type="text"
+                className="text-darkBlue py-2 px-4 w-1/2"
+                placeholder="CVV/CVC"
+              />
+              {errors.cvvCode && touched.cvvCode && (
+                <div className="text-red-400 my-2 text-sm">
+                  {errors.cvvCode}
+                </div>
+              )}
             </div>
           </div>
           <div className="mt-5 flex justify-between">
