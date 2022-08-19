@@ -15,6 +15,13 @@
   .nav-item {
     @apply hover:border-b-4 border-darkBlue rounded-md transition-all duration-75;
   }
+
+  .modal {
+    @apply w-full min-h-full absolute top-0 left-0 bg-black bg-opacity-80 flex justify-center items-center invisible;
+  }
+  .modal.activeModal {
+    @apply visible;
+  }
 }
 .active {
   @apply bg-darkBlue text-white;

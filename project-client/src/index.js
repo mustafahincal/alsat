@@ -14,6 +14,7 @@ import { OfferProvider } from "./context/OfferContext";
 import { CategoryProvider } from "./context/CategoryContext";
 import { UsingStateProvider } from "./context/UsingStateContext";
 import { NaviProvider } from "./context/NaviContext";
+import { PaymentProvider } from "./context/PaymentContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -28,7 +29,9 @@ root.render(
                   <CategoryProvider>
                     <UsingStateProvider>
                       <NaviProvider>
-                        <App />
+                        <PaymentProvider>
+                          <App />
+                        </PaymentProvider>
                       </NaviProvider>
                     </UsingStateProvider>
                   </CategoryProvider>

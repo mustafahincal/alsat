@@ -23,12 +23,15 @@ import {
 import { useUserContext } from "../../context/UserContext";
 import { getUserById } from "../../services/userService";
 import { getFromLocalStorage } from "../../services/localStorageService";
+import { usePaymentContext } from "../../context/PaymentContext";
 
 function Payment() {
   const { productId, offerId } = useParams();
   const { selectedProduct, setSelectedProduct } = useProductContext();
   const { selectedOffer, setSelectedOffer } = useOfferContext();
   const { selectedCreditCard, setSelectedCreditCard } = useUserContext();
+  const { saveCardModalActive, setSaveCardModalActive, isSaved, setIsSaved } =
+    usePaymentContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -58,32 +61,39 @@ function Payment() {
         expirationDate: "",
         cvvCode: "",
       },
-      onSubmit: (values) => {
+      onSubmit: async (values) => {
         if (
-          values.cardNumber === selectedCreditCard.cardNumber &&
-          values.cardHolder === selectedCreditCard.cardHolder &&
-          values.expirationDate === selectedCreditCard.expirationDate &&
-          values.cvvCode === selectedCreditCard.cvvCode
+          values.cardNumber ===
+            (selectedCreditCard ? selectedCreditCard.cardNumber : "") &&
+          values.cardHolder ===
+            (selectedCreditCard ? selectedCreditCard.cardHolder : "") &&
+          values.expirationDate ===
+            (selectedCreditCard ? selectedCreditCard.expirationDate : "") &&
+          values.cvvCode ===
+            (selectedCreditCard ? selectedCreditCard.cvvCode : "")
         ) {
+          console.log("aynı kredi kart");
         } else {
-          let isSaved = window.confirm(
-            "Kredi Kartı sonraki alışverişleriniz için kaydedilsin mi?"
-          );
-          if (isSaved && selectedCreditCard) {
-            const data = {
-              ...values,
-              creditCardId: selectedCreditCard.creditCardId,
-            };
-            updateCreditCard(data);
-          } else {
-            saveCreditCard(values);
-          }
+          setSaveCardModalActive(true);
         }
         //handleBuyProduct();
-        navigate("/main");
+        // navigate("/main");
       },
       validationSchema: PaymentSchema,
     });
+
+  const handleSaveCreditCardModal = (controlSave) => {
+    setSaveCardModalActive(false);
+    if (controlSave && selectedCreditCard) {
+      const data = {
+        ...values,
+        creditCardId: selectedCreditCard.creditCardId,
+      };
+      updateCreditCard(data);
+    } else if (controlSave) {
+      saveCreditCard(values);
+    }
+  };
 
   const usePreviousCard = () => {
     values.cardHolder = selectedCreditCard.cardHolder;
@@ -129,103 +139,131 @@ function Payment() {
   };
 
   return (
-    <div className="w-2/5 m-auto py-12 px-16 shadow-item mt-20 bg-white">
-      <form onSubmit={handleSubmit}>
-        <div className="w-full m-auto">
-          <h1 className="font-extrabold text-3xl text-black mb-5 text-center">
-            Ödeme Bilgileri
-          </h1>
-          {selectedCreditCard && (
-            <div
-              onClick={usePreviousCard}
-              className="px-3 py-4 bg-red-500 bg-opacity-60 text-xl text-white  text-center mb-5 cursor-pointer block w-full"
-            >
-              Kayıtlı Kartınızı kullanmak isterseniz tıklayınız
-            </div>
-          )}
-          <div className="w-full flex  flex-col bg-darkBlue text-gray-100  px-14 py-10">
-            <div className="w-full">
-              <input
-                value={values.cardHolder}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                name="cardHolder"
-                type="text"
-                className="text-darkBlue py-2 px-4 w-full"
-                placeholder="Kart üzerindeki isim"
-              />
-              {errors.cardHolder && touched.cardHolder && (
-                <div className="text-red-400 my-2  text-sm">
-                  {errors.cardHolder}
-                </div>
-              )}
-            </div>
-            <div className="mt-5">
-              <input
-                value={values.cardNumber}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                name="cardNumber"
-                type="text"
-                className="text-darkBlue py-2 px-4 w-full"
-                placeholder="Kart Numarası"
-              />
-              {errors.cardNumber && touched.cardNumber && (
-                <div className="text-red-400 my-2 text-sm">
-                  {errors.cardNumber}
-                </div>
-              )}
-            </div>
-            <div className="mt-5">
-              <input
-                value={values.expirationDate}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                name="expirationDate"
-                type="text"
-                className="text-darkBlue py-2 px-4 w-1/2"
-                placeholder="Son Kullanım Tarihi - aa/yy"
-              />
-              {errors.expirationDate && touched.expirationDate && (
-                <div className="text-red-400 my-2 text-sm">
-                  {errors.expirationDate}
-                </div>
-              )}
-            </div>
-            <div className="mt-5">
-              <input
-                value={values.cvvCode}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                name="cvvCode"
-                type="text"
-                className="text-darkBlue py-2 px-4 w-1/2"
-                placeholder="CVV/CVC"
-              />
-              {errors.cvvCode && touched.cvvCode && (
-                <div className="text-red-400 my-2 text-sm">
-                  {errors.cvvCode}
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="mt-5 flex justify-between">
-            {offerId ? (
-              <div className="bg-darkBlue px-4 py-2 text-white rounded text-lg">
-                {selectedOffer.offeredPrice}₺
-              </div>
-            ) : (
-              <div className="bg-darkBlue px-4 py-2 text-white rounded text-lg">
-                {selectedProduct.price}₺
+    <div className="my-20">
+      <div className="w-2/5 m-auto py-12  px-16 shadow-item mt-20 bg-white">
+        <form onSubmit={handleSubmit}>
+          <div className="w-full m-auto">
+            <h1 className="font-extrabold text-3xl text-black mb-5 text-center">
+              Ödeme Bilgileri
+            </h1>
+            {selectedCreditCard && (
+              <div
+                onClick={usePreviousCard}
+                className="px-3 py-4 bg-red-500 bg-opacity-60 text-xl text-white  text-center mb-5 cursor-pointer block w-full"
+              >
+                Kayıtlı Kartınızı kullanmak isterseniz tıklayınız
               </div>
             )}
+            <div className="w-full flex  flex-col bg-darkBlue text-gray-100  px-14 py-10">
+              <div className="w-full">
+                <input
+                  value={values.cardHolder}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  name="cardHolder"
+                  type="text"
+                  className="text-darkBlue py-2 px-4 w-full"
+                  placeholder="Kart üzerindeki isim"
+                />
+                {errors.cardHolder && touched.cardHolder && (
+                  <div className="text-red-400 my-2  text-sm">
+                    {errors.cardHolder}
+                  </div>
+                )}
+              </div>
+              <div className="mt-5">
+                <input
+                  value={values.cardNumber}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  name="cardNumber"
+                  type="text"
+                  className="text-darkBlue py-2 px-4 w-full"
+                  placeholder="Kart Numarası"
+                />
+                {errors.cardNumber && touched.cardNumber && (
+                  <div className="text-red-400 my-2 text-sm">
+                    {errors.cardNumber}
+                  </div>
+                )}
+              </div>
+              <div className="mt-5">
+                <input
+                  value={values.expirationDate}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  name="expirationDate"
+                  type="text"
+                  className="text-darkBlue py-2 px-4 w-1/2"
+                  placeholder="aa/yy"
+                />
+                {errors.expirationDate && touched.expirationDate && (
+                  <div className="text-red-400 my-2 text-sm">
+                    {errors.expirationDate}
+                  </div>
+                )}
+              </div>
+              <div className="mt-5">
+                <input
+                  value={values.cvvCode}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  name="cvvCode"
+                  type="text"
+                  className="text-darkBlue py-2 px-4 w-1/2"
+                  placeholder="CVV/CVC"
+                />
+                {errors.cvvCode && touched.cvvCode && (
+                  <div className="text-red-400 my-2 text-sm">
+                    {errors.cvvCode}
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="mt-5 flex justify-between">
+              {offerId ? (
+                <div className="bg-darkBlue px-4 py-2 text-white rounded text-lg">
+                  {selectedOffer.offeredPrice}₺
+                </div>
+              ) : (
+                <div className="bg-darkBlue px-4 py-2 text-white rounded text-lg">
+                  {selectedProduct.price}₺
+                </div>
+              )}
 
-            <button type="submit" className="btn text-lg">
-              Ödemeyi Tamamla
+              <button type="submit" className="btn text-lg">
+                Ödemeyi Tamamla
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div className={`modal ${saveCardModalActive && "activeModal"}`}>
+        <div className="bg-white text-black w-1/3 py-10 px-16">
+          <div className="flex justify-between mb-3 items-center">
+            <h1 className="text-2xl ">
+              Kredi Kartı sonraki alışverişleriniz için kaydedilsin mi?
+            </h1>
+            <button onClick={() => setSaveCardModalActive(false)}>
+              <i className="fa-solid fa-xmark"></i>
             </button>
           </div>
+          <div className="flex">
+            <div
+              onClick={() => handleSaveCreditCardModal(true)}
+              className="btn bg-crimson text-white mt-4 self-end cursor-pointer"
+            >
+              Kaydet
+            </div>
+            <div
+              onClick={() => handleSaveCreditCardModal(false)}
+              className="btn bg-crimson text-white mt-4 ml-4 self-end cursor-pointer"
+            >
+              Kaydetme
+            </div>
+          </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
