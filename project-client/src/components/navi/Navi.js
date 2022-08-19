@@ -6,21 +6,58 @@ import { removeFromLocalStorage } from "../../services/localStorageService";
 
 import { CgProfile } from "react-icons/cg";
 import { useNaviContext } from "../../context/NaviContext";
+import { useProductContext } from "../../context/ProductContext";
+import { useBrandContext } from "../../context/BrandContext";
+import { useCategoryContext } from "../../context/CategoryContext";
+import { useColorContext } from "../../context/ColorContext";
+import { useOfferContext } from "../../context/OfferContext";
 
 function Navi() {
-  const { isAdmin, isLogged, setIsLogged, setIsAdmin } = useAuthContext();
-  const { selectedUser } = useUserContext();
+  const { isAdmin, isLogged, setIsLogged, setIsAdmin, setCounter } =
+    useAuthContext();
+  const { selectedUser, setSelectedUser, setSelectedCreditCard } =
+    useUserContext();
   const { visible, setVisible } = useNaviContext();
+  const {
+    setProducts,
+    setSelectedProduct,
+    setPurchasedProducts,
+    setSoldedProducts,
+  } = useProductContext();
+  const { setSelectedBrand, setUpdateBrandStatus } = useBrandContext();
+  const { setSelectedCategory, setUpdateCategoryStatus } = useCategoryContext();
+  const { setSelectedColor, setUpdateColorStatus } = useColorContext();
+  const { setGivenOffers, setTakenOffers, setSelectedOffer } =
+    useOfferContext();
+
   const navigate = useNavigate();
 
   const handleLogOut = () => {
     setIsLogged(false);
     setIsAdmin(false);
+    setSelectedUser({});
+    setSelectedCreditCard({});
+    setProducts([]);
+    setSoldedProducts([]);
+    setSelectedProduct({});
+    setPurchasedProducts([]);
+    setCounter(0);
+    setSelectedBrand({});
+    setUpdateBrandStatus(false);
+    setSelectedCategory({});
+    setUpdateCategoryStatus(false);
+    setSelectedColor({});
+    setUpdateColorStatus(false);
+    setGivenOffers([]);
+    setTakenOffers([]);
+    setSelectedOffer({});
+
     removeFromLocalStorage("isLogged");
     removeFromLocalStorage("token");
     removeFromLocalStorage("userId");
     removeFromLocalStorage("productId");
     removeFromLocalStorage("isAdmin");
+
     setVisible(false);
     navigate("/");
   };

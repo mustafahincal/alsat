@@ -29,9 +29,12 @@ function Payment() {
   const { productId, offerId } = useParams();
   const { selectedProduct, setSelectedProduct } = useProductContext();
   const { selectedOffer, setSelectedOffer } = useOfferContext();
-  const { selectedCreditCard, setSelectedCreditCard } = useUserContext();
-  const { saveCardModalActive, setSaveCardModalActive, isSaved, setIsSaved } =
-    usePaymentContext();
+  const {
+    saveCardModalActive,
+    setSaveCardModalActive,
+    selectedCreditCard,
+    setSelectedCreditCard,
+  } = usePaymentContext();
   const navigate = useNavigate();
 
   useEffect(() => {

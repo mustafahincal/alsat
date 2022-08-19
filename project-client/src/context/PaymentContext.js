@@ -4,12 +4,13 @@ const PaymentContext = createContext();
 
 export const PaymentProvider = ({ children }) => {
   const [saveCardModalActive, setSaveCardModalActive] = useState(false);
-  const [isSaved, setIsSaved] = useState(false);
+  const [selectedCreditCard, setSelectedCreditCard] = useState({});
+
   const values = {
     saveCardModalActive,
     setSaveCardModalActive,
-    isSaved,
-    setIsSaved,
+    selectedCreditCard,
+    setSelectedCreditCard,
   };
 
   return (

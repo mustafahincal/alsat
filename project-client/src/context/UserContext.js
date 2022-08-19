@@ -8,7 +8,6 @@ const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState({});
-  const [selectedCreditCard, setSelectedCreditCard] = useState({});
 
   useEffect(() => {
     if (getFromLocalStorage("token")) {
@@ -27,8 +26,6 @@ export const UserProvider = ({ children }) => {
     setUsers,
     selectedUser,
     setSelectedUser,
-    selectedCreditCard,
-    setSelectedCreditCard,
   };
 
   return <UserContext.Provider value={values}>{children}</UserContext.Provider>;
