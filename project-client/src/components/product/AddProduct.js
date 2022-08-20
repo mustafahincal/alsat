@@ -65,10 +65,15 @@ function AddProduct() {
                 ? null
                 : values.colorId,
             isOfferable: isOfferableBool,
-            file: file,
+            // file: file,
           };
           console.log(data);
-          addProduct(data)
+
+          const formData = new FormData();
+          formData.append("file", file);
+          formData.append("body", JSON.stringify(data));
+
+          addProduct(formData)
             .then((response) => {
               if (response.success) {
                 toast.success(response.message);

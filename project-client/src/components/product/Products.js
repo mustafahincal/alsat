@@ -40,7 +40,7 @@ function Products() {
         {products.map((product, index) => (
           <NavLink
             key={index}
-            className="bg-red-500 rounded-md col-span-3 shadow-item mb-10"
+            className="flex flex-col justify-between rounded-md col-span-3 shadow-item mb-10 "
             to={`/productdetails/${product.productId}`}
           >
             <img
@@ -49,7 +49,7 @@ function Products() {
                   ? apiImagesUrl + product.imagePath
                   : defaultImage
               }
-              className="rounded-t-md h-2/3 object-cover object-center w-full"
+              className="rounded-t-md h-2/3 object-cover object-center w-full flex-shrink-0"
               alt=""
             />
             <div className="text-center bg-white flex flex-col justify-between py-2 px-5">
