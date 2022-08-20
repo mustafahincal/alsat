@@ -14,31 +14,27 @@ namespace Business.Concrete
     public class CategoryManager : ICategoryService
     {
         ICategoryDal _categortDal;
-        IUnitOfWork _unitOfWork;
-        public CategoryManager(ICategoryDal categortDal, IUnitOfWork unitOfWork)
+        public CategoryManager(ICategoryDal categortDal)
         {
             _categortDal = categortDal;
-            _unitOfWork = unitOfWork;
         }
 
         public IResult Add(Category category)
         {
             _categortDal.Add(category);
-            _unitOfWork.SaveChanges();
+            _categortDal.Commit();
             return new SuccessResult("Kategori eklendi");
         }
 
         public IResult Delete(Category category)
         {
             _categortDal.Delete(category);
-            _unitOfWork.SaveChanges();
             return new SuccessResult("Kategori silindi");
         }
 
         public IResult Update(Category category)
         {
             _categortDal.Update(category);
-            _unitOfWork.SaveChanges();
             return new SuccessResult("Kategori güncellendi");
         }
 

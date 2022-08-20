@@ -1,4 +1,4 @@
-﻿using Core.DataAccess.EntityFramework;
+﻿using DataAccess.Repository.EntityFramework;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.Context;
 using Entities.Concrete;
@@ -12,8 +12,12 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfProductDal : EfEntityRepositoryBase<Product, PrimeforContext> , IProductDal
+    public class EfProductDal : EfEntityRepositoryBase<Product> , IProductDal
     {
+        public EfProductDal(PrimeforContext companyContext) : base(companyContext)
+        {
+        }
+
         public List<ProductDetailDto> GetProductDetails(Expression<Func<ProductDetailDto, bool>> filter = null)
         {
             using (PrimeforContext context = new PrimeforContext())

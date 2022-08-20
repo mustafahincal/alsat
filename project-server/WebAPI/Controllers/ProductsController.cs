@@ -1,8 +1,8 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
 using Entities.Dtos;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace WebAPI.Controllers
 {
@@ -16,20 +16,20 @@ namespace WebAPI.Controllers
         public ProductsController(IProductService productService, IProductImageService productImageService)
         {
             _productService = productService;
-            _productImageService = productImageService; 
+            _productImageService = productImageService;
         }
 
         [HttpPost("add")]
-        public IActionResult Add( [FromBody] ProductForAddDto productForAddDto)
+        public IActionResult Add([FromForm] IFormFile file, [FromForm] string body)
         {
-            //var result = _productService.Add(productForAddDto);
-            //if (result.Success)
-            //{
-            //    return Ok(result);
-            //}
-            //return BadRequest(result);
-            Console.WriteLine("hey");
-            return BadRequest();
+            var productForAddDto = JsonConvert.DeserializeObject<ProductForAddDto>(body);
+            productForAddDto.file = file;
+            var result = _productService.Add(productForAddDto);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
         [HttpPost("delete")]
@@ -142,6 +142,6 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        
+
     }
 }

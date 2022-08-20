@@ -9,6 +9,8 @@ using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.EntityFramework.UnitOfWork;
+using DataAccess.Repository;
+using DataAccess.Repository.EntityFramework;
 
 namespace Business.DependencyResolvers.Autofac
 {
@@ -47,9 +49,6 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
-
-            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
-
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 

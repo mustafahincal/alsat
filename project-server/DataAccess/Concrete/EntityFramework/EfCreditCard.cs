@@ -1,4 +1,4 @@
-﻿using Core.DataAccess.EntityFramework;
+﻿using DataAccess.Repository.EntityFramework;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.Context;
 using Entities.Concrete;
@@ -11,8 +11,10 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfCreditCard : EfEntityRepositoryBase<CreditCard, PrimeforContext>, ICreditCardDal
+    public class EfCreditCard : EfEntityRepositoryBase<CreditCard>, ICreditCardDal
     {
-
+        public EfCreditCard(PrimeforContext companyContext) : base(companyContext)
+        {
+        }
     }
 }

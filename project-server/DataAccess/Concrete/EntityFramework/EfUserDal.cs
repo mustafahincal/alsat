@@ -1,4 +1,4 @@
-﻿using Core.DataAccess.EntityFramework;
+﻿using DataAccess.Repository.EntityFramework;
 using Core.Entities.Concrete;
 using Core.Entities.Dtos;
 using DataAccess.Abstract;
@@ -12,9 +12,12 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfUserDal : EfEntityRepositoryBase<User, PrimeforContext>, IUserDal
+    public class EfUserDal : EfEntityRepositoryBase<User>, IUserDal
     {
-       
+        public EfUserDal(PrimeforContext companyContext) : base(companyContext)
+        {
+        }
+
         public List<OperationClaim> GetClaims(User user)
         {
             using (var context = new PrimeforContext())

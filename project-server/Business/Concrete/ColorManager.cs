@@ -14,11 +14,9 @@ namespace Business.Concrete
     public class ColorManager : IColorService
     {
         IColorDal _colorDal;
-        IUnitOfWork _unitOfWork;
-        public ColorManager(IColorDal colorDal, IUnitOfWork unitOfWork)
+        public ColorManager(IColorDal colorDal)
         {
             _colorDal = colorDal;
-            _unitOfWork = unitOfWork;
         }
 
         public IDataResult<List<Color>> GetAll()
@@ -34,21 +32,21 @@ namespace Business.Concrete
         public IResult Add(Color color)
         {
             _colorDal.Add(color);
-            _unitOfWork.SaveChanges();
+            _colorDal.Commit();
             return new SuccessResult("Renk eklendi");
         }
 
         public IResult Delete(Color color)
         {
             _colorDal.Delete(color);
-            _unitOfWork.SaveChanges();
+            //_unitOfWork.SaveChanges();
             return new SuccessResult("Renk silindi");
         }
 
         public IResult Update(Color color)
         {
             _colorDal.Update(color);
-            _unitOfWork.SaveChanges();
+            //_unitOfWork.SaveChanges();
             return new SuccessResult("Renk güncellendi");
         }
     }

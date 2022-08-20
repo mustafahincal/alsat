@@ -1,4 +1,4 @@
-﻿using Core.DataAccess.EntityFramework;
+﻿using DataAccess.Repository.EntityFramework;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.Context;
 using Entities.Concrete;
@@ -10,7 +10,10 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfProductImageDal : EfEntityRepositoryBase<ProductImage, PrimeforContext>, IProductImageDal
+    public class EfProductImageDal : EfEntityRepositoryBase<ProductImage>, IProductImageDal
     {
+        public EfProductImageDal(PrimeforContext companyContext) : base(companyContext)
+        {
+        }
     }
 }

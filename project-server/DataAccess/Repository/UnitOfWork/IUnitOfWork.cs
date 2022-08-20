@@ -8,6 +8,7 @@ namespace DataAccess.Concrete.EntityFramework.UnitOfWork
 {
     public interface IUnitOfWork
     {
+        void Commit();
         void SaveChanges();
     }
 }

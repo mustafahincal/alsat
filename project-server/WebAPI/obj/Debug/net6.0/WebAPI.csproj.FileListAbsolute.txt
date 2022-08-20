@@ -1,5 +1,12 @@
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.csproj.AssemblyReference.cache
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.AssemblyInfoInputs.cache
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.AssemblyInfo.cs
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.csproj.CoreCompileInputs.cache
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\appsettings.json
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\WebAPI.staticwebassets.runtime.json
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\WebAPI.exe
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\WebAPI.deps.json
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\WebAPI.runtimeconfig.json
@@ -60,13 +67,6 @@ C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bi
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Core.pdb
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\DataAccess.pdb
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Entities.pdb
-C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.csproj.AssemblyReference.cache
-C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.AssemblyInfoInputs.cache
-C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.AssemblyInfo.cs
-C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.csproj.CoreCompileInputs.cache
-C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\staticwebassets.development.json
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\scopedcss\bundle\WebAPI.styles.css
@@ -76,4 +76,3 @@ C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\ob
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.pdb
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.genruntimeconfig.cache
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\ref\WebAPI.dll
-C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\WebAPI.staticwebassets.runtime.json

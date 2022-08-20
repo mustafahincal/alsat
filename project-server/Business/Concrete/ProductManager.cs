@@ -1,22 +1,11 @@
 ﻿using Business.Abstract;
-using Business.BusinessAspects.Autofac;
 using Business.Constants;
-using Business.ValidationRules.FluentValidation;
-using Core.Aspects.Autofac.Validation;
-using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.EntityFramework.UnitOfWork;
 using Entities.Concrete;
 using Entities.Dtos;
-using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
@@ -48,31 +37,32 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<Product>>(result.Message);
             }
 
-            Product productToAdd = new Product();
-            productToAdd.Name = productForAddDto.Name;
-            productToAdd.CategoryId = productForAddDto.CategoryId;
-            productToAdd.BrandId = productForAddDto.BrandId;
-            productToAdd.ColorId = productForAddDto.ColorId;
-            productToAdd.Price = productForAddDto.Price;
-            productToAdd.UsingStateId = productForAddDto.UsingStateId;
-            productToAdd.Description = productForAddDto.Description;
-            productToAdd.IsOfferable = productForAddDto.IsOfferable;
-            productToAdd.IsSold = productForAddDto.IsSold;
-            productToAdd.OwnerId = productForAddDto.OwnerId;
-
-            ProductImage productImageToAdd = new ProductImage();
-            productImageToAdd.ProductId = productToAdd.ProductId;
-
+            Product productToAdd = new Product
+            {
+                Name = productForAddDto.Name,
+                CategoryId = productForAddDto.CategoryId,
+                BrandId = productForAddDto.BrandId,
+                ColorId = productForAddDto.ColorId,
+                Price = productForAddDto.Price,
+                UsingStateId = productForAddDto.UsingStateId,
+                Description = productForAddDto.Description,
+                IsOfferable = productForAddDto.IsOfferable,
+                IsSold = productForAddDto.IsSold,
+                OwnerId = productForAddDto.OwnerId
+            };
 
             _productDal.Add(productToAdd);
-            //_productImageService.Add(productImageToAdd);
-            _unitOfWork.SaveChanges();
-
+            //_productDal.Commit();
+            ProductImage productImageToAdd = new ProductImage
+            {
+                ProductId = productToAdd.ProductId
+            };
+            _productImageService.Add(productForAddDto.file, productImageToAdd, productToAdd.ProductId);
+            
             var productInfo = _productDal.GetAll(p => p.ProductId == productToAdd.ProductId);
             return new SuccessDataResult<List<Product>>(productInfo, Messages.ProductAdded);
         }
 
-    
         public IResult Update(Product product)
         {
             _productDal.Update(product);
@@ -156,6 +146,6 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        
+
     }
 }
