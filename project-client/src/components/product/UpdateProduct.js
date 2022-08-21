@@ -18,7 +18,7 @@ import { getFromLocalStorage } from "../../services/localStorageService";
 import { useCategoryContext } from "../../context/CategoryContext";
 import { getCategories } from "../../services/categoryService";
 import { getProduct } from "../../services/productService";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { updateProduct } from "../../services/productService";
 import { getUsingStates } from "../../services/usingStateService";
 import { UseUsingStateContext } from "../../context/UsingStateContext";
@@ -104,7 +104,6 @@ function Updateproduct() {
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("productId", selectedProduct.productId);
 
     const exists = selectedProduct.imagePath == null ? false : true;
 
@@ -120,7 +119,10 @@ function Updateproduct() {
           setFile(false);
         }
       })
-      .catch((err) => toast.error(err));
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.response.data.message);
+      });
   };
 
   const handleDeleteImage = () => {

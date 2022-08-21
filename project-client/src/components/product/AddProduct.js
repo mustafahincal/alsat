@@ -65,9 +65,7 @@ function AddProduct() {
                 ? null
                 : values.colorId,
             isOfferable: isOfferableBool,
-            // file: file,
           };
-          console.log(data);
 
           const formData = new FormData();
           formData.append("file", file);
@@ -77,6 +75,8 @@ function AddProduct() {
             .then((response) => {
               if (response.success) {
                 toast.success(response.message);
+                setFile(false);
+                navigate("/main");
               }
             })
             .catch((err) => {
@@ -89,23 +89,6 @@ function AddProduct() {
       },
       validationSchema: ProductSchema,
     });
-
-  const handleAddFile = (productId) => {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("productId", productId);
-
-    addImage(formData, false)
-      .then((response) => {
-        if (response.success) {
-          toast.success(response.message);
-          setFile(false);
-        }
-
-        navigate("/main");
-      })
-      .catch((err) => toast.error(err));
-  };
 
   return (
     <div className="flex justify-between items-start min-h-screen">
