@@ -26,7 +26,16 @@ namespace Core.Extensions
             }
             catch (Exception e)
             {
-                // _logger.Log(e.Message);
+                File.AppendAllText("log.txt", Environment.NewLine + "**********************************************" + Environment.NewLine);
+                File.AppendAllText("log.txt", Environment.UserName);
+                File.AppendAllText("log.txt", Environment.NewLine);
+                File.AppendAllText("log.txt", DateTime.Now.ToString("dd.MM.yyyy HH:mm"));
+                File.AppendAllText("log.txt", Environment.NewLine);
+                File.AppendAllText("log.txt", e.Message);
+                File.AppendAllText("log.txt", "@");
+                File.AppendAllText("log.txt", e.StackTrace);
+                File.AppendAllText("log.txt", Environment.NewLine +"**********************************************"+Environment.NewLine);
+
                 await HandleExceptionAsync(httpContext, e);
             }
         }
