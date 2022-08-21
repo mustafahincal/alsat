@@ -7,9 +7,11 @@ namespace DataAccess.Concrete.EntityFramework.Context
 {
     public class PrimeforContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+     
+
+        public PrimeforContext(DbContextOptions options) : base(options)
         {
-            optionsBuilder.UseSqlServer(Configuration.ConnectionString);
+
         }
 
         public DbSet<Product> Products { get; set; }

@@ -19,46 +19,60 @@ namespace Business.Concrete
     {
         IProductImageDal _productImageDal;
         IFileHelper _fileHelper;
-        IUnitOfWork _unitOfWork;
 
-        public ProductImageManager(IProductImageDal productImageDal, IFileHelper fileHelper, IUnitOfWork unitOfWork)
+        public ProductImageManager(IProductImageDal productImageDal, IFileHelper fileHelper)
         {
             _productImageDal = productImageDal;
             _fileHelper = fileHelper;
-            _unitOfWork = unitOfWork;
         }
 
-        public IResult Add(IFormFile file, ProductImage productImage, int productId)
+        public Core.Utilities.Results.IResult Add(IFormFile file, ProductImage productImage, int productId)
         {
-            
+            Core.Utilities.Results.IResult result = BusinessRules.Run(
+                CheckIfImageSizeInvalid(file)
+                ); ;
+
+            if (result != null)
+            {
+                return new ErrorDataResult<List<Product>>(result.Message);
+            }
+
             productImage.ImagePath = _fileHelper.Upload(file, FilePath.ImagesPath);
             productImage.ProductId = productId;
             _productImageDal.Add(productImage);
-            _unitOfWork.SaveChanges();
+            _productImageDal.Commit();
             return new SuccessResult("Fotoğraf eklendi");
         }
 
-        public IResult Update(IFormFile file, ProductImage productImage, int productId, int productImageId)
+        public Core.Utilities.Results.IResult Update(IFormFile file, int productImageId)
         {
-            //var fileLength = file.Length;
-            //if (fileLength > 400)
-            //    return new ErrorResult("dosya büyüklüğü en fazla 400kb olabilir");
-            productImage.ImagePath = _fileHelper.Update(file, FilePath.ImagesPath + productImage.ImagePath, FilePath.ImagesPath);
-            productImage.ProductId = productId;
-            productImage.ProductImageId = productImageId;
-            _productImageDal.Update(productImage);
-            _unitOfWork.SaveChanges();
+            Core.Utilities.Results.IResult result = BusinessRules.Run(
+                CheckIfImageSizeInvalid(file)
+                ); ;
+
+            if (result != null)
+            {
+                return new ErrorDataResult<List<Product>>(result.Message);
+            }
+
+            ProductImage productImageToUpdate = _productImageDal.Get(image => image.ProductImageId == productImageId);
+
+            productImageToUpdate.ImagePath = _fileHelper.Update(file, FilePath.ImagesPath + productImageToUpdate.ImagePath, FilePath.ImagesPath);
+            productImageToUpdate.ProductId = productImageToUpdate.ProductId;
+            productImageToUpdate.ProductImageId = productImageToUpdate.ProductImageId;
+            _productImageDal.Update(productImageToUpdate);
+            _productImageDal.Commit();
             return new SuccessResult("Fotoğraf Güncellendi");
         }
 
        
 
 
-        public IResult Delete(ProductImage productImage)
+        public Core.Utilities.Results.IResult Delete(ProductImage productImage)
         {
             _fileHelper.Delete(FilePath.ImagesPath + productImage.ImagePath);
             _productImageDal.Delete(productImage);
-            _unitOfWork.SaveChanges();
+            _productImageDal.Commit();
             return new SuccessResult("Fotoğraf Silindi");
         }
 
@@ -84,7 +98,7 @@ namespace Business.Concrete
         }
 
         
-        private IResult CheckCarImage(int productId)
+        private Core.Utilities.Results.IResult CheckCarImage(int productId)
         {
             var result = _productImageDal.GetAll(p => p.ProductId == productId).Count;
             if (result > 0)
@@ -92,6 +106,17 @@ namespace Business.Concrete
                 return new SuccessResult();
             }
             return new ErrorResult();
+        }
+
+        private Core.Utilities.Results.IResult CheckIfImageSizeInvalid(IFormFile file)
+        {
+            var size = file.Length;
+            var limit = 400 * Math.Pow(2, 10);
+            if (size > limit)
+            {
+                return new ErrorResult(Messages.ProductImageSizeInvalid);
+            }
+            return new SuccessResult();
         }
     }
 }

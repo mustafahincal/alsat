@@ -20,14 +20,12 @@ namespace Business.Concrete
     {
         private IUserService _userService;
         private ITokenHelper _tokenHelper;
-        IUnitOfWork _unitOfWork;
 
      
-        public AuthManager(IUserService userService, ITokenHelper tokenHelper, IUnitOfWork unitOfWork)
+        public AuthManager(IUserService userService, ITokenHelper tokenHelper)
         {
             _userService = userService;
             _tokenHelper = tokenHelper;
-            _unitOfWork = unitOfWork;
         }
 
         public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
@@ -48,7 +46,6 @@ namespace Business.Concrete
             string messageBody = "ALSAT'a Merhaba De!";
             SendMessage(userForRegisterDto.Email,messageBody,messageHeader);
             _userService.Add(user);
-            _unitOfWork.SaveChanges();
             return new SuccessDataResult<User>(user, Messages.UserRegistered);
         }
 
@@ -73,7 +70,6 @@ namespace Business.Concrete
             var userToCheck = _userService.GetByMail(email).Data;
             userToCheck.Status = false;
             _userService.Update(userToCheck);
-            _unitOfWork.SaveChanges();
             string messageHeader = "Hesabın Bloke Edildi";
             string messageBody = "3 kez hatalı şifre girdiğinizden dolayı hesabınız bloke edildi.";
             SendMessage(email, messageBody, messageHeader);
@@ -85,7 +81,6 @@ namespace Business.Concrete
             var userToCheck = _userService.GetById(id).Data;    
             userToCheck.Status = true;
             _userService.Update(userToCheck);
-            _unitOfWork.SaveChanges();
             return new SuccessResult("Kullanıcı blokesi kaldırıldı");
         }
 
@@ -134,7 +129,7 @@ namespace Business.Concrete
             userToCheck.PasswordHash = passwordHash;
             userToCheck.PasswordSalt = passwordSalt;
             _userService.Update(userToCheck);
-            _unitOfWork.SaveChanges();
+            
             return new SuccessResult("Şifre başarıyla değiştirildi");
 
         }

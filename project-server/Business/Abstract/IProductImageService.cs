@@ -11,9 +11,9 @@ namespace Business.Abstract
 {
     public interface IProductImageService
     {
-        IResult Add(IFormFile file, ProductImage productImage, int productId);
-        IResult Delete(ProductImage productImage);
-        IResult Update(IFormFile file, ProductImage productImage, int productId, int productImageId);
+        Core.Utilities.Results.IResult Add(IFormFile file, ProductImage productImage, int productId);
+        Core.Utilities.Results.IResult Delete(ProductImage productImage);
+        Core.Utilities.Results.IResult Update(IFormFile file, int productImageId);
 
         IDataResult<List<ProductImage>> GetAll();
         IDataResult<List<ProductImage>> GetByProductId(int productId);

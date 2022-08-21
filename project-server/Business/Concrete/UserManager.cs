@@ -17,16 +17,14 @@ namespace Business.Concrete
     public class UserManager : IUserService
     {
         IUserDal _userDal;
-        IUnitOfWork _unitOfWork;
-        public UserManager(IUserDal userDal, IUnitOfWork unitOfWork)
+        public UserManager(IUserDal userDal)
         {
             _userDal = userDal;
-            _unitOfWork = unitOfWork;
         }
         public IResult Add(User user)
         {
             _userDal.Add(user);
-            _unitOfWork.SaveChanges();
+            _userDal.Commit();
             return new SuccessResult("Kullanıcı eklendi");
         }
 
@@ -34,7 +32,7 @@ namespace Business.Concrete
         {
             var userToDelete = _userDal.Get(p => p.UserId == id);
             _userDal.Delete(userToDelete);
-            _unitOfWork.SaveChanges();
+            _userDal.Commit();
             return new SuccessResult("Kullanıcı silindi");
         }
 
@@ -71,7 +69,7 @@ namespace Business.Concrete
         public IResult Update(User user)
         {
             _userDal.Update(user);
-            _unitOfWork.SaveChanges();
+            _userDal.Commit();
             return new SuccessResult();
         }
     }

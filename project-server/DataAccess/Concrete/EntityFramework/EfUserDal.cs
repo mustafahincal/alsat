@@ -14,32 +14,32 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfUserDal : EfEntityRepositoryBase<User>, IUserDal
     {
-        public EfUserDal(PrimeforContext companyContext) : base(companyContext)
+        PrimeforContext _primeforContext;
+        public EfUserDal(PrimeforContext primeforContext) : base(primeforContext)
         {
+            _primeforContext = primeforContext;
         }
 
         public List<OperationClaim> GetClaims(User user)
         {
-            using (var context = new PrimeforContext())
-            {
-                var result = from operationClaim in context.OperationClaims
-                             join userOperationClaim in context.UserOperationClaims
+          
+                var result = from operationClaim in _primeforContext.OperationClaims
+                             join userOperationClaim in _primeforContext.UserOperationClaims
                                  on operationClaim.OperationClaimId equals userOperationClaim.OperationClaimId
                              where userOperationClaim.UserId == user.UserId
                              select new OperationClaim { OperationClaimId = operationClaim.OperationClaimId, Name = operationClaim.Name };
                 return result.ToList();
 
-            }
+            
         }
 
         public List<UserDetailDto> GetUserDetails(Expression<Func<UserDetailDto, bool>> filter = null)
         {
-            using (PrimeforContext context = new PrimeforContext())
-            {
-                var result = from u in context.Users
-                             join uo in context.UserOperationClaims
+            
+                var result = from u in _primeforContext.Users
+                             join uo in _primeforContext.UserOperationClaims
                              on u.UserId equals uo.UserId
-                             join o in context.OperationClaims
+                             join o in _primeforContext.OperationClaims
                              on uo.OperationClaimId equals o.OperationClaimId
                              select new UserDetailDto
                              {
@@ -57,7 +57,7 @@ namespace DataAccess.Concrete.EntityFramework
                 ? result.ToList()
                 : result.Where(filter).ToList();
 
-            }
+            
         }
 
 

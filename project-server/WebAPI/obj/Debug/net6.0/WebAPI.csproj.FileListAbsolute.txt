@@ -76,3 +76,14 @@ C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\ob
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.pdb
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.genruntimeconfig.cache
 C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\ref\WebAPI.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\obj\Debug\net6.0\WebAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Serilog.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Serilog.AspNetCore.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Serilog.Extensions.Hosting.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Serilog.Extensions.Logging.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Serilog.Formatting.Compact.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Serilog.Settings.Configuration.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Serilog.Sinks.Console.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Serilog.Sinks.Debug.dll
+C:\Users\musta\Desktop\primefor-2022-staj-mustafahincal\project-server\WebAPI\bin\Debug\net6.0\Serilog.Sinks.File.dll

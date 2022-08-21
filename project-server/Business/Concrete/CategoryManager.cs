@@ -29,12 +29,14 @@ namespace Business.Concrete
         public IResult Delete(Category category)
         {
             _categortDal.Delete(category);
+            _categortDal.Commit();
             return new SuccessResult("Kategori silindi");
         }
 
         public IResult Update(Category category)
         {
             _categortDal.Update(category);
+            _categortDal.Commit();
             return new SuccessResult("Kategori güncellendi");
         }
 

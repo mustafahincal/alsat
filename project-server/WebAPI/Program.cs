@@ -3,6 +3,7 @@ using Autofac.Extensions.DependencyInjection;
 using Business.DependencyResolvers.Autofac;
 using Core.DependencyResolvers;
 using Core.Extensions;
+using Core.Utilities.Configurations;
 using Core.Utilities.IoC;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
@@ -10,6 +11,7 @@ using DataAccess.Concrete.EntityFramework.Context;
 using DataAccess.Repository;
 using DataAccess.Repository.EntityFramework;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +21,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped(typeof(IEntityRepository<>), typeof(EfEntityRepositoryBase<>));
-builder.Services.AddScoped<PrimeforContext>();
+
+builder.Services.AddTransient<PrimeforContext>();
+
+// connection string
+builder.Services.AddDbContext<PrimeforContext>(o => o.UseSqlServer(Configuration.ConnectionString));
 
 // Autofac
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());

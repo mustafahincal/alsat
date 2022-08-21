@@ -13,7 +13,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCreditCard : EfEntityRepositoryBase<CreditCard>, ICreditCardDal
     {
-        public EfCreditCard(PrimeforContext companyContext) : base(companyContext)
+        public EfCreditCard(PrimeforContext primeforContext) : base(primeforContext)
         {
         }
     }

@@ -28,10 +28,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update([FromForm] IFormFile file, [FromForm] int productId, [FromForm] int productImageId)
+        public IActionResult Update([FromForm] IFormFile file, [FromForm] int productImageId)
         { 
-            var productImage = new ProductImage() { ProductId = productId, ProductImageId = productImageId };
-            var result = _productImageService.Update(file, productImage, productId, productImageId);
+
+            var result = _productImageService.Update(file, productImageId);
             if (result.Success)
             {
                 return Ok(result);

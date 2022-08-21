@@ -14,44 +14,45 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfProductDal : EfEntityRepositoryBase<Product> , IProductDal
     {
-        public EfProductDal(PrimeforContext companyContext) : base(companyContext)
+        PrimeforContext _primeforContext;
+        public EfProductDal(PrimeforContext primeforContext) : base(primeforContext)
         {
+            _primeforContext = primeforContext;
         }
 
         public List<ProductDetailDto> GetProductDetails(Expression<Func<ProductDetailDto, bool>> filter = null)
         {
-            using (PrimeforContext context = new PrimeforContext())
-            {
-                var result = from p in context.Products
-                             join c in context.Categories
+            
+                var result = from p in _primeforContext.Products
+                             join c in _primeforContext.Categories
                              on p.CategoryId equals c.CategoryId
-                             join us in context.UsingStates
+                             join us in _primeforContext.UsingStates
                              on p.UsingStateId equals us.UsingStateId
                              select new ProductDetailDto
                              {
                                  ProductId = p.ProductId,
                                  CategoryId = c.CategoryId,
-                                 ColorId = (from cl in context.Colors where cl.ColorId == p.ColorId select cl.ColorId).FirstOrDefault(),
-                                 BrandId = (from b in context.Brands where b.BrandId == p.BrandId select b.BrandId).FirstOrDefault(),
+                                 ColorId = (from cl in _primeforContext.Colors where cl.ColorId == p.ColorId select cl.ColorId).FirstOrDefault(),
+                                 BrandId = (from b in _primeforContext.Brands where b.BrandId == p.BrandId select b.BrandId).FirstOrDefault(),
                                  UsingStateId = us.UsingStateId,
                                  OwnerId = (int)p.OwnerId,
                                  ProductName = p.Name,
                                  CategoryName = c.Name,
-                                 ColorName = (from cl in context.Colors where cl.ColorId == p.ColorId select cl.Name).FirstOrDefault(),
-                                 BrandName = (from b in context.Brands where b.BrandId == p.BrandId select b.Name).FirstOrDefault(),
+                                 ColorName = (from cl in _primeforContext.Colors where cl.ColorId == p.ColorId select cl.Name).FirstOrDefault(),
+                                 BrandName = (from b in _primeforContext.Brands where b.BrandId == p.BrandId select b.Name).FirstOrDefault(),
                                  UsingStateName = us.Name,
                                  Price = p.Price,
                                  Description = p.Description,
                                  IsOfferable = p.IsOfferable,
                                  IsSold = p.IsSold,
-                                 ImagePath = (from pi in context.ProductImages where pi.ProductId == p.ProductId select pi.ImagePath).FirstOrDefault(),
-                                 ProductImageId = (from pi in context.ProductImages where pi.ProductId == p.ProductId select pi.ProductImageId).FirstOrDefault()
+                                 ImagePath = (from pi in _primeforContext.ProductImages where pi.ProductId == p.ProductId select pi.ImagePath).FirstOrDefault(),
+                                 ProductImageId = (from pi in _primeforContext.ProductImages where pi.ProductId == p.ProductId select pi.ProductImageId).FirstOrDefault()
                              };
                 return filter == null
                 ? result.ToList()
                 : result.Where(filter).ToList();
 
-            }
-        }
+            }// bu farklı hata
+        
     }
 }

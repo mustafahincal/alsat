@@ -14,11 +14,9 @@ namespace Business.Concrete
     public class CreditCardManager : ICreditCardService
     {
         ICreditCardDal _creditCardDal;
-        IUnitOfWork _unitOfWork;
-        public CreditCardManager(ICreditCardDal creditCardDal, IUnitOfWork unitOfWork)
+        public CreditCardManager(ICreditCardDal creditCardDal)
         {
             _creditCardDal = creditCardDal;
-            _unitOfWork = unitOfWork;
         }
 
         public IDataResult<List<CreditCard>> GetAll()
@@ -34,21 +32,21 @@ namespace Business.Concrete
         public IResult Add(CreditCard creditCard)
         {
             _creditCardDal.Add(creditCard);
-            _unitOfWork.SaveChanges();
+            _creditCardDal.Commit();
             return new SuccessResult("Kredi Kartı eklendi");
         }
 
         public IResult Delete(CreditCard creditCard)
         {
             _creditCardDal.Delete(creditCard);
-            _unitOfWork.SaveChanges();
+            _creditCardDal.Commit();
             return new SuccessResult("Kredi Kartı silindi");
         }
 
         public IResult Update(CreditCard creditCard)
         {
             _creditCardDal.Update(creditCard);
-            _unitOfWork.SaveChanges();
+            _creditCardDal.Commit();
             return new SuccessResult("Kredi Kartı güncellendi");
         }
     }

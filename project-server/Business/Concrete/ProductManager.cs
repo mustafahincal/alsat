@@ -14,27 +14,31 @@ namespace Business.Concrete
         IProductDal _productDal;
         ICategoryService _categoryService;
         IProductImageService _productImageService;
-        IUnitOfWork _unitOfWork;
-        public ProductManager(IProductDal productDal, ICategoryService categoryService, IProductImageService productImageService, IUnitOfWork unitOfWork)
+        public ProductManager(IProductDal productDal, ICategoryService categoryService, IProductImageService productImageService)
         {
             _productDal = productDal;
             _categoryService = categoryService;
             _productImageService = productImageService;
-            _unitOfWork = unitOfWork;
         }
 
         public IDataResult<List<Product>> Add(ProductForAddDto productForAddDto)
         {
 
             IResult result = BusinessRules.Run(
-                CheckIfProductCountOfCategoryCorrect(productForAddDto.CategoryId),
-                CheckIfProductNameExists(productForAddDto.Name),
-                CheckIfCategoryLimitExceded()
-                );
+                CheckIfProductNameExists(productForAddDto.Name)
+                ); ;
+            
 
             if (result != null)
             {
                 return new ErrorDataResult<List<Product>>(result.Message);
+            }
+
+            var size = productForAddDto.file.Length;
+            var limit = 400 * Math.Pow(2, 10);
+            if (size > limit)
+            {
+                return new ErrorDataResult<List<Product>>(Messages.ProductImageSizeInvalid);
             }
 
             Product productToAdd = new Product
@@ -52,7 +56,7 @@ namespace Business.Concrete
             };
 
             _productDal.Add(productToAdd);
-            //_productDal.Commit();
+            _productDal.Commit();
             ProductImage productImageToAdd = new ProductImage
             {
                 ProductId = productToAdd.ProductId
@@ -66,14 +70,14 @@ namespace Business.Concrete
         public IResult Update(Product product)
         {
             _productDal.Update(product);
-            _unitOfWork.SaveChanges();
+            _productDal.Commit();
             return new SuccessResult(Messages.ProductUpdated);
         }
 
         public IResult Delete(Product product)
         {
             _productDal.Delete(product);
-            _unitOfWork.SaveChanges();
+            _productDal.Commit();
             return new SuccessResult(Messages.ProductDeleted);
         }
 
@@ -125,10 +129,6 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.OwnerId == ownerId), Messages.ProductsListed);
         }
-        private IResult CheckIfProductCountOfCategoryCorrect(int categoryId)
-        {
-            return new SuccessResult();
-        }
 
         private IResult CheckIfProductNameExists(string productName)
         {
@@ -140,11 +140,6 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        private IResult CheckIfCategoryLimitExceded()
-        {
-            var result = _categoryService.GetAll();
-            return new SuccessResult();
-        }
 
 
     }

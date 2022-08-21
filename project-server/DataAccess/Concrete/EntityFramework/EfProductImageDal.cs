@@ -12,7 +12,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfProductImageDal : EfEntityRepositoryBase<ProductImage>, IProductImageDal
     {
-        public EfProductImageDal(PrimeforContext companyContext) : base(companyContext)
+        public EfProductImageDal(PrimeforContext primeforContext) : base(primeforContext)
         {
         }
     }

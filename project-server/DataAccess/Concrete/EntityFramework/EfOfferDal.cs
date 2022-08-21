@@ -14,20 +14,21 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfOfferDal : EfEntityRepositoryBase<Offer>, IOfferDal
     {
-        public EfOfferDal(PrimeforContext companyContext) : base(companyContext)
+        PrimeforContext _primeforContext;
+        public EfOfferDal(PrimeforContext primeforContext) : base(primeforContext)
         {
+            _primeforContext = primeforContext;
         }
 
         public List<OfferDetailDto> GetOfferDetails(Expression<Func<OfferDetailDto, bool>> filter = null)
         {
-            using (PrimeforContext context = new PrimeforContext())
-            {
-                var result = from o in context.Offers
-                             join p in context.Products
+           
+                var result = from o in _primeforContext.Offers
+                             join p in _primeforContext.Products
                              on o.ProductId equals p.ProductId
-                             join u in context.Users
+                             join u in _primeforContext.Users
                              on p.OwnerId equals u.UserId
-                             join u2 in context.Users
+                             join u2 in _primeforContext.Users
                              on o.UserId equals u2.UserId
                              select new OfferDetailDto
                              {
@@ -46,7 +47,7 @@ namespace DataAccess.Concrete.EntityFramework
                 return filter == null
                 ? result.ToList()
                 : result.Where(filter).ToList();
-            }
+            
         }
     }
 }

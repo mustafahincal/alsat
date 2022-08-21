@@ -13,7 +13,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfUsingStateDal : EfEntityRepositoryBase<UsingState>, IUsingStateDal
     {
-        public EfUsingStateDal(PrimeforContext companyContext) : base(companyContext)
+        public EfUsingStateDal(PrimeforContext primeforContext) : base(primeforContext)
         {
         }
     }

@@ -7,44 +7,40 @@ namespace DataAccess.Repository.EntityFramework
 {
     public class EfEntityRepositoryBase<T> : IUnitOfWork, IEntityRepository<T> where T : class, IEntity, new()
     {
-        protected PrimeforContext _companyContext;
+        protected PrimeforContext _primeforContext;
 
-        public EfEntityRepositoryBase(PrimeforContext companyContext)
+        public EfEntityRepositoryBase(PrimeforContext primeforContext)
         {
-            _companyContext = companyContext;
+            _primeforContext = primeforContext;
         }
 
         public List<T> GetAll(Expression<Func<T, bool>> filter = null)
         {
-            return filter == null ? _companyContext.Set<T>().ToList() : _companyContext.Set<T>().Where(filter).ToList();
+            return filter == null ? _primeforContext.Set<T>().ToList() : _primeforContext.Set<T>().Where(filter).ToList();
         }
 
         public T Get(Expression<Func<T, bool>> filter = null)
         {
-            return _companyContext.Set<T>().Where(filter).FirstOrDefault();
+            return _primeforContext.Set<T>().Where(filter).FirstOrDefault();
         }
 
         public void Add(T model)
         {
-            _companyContext.Set<T>().Add(model);
+            _primeforContext.Set<T>().Add(model);
 
         }
 
         public void Delete(T model)
         {
-            _companyContext.Set<T>().Remove(model);
+            _primeforContext.Set<T>().Remove(model);
         }
 
         public void Update(T model)
         {
-            _companyContext.Set<T>().Update(model);
+            _primeforContext.Set<T>().Update(model);
         }
 
-        public void Commit() => _companyContext.SaveChanges();
-
-        public void SaveChanges()
-        {
-
-        }
+        public void Commit() => _primeforContext.SaveChanges();
+        
     }
 }

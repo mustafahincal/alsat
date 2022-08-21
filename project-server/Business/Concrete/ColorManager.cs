@@ -39,14 +39,14 @@ namespace Business.Concrete
         public IResult Delete(Color color)
         {
             _colorDal.Delete(color);
-            //_unitOfWork.SaveChanges();
+            _colorDal.Commit();
             return new SuccessResult("Renk silindi");
         }
 
         public IResult Update(Color color)
         {
             _colorDal.Update(color);
-            //_unitOfWork.SaveChanges();
+            _colorDal.Commit();
             return new SuccessResult("Renk güncellendi");
         }
     }
