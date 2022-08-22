@@ -75,12 +75,13 @@ function Payment() {
           values.cvvCode ===
             (selectedCreditCard ? selectedCreditCard.cvvCode : "")
         ) {
-          console.log("aynı kredi kart");
+          console.log("true");
+          handleBuyProduct();
+          navigate("/");
         } else {
           setSaveCardModalActive(true);
+          console.log("false");
         }
-        handleBuyProduct();
-        navigate("/main");
       },
       validationSchema: PaymentSchema,
     });
@@ -92,9 +93,15 @@ function Payment() {
         ...values,
         creditCardId: selectedCreditCard.creditCardId,
       };
-      updateCreditCard(data);
+      updateCreditCard(data).then((result) => {
+        handleBuyProduct();
+        navigate("/");
+      });
     } else if (controlSave) {
-      saveCreditCard(values);
+      saveCreditCard(values).then((result) => {
+        handleBuyProduct();
+        navigate("/");
+      });
     }
   };
 
