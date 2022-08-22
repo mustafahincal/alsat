@@ -3,6 +3,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.UnitOfWork;
 using Entities.Concrete;
+using Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,16 +37,19 @@ namespace Business.Concrete
             return new SuccessResult("Marka eklendi");
         }
 
-        public IResult Delete(Brand brand)
+        public IResult Delete(int brandId)
         {
-            _brandDal.Delete(brand);
+            var brandToDelete = _brandDal.Get(b => b.BrandId == brandId);
+            _brandDal.Delete(brandToDelete);
             _brandDal.Commit();
             return new SuccessResult("Marka silindi");
         }
 
-        public IResult Update(Brand brand)
+        public IResult Update(BrandForUpdateDto brandForUpdateDto)
         {
-            _brandDal.Update(brand);
+            var brandToUpdate = _brandDal.Get(b => b.BrandId == brandForUpdateDto.BrandId);
+            brandToUpdate.Name = brandForUpdateDto.Name;
+            _brandDal.Update(brandToUpdate);
             _brandDal.Commit();
             return new SuccessResult("Marka güncellendi");
         }

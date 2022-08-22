@@ -18,8 +18,8 @@ namespace WebAPI.Controllers
         [HttpPost("add")]
         public IActionResult Add([FromForm] IFormFile file, [FromForm] int productId)
         {
-            var productImage = new ProductImage() { ProductId = productId };
-            var result = _productImageService.Add(file, productImage, productId);
+           
+            var result = _productImageService.Add(file, productId);
             if (result.Success)
             {
                 return Ok(result);
@@ -39,11 +39,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("delete")]
-        public IActionResult Delete(ProductImage productImage)
+        [HttpGet("delete")]
+        public IActionResult Delete(int productImageId)
         {
-            var imageToDelete = _productImageService.GetByImageId(productImage.ProductImageId).Data;
-            var result = _productImageService.Delete(imageToDelete);
+            var result = _productImageService.Delete(productImageId);
             if (result.Success)
             {
                 return Ok(result);

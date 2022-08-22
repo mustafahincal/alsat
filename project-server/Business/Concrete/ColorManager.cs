@@ -3,6 +3,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.UnitOfWork;
 using Entities.Concrete;
+using Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,16 +37,19 @@ namespace Business.Concrete
             return new SuccessResult("Renk eklendi");
         }
 
-        public IResult Delete(Color color)
+        public IResult Delete(int colorId)
         {
-            _colorDal.Delete(color);
+            var colorToDelete = _colorDal.Get(c => c.ColorId == colorId);
+            _colorDal.Delete(colorToDelete);
             _colorDal.Commit();
             return new SuccessResult("Renk silindi");
         }
 
-        public IResult Update(Color color)
+        public IResult Update(ColorForUpdateDto colorForUpdateDto)
         {
-            _colorDal.Update(color);
+            var colorToUpdate = _colorDal.Get(c => c.ColorId == colorForUpdateDto.ColorId);
+            colorToUpdate.Name = colorForUpdateDto.Name;
+            _colorDal.Update(colorToUpdate);
             _colorDal.Commit();
             return new SuccessResult("Renk güncellendi");
         }

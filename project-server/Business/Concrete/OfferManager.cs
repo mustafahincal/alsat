@@ -26,16 +26,20 @@ namespace Business.Concrete
             return new SuccessResult("Teklif eklendi");
         }
 
-        public IResult Delete(Offer offer)
+        public IResult Delete(int offerId)
         {
-            _offerDal.Delete(offer);
+            var offerToDelete = _offerDal.Get(o => o.OfferId == offerId);
+            _offerDal.Delete(offerToDelete);
             _offerDal.Commit();
             return new SuccessResult("Teklif silindi");
         }
 
-        public IResult Update(Offer offer)
+        public IResult Update(OfferForUpdateDto offerForUpdateDto)
         {
-            _offerDal.Update(offer);
+            var offerToUpdate = _offerDal.Get(o => o.OfferId == offerForUpdateDto.OfferId);
+            offerToUpdate.OfferedPrice = offerForUpdateDto.OfferedPrice;
+            offerToUpdate.IsApproved = offerForUpdateDto.IsApproved;
+            _offerDal.Update(offerToUpdate);
             _offerDal.Commit();
             return new SuccessResult("Teklif güncellendi");
         }

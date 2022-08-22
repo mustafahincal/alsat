@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -47,10 +48,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("delete")]
-        public IActionResult Delete(CreditCard creditCard)
+        [HttpGet("delete")]
+        public IActionResult Delete(int creditCardId)
         {
-            var result = _creditCardService.Delete(creditCard);
+            var result = _creditCardService.Delete(creditCardId);
             if (result.Success)
             {
                 return Ok(result);
@@ -59,9 +60,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(CreditCard creditCard)
+        public IActionResult Update(CreditCardForUpdateDto creditCardForUpdateDto)
         {
-            var result = _creditCardService.Update(creditCard);
+            var result = _creditCardService.Update(creditCardForUpdateDto);
             if (result.Success)
             {
                 return Ok(result);

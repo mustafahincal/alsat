@@ -61,22 +61,34 @@ namespace Business.Concrete
             {
                 ProductId = productToAdd.ProductId
             };
-            _productImageService.Add(productForAddDto.file, productImageToAdd, productToAdd.ProductId);
+            _productImageService.Add(productForAddDto.file, productToAdd.ProductId);
             
             var productInfo = _productDal.GetAll(p => p.ProductId == productToAdd.ProductId);
             return new SuccessDataResult<List<Product>>(productInfo, Messages.ProductAdded);
         }
 
-        public IResult Update(Product product)
+        public IResult Update(ProductForUpdateDto productForUpdateDto)
         {
-            _productDal.Update(product);
+            var productToUpdate = _productDal.Get(p => p.ProductId == productForUpdateDto.ProductId);
+            productToUpdate.ColorId = productForUpdateDto.ColorId;
+            productToUpdate.BrandId = productForUpdateDto.BrandId;
+            productToUpdate.CategoryId = productForUpdateDto.CategoryId;
+            productToUpdate.UsingStateId = productForUpdateDto.UsingStateId;
+            productToUpdate.Name = productForUpdateDto.Name;
+            productToUpdate.Description = productForUpdateDto.Description;
+            productToUpdate.IsSold = productForUpdateDto.IsSold;
+            productToUpdate.IsOfferable = productForUpdateDto.IsOfferable;
+            productToUpdate.Price = productForUpdateDto.Price;
+
+            _productDal.Update(productToUpdate);
             _productDal.Commit();
             return new SuccessResult(Messages.ProductUpdated);
         }
 
-        public IResult Delete(Product product)
+        public IResult Delete(int productId)
         {
-            _productDal.Delete(product);
+            var productToDelete = _productDal.Get(p => p.ProductId == productId);
+            _productDal.Delete(productToDelete);
             _productDal.Commit();
             return new SuccessResult(Messages.ProductDeleted);
         }

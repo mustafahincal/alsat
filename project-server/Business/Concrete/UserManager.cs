@@ -6,6 +6,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.UnitOfWork;
 using Entities.Concrete;
+using Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,9 +67,17 @@ namespace Business.Concrete
         }
 
 
-        public IResult Update(User user)
+        public IResult Update(UserForUpdateDto userForUpdateDto)
         {
-            _userDal.Update(user);
+            var userToUpdate = _userDal.Get(u => u.UserId == userForUpdateDto.UserId);
+            userToUpdate.Status = userForUpdateDto.Status;
+            userToUpdate.Email = userForUpdateDto.Email;
+            userToUpdate.FirstName = userForUpdateDto.FirstName;
+            userToUpdate.LastName = userForUpdateDto.LastName;
+            userToUpdate.PasswordHash = userForUpdateDto.PasswordHash;
+            userToUpdate.PasswordSalt = userForUpdateDto.PasswordSalt;
+
+            _userDal.Update(userToUpdate);
             _userDal.Commit();
             return new SuccessResult();
         }

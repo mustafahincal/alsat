@@ -3,6 +3,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.UnitOfWork;
 using Entities.Concrete;
+using Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,33 +22,36 @@ namespace Business.Concrete
 
         public IDataResult<List<UsingState>> GetAll()
         {
-            return new SuccessDataResult<List<UsingState>>(_usingStateDal.GetAll(), "Renkler getirildi");
+            return new SuccessDataResult<List<UsingState>>(_usingStateDal.GetAll(), "Kullanım Durumları getirildi");
         }
 
         public IDataResult<UsingState> GetById(int usingStateId)
         {
-            return new SuccessDataResult<UsingState>(_usingStateDal.Get(us => us.UsingStateId == usingStateId), "Renkler getirildi");
+            return new SuccessDataResult<UsingState>(_usingStateDal.Get(us => us.UsingStateId == usingStateId), "Kullanım Durumları getirildi");
         }
 
         public IResult Add(UsingState usingState)
         {
             _usingStateDal.Add(usingState);
             _usingStateDal.Commit();
-            return new SuccessResult("Renk eklendi");
+            return new SuccessResult("Kullanım Durumu eklendi");
         }
 
-        public IResult Delete(UsingState usingState)
+        public IResult Delete(int usingStateId)
         {
-            _usingStateDal.Delete(usingState);
+            var usingStateToDelete = _usingStateDal.Get(u => u.UsingStateId == usingStateId);
+            _usingStateDal.Delete(usingStateToDelete);
             _usingStateDal.Commit();
-            return new SuccessResult("Renk silindi");
+            return new SuccessResult("Kullanım Durumu silindi");
         }
 
-        public IResult Update(UsingState usingState)
+        public IResult Update(UsingStateForUpdateDto usingStateForUpdateDto)
         {
-            _usingStateDal.Update(usingState);
+            var usingStateToUpdate = _usingStateDal.Get(u => u.UsingStateId == usingStateForUpdateDto.UsingStateId);
+            usingStateToUpdate.Name = usingStateForUpdateDto.Name;
+            _usingStateDal.Update(usingStateToUpdate);
             _usingStateDal.Commit();
-            return new SuccessResult("Renk güncellendi");
+            return new SuccessResult("Kullanım Durumu güncellendi");
         }
     }
 }

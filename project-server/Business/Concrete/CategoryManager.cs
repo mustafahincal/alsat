@@ -3,6 +3,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.UnitOfWork;
 using Entities.Concrete;
+using Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,16 +27,19 @@ namespace Business.Concrete
             return new SuccessResult("Kategori eklendi");
         }
 
-        public IResult Delete(Category category)
+        public IResult Delete(int categoryId)
         {
-            _categortDal.Delete(category);
+            var categoryToDelete = _categortDal.Get(c => c.CategoryId == categoryId); 
+            _categortDal.Delete(categoryToDelete);
             _categortDal.Commit();
             return new SuccessResult("Kategori silindi");
         }
 
-        public IResult Update(Category category)
+        public IResult Update(CategoryForUpdateDto categoryForUpdateDto)
         {
-            _categortDal.Update(category);
+            var categoryToUpdate = _categortDal.Get(c => c.CategoryId == categoryForUpdateDto.CategoryId);
+            categoryToUpdate.Name = categoryForUpdateDto.Name;
+            _categortDal.Update(categoryToUpdate);
             _categortDal.Commit();
             return new SuccessResult("Kategori güncellendi");
         }

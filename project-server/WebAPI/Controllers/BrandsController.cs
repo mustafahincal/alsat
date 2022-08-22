@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -48,10 +49,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("delete")]
-        public IActionResult Delete(Brand brand)
+        [HttpGet("delete")]
+        public IActionResult Delete(int brandId)
         {
-            var result = _brandService.Delete(brand);
+            var result = _brandService.Delete(brandId);
             if (result.Success)
             {
                 return Ok(result);
@@ -60,9 +61,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(Brand brand)
+        public IActionResult Update(BrandForUpdateDto brandForUpdateDto)
         {
-            var result = _brandService.Update(brand);
+            var result = _brandService.Update(brandForUpdateDto);
             if (result.Success)
             {
                 return Ok(result);

@@ -3,6 +3,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.UnitOfWork;
 using Entities.Concrete;
+using Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,16 +37,22 @@ namespace Business.Concrete
             return new SuccessResult("Kredi Kartı eklendi");
         }
 
-        public IResult Delete(CreditCard creditCard)
+        public IResult Delete(int creditCardId)
         {
-            _creditCardDal.Delete(creditCard);
+            var creditCardToDelete = _creditCardDal.Get(cc => cc.CreditCardId == creditCardId);
+            _creditCardDal.Delete(creditCardToDelete);
             _creditCardDal.Commit();
             return new SuccessResult("Kredi Kartı silindi");
         }
 
-        public IResult Update(CreditCard creditCard)
+        public IResult Update(CreditCardForUpdateDto creditCardForUpdateDto)
         {
-            _creditCardDal.Update(creditCard);
+            var creditCardToUpdate = _creditCardDal.Get(cc => cc.CreditCardId == creditCardForUpdateDto.CreditCardId);
+            creditCardToUpdate.CardHolder = creditCardForUpdateDto.CardHolder;
+            creditCardToUpdate.CardNumber = creditCardForUpdateDto.CardNumber;
+            creditCardToUpdate.CvvCode = creditCardForUpdateDto.CvvCode;
+            creditCardToUpdate.ExpirationDate = creditCardForUpdateDto.ExpirationDate;
+            _creditCardDal.Update(creditCardToUpdate);
             _creditCardDal.Commit();
             return new SuccessResult("Kredi Kartı güncellendi");
         }

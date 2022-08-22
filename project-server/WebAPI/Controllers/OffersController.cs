@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -96,10 +97,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("delete")]
-        public IActionResult Delete(Offer offer)
+        [HttpGet("delete")]
+        public IActionResult Delete(int offerId)
         {
-            var result = _offerService.Delete(offer);
+            var result = _offerService.Delete(offerId);
             if (result.Success)
             {
                 return Ok(result);
@@ -108,9 +109,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(Offer offer)
+        public IActionResult Update(OfferForUpdateDto offerForUpdateDto)
         {
-            var result = _offerService.Update(offer);
+            var result = _offerService.Update(offerForUpdateDto);
             if (result.Success)
             {
                 return Ok(result);

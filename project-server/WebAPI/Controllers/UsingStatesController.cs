@@ -1,5 +1,6 @@
 using Business.Abstract;
 using Entities.Concrete;
+using Entities.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -47,10 +48,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("delete")]
-        public IActionResult Delete(UsingState usingState)
+        [HttpGet("delete")]
+        public IActionResult Delete(int usingStateId)
         {
-            var result = _usingStateService.Delete(usingState);
+            var result = _usingStateService.Delete(usingStateId);
             if (result.Success)
             {
                 return Ok(result);
@@ -59,9 +60,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(UsingState usingState)
+        public IActionResult Update(UsingStateForUpdateDto usingStateForUpdateDto)
         {
-            var result = _usingStateService.Update(usingState);
+            var result = _usingStateService.Update(usingStateForUpdateDto);
             if (result.Success)
             {
                 return Ok(result);

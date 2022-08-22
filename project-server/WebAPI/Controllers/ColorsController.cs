@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -47,10 +48,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("delete")]
-        public IActionResult Delete(Color color)
+        [HttpGet("delete")]
+        public IActionResult Delete(int colorId)
         {
-            var result = _colorService.Delete(color);
+            var result = _colorService.Delete(colorId);
             if (result.Success)
             {
                 return Ok(result);
@@ -59,9 +60,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(Color color)
+        public IActionResult Update(ColorForUpdateDto colorForUpdateDto)
         {
-            var result = _colorService.Update(color);
+            var result = _colorService.Update(colorForUpdateDto);
             if (result.Success)
             {
                 return Ok(result);

@@ -26,7 +26,7 @@ namespace Business.Concrete
             _fileHelper = fileHelper;
         }
 
-        public Core.Utilities.Results.IResult Add(IFormFile file, ProductImage productImage, int productId)
+        public Core.Utilities.Results.IResult Add(IFormFile file, int productId)
         {
             Core.Utilities.Results.IResult result = BusinessRules.Run(
                 CheckIfImageSizeInvalid(file)
@@ -36,10 +36,12 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<Product>>(result.Message);
             }
-
-            productImage.ImagePath = _fileHelper.Upload(file, FilePath.ImagesPath);
-            productImage.ProductId = productId;
-            _productImageDal.Add(productImage);
+            ProductImage productImageToAdd = new ProductImage
+            {
+                ImagePath = _fileHelper.Upload(file, FilePath.ImagesPath),
+                ProductId = productId
+            };
+            _productImageDal.Add(productImageToAdd);
             _productImageDal.Commit();
             return new SuccessResult("Fotoğraf eklendi");
         }
@@ -68,10 +70,11 @@ namespace Business.Concrete
        
 
 
-        public Core.Utilities.Results.IResult Delete(ProductImage productImage)
+        public Core.Utilities.Results.IResult Delete(int productImageId)
         {
-            _fileHelper.Delete(FilePath.ImagesPath + productImage.ImagePath);
-            _productImageDal.Delete(productImage);
+            var productImageToDelete = _productImageDal.Get(productImage => productImage.ProductImageId == productImageId);
+            _fileHelper.Delete(FilePath.ImagesPath + productImageToDelete.ImagePath);
+            _productImageDal.Delete(productImageToDelete);
             _productImageDal.Commit();
             return new SuccessResult("Fotoğraf Silindi");
         }

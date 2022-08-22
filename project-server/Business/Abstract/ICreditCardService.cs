@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Results;
 using Entities.Concrete;
+using Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Business.Abstract
         IDataResult<List<CreditCard>> GetAll();
         IDataResult<CreditCard> GetById(int creditCardId);
         IResult Add(CreditCard creditCard);
-        IResult Delete(CreditCard creditCard);
-        IResult Update(CreditCard creditCard);
+        IResult Delete(int creditCardId);
+        IResult Update(CreditCardForUpdateDto creditCardForUpdateDto);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Results;
 using Entities.Concrete;
+using Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,8 @@ namespace Business.Abstract
     {
 
         IResult Add(Category category);
-        IResult Delete(Category category);
-        IResult Update(Category category);
+        IResult Delete(int categoryId);
+        IResult Update(CategoryForUpdateDto categoryForUpdateDto);
         IDataResult<List<Category>> GetAll();
         IDataResult<Category> GetById(int categoryId);
     }

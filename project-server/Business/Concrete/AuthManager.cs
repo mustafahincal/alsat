@@ -5,6 +5,7 @@ using Core.Utilities.Results;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.JWT;
 using DataAccess.Concrete.EntityFramework.UnitOfWork;
+using Entities.Dtos;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
@@ -68,8 +69,17 @@ namespace Business.Concrete
         public IResult BlockUser(string email)
         {
             var userToCheck = _userService.GetByMail(email).Data;
-            userToCheck.Status = false;
-            _userService.Update(userToCheck);
+            var userForUpdate = new UserForUpdateDto
+            {
+                UserId = userToCheck.UserId,
+                FirstName = userToCheck.FirstName,
+                LastName = userToCheck.LastName,
+                PasswordHash = userToCheck.PasswordHash,
+                PasswordSalt = userToCheck.PasswordSalt,
+                Email = userToCheck.Email
+            };
+            userForUpdate.Status = false;
+            _userService.Update(userForUpdate);
             string messageHeader = "Hesabın Bloke Edildi";
             string messageBody = "3 kez hatalı şifre girdiğinizden dolayı hesabınız bloke edildi.";
             SendMessage(email, messageBody, messageHeader);
@@ -78,9 +88,18 @@ namespace Business.Concrete
 
         public IResult UnBlockUser(int id)
         {
-            var userToCheck = _userService.GetById(id).Data;    
-            userToCheck.Status = true;
-            _userService.Update(userToCheck);
+            var userToCheck = _userService.GetById(id).Data;
+            var userForUpdate = new UserForUpdateDto
+            {
+                UserId = userToCheck.UserId,
+                FirstName = userToCheck.FirstName,
+                LastName = userToCheck.LastName,
+                PasswordHash = userToCheck.PasswordHash,
+                PasswordSalt = userToCheck.PasswordSalt,
+                Email = userToCheck.Email
+            };
+            userForUpdate.Status = true;
+            _userService.Update(userForUpdate);
             return new SuccessResult("Kullanıcı blokesi kaldırıldı");
         }
 
@@ -126,9 +145,20 @@ namespace Business.Concrete
                 return new ErrorDataResult<User>("Eski şifre geçersiz");
             }
             HashingHelper.CreatePasswordHash(changePasswordDto.NewPass, out passwordHash, out passwordSalt);
-            userToCheck.PasswordHash = passwordHash;
-            userToCheck.PasswordSalt = passwordSalt;
-            _userService.Update(userToCheck);
+          
+
+            var userForUpdate = new UserForUpdateDto
+            {
+                UserId = userToCheck.UserId,
+                FirstName = userToCheck.FirstName,
+                LastName = userToCheck.LastName,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                Email = userToCheck.Email,
+                Status = userToCheck.Status
+            };
+
+            _userService.Update(userForUpdate);
             
             return new SuccessResult("Şifre başarıyla değiştirildi");
 

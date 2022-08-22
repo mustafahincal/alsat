@@ -14,8 +14,8 @@ namespace Business.Abstract
         IDataResult<List<Offer>> GetAll();
         IDataResult<Offer> GetById(int offerId);
         IResult Add(Offer offer);
-        IResult Delete(Offer offer);
-        IResult Update(Offer offer);
+        IResult Delete(int offerId);
+        IResult Update(OfferForUpdateDto offerForUpdateDto);
 
         IDataResult<List<Offer>> GetByUserId(int userId);
 
