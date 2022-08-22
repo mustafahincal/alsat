@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 
 function UpdateUser() {
   const { selectedUser, setSelectedUser } = useUserContext();
-  const { id } = useParams();
+
   useEffect(() => {
     getUserById(getFromLocalStorage("userId")).then((result) =>
       setSelectedUser(result.data[0])
@@ -36,7 +36,9 @@ function UpdateUser() {
         updateUser(data)
           .then((result) => {
             toast.success(result.message);
-            getUserById(id).then((result) => setSelectedUser(result.data[0]));
+            getUserById(getFromLocalStorage("userId")).then((result) =>
+              setSelectedUser(result.data[0])
+            );
             values.firstName = "";
             values.lastName = "";
             values.email = "";

@@ -8,6 +8,7 @@ import GivenOffers from "./GivenOffers";
 import ProfileMain from "./ProfileMain";
 import SoldedProducts from "./SoldedProducts";
 import PurchasedProducts from "./PurchasedProducts";
+import CreditCard from "./CreditCard";
 
 function Profile() {
   return (
@@ -50,6 +51,12 @@ function Profile() {
           >
             Şifre Değiştir
           </NavLink>
+          <NavLink
+            to={"creditCard"}
+            className="px-2  rounded py-2 border-b-2  "
+          >
+            Kayıtlı Kartlarım
+          </NavLink>
           <NavLink to={"updateUser"} className="px-2 rounded py-2 border-b-2 ">
             Bilgileri Değiştir
           </NavLink>
@@ -64,6 +71,7 @@ function Profile() {
           <Route path="/takenOffers" element={<TakenOffers />} />
           <Route path="/givenOffers" element={<GivenOffers />} />
           <Route path="/soldedProducts" element={<SoldedProducts />} />
+          <Route path="/creditCard" element={<CreditCard />} />
           <Route path="/purchasedProducts" element={<PurchasedProducts />} />
         </Routes>
       </div>
