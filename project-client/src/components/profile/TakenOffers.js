@@ -54,7 +54,7 @@ function TakenOffers() {
         <div>
           {takenOffers.map((offer, index) => (
             <div
-              className="h-52 flex hover:border-gray-400 border-2 border-gray-100"
+              className="h-52 flex hover:border-gray-400 border-2 border-gray-100 mb-5 shadow-item2"
               key={index}
             >
               <div className="w-1/3 h-full">
@@ -68,7 +68,7 @@ function TakenOffers() {
                   alt=""
                 />
               </div>
-              <div className="py-4 px-10 rounded w-full mb-3 flex flex-col justify-between text-xl transition-all duration-75  bg-white">
+              <div className="py-4 px-10 rounded w-full  flex flex-col justify-between text-xl transition-all duration-75  bg-white">
                 <div className="flex justify-between">
                   <div className="flex flex-col items-center  gap-1">
                     <div>

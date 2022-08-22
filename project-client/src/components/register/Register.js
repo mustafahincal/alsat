@@ -39,8 +39,8 @@ function Register() {
                   "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
                 ]
               );
-              setSelectedUser(responseUser.data);
-              setToLocalStorage("userId", responseUser.data.userId);
+              setSelectedUser(responseUser.data[0]);
+              setToLocalStorage("userId", responseUser.data[0].userId);
               setIsLogged(true);
               navigate("/");
             }

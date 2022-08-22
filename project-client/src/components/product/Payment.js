@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import {
   deleteProduct,
   getProduct,
+  getProducts,
   updateProduct,
 } from "../../services/productService";
 import { useProductContext } from "../../context/ProductContext";
@@ -27,7 +28,8 @@ import { usePaymentContext } from "../../context/PaymentContext";
 
 function Payment() {
   const { productId, offerId } = useParams();
-  const { selectedProduct, setSelectedProduct } = useProductContext();
+  const { selectedProduct, setSelectedProduct, products, setProducts } =
+    useProductContext();
   const { selectedOffer, setSelectedOffer } = useOfferContext();
   const {
     saveCardModalActive,
@@ -100,7 +102,6 @@ function Payment() {
     } else if (controlSave) {
       saveCreditCard(values).then((result) => {
         handleBuyProduct();
-        navigate("/");
       });
     }
   };
@@ -117,7 +118,7 @@ function Payment() {
   };
 
   const handleBuyProduct = () => {
-    const productData = {
+    const data = {
       productId: selectedProduct.productId,
       name: selectedProduct.productName,
       categoryId: selectedProduct.categoryId,
@@ -139,11 +140,15 @@ function Payment() {
       ownerId: selectedProduct.ownerId,
       isSold: true,
       isOfferable: false,
+      offerId: selectedOffer.offerId,
     };
-
-    updateProduct(productData)
+    updateProduct(data)
       .then((response) => {
         toast.success("Satın Alma İşlemi Başarılı");
+        getProducts().then((result) => {
+          setProducts(result.data);
+          navigate("/");
+        });
       })
       .catch((err) => console.log(err));
   };
