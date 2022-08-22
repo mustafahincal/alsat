@@ -11,9 +11,11 @@ import { getFromLocalStorage } from "../../services/localStorageService";
 import { toast } from "react-toastify";
 import { getProduct, updateProduct } from "../../services/productService";
 import { useProductContext } from "../../context/ProductContext";
+import defaultImage from "../../assets/default.png";
 
 function TakenOffers() {
   const { takenOffers, setTakenOffers } = useOfferContext();
+  const apiImagesUrl = "https://localhost:44350/uploads/images/";
   const { seledtedProduct, setSelectedProduct } = useProductContext();
   useEffect(() => {
     getOfferDetailsByOwnerId(getFromLocalStorage("userId")).then((result) =>
@@ -52,34 +54,71 @@ function TakenOffers() {
         <div>
           {takenOffers.map((offer, index) => (
             <div
-              className="py-4 px-10 rounded w-full mb-3 flex flex-col text-xl transition-all duration-75  bg-white hover:border-gray-400 border-2 border-gray-100"
+              className="h-52 flex hover:border-gray-400 border-2 border-gray-100"
               key={index}
             >
-              <div className="flex justify-between">
-                <div>Ürün Sahibi = {offer.ownerName}</div>
-                <div>Teklif Veren = {offer.userName}</div>
-                <div>{offer.productName}</div>
-                <div>Ürün Fiyatı = {offer.price}</div>
-                <div>Verdiğiniz Teklif = {offer.offeredPrice}</div>
+              <div className="w-1/3 h-full">
+                <img
+                  src={
+                    offer.imagePath
+                      ? apiImagesUrl + offer.imagePath
+                      : defaultImage
+                  }
+                  className="rounded-tl-md rounded-bl-md object-cover object-center w-full -ml-[1px] h-full"
+                  alt=""
+                />
               </div>
-              <div className="flex mt-5 justify-center">
-                {!offer.isApproved && (
-                  <div
-                    onClick={() =>
-                      handleApproveOffer(
-                        offer.offerId,
-                        offer.productId,
-                        offer.offeredPrice,
-                        offer.userId
-                      )
-                    }
-                    className="btn border-2 box-border bg-white border-emerald-600 transition-all text-emerald-500 hover:bg-emerald-500 hover:text-white cursor-pointer"
-                  >
-                    Teklifi Onayla
+              <div className="py-4 px-10 rounded w-full mb-3 flex flex-col justify-between text-xl transition-all duration-75  bg-white">
+                <div className="flex justify-between">
+                  <div className="flex flex-col items-center  gap-1">
+                    <div>
+                      <div>Ürün Sahibi</div>
+                    </div>
+                    <div>{offer.ownerName}</div>
                   </div>
-                )}
+                  <div className="flex flex-col items-center  gap-1">
+                    <div>
+                      <div>Teklif Veren</div>
+                    </div>
+                    <div>{offer.userName}</div>
+                  </div>
+                  <div className="flex flex-col items-center  gap-1">
+                    <div>
+                      <div>Ürün Adı</div>
+                    </div>
+                    <div>{offer.productName}</div>
+                  </div>
+                  <div className="flex flex-col items-center gap-1">
+                    <div>
+                      <div>Ürün Fiyatı</div>
+                    </div>
+                    <div>{offer.price}</div>
+                  </div>
+                  <div className="flex flex-col items-center  gap-1">
+                    <div>
+                      <div>Verdiğiniz Teklif</div>
+                    </div>
+                    <div>{offer.offeredPrice}</div>
+                  </div>
+                </div>
+                <div className="flex mt-5 justify-center">
+                  {!offer.isApproved && (
+                    <div
+                      onClick={() =>
+                        handleApproveOffer(
+                          offer.offerId,
+                          offer.productId,
+                          offer.offeredPrice,
+                          offer.userId
+                        )
+                      }
+                      className="btn border-2 box-border bg-white border-emerald-600 transition-all text-emerald-500 hover:bg-emerald-500 hover:text-white cursor-pointer"
+                    >
+                      Teklifi Onayla
+                    </div>
+                  )}
 
-                {/* {!offer.isApproved && (
+                  {/* {!offer.isApproved && (
                   <div
                     onClick={() => handleRefuseOffer()}
                     className="btn bg-red-500 cursor-pointer ml-3"
@@ -88,17 +127,18 @@ function TakenOffers() {
                   </div>
                 )} */}
 
-                {offer.isApproved && !offer.isSold && (
-                  <div className="btn bg-indigo-500 ml-3 border-2 border-indigo-500">
-                    Teklif Kabul Edildi, Ödeme Bekleniyor
-                  </div>
-                )}
+                  {offer.isApproved && !offer.isSold && (
+                    <div className="btn bg-indigo-500 ml-3 border-2 border-indigo-500">
+                      Teklif Kabul Edildi, Ödeme Bekleniyor
+                    </div>
+                  )}
 
-                {offer.isApproved && offer.isSold && (
-                  <div className="btn bg-amber-500 ml-3 border-2 border-amber-500">
-                    Ödeme Yapıldı, Ürün Satıldı
-                  </div>
-                )}
+                  {offer.isApproved && offer.isSold && (
+                    <div className="btn bg-amber-500 ml-3 border-2 border-amber-500">
+                      Ödeme Yapıldı, Ürün Satıldı
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           ))}

@@ -79,8 +79,8 @@ function Payment() {
         } else {
           setSaveCardModalActive(true);
         }
-        //handleBuyProduct();
-        // navigate("/main");
+        handleBuyProduct();
+        navigate("/main");
       },
       validationSchema: PaymentSchema,
     });

@@ -11,10 +11,11 @@ import { toast } from "react-toastify";
 import { useNavigate, NavLink } from "react-router-dom";
 import { deleteProduct } from "../../services/productService";
 import { useProductContext } from "../../context/ProductContext";
+import defaultImage from "../../assets/default.png";
 
 function SoldedProducts() {
   const { soldedProducts, setSoldedProducts } = useProductContext();
-
+  const apiImagesUrl = "https://localhost:44350/uploads/images/";
   useEffect(() => {
     getOfferDetailsByOwnerId(getFromLocalStorage("userId")).then((result) =>
       setSoldedProducts(result.data.filter((offer) => offer.isSold === true))
@@ -27,13 +28,29 @@ function SoldedProducts() {
         <div className="grid grid-cols-12 gap-7">
           {soldedProducts.map((product, index) => (
             <div
-              className="p-6 items-center rounded gap-2 w-full mb-3 flex flex-col justify-between  text-xl transition-all duration-75  bg-white hover:border-gray-400 border-2 border-gray-100 col-span-4"
               key={index}
+              className="cursor-pointer shadow-item2 rounded-tl-md rounded-tr-md  bg-white border-gray-100 col-span-4"
             >
-              <div>Ürünü Satın Alan = {product.userName}</div>
-              <div>Ürün Adı = {product.productName}</div>
-              <div>Ürün Fiyatı = {product.price}</div>
-              <div>Satılan Fiyat = {product.offeredPrice}</div>
+              <div>
+                <img
+                  src={
+                    product.imagePath
+                      ? apiImagesUrl + product.imagePath
+                      : defaultImage
+                  }
+                  className="rounded-tl-md rounded-tr-md object-cover object-center w-full -ml-[1px] h-full"
+                  alt=""
+                />
+              </div>
+              <div
+                className="p-6 items-center rounded gap-2 w-full mb-3 flex flex-col justify-between  text-xl bg-white "
+                key={index}
+              >
+                <div>Ürünü Satın Alan = {product.userName}</div>
+                <div>Ürün Adı = {product.productName}</div>
+                <div>Ürün Fiyatı = {product.price}</div>
+                <div>Satılan Fiyat = {product.offeredPrice}</div>
+              </div>
             </div>
           ))}
         </div>

@@ -165,30 +165,21 @@ function Navi() {
                 </NavLink>
                 <NavLink
                   onClick={() => setVisible(!visible)}
-                  to="/profile/takenOffers"
-                  className={({ isActive }) =>
-                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
-                  }
-                >
-                  Aldığım Teklifler
-                </NavLink>
-                <NavLink
-                  onClick={() => setVisible(!visible)}
                   to="/profile/givenOffers"
                   className={({ isActive }) =>
                     "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
                   }
                 >
-                  Verdiğim Teklifler
+                  Verilen Teklifler
                 </NavLink>
                 <NavLink
                   onClick={() => setVisible(!visible)}
-                  to="/profile/purchasedProducts"
+                  to="/profile/takenOffers"
                   className={({ isActive }) =>
                     "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
                   }
                 >
-                  Aldığım Ürünler
+                  Alınan Teklifler
                 </NavLink>
                 <NavLink
                   onClick={() => setVisible(!visible)}
@@ -197,8 +188,36 @@ function Navi() {
                     "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
                   }
                 >
-                  Sattığım Ürünler
+                  Satılan Ürünler
                 </NavLink>
+                <NavLink
+                  onClick={() => setVisible(!visible)}
+                  to="/profile/purchasedProducts"
+                  className={({ isActive }) =>
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
+                  }
+                >
+                  Alınan Ürünler
+                </NavLink>
+                <NavLink
+                  onClick={() => setVisible(!visible)}
+                  to="/profile/changePassword"
+                  className={({ isActive }) =>
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
+                  }
+                >
+                  Şifre Değiştir
+                </NavLink>
+                <NavLink
+                  onClick={() => setVisible(!visible)}
+                  to="/profile/creditcard"
+                  className={({ isActive }) =>
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
+                  }
+                >
+                  Kayıtlı Kartlarım
+                </NavLink>
+
                 <span
                   className="border-b-2 border-red-200 cursor-pointer text-base py-2 px-2 items-center rounded  text-red-500  hover:bg-red-500 hover:text-white"
                   onClick={() => handleLogOut()}

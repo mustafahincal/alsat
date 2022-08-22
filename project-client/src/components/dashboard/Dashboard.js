@@ -7,6 +7,7 @@ import ControlColors from "./control/ControlColors";
 import ControlCategories from "./control/ControlCategories";
 import ControlUsingStates from "./control/ControlUsingStates";
 import ControlProducts from "./control/ControlProducts";
+import ControlCreditCards from "./control/ControlCreditCards";
 
 function DashBoard() {
   return (
@@ -43,9 +44,15 @@ function DashBoard() {
           <NavLink to={`users`} className="px-2 rounded py-2 border-b-2">
             Kullanıcılar
           </NavLink>
+          <NavLink
+            to={`controlCreditCards`}
+            className="px-2 rounded py-2 border-b-2"
+          >
+            Kayıtlı Kredi Kartları
+          </NavLink>
         </div>
       </div>
-      <div className="col-span-8 py-10 pl-5">
+      <div className="col-span-8 pt-10 pb-32 pl-5">
         <Routes>
           <Route path="/" element={<ControlProducts />} />
           <Route path="/products" element={<ControlProducts />} />
@@ -54,6 +61,7 @@ function DashBoard() {
           <Route path="/controlColors" element={<ControlColors />} />
           <Route path="/controlCategories" element={<ControlCategories />} />
           <Route path="/controlUsingStates" element={<ControlUsingStates />} />
+          <Route path="/controlCreditCards" element={<ControlCreditCards />} />
         </Routes>
       </div>
     </div>

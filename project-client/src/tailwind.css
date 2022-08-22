@@ -6,6 +6,9 @@
 @tailwind utilities;
 
 @layer components {
+  * {
+    @apply box-border;
+  }
   .btn {
     @apply bg-darkBlue text-white py-2 px-5 rounded-md;
   }

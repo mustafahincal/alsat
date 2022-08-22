@@ -5,10 +5,10 @@ export const getCreditCardDetails = () =>
   get(apiUrl + "/creditCards/getCreditCardDetails");
 
 export const getCreditCardDetailsByUserId = (userId) =>
-  get(apiUrl + "/creditCards/getCreditCardDetails?userId=" + userId);
+  get(apiUrl + "/creditCards/getcreditcarddetailsbyuserid?userId=" + userId);
 
 export const getCreditCardDetailsById = (id) =>
-  get(apiUrl + "/creditCards/getCreditCardDetails?id=" + id);
+  get(apiUrl + "/creditCards/getcreditcarddetailsbyid?id=" + id);
 
 export const getCreditCardById = (id) =>
   get(apiUrl + "/creditCards/getbyid?id=" + id);

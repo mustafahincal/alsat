@@ -4,19 +4,25 @@ import { useCreditCardContext } from "../../context/CreditCardContext";
 import {
   deleteCreditCard,
   getCreditCardDetails,
+  getCreditCardDetailsByUserId,
 } from "../../services/creditCardService";
 import { AiFillDelete } from "react-icons/ai";
+import { getFromLocalStorage } from "../../services/localStorageService";
 
 function CreditCard() {
   const { creditCards, setCreditCards } = useCreditCardContext();
   useEffect(() => {
-    getCreditCardDetails().then((result) => setCreditCards(result.data));
+    getCreditCardDetailsByUserId(getFromLocalStorage("userId")).then((result) =>
+      setCreditCards(result.data)
+    );
   }, []);
 
   const handleDeleteCreditCard = (creditCardId) => {
     deleteCreditCard(creditCardId).then((result) => {
       toast.success("Kredi Kartı Kaldırıldı");
-      getCreditCardDetails().then((result) => setCreditCards(result.data));
+      getCreditCardDetailsByUserId(getFromLocalStorage("userId")).then(
+        (result) => setCreditCards(result.data)
+      );
     });
   };
 
