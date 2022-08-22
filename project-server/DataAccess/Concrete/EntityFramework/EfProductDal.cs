@@ -52,7 +52,7 @@ namespace DataAccess.Concrete.EntityFramework
                 ? result.ToList()
                 : result.Where(filter).ToList();
 
-            }// bu farklı hata
+            }
         
     }
 }

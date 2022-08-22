@@ -69,5 +69,38 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpGet("getcreditcarddetails")]
+        public IActionResult GetCreditCardDetails()
+        {
+            var result = _creditCardService.GetCreditCardDetails();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getcreditcarddetailsbyid")]
+        public IActionResult GetCreditCardDetailsById(int id)
+        {
+            var result = _creditCardService.GetCreditCardDetailsById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getcreditcarddetailsbyuserid")]
+        public IActionResult GetCreditCardDetailsByUserId(int userId)
+        {
+            var result = _creditCardService.GetCreditCardDetailsByUserId(userId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }

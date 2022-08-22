@@ -56,5 +56,20 @@ namespace Business.Concrete
             _creditCardDal.Commit();
             return new SuccessResult("Kredi Kartı güncellendi");
         }
+
+        public IDataResult<List<CreditCardDetailDto>> GetCreditCardDetails()
+        {
+            return new SuccessDataResult<List<CreditCardDetailDto>>(_creditCardDal.GetCreditCardDetails(), "Kredi Kartları Listelendi");
+        }
+
+        public IDataResult<List<CreditCardDetailDto>> GetCreditCardDetailsById(int id)
+        {
+            return new SuccessDataResult<List<CreditCardDetailDto>>(_creditCardDal.GetCreditCardDetails(cc => cc.CreditCardId == id), "Kredi Kartı Listelendi");
+        }
+
+        public IDataResult<List<CreditCardDetailDto>> GetCreditCardDetailsByUserId(int userId)
+        {
+            return new SuccessDataResult<List<CreditCardDetailDto>>(_creditCardDal.GetCreditCardDetails(cc => cc.UserId == userId), "Kullanıcının Kartı Listelendi");
+        }
     }
 }
