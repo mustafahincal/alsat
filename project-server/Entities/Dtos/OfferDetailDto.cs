@@ -20,6 +20,7 @@ namespace Entities.Dtos
         public string ProductName { get; set; }
         public string UserName { get; set; }
         public string OwnerName { get; set; }
-
+        public int ProductImageId { get; set; }
+        public string ImagePath { get; set; }
     }
 }

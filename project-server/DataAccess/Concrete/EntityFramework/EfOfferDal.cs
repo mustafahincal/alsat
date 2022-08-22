@@ -43,6 +43,8 @@ namespace DataAccess.Concrete.EntityFramework
                                  ProductName = p.Name,
                                  OwnerName = u.FirstName + " " + u.LastName,
                                  UserName = u2.FirstName + " " + u2.LastName,
+                                 ProductImageId = (from pi in _primeforContext.ProductImages where pi.ProductId == p.ProductId select pi.ProductImageId).FirstOrDefault(),
+                                 ImagePath = (from pi in _primeforContext.ProductImages where pi.ProductId == p.ProductId select pi.ImagePath).FirstOrDefault(),
                              };
                 return filter == null
                 ? result.ToList()
