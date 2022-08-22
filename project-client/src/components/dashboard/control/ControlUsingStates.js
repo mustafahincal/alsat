@@ -120,7 +120,7 @@ function ControlUsingStates() {
                   </div>
                 ) : (
                   <div
-                    className="bg-lime-500 text-white px-2 flex items-center justify-center rounded cursor-pointer mr-2"
+                    className="bg-blue  -500 text-white px-2 flex items-center justify-center rounded cursor-pointer mr-2"
                     onClick={() =>
                       handleUpdateUsingState(
                         usingState.usingStateId,

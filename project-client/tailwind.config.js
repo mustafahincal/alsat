@@ -21,6 +21,9 @@ module.exports = {
       backgroundImage: {
         "home-bg": "url('/src/assets/home-background.png')",
       },
+      transitionDuration: {
+        25: "25ms",
+      },
     },
   },
   plugins: [],

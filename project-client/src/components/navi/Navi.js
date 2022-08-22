@@ -11,12 +11,13 @@ import { useBrandContext } from "../../context/BrandContext";
 import { useCategoryContext } from "../../context/CategoryContext";
 import { useColorContext } from "../../context/ColorContext";
 import { useOfferContext } from "../../context/OfferContext";
+import { usePaymentContext } from "../../context/PaymentContext";
 
 function Navi() {
   const { isAdmin, isLogged, setIsLogged, setIsAdmin, setCounter } =
     useAuthContext();
-  const { selectedUser, setSelectedUser, setSelectedCreditCard } =
-    useUserContext();
+  const { selectedUser, setSelectedUser } = useUserContext();
+  const { setSelectedCreditCard } = usePaymentContext();
   const { visible, setVisible } = useNaviContext();
   const {
     setProducts,
@@ -149,7 +150,7 @@ function Navi() {
                 </span>
               </button>
               <div
-                className={`absolute top-full right-0 w-64 rounded p-1 bg-white flex flex-col z-10 duration-75 transition-all font-medium shadow-item2 ${
+                className={`absolute top-full right-0 w-64 rounded p-1 bg-white flex flex-col z-10 duration-25 transition-all font-medium shadow-item2  ${
                   visible ? " visible mt-4" : " invisible mt-2"
                 } `}
               >
