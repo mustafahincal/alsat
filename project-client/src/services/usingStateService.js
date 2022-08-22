@@ -3,11 +3,10 @@ const apiUrl = "https://localhost:44350/api";
 
 export const getUsingStates = () => get(apiUrl + "/usingStates/getall");
 
-export const postUsingState = (brand) =>
-  post(apiUrl + "/usingStates/add", brand);
+export const postUsingState = (data) => post(apiUrl + "/usingStates/add", data);
 
 export const updateUsingState = (data) =>
   post(apiUrl + "/usingStates/update", data);
 
-export const deleteUsingState = (data) =>
-  post(apiUrl + "/usingStates/delete", data);
+export const deleteUsingState = (usingStateId) =>
+  get(apiUrl + "/usingStates/delete?usingStateId=" + usingStateId);

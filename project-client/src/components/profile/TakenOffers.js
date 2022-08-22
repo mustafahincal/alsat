@@ -22,10 +22,7 @@ function TakenOffers() {
   }, []);
 
   // const handleRefuseOffer = (offerId) => {
-  //   const data = {
-  //     offerId,
-  //   };
-  //   deleteOffer(data).then((response) => {
+  //   deleteOffer(offerId).then((response) => {
   //     toast.success(response.message);
   //     getOfferDetailsByOwnerId(getFromLocalStorage("userId")).then((result) =>
   //       setTakenOffers(result.data)

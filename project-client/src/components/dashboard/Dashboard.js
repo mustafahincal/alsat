@@ -47,6 +47,7 @@ function DashBoard() {
       </div>
       <div className="col-span-8 py-10 pl-5">
         <Routes>
+          <Route path="/" element={<ControlProducts />} />
           <Route path="/products" element={<ControlProducts />} />
           <Route path="/users" element={<ControlUsers />} />
           <Route path="/controlBrands" element={<ControlBrands />} />

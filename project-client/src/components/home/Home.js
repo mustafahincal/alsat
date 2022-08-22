@@ -17,13 +17,13 @@ function Home() {
         <div className="flex">
           <NavLink
             to={"/main"}
-            className="btn w-48 text-base rounded-2xl py-4 font-bold mr-6 text-center"
+            className="btn px-10 text-base rounded-2xl py-3 font-bold mr-6 text-center flex justify-center items-center bg-white text-darkBlue hover:bg-darkBlue hover:text-white transition-all duration-15"
           >
             Ürün Al
           </NavLink>
           <NavLink
             to={"/addProduct"}
-            className="btn w-48 text-base rounded-2xl py-4 font-bold text-center"
+            className="btn px-10 text-base rounded-2xl py-3 font-bold mr-6 text-center flex justify-center items-center bg-white text-darkBlue hover:bg-darkBlue hover:text-white transition-all duration-150"
           >
             Ürün Sat
           </NavLink>
@@ -31,7 +31,7 @@ function Home() {
       </div>
       <div className="w-11/12 m-auto my-24">
         <div className="text-3xl mb-5 font-bold">Güncel İlanlar</div>
-        <Products />
+        <Products limit={8} />
       </div>
     </div>
   );

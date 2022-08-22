@@ -9,5 +9,5 @@ export const postCategory = (category) =>
 export const updateCategory = (data) =>
   post(apiUrl + "/categories/update", data);
 
-export const deleteCategory = (data) =>
-  post(apiUrl + "/categories/delete", data);
+export const deleteCategory = (categoryId) =>
+  get(apiUrl + "/categories/delete?categoryId=" + categoryId);

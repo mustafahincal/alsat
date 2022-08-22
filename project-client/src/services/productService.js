@@ -33,6 +33,5 @@ export const getProductsByBrandAndByColor = async (brandId, colorId) => {
 
 export const addProduct = (data) => post(apiUrl + "/products/add", data);
 export const updateProduct = (data) => post(apiUrl + "/products/update", data);
-export const deleteProduct = (data) => post(apiUrl + "/products/delete", data);
-
-export const buyProduct = (data) => {};
+export const deleteProduct = (productId) =>
+  get(apiUrl + "/products/delete?productId=" + productId);

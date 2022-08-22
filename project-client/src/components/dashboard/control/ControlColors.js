@@ -59,12 +59,8 @@ function Controlcolors() {
       validationSchema: ControlSchema,
     });
 
-  const handleDeleteColor = (colorId, colorName) => {
-    const colorToDelete = {
-      colorId: colorId,
-      name: colorName,
-    };
-    deleteColor(colorToDelete)
+  const handleDeleteColor = (colorId) => {
+    deleteColor(colorId)
       .then((response) => {
         if (response.success) {
           toast.success(response.message);
@@ -117,7 +113,7 @@ function Controlcolors() {
 
                 <div
                   className="bg-red-500 text-white w-7 h-7 flex items-center justify-center rounded cursor-pointer"
-                  onClick={() => handleDeleteColor(color.colorId, color.name)}
+                  onClick={() => handleDeleteColor(color.colorId)}
                 >
                   &#215;
                 </div>

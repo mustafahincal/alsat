@@ -59,12 +59,8 @@ function ControlBrands() {
       validationSchema: ControlSchema,
     });
 
-  const handleDeleteBrand = (brandId, brandName) => {
-    const brandToDelete = {
-      brandId: brandId,
-      name: brandName,
-    };
-    deleteBrand(brandToDelete)
+  const handleDeleteBrand = (brandId) => {
+    deleteBrand(brandId)
       .then((response) => {
         if (response.success) {
           toast.success(response.message);
@@ -117,7 +113,7 @@ function ControlBrands() {
 
                 <div
                   className="bg-red-500 text-white w-7 h-7 flex items-center justify-center rounded cursor-pointer"
-                  onClick={() => handleDeleteBrand(brand.brandId, brand.name)}
+                  onClick={() => handleDeleteBrand(brand.brandId)}
                 >
                   &#215;
                 </div>

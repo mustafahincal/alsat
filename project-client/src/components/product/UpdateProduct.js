@@ -109,6 +109,8 @@ function Updateproduct() {
 
     if (exists) {
       formData.append("productImageId", selectedProduct.productImageId);
+    } else {
+      formData.append("productId", selectedProduct.productId);
     }
 
     addImage(formData, exists)
@@ -126,12 +128,7 @@ function Updateproduct() {
   };
 
   const handleDeleteImage = () => {
-    const data = {
-      productImageId: selectedProduct.productImageId,
-      productId: selectedProduct.productId,
-      imagePath: selectedProduct.imagePath,
-    };
-    deleteProductImage(data).then((result) => {
+    deleteProductImage(selectedProduct.productImageId).then((result) => {
       if (result.success) {
         toast.success(result.message);
       }

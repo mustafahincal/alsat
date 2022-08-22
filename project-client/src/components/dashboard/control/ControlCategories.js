@@ -59,12 +59,8 @@ function ControlCategories() {
       validationSchema: ControlSchema,
     });
 
-  const handleDeleteCategory = (categoryId, categoryName) => {
-    const categoryToDelete = {
-      categoryId: categoryId,
-      name: categoryName,
-    };
-    deleteCategory(categoryToDelete)
+  const handleDeleteCategory = (categoryId) => {
+    deleteCategory(categoryId)
       .then((response) => {
         if (response.success) {
           toast.success(response.message);

@@ -15,5 +15,6 @@ export const getOfferDetailsById = (id) =>
 export const offerForProduct = (data) => {
   return post(apiUrl + "/offers/add", data);
 };
-export const deleteOffer = (data) => post(apiUrl + "/offers/delete", data);
+export const deleteOffer = (offerId) =>
+  post(apiUrl + "/offers/delete?offerId=" + offerId);
 export const updateOffer = (data) => post(apiUrl + "/offers/update", data);

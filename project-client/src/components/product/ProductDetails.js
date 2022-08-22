@@ -24,28 +24,27 @@ function ProductDetails() {
   }, []);
 
   const handleDeleteProduct = () => {
-    const data = {
-      productId: selectedProduct.productId,
-      name: selectedProduct.productName,
-    };
-    const imageData = {
-      productImageId: selectedProduct.productImageId,
-      productId: selectedProduct.productId,
-      imagePath: selectedProduct.imagePath,
-    };
-
-    deleteProductImage(imageData)
-      .then((result) => {
-        if (result.success) {
-          deleteProduct(data)
-            .then((response) => {
-              toast.success(response.message);
-              navigate("/main");
-            })
-            .catch((err) => console.log(err));
-        }
-      })
-      .catch((err) => console.log(err));
+    if (selectedProduct.productImageId) {
+      deleteProductImage(selectedProduct.productImageId)
+        .then((result) => {
+          if (result.success) {
+            deleteProduct(selectedProduct.productId)
+              .then((response) => {
+                toast.success(response.message);
+                navigate("/main");
+              })
+              .catch((err) => console.log(err));
+          }
+        })
+        .catch((err) => console.log(err));
+    } else {
+      deleteProduct(selectedProduct.productId)
+        .then((response) => {
+          toast.success(response.message);
+          navigate("/main");
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   return (

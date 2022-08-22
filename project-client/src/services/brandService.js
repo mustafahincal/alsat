@@ -7,4 +7,5 @@ export const postBrand = (brand) => post(apiUrl + "/brands/add", brand);
 
 export const updateBrand = (data) => post(apiUrl + "/brands/update", data);
 
-export const deleteBrand = (data) => post(apiUrl + "/brands/delete", data);
+export const deleteBrand = (brandId) =>
+  get(apiUrl + "/brands/delete?brandId=" + brandId);

@@ -16,32 +16,31 @@ function ControlProducts() {
     getProducts().then((result) => setProducts(result.data));
   }, []);
 
-  const handleDeleteProduct = async (id) => {
-    const result = await getProduct(id);
+  const handleDeleteProduct = async (productId) => {
+    const result = await getProduct(productId);
     const selectedProduct = result.data[0];
 
-    const data = {
-      productId: selectedProduct.productId,
-      name: selectedProduct.productName,
-    };
-    const imageData = {
-      productImageId: selectedProduct.productImageId,
-      productId: selectedProduct.productId,
-      imagePath: selectedProduct.imagePath,
-    };
-
-    deleteProductImage(imageData)
-      .then((result) => {
-        if (result.success) {
-          deleteProduct(data)
-            .then((response) => {
-              toast.success(response.message);
-              getProducts().then((result) => setProducts(result.data));
-            })
-            .catch((err) => console.log(err));
-        }
-      })
-      .catch((err) => console.log(err));
+    if (selectedProduct.productImageId) {
+      deleteProductImage(selectedProduct.productImageId)
+        .then((result) => {
+          if (result.success) {
+            deleteProduct(selectedProduct.productId)
+              .then((response) => {
+                toast.success(response.message);
+                getProducts().then((result) => setProducts(result.data));
+              })
+              .catch((err) => console.log(err));
+          }
+        })
+        .catch((err) => console.log(err));
+    } else {
+      deleteProduct(selectedProduct.productId)
+        .then((response) => {
+          toast.success(response.message);
+          getProducts().then((result) => setProducts(result.data));
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   return (

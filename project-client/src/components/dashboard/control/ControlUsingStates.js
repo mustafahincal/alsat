@@ -13,6 +13,7 @@ import { UseUsingStateContext } from "../../../context/UsingStateContext";
 import {
   deleteUsingState,
   getUsingStates,
+  postUsingState,
   updateUsingState,
   updateUsingStates,
 } from "../../../services/usingStateService";
@@ -38,7 +39,7 @@ function ControlUsingStates() {
       },
       onSubmit: (values) => {
         if (!updateUsingStateStatus) {
-          postColor(values)
+          postUsingState(values)
             .then((response) => {
               if (response.success) {
                 toast.success(response.message);
@@ -66,12 +67,8 @@ function ControlUsingStates() {
       validationSchema: ControlSchema,
     });
 
-  const handleDeleteUsingState = (usingStateId, usingStateName) => {
-    const usingStateToDelete = {
-      usingStateId: usingStateId,
-      name: usingStateName,
-    };
-    deleteUsingState(usingStateToDelete)
+  const handleDeleteUsingState = (usingStateId) => {
+    deleteUsingState(usingStateId)
       .then((response) => {
         if (response.success) {
           toast.success(response.message);
@@ -120,7 +117,7 @@ function ControlUsingStates() {
                   </div>
                 ) : (
                   <div
-                    className="bg-blue  -500 text-white px-2 flex items-center justify-center rounded cursor-pointer mr-2"
+                    className="bg-blue-500 text-white px-2 flex items-center justify-center rounded cursor-pointer mr-2"
                     onClick={() =>
                       handleUpdateUsingState(
                         usingState.usingStateId,
@@ -135,10 +132,7 @@ function ControlUsingStates() {
                 <div
                   className="bg-red-500 text-white w-7 h-7 flex items-center justify-center rounded cursor-pointer"
                   onClick={() =>
-                    handleDeleteUsingState(
-                      usingState.usingStateId,
-                      usingState.name
-                    )
+                    handleDeleteUsingState(usingState.usingStateId)
                   }
                 >
                   &#215;

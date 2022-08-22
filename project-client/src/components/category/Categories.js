@@ -13,22 +13,26 @@ function Categories() {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <div className="bg-white  rounded-lg flex flex-col shadow-item">
-      <NavLink
-        to="/main/products/"
-        className="px-2  rounded py-2 border-b-2 font-bold"
-      >
-        Tüm Kategoriler
-      </NavLink>
-      {categories.map((category) => (
-        <NavLink
-          to={`/main/products/category/${category.categoryId}`}
-          className={"px-2 rounded py-2 border-b-2 "}
-          key={category.categoryId}
-        >
-          {category.name}
-        </NavLink>
-      ))}
+    <div>
+      {categories !== 0 && (
+        <div className="bg-white  rounded-lg flex flex-col shadow-item">
+          <NavLink
+            to="/main/products/"
+            className="px-2  rounded py-2 border-b-2 font-bold"
+          >
+            Tüm Kategoriler
+          </NavLink>
+          {categories.map((category) => (
+            <NavLink
+              to={`/main/products/category/${category.categoryId}`}
+              className={"px-2 rounded py-2 border-b-2 "}
+              key={category.categoryId}
+            >
+              {category.name}
+            </NavLink>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

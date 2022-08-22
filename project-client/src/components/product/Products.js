@@ -10,7 +10,7 @@ import defaultImage from "../../assets/default.png";
 import { useProductContext } from "../../context/ProductContext";
 import { getProductsByOwner } from "../../services/productService";
 
-function Products() {
+function Products({ limit }) {
   const { products, setProducts } = useProductContext();
   const { brandId, colorId, categoryId, ownerId } = useParams();
 
@@ -37,71 +37,74 @@ function Products() {
   return (
     <div className="bg-gray-100">
       <div className="grid grid-cols-12 gap-x-8 gap-y-12">
-        {products.map((product, index) => (
-          <NavLink
-            key={index}
-            className="flex flex-col justify-between rounded-md col-span-3 shadow-item mb-10 "
-            to={`/productdetails/${product.productId}`}
-          >
-            <img
-              src={
-                product.imagePath
-                  ? apiImagesUrl + product.imagePath
-                  : defaultImage
-              }
-              className="rounded-t-md h-2/3 object-cover object-center w-full flex-shrink-0"
-              alt=""
-            />
-            <div className="text-center bg-white flex flex-col justify-between py-2 px-5">
-              <div className="flex justify-between">
-                <p>Ürün</p>
-                <p>{product.productName}</p>
-              </div>
-              <div className="flex justify-between">
-                <p>Kategori</p>
-                <p>{product.categoryName}</p>
-              </div>
-              {product.brandName && (
-                <div className="flex justify-between">
-                  <p>Marka</p>
-                  <p>{product.brandName}</p>
+        {products.map(
+          (product, index) =>
+            (limit ? index < limit : true) && (
+              <NavLink
+                key={index}
+                className="flex flex-col justify-between rounded-md col-span-3 shadow-item mb-10 "
+                to={`/productdetails/${product.productId}`}
+              >
+                <img
+                  src={
+                    product.imagePath
+                      ? apiImagesUrl + product.imagePath
+                      : defaultImage
+                  }
+                  className="rounded-t-md h-2/3 object-cover object-center w-full flex-shrink-0"
+                  alt=""
+                />
+                <div className="text-center bg-white flex flex-col justify-between py-2 px-5">
+                  <div className="flex justify-between">
+                    <p>Ürün</p>
+                    <p>{product.productName}</p>
+                  </div>
+                  <div className="flex justify-between">
+                    <p>Kategori</p>
+                    <p>{product.categoryName}</p>
+                  </div>
+                  {product.brandName && (
+                    <div className="flex justify-between">
+                      <p>Marka</p>
+                      <p>{product.brandName}</p>
+                    </div>
+                  )}
+                  {product.colorName && (
+                    <div className="flex justify-between">
+                      <p>Renk</p>
+                      <p>{product.colorName}</p>
+                    </div>
+                  )}
+                  <div className="flex justify-between">
+                    <p>Fiyat</p>
+                    <p>{product.price}₺</p>
+                  </div>
                 </div>
-              )}
-              {product.colorName && (
-                <div className="flex justify-between">
-                  <p>Renk</p>
-                  <p>{product.colorName}</p>
-                </div>
-              )}
-              <div className="flex justify-between">
-                <p>Fiyat</p>
-                <p>{product.price}₺</p>
-              </div>
-            </div>
 
-            <div>
-              {product.isOfferable ? (
-                <div className="py-1 bg-teal-500 text-white text-center text-sm">
-                  Teklif Verilebilir
-                </div>
-              ) : (
-                <div className="py-1 bg-indigo-500  text-white text-center text-sm">
-                  Teklif Verilemez
-                </div>
-              )}
+                <div>
+                  {product.isOfferable ? (
+                    <div className="py-1 bg-teal-500 text-white text-center text-sm">
+                      Teklif Verilebilir
+                    </div>
+                  ) : (
+                    <div className="py-1 bg-indigo-500  text-white text-center text-sm">
+                      Teklif Verilemez
+                    </div>
+                  )}
 
-              {product.isSold ? (
-                <div className="py-1 bg-rose-500 rounded-b text-white text-center text-sm ">
-                  Satıldı
+                  {product.isSold ? (
+                    <div className="py-1 bg-rose-500 rounded-b text-white text-center text-sm ">
+                      Satıldı
+                    </div>
+                  ) : (
+                    <div className="py-1 bg-lime-500 rounded-b text-white text-center text-sm">
+                      Satılmadı
+                    </div>
+                  )}
                 </div>
-              ) : (
-                <div className="py-1 bg-lime-500 rounded-b text-white text-center text-sm">
-                  Satılmadı
-                </div>
-              )}
-            </div>
-          </NavLink>
-        ))}
+              </NavLink>
+            )
+        )}
       </div>
     </div>
   );

@@ -19,10 +19,7 @@ function GivenOffers() {
   }, []);
 
   const handleCancelOffer = (offerId) => {
-    const data = {
-      offerId,
-    };
-    deleteOffer(data).then((response) => {
+    deleteOffer(offerId).then((response) => {
       toast.success(response.message);
       getOfferDetailsByUserId(getFromLocalStorage("userId")).then((result) =>
         setGivenOffers(result.data)

@@ -6,4 +6,5 @@ export const postColor = (color) => post(apiUrl + "/colors/add", color);
 
 export const updateColor = (data) => post(apiUrl + "/colors/update", data);
 
-export const deleteColor = (data) => post(apiUrl + "/colors/delete", data);
+export const deleteColor = (colorId) =>
+  get(apiUrl + "/colors/delete?colorId=" + colorId);
