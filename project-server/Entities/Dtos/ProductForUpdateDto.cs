@@ -22,5 +22,8 @@ namespace Entities.Dtos
         public bool IsSold { get; set; }
         public int OwnerId { get; set; }
 
+        public int OfferId { get; set; }
+
+
     }
 }

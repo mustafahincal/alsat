@@ -39,13 +39,18 @@ namespace Business.Concrete
             var offerToUpdate = _offerDal.Get(o => o.OfferId == offerForUpdateDto.OfferId);
             offerToUpdate.OfferedPrice = offerForUpdateDto.OfferedPrice;
             offerToUpdate.IsApproved = offerForUpdateDto.IsApproved;
-            _offerDal.Update(offerToUpdate);
+             _offerDal.Update(offerToUpdate);
             _offerDal.Commit();
             return new SuccessResult("Teklif güncellendi");
         }
         public IDataResult<List<Offer>> GetAll()
         {
             return new SuccessDataResult<List<Offer>>(_offerDal.GetAll(), "Teklifler listelendi");
+        }
+
+        public List<Offer> GetAllByProductId(int productId)
+        {
+            return new List<Offer>(_offerDal.GetAll(offer => offer.ProductId == productId));
         }
 
         public IDataResult<Offer> GetById(int offerId)

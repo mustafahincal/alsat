@@ -19,6 +19,8 @@ namespace Business.Abstract
 
         IDataResult<List<Offer>> GetByUserId(int userId);
 
+        List<Offer> GetAllByProductId(int productId);
+
         IDataResult<List<OfferDetailDto>> GetOfferDetails();
         IDataResult<List<OfferDetailDto>> GetOfferDetailsByUserId(int userId);
         IDataResult<List<OfferDetailDto>> GetOfferDetailsByOwnerId(int ownerId);

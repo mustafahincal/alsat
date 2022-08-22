@@ -14,11 +14,13 @@ namespace Business.Concrete
         IProductDal _productDal;
         ICategoryService _categoryService;
         IProductImageService _productImageService;
-        public ProductManager(IProductDal productDal, ICategoryService categoryService, IProductImageService productImageService)
+        IOfferService _offerService;
+        public ProductManager(IProductDal productDal, ICategoryService categoryService, IProductImageService productImageService, IOfferService offerService)
         {
             _productDal = productDal;
             _categoryService = categoryService;
             _productImageService = productImageService;
+            _offerService = offerService;
         }
 
         public IDataResult<List<Product>> Add(ProductForAddDto productForAddDto)
@@ -79,6 +81,18 @@ namespace Business.Concrete
             productToUpdate.IsSold = productForUpdateDto.IsSold;
             productToUpdate.IsOfferable = productForUpdateDto.IsOfferable;
             productToUpdate.Price = productForUpdateDto.Price;
+
+            if (productToUpdate.IsSold)
+            {
+                var offersToDelete = _offerService.GetAllByProductId(productToUpdate.ProductId);
+                foreach(Offer offer in offersToDelete)
+                {
+                    if (offer.OfferId != productForUpdateDto.OfferId)
+                    {
+                        _offerService.Delete(offer.OfferId);
+                    }
+                }
+            }
 
             _productDal.Update(productToUpdate);
             _productDal.Commit();
