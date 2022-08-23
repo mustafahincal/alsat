@@ -24,11 +24,11 @@ function PurchasedProducts() {
   return (
     <div>
       {purchasedProducts.length !== 0 ? (
-        <div className="grid grid-cols-10 gap-7">
+        <div className="grid grid-cols-12 gap-7">
           {purchasedProducts.map((product, index) => (
             <div
               key={index}
-              className="shadow-item2  bg-white rounded-tl-md rounded-tr-md cursor-pointer border-gray-100 col-span-3"
+              className="shadow-item2  rounded-tl-md rounded-tr-md cursor-pointer bg-white dark:bg-gray-800 border-gray-100 col-span-4"
             >
               <div>
                 <img
@@ -37,11 +37,11 @@ function PurchasedProducts() {
                       ? apiImagesUrl + product.imagePath
                       : defaultImage
                   }
-                  className="rounded-tl-md rounded-tr-md object-cover object-center w-full -ml-[1px] h-full"
+                  className="rounded-tl-md rounded-tr-md object-cover object-center w-full  h-full"
                   alt=""
                 />
               </div>
-              <div className="p-7 rounded items-center gap-2 w-full mb-3 flex flex-col justify-between text-xl bg-white">
+              <div className="p-7 rounded-b-md items-center gap-2 w-full mb-3 flex flex-col justify-between text-xl dark:bg-gray-800 dark:text-white bg-white">
                 <div>Ürünü Satan = {product.userName}</div>
                 <div>Ürün Adı = {product.productName}</div>
                 <div>Ürün Fiyatı = {product.price}</div>

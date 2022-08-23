@@ -98,7 +98,7 @@ function Navi() {
             <NavLink
               to="/addProduct"
               className={({ isActive }) =>
-                `group relative ml-10 ${isActive ? "active-nav" : ""}`
+                `group relative ml-10 mr-5 ${isActive ? "active-nav" : ""}`
               }
             >
               Ürün Sat
@@ -108,7 +108,7 @@ function Navi() {
           {isLogged && isAdmin && (
             <NavLink
               className={({ isActive }) =>
-                "btn bg-sky-400 shadow-item2 text-white  ml-10 text-base dark:bg-sky-300 dark:text-black"
+                "btn bg-sky-400 shadow-item2 text-white  text-base dark:bg-sky-300 dark:text-black"
               }
               to={"/dashboard"}
             >

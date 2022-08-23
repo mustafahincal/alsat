@@ -103,6 +103,8 @@ function Payment() {
       saveCreditCard(values).then((result) => {
         handleBuyProduct();
       });
+    } else if (!controlSave) {
+      handleBuyProduct();
     }
   };
 
@@ -155,10 +157,10 @@ function Payment() {
 
   return (
     <div className="my-20">
-      <div className="w-2/5 m-auto py-12  px-16 shadow-item mt-20 bg-white">
+      <div className="w-2/5 m-auto py-12  px-16 shadow-item mt-20 bg-white dark:bg-gray-800 dark:text-white">
         <form onSubmit={handleSubmit}>
           <div className="w-full m-auto">
-            <h1 className="font-extrabold text-3xl text-black mb-5 text-center">
+            <h1 className="font-extrabold text-3xl  mb-5 text-center">
               Ödeme Bilgileri
             </h1>
             {selectedCreditCard && (
@@ -254,7 +256,7 @@ function Payment() {
         </form>
       </div>
       <div className={`modal ${saveCardModalActive && "activeModal"}`}>
-        <div className="bg-white text-black w-1/3 py-10 px-16">
+        <div className="dark:bg-darkBlue dark:text-white bg-white text-black w-1/3 py-10 px-16">
           <div className="flex justify-between mb-3 items-center">
             <h1 className="text-2xl ">
               Kredi Kartı sonraki alışverişleriniz için kaydedilsin mi?
