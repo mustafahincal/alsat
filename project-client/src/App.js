@@ -26,7 +26,7 @@ export default function App() {
 
   return (
     <>
-      <div className="font-poppins bg-gray-100 min-h-screen flex flex-col justify-between">
+      <div className="font-poppins bg-gray-100 min-h-screen flex flex-col justify-between dark:bg-gray-700">
         <div>
           <Navi />
           <div
