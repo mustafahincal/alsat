@@ -92,6 +92,10 @@ function ProductDetails() {
             <div>Açıklama</div>
             <div>{selectedProduct.description}</div>
           </div>
+          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+            <div>Ürün Sahibi</div>
+            <div>{selectedProduct.ownerName}</div>
+          </div>
         </div>
       </div>
 

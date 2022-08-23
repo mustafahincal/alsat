@@ -63,7 +63,7 @@ function ControlProducts() {
               alt=""
             />
           </div>
-          <div className="flex flex-col w-1/3 h-full justify-between self-stretch py-7 px-14 text-xl flex-1">
+          <div className="flex flex-col w-1/3 h-full justify-between self-stretch py-2 px-14 text-md flex-1">
             <div className="flex justify-between">
               <div>Ürün Id</div>
               <div>{product.productId}</div>
@@ -79,6 +79,10 @@ function ControlProducts() {
             <div className="flex justify-between">
               <div>Fiyat</div>
               <div>{product.price}</div>
+            </div>
+            <div className="flex justify-between">
+              <div>Ürün Sahibi</div>
+              <div>{product.ownerName}</div>
             </div>
             <div className="text-center">
               {product.isOfferable ? "Teklif verilebilir" : "Teklif verilemez"}
