@@ -151,6 +151,10 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.ColorId == colorId), Messages.ProductsListed);
         }
+        public IDataResult<List<ProductDetailDto>> GetProductDetailsByUsingStateId(int usingStateId)
+        {
+            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.UsingStateId == usingStateId), Messages.ProductsListed);
+        }
 
         public IDataResult<List<ProductDetailDto>> GetProductDetailsByOwnerId(int ownerId)
         {

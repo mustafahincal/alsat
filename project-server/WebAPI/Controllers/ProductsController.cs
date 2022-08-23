@@ -131,6 +131,17 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getproductdetailsbyusingstateid")]
+        public IActionResult GetProductDetailsByUsingStateId(int usingStateId)
+        {
+            var result = _productService.GetProductDetailsByUsingStateId(usingStateId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpGet("getproductdetailsbyownerid")]
         public IActionResult GetProductDetailsByOwnerId(int ownerId)
         {
