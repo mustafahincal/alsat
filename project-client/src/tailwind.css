@@ -13,7 +13,7 @@
     @apply bg-darkBlue text-white py-2 px-5 rounded-md;
   }
   html {
-    @apply text-[13px];
+    @apply text-[11px];
   }
   .nav-item {
     @apply hover:border-b-4 border-darkBlue rounded-md transition-all duration-75 dark:border-white;

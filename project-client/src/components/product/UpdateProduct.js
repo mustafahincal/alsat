@@ -138,7 +138,7 @@ function Updateproduct() {
 
   return (
     <div className="flex justify-between items-center px-16 py-8">
-      <div className="w-2/5  mx-auto  bg-white rounded-md shadow-item ">
+      <div className="w-2/5  mx-auto  bg-white dark:bg-gray-800 dark:text-white rounded-md shadow-item ">
         <img
           src={
             selectedProduct.imagePath
@@ -149,42 +149,42 @@ function Updateproduct() {
           alt=""
         />
         <div className="">
-          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold dark:border-gray-700">
             <div>İsim</div>
             <div>{selectedProduct.productName}</div>
           </div>
 
-          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold dark:border-gray-700">
             <div>Kategori</div>
             <div>{selectedProduct.categoryName}</div>
           </div>
 
           {selectedProduct.brandName && (
-            <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+            <div className="w-full flex justify-between border-2 py-3 px-20 font-bold dark:border-gray-700">
               <div>Marka</div>
               <div>{selectedProduct.brandName}</div>
             </div>
           )}
           {selectedProduct.colorName && (
-            <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+            <div className="w-full flex justify-between border-2 py-3 px-20 font-bold dark:border-gray-700">
               <div>Renk</div>
               <div>{selectedProduct.colorName}</div>
             </div>
           )}
 
-          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold dark:border-gray-700">
             <div>Fiyat</div>
             <div>{selectedProduct.price}₺</div>
           </div>
-          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold dark:border-gray-700">
             <div>Kullanım Durumu</div>
             <div>{selectedProduct.usingStateName}</div>
           </div>
-          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold dark:border-gray-700">
             <div>Açıklama</div>
             <div>{selectedProduct.description}</div>
           </div>
-          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold dark:border-gray-700">
             <div>Ürün Sahibi</div>
             <div>{selectedProduct.ownerName}</div>
           </div>
@@ -192,9 +192,9 @@ function Updateproduct() {
       </div>
 
       <div className="flex flex-col items-start min-h-screen w-1/2">
-        <div className="w-4/5 m-auto py-10 shadow-item mt-14 bg-white">
+        <div className="w-4/5 m-auto py-10 shadow-item mt-14 bg-white dark:bg-gray-800 dark:text-white">
           <div className="w-3/4 mx-auto">
-            <h1 className="font-extrabold text-3xl text-black mb-5 text-center">
+            <h1 className="font-extrabold text-3xl  mb-5 text-center">
               Ürün Güncelle
             </h1>
             <form onSubmit={handleSubmit}>
@@ -365,9 +365,9 @@ function Updateproduct() {
             </form>
           </div>
         </div>
-        <div className="w-4/5 mx-auto py-3 px-14 shadow-item mt-14 bg-white">
+        <div className="w-4/5 mx-auto py-3 px-14 shadow-item mt-14 bg-white dark:bg-gray-800 dark:text-white">
           <div className="mx-auto text-center py-8">
-            <h1 className="font-extrabold text-3xl text-black mb-5 text-center">
+            <h1 className="font-extrabold text-3xl  mb-5 text-center">
               Fotoğraf Ekle
             </h1>
             <div className=" bg-darkBlue text-gray-100  p-10 text-lg flex justify-center items-center">

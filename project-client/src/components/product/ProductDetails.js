@@ -108,7 +108,7 @@ function ProductDetails() {
                   {!selectedProduct.isSold && (
                     <NavLink
                       to={`/offerForProduct/${selectedProduct.productId}`}
-                      className="btn  py-3 mb-2"
+                      className="rounded text-lg border-2 border-darkBlue bg-darkBlue py-2 text-white"
                     >
                       Teklif Ver
                     </NavLink>
@@ -119,7 +119,7 @@ function ProductDetails() {
               {!selectedProduct.isSold ? (
                 <NavLink
                   to={`/payment/product/${selectedProduct.productId}`}
-                  className="btn py-3 cursor-pointer mt-1"
+                  className="rounded text-lg border-2 border-darkBlue bg-darkBlue py-2 text-white mt-4"
                 >
                   Satın Al
                 </NavLink>
@@ -143,13 +143,13 @@ function ProductDetails() {
                 <div className="flex flex-col w-full">
                   <NavLink
                     to={`/updateProduct/${selectedProduct.productId}`}
-                    className="btn bg-littleDarkBlue py-3"
+                    className="rounded text-lg border-2 border-littleDarkBlue bg-littleDarkBlue py-2 text-white"
                   >
                     Ürünü Güncelle
                   </NavLink>
                   <button
                     onClick={handleDeleteProduct}
-                    className="btn bg-red-500  py-3 mt-2"
+                    className="rounded bg-transparent text-lg text-red-500 border-2 border-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 py-2 mt-4"
                   >
                     Ürünü Sil
                   </button>
