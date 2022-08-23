@@ -46,10 +46,10 @@ function ControlUsers() {
     <div>
       {users.map((user, index) => (
         <div
-          className={`py-4 px-6  border-2 transition-all duration-75  rounded w-full mb-4 flex justify-between items-center ${
+          className={`py-4 px-6  border-2 transition-all duration-75  rounded w-full mb-4 flex justify-between items-center dark:border-gray-800 shadow-item2 ${
             user.operationClaimId == 1
-              ? "bg-gold text-black font-bold hover:border-darkBlue"
-              : " bg-white hover:border-gray-400 border-gray-100"
+              ? "bg-gold text-black font-bold hover:border-gray-700 dark:hover:border-gray-100"
+              : " bg-white dark:bg-gray-800 hover:border-gray-600 dark:hover:border-gray-100 "
           } `}
           key={index}
         >

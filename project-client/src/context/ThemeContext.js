@@ -9,18 +9,25 @@ const ThemeContext = createContext();
 export const ThemeProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(false);
 
+  const root = window.document.documentElement;
   useEffect(() => {
     const theme = getFromLocalStorage("theme");
-    if (theme) setDarkMode(theme);
+    if (theme === "true") {
+      setDarkMode(true);
+      root.classList.add("dark");
+    } else {
+      setDarkMode(false);
+      root.classList.add("light");
+    }
   }, []);
 
   const handleDarkMode = () => {
-    const root = window.document.documentElement;
-    setDarkMode(!darkMode);
-    root.classList.remove(darkMode ? "light" : "dark");
-    root.classList.add(darkMode ? "dark" : "light");
+    root.classList.remove(!darkMode ? "light" : "dark");
+    root.classList.add(!darkMode ? "dark" : "light");
 
-    setToLocalStorage("theme", darkMode);
+    setToLocalStorage("theme", !darkMode);
+
+    setDarkMode(!darkMode);
   };
 
   const values = {

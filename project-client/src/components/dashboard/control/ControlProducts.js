@@ -49,7 +49,7 @@ function ControlProducts() {
     <div>
       {products.map((product, index) => (
         <div
-          className=" bg-white hover:border-gray-400 border-2 rounded-tl-md rounded-bl-md  transition-all duration-75 border-gray-100 rounded w-full h-52  mb-5 flex justify-between items-center shadow-item2"
+          className=" dark:bg-gray-800 hover:border-gray-300 border-2 rounded-tl-md rounded-bl-md  transition-all duration-75 border-gray-100 rounded w-full h-52  mb-5 flex justify-between items-center shadow-item2 dark:border-gray-600 dark:hover:border-gray-700 "
           key={index}
         >
           <div className="w-1/3 h-full">
@@ -94,7 +94,7 @@ function ControlProducts() {
           <div className="flex justify-between items-center px-10 w-1/3">
             <NavLink
               to={`/productDetails/${product.productId}`}
-              className="btn border-2 box-border bg-white border-indigo-600 transition-all text-indigo-500 hover:bg-indigo-500 hover:text-white"
+              className="btn border-2 box-border bg-white  border-indigo-600 transition-all text-indigo-500 hover:bg-indigo-500 hover:text-white"
             >
               Ürün Detayları
             </NavLink>

@@ -92,9 +92,9 @@ function AddProduct() {
 
   return (
     <div className="flex justify-between items-start min-h-screen">
-      <div className="w-2/5 m-auto py-10 shadow-item mt-14 bg-white">
+      <div className="w-2/5 m-auto py-10 shadow-item mt-14 bg-white  dark:bg-gray-800 dark:text-white">
         <div className="w-3/4 mx-auto">
-          <h1 className="font-extrabold text-3xl text-black mb-5 text-center">
+          <h1 className="font-extrabold text-3xl  mb-5 text-center">
             Ürün Ekle
           </h1>
           <form onSubmit={handleSubmit}>
@@ -253,9 +253,9 @@ function AddProduct() {
           </form>
         </div>
       </div>
-      <div className="w-1/3 mx-auto py-3 px-14 shadow-item mt-14 bg-white">
+      <div className="w-1/3 mx-auto py-3 px-14 shadow-item mt-14 bg-white dark:bg-gray-800 dark:text-white">
         <div className="mx-auto text-center pt-10 pb-14">
-          <h1 className="font-extrabold text-3xl text-black mb-5 text-center">
+          <h1 className="font-extrabold text-3xl mb-5 text-center">
             Fotoğraf Ekle
           </h1>
           <div className=" bg-darkBlue text-gray-100  p-10 text-lg flex justify-center items-center">

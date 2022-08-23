@@ -100,7 +100,7 @@ function ControlUsingStates() {
 
   return (
     <div className="flex justify-between items-center p-16">
-      <div className="w-1/3  mx-auto  bg-white rounded-md shadow-item px-4 py-5">
+      <div className="w-1/3  mx-auto  bg-white dark:bg-gray-800 rounded-md shadow-item px-4 py-5">
         <div className="flex flex-col gap-2">
           {usingStates.map((usingState) => (
             <div
@@ -149,9 +149,9 @@ function ControlUsingStates() {
         </div>
       </div>
 
-      <div className="w-1/2 mx-auto  py-10 shadow-item  bg-white">
+      <div className="w-1/2 mx-auto  py-10 shadow-item dark:bg-gray-800 dark:text-white  bg-white">
         <div className="w-3/4 m-auto">
-          <h1 className="font-extrabold text-3xl text-black mb-5 text-center">
+          <h1 className="font-extrabold text-3xl  mb-5 text-center">
             {updateUsingStateStatus
               ? "Kullanım Durumu Güncelle"
               : "Kullanım Durumu Ekle"}

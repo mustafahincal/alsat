@@ -92,7 +92,7 @@ function ControlCategories() {
 
   return (
     <div className="flex justify-between items-center p-16">
-      <div className="w-1/3  mx-auto  bg-white rounded-md shadow-item px-4 py-5">
+      <div className="w-1/3  mx-auto  bg-white dark:bg-gray-800 rounded-md shadow-item px-4 py-5">
         <div className="flex flex-col gap-2">
           {categories.map((category) => (
             <div
@@ -103,7 +103,7 @@ function ControlCategories() {
               <div className="flex">
                 {updateCategoryStatus ? (
                   <div
-                    className="bg-indigo-500 text-white px-2 flex items-center justify-center rounded cursor-pointer mr-2"
+                    className="bg-indigo-500 text-white  px-2 flex items-center justify-center rounded cursor-pointer mr-2"
                     onClick={() =>
                       handleUpdateCategory(category.categoryId, category.name)
                     }
@@ -135,9 +135,9 @@ function ControlCategories() {
         </div>
       </div>
 
-      <div className="w-1/2 mx-auto  py-10 shadow-item  bg-white">
+      <div className="w-1/2 mx-auto  py-10 shadow-item  bg-white dark:bg-gray-800 dark:text-white">
         <div className="w-3/4 m-auto">
-          <h1 className="font-extrabold text-3xl text-black mb-5 text-center">
+          <h1 className="font-extrabold text-3xl mb-5 text-center">
             {updateCategoryStatus ? "Kategori Güncelle" : "Kategori Ekle"}
           </h1>
           <form onSubmit={handleSubmit}>
