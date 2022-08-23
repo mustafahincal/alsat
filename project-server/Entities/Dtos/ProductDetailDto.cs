@@ -10,6 +10,7 @@ namespace Entities.Dtos
     public class ProductDetailDto : IDto
     {
         public int ProductId { get; set; }
+        public string OwnerName { get; set; }
         public int CategoryId { get; set; }
         public int BrandId { get; set; }
         public int ColorId { get; set; }
