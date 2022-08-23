@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.UnitOfWork;
@@ -32,6 +34,17 @@ namespace Business.Concrete
 
         public IResult Add(Brand brand)
         {
+
+            IResult result = BusinessRules.Run(
+                CheckIfBrandNameExists(brand.Name)
+                ); ;
+
+
+            if (result != null)
+            {
+                return new ErrorDataResult<List<Brand>>(result.Message);
+            }
+
             _brandDal.Add(brand);
             _brandDal.Commit();
             return new SuccessResult("Marka eklendi");
@@ -47,11 +60,32 @@ namespace Business.Concrete
 
         public IResult Update(BrandForUpdateDto brandForUpdateDto)
         {
+
+            IResult result = BusinessRules.Run(
+               CheckIfBrandNameExists(brandForUpdateDto.Name)
+               ); ;
+
+
+            if (result != null)
+            {
+                return new ErrorDataResult<List<Brand>>(result.Message);
+            }
+
             var brandToUpdate = _brandDal.Get(b => b.BrandId == brandForUpdateDto.BrandId);
             brandToUpdate.Name = brandForUpdateDto.Name;
             _brandDal.Update(brandToUpdate);
             _brandDal.Commit();
             return new SuccessResult("Marka güncellendi");
+        }
+
+        private IResult CheckIfBrandNameExists(string brandName)
+        {
+            var result = _brandDal.GetAll(b => b.Name == brandName).Any();
+            if (result)
+            {
+                return new ErrorResult(Messages.BrandNameAlreadyExists);
+            }
+            return new SuccessResult();
         }
     }
 }

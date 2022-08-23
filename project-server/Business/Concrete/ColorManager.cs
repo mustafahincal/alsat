@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.UnitOfWork;
@@ -32,6 +34,17 @@ namespace Business.Concrete
 
         public IResult Add(Color color)
         {
+
+            IResult result = BusinessRules.Run(
+                CheckIfColorNameExists(color.Name)
+                );
+
+
+            if (result != null)
+            {
+                return new ErrorDataResult<List<Color>>(result.Message);
+            }
+
             _colorDal.Add(color);
             _colorDal.Commit();
             return new SuccessResult("Renk eklendi");
@@ -47,11 +60,32 @@ namespace Business.Concrete
 
         public IResult Update(ColorForUpdateDto colorForUpdateDto)
         {
+
+            IResult result = BusinessRules.Run(
+                CheckIfColorNameExists(colorForUpdateDto.Name)
+                );
+
+
+            if (result != null)
+            {
+                return new ErrorDataResult<List<Color>>(result.Message);
+            }
+
             var colorToUpdate = _colorDal.Get(c => c.ColorId == colorForUpdateDto.ColorId);
             colorToUpdate.Name = colorForUpdateDto.Name;
             _colorDal.Update(colorToUpdate);
             _colorDal.Commit();
             return new SuccessResult("Renk güncellendi");
+        }
+
+        private IResult CheckIfColorNameExists(string colorName)
+        {
+            var result = _colorDal.GetAll(c => c.Name == colorName).Any();
+            if (result)
+            {
+                return new ErrorResult(Messages.ColorNameAlreadyExists);
+            }
+            return new SuccessResult();
         }
     }
 }

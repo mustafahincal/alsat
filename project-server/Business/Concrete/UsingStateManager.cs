@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.UnitOfWork;
@@ -32,6 +34,17 @@ namespace Business.Concrete
 
         public IResult Add(UsingState usingState)
         {
+
+            IResult result = BusinessRules.Run(
+                CheckIfUsingStateNameExists(usingState.Name)
+                );
+
+
+            if (result != null)
+            {
+                return new ErrorDataResult<List<UsingState>>(result.Message);
+            }
+
             _usingStateDal.Add(usingState);
             _usingStateDal.Commit();
             return new SuccessResult("Kullanım Durumu eklendi");
@@ -47,11 +60,32 @@ namespace Business.Concrete
 
         public IResult Update(UsingStateForUpdateDto usingStateForUpdateDto)
         {
+
+            IResult result = BusinessRules.Run(
+                CheckIfUsingStateNameExists(usingStateForUpdateDto.Name)
+                );
+
+
+            if (result != null)
+            {
+                return new ErrorDataResult<List<UsingState>>(result.Message);
+            }
+
             var usingStateToUpdate = _usingStateDal.Get(u => u.UsingStateId == usingStateForUpdateDto.UsingStateId);
             usingStateToUpdate.Name = usingStateForUpdateDto.Name;
             _usingStateDal.Update(usingStateToUpdate);
             _usingStateDal.Commit();
             return new SuccessResult("Kullanım Durumu güncellendi");
+        }
+
+        private IResult CheckIfUsingStateNameExists(string usingState)
+        {
+            var result = _usingStateDal.GetAll(u => u.Name == usingState).Any();
+            if (result)
+            {
+                return new ErrorResult(Messages.UsingStateNameAlreadyExists);
+            }
+            return new SuccessResult();
         }
     }
 }

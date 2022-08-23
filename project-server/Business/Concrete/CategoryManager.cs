@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.UnitOfWork;
@@ -22,6 +24,16 @@ namespace Business.Concrete
 
         public IResult Add(Category category)
         {
+            IResult result = BusinessRules.Run(
+                CheckIfCategoryNameExists(category.Name)
+                ); 
+
+
+            if (result != null)
+            {
+                return new ErrorDataResult<List<Category>>(result.Message);
+            }
+
             _categortDal.Add(category);
             _categortDal.Commit();
             return new SuccessResult("Kategori eklendi");
@@ -37,6 +49,16 @@ namespace Business.Concrete
 
         public IResult Update(CategoryForUpdateDto categoryForUpdateDto)
         {
+            IResult result = BusinessRules.Run(
+                CheckIfCategoryNameExists(categoryForUpdateDto.Name)
+                );
+
+
+            if (result != null)
+            {
+                return new ErrorDataResult<List<Category>>(result.Message);
+            }
+
             var categoryToUpdate = _categortDal.Get(c => c.CategoryId == categoryForUpdateDto.CategoryId);
             categoryToUpdate.Name = categoryForUpdateDto.Name;
             _categortDal.Update(categoryToUpdate);
@@ -53,6 +75,16 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<Category>(_categortDal.Get(c => c.CategoryId == categoryId));
 
+        }
+
+        private IResult CheckIfCategoryNameExists(string categoryName)
+        {
+            var result = _categortDal.GetAll(c => c.Name == categoryName).Any();
+            if (result)
+            {
+                return new ErrorResult(Messages.CategoryNameAlreadyExists);
+            }
+            return new SuccessResult();
         }
     }
 }

@@ -27,6 +27,10 @@ namespace Business.Constants
 
         public static string AuthorizationDenied = "Yetkiniz yok";
         public static string ProductNameAlreadyExists = "Ürün ismi zaten mevcut";
+        public static string BrandNameAlreadyExists = "Marka ismi zaten mevcut";
+        public static string CategoryNameAlreadyExists = "Kategori ismi zaten mevcut";
+        public static string ColorNameAlreadyExists = "Renk ismi zaten mevcut";
+        public static string UsingStateNameAlreadyExists = "Kullanım Durumu ismi zaten mevcut";
 
         public static string Added = "Eklendi";
         public static string Deleted = "Silindi";
