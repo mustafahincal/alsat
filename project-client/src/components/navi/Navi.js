@@ -152,7 +152,7 @@ function Navi() {
                 </span>
               </button>
               <div
-                className={`absolute top-full right-0 w-64 rounded p-1 bg-white flex flex-col z-10 duration-25 transition-all font-medium shadow-item2  ${
+                className={`absolute top-full right-0 w-64 rounded p-1 bg-white flex flex-col z-10 duration-25 transition-all font-medium shadow-item2 dark:bg-gray-800 dark:text-white   ${
                   visible ? " visible mt-4" : " invisible mt-2"
                 } `}
               >
@@ -160,7 +160,7 @@ function Navi() {
                   onClick={() => setVisible(!visible)}
                   to="/profile"
                   className={({ isActive }) =>
-                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200  border-b-2 dark:hover:bg-gray-700 dark:border-gray-700"
                   }
                 >
                   Hesabım
@@ -169,7 +169,7 @@ function Navi() {
                   onClick={() => setVisible(!visible)}
                   to="/profile/givenOffers"
                   className={({ isActive }) =>
-                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2  dark:hover:bg-gray-700 dark:border-gray-700"
                   }
                 >
                   Verilen Teklifler
@@ -178,7 +178,7 @@ function Navi() {
                   onClick={() => setVisible(!visible)}
                   to="/profile/takenOffers"
                   className={({ isActive }) =>
-                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2  dark:hover:bg-gray-700 dark:border-gray-700"
                   }
                 >
                   Alınan Teklifler
@@ -187,7 +187,7 @@ function Navi() {
                   onClick={() => setVisible(!visible)}
                   to="/profile/soldedProducts"
                   className={({ isActive }) =>
-                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2  dark:hover:bg-gray-700 dark:border-gray-700"
                   }
                 >
                   Satılan Ürünler
@@ -196,7 +196,7 @@ function Navi() {
                   onClick={() => setVisible(!visible)}
                   to="/profile/purchasedProducts"
                   className={({ isActive }) =>
-                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2  dark:hover:bg-gray-700 dark:border-gray-700"
                   }
                 >
                   Alınan Ürünler
@@ -205,7 +205,7 @@ function Navi() {
                   onClick={() => setVisible(!visible)}
                   to="/profile/changePassword"
                   className={({ isActive }) =>
-                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2  dark:hover:bg-gray-700 dark:border-gray-700"
                   }
                 >
                   Şifre Değiştir
@@ -214,14 +214,14 @@ function Navi() {
                   onClick={() => setVisible(!visible)}
                   to="/profile/creditcard"
                   className={({ isActive }) =>
-                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2  dark:hover:bg-gray-700 dark:border-gray-700"
                   }
                 >
                   Kayıtlı Kartlarım
                 </NavLink>
 
                 <span
-                  className="border-b-2 border-red-200 cursor-pointer text-base py-2 px-2 items-center rounded  text-red-500  hover:bg-red-500 hover:text-white"
+                  className="border-b-2 border-red-400 cursor-pointer text-base py-2 px-2 items-center rounded  text-red-500  hover:bg-red-500 hover:text-white "
                   onClick={() => handleLogOut()}
                 >
                   Çıkış Yap

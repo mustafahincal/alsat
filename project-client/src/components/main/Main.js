@@ -8,6 +8,7 @@ import { useUserContext } from "../../context/UserContext";
 import { getUserById } from "../../services/userService";
 import { getFromLocalStorage } from "../../services/localStorageService";
 import { useNaviContext } from "../../context/NaviContext";
+import UsingStates from "../usingState/UsingStates";
 
 function Main() {
   const { selectedUser } = useUserContext();
@@ -31,6 +32,7 @@ function Main() {
         <Categories />
         <Brands />
         <Colors />
+        <UsingStates />
       </div>
       <div className="col-span-8 py-10 pl-5">
         <Routes>
@@ -39,6 +41,10 @@ function Main() {
           <Route path="/products/user/:ownerId" element={<Products />} />
           <Route path="/products/brand/:brandId" element={<Products />} />
           <Route path="/products/color/:colorId" element={<Products />} />
+          <Route
+            path="/products/usingState/:usingStateId"
+            element={<Products />}
+          />
           <Route path="/products/category/:categoryId" element={<Products />} />
         </Routes>
       </div>

@@ -4,6 +4,7 @@ import {
   getProductsByBrand,
   getProductsByCategory,
   getProductsByColor,
+  getProductsByUsingState,
 } from "../../services/productService";
 import { NavLink, useParams } from "react-router-dom";
 import defaultImage from "../../assets/default.png";
@@ -12,7 +13,7 @@ import { getProductsByOwner } from "../../services/productService";
 
 function Products({ limit }) {
   const { products, setProducts } = useProductContext();
-  const { brandId, colorId, categoryId, ownerId } = useParams();
+  const { brandId, colorId, categoryId, ownerId, usingStateId } = useParams();
 
   const apiImagesUrl = "https://localhost:44350/uploads/images/";
 
@@ -21,6 +22,10 @@ function Products({ limit }) {
       getProductsByBrand(brandId).then((result) => setProducts(result.data));
     } else if (colorId) {
       getProductsByColor(colorId).then((result) => setProducts(result.data));
+    } else if (usingStateId) {
+      getProductsByUsingState(usingStateId).then((result) =>
+        setProducts(result.data)
+      );
     } else if (categoryId) {
       getProductsByCategory(categoryId).then((result) =>
         setProducts(result.data)
@@ -32,7 +37,7 @@ function Products({ limit }) {
     }
 
     //return () => console.log("component kapando");
-  }, [brandId, colorId, categoryId, ownerId]);
+  }, [brandId, colorId, categoryId, ownerId, usingStateId]);
 
   return (
     <div className="bg-gray-100 dark:bg-gray-700">

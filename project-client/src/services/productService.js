@@ -9,6 +9,13 @@ export const getProductsByBrand = (brandId) =>
 export const getProductsByColor = (colorId) =>
   get(apiUrl + "/products/getproductdetailsbycolorid?colorId=" + colorId);
 
+export const getProductsByUsingState = (usingStateId) =>
+  get(
+    apiUrl +
+      "/products/getproductdetailsbyusingStateid?usingStateId=" +
+      usingStateId
+  );
+
 export const getProductsByCategory = (categoryId) =>
   get(
     apiUrl + "/products/getproductdetailsbycategoryid?categoryId=" + categoryId
