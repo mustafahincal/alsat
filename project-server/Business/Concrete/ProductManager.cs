@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -12,17 +14,16 @@ namespace Business.Concrete
     public class ProductManager : IProductService
     {
         IProductDal _productDal;
-        ICategoryService _categoryService;
         IProductImageService _productImageService;
         IOfferService _offerService;
-        public ProductManager(IProductDal productDal, ICategoryService categoryService, IProductImageService productImageService, IOfferService offerService)
+        public ProductManager(IProductDal productDal, IProductImageService productImageService, IOfferService offerService)
         {
             _productDal = productDal;
-            _categoryService = categoryService;
             _productImageService = productImageService;
             _offerService = offerService;
         }
 
+        [ValidationAspect(typeof(ProductValidator))]
         public IDataResult<List<Product>> Add(ProductForAddDto productForAddDto)
         {
 

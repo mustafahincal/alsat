@@ -12,10 +12,12 @@ namespace Business.ValidationRules.FluentValidation
     {
         public ProductValidator()
         {
-            RuleFor(p => p.Name).NotEmpty();
-            RuleFor(p => p.Name).MinimumLength(2);
-            RuleFor(p => p.Price).NotEmpty();
-            RuleFor(p => p.Price).GreaterThan(0);
+         
+            RuleFor(p => p.Name).MaximumLength(100).NotEmpty();
+            RuleFor(p => p.Description).MaximumLength(500).NotEmpty();
+            RuleFor(p => p.CategoryId).NotEmpty();
+            RuleFor(p => p.UsingStateId).NotEmpty();
+            RuleFor(p => p.Price).GreaterThan(0).NotEmpty();
         }
     }
 }

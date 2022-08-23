@@ -7,7 +7,7 @@ export const ProductSchema = Yup.object().shape({
     .notOneOf(["0", 0], "Kategori Alanı Zorunludur"),
   brandId: Yup.string(),
   colorId: Yup.string(),
-  price: Yup.number().required(),
+  price: Yup.number().required().min(0),
   description: Yup.string().required().max(500),
   usingStateId: Yup.string()
     .required()
