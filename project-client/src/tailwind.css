@@ -16,7 +16,7 @@
     @apply text-[13px];
   }
   .nav-item {
-    @apply hover:border-b-4 border-darkBlue rounded-md transition-all duration-75;
+    @apply hover:border-b-4 border-darkBlue rounded-md transition-all duration-75 dark:border-white;
   }
 
   .modal {
@@ -27,8 +27,8 @@
   }
 }
 .active {
-  @apply bg-darkBlue text-white;
+  @apply bg-darkBlue text-white dark:bg-gray-300 dark:text-black;
 }
 .active-nav {
-  @apply border-b-4 border-black rounded-md;
+  @apply border-b-4 border-black rounded-md dark:border-white;
 }

@@ -5,6 +5,7 @@ import { useUserContext } from "../../context/UserContext";
 import { removeFromLocalStorage } from "../../services/localStorageService";
 
 import { CgProfile } from "react-icons/cg";
+import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
 import { useNaviContext } from "../../context/NaviContext";
 import { useProductContext } from "../../context/ProductContext";
 import { useBrandContext } from "../../context/BrandContext";
@@ -12,6 +13,7 @@ import { useCategoryContext } from "../../context/CategoryContext";
 import { useColorContext } from "../../context/ColorContext";
 import { useOfferContext } from "../../context/OfferContext";
 import { usePaymentContext } from "../../context/PaymentContext";
+import { useThemeContext } from "../../context/ThemeContext";
 
 function Navi() {
   const { isAdmin, isLogged, setIsLogged, setIsAdmin, setCounter } =
@@ -30,7 +32,7 @@ function Navi() {
   const { setSelectedColor, setUpdateColorStatus } = useColorContext();
   const { setGivenOffers, setTakenOffers, setSelectedOffer } =
     useOfferContext();
-
+  const { handleDarkMode } = useThemeContext();
   const navigate = useNavigate();
 
   const handleLogOut = () => {
@@ -65,7 +67,7 @@ function Navi() {
 
   return (
     <div>
-      <nav className="flex justify-between items-center py-3 px-32 bg-white text-black font-bold border-b-2 border-gray-300">
+      <nav className="flex justify-between items-center py-3 px-32 bg-white text-black font-bold border-b-2 border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white">
         <NavLink
           to="/"
           className={({ isActive }) => "logo text-6xl font-dancing"}
@@ -80,7 +82,7 @@ function Navi() {
             }
           >
             Anasayfa
-            <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all duration-75"></div>
+            <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all dark:bg-white duration-75"></div>
           </NavLink>
           <NavLink
             to="/main"
@@ -89,7 +91,7 @@ function Navi() {
             }
           >
             Ürünler
-            <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all duration-75"></div>
+            <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all duration-75 dark:bg-white"></div>
           </NavLink>
 
           {isLogged && (
@@ -100,13 +102,13 @@ function Navi() {
               }
             >
               Ürün Sat
-              <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all duration-75"></div>
+              <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all duration-75 dark:bg-white"></div>
             </NavLink>
           )}
           {isLogged && isAdmin && (
             <NavLink
               className={({ isActive }) =>
-                "btn bg-littleDarkBlue shadow-item2 text-white  ml-10 text-base"
+                "btn bg-sky-400 shadow-item2 text-white  ml-10 text-base dark:bg-sky-300 dark:text-black"
               }
               to={"/dashboard"}
             >
@@ -136,7 +138,7 @@ function Navi() {
           )}
           {isLogged && (
             <div className="group relative">
-              <button className="flex items-center bg-darkBlue border-4 border-white shadow-item2 text-white py-2 rounded-xl px-4 text-base ml-10">
+              <button className="flex items-center bg-darkBlue shadow-item2 text-white py-2 rounded-md px-4 text-base ml-6 dark:bg-gray-200 dark:text-black">
                 <span
                   onClick={() => setVisible(!visible)}
                   className="flex items-center"
@@ -227,6 +229,19 @@ function Navi() {
               </div>
             </div>
           )}
+
+          <div
+            href="#"
+            onClick={handleDarkMode}
+            className="btn bg-gray-700 text-white text-base ml-6 cursor-pointer dark:bg-yellow-300 dark:text-black py-3"
+          >
+            <span className="dark:hidden flex items-center  justify-between">
+              <BsFillMoonFill />
+            </span>
+            <span className="hidden  dark:flex dark:items-center dark:justify-between">
+              <BsFillSunFill />
+            </span>
+          </div>
         </div>
       </nav>
     </div>

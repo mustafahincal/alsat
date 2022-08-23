@@ -35,14 +35,14 @@ function Products({ limit }) {
   }, [brandId, colorId, categoryId, ownerId]);
 
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 dark:bg-gray-700">
       <div className="grid grid-cols-12 gap-x-8 gap-y-12">
         {products.map(
           (product, index) =>
             (limit ? index < limit : true) && (
               <NavLink
                 key={index}
-                className="flex flex-col justify-between rounded-md col-span-3 shadow-item mb-10 "
+                className="flex flex-col justify-between rounded-md col-span-3 shadow-item mb-10 dark:bg-darkBlue dark:text-white"
                 to={`/productdetails/${product.productId}`}
               >
                 <img
@@ -54,7 +54,7 @@ function Products({ limit }) {
                   className="rounded-t-md h-2/3 object-cover object-center w-full flex-shrink-0"
                   alt=""
                 />
-                <div className="text-center bg-white flex flex-col justify-between py-2 px-5">
+                <div className="text-center bg-white dark:bg-gray-800 flex flex-col justify-between py-2 px-5">
                   <div className="flex justify-between">
                     <p>Ürün</p>
                     <p>{product.productName}</p>

@@ -17,7 +17,13 @@ function Main() {
       <div className="col-span-2 py-10 pr-5">
         <NavLink
           to={`products/user/${selectedUser.userId}`}
-          className="px-2 rounded py-2 border-b-2 font-bold w-full block mb-5 shadow-item bg-white"
+          className={({ isActive }) =>
+            `px-2 rounded py-2 border-b-2 font-bold w-full block mb-5 shadow-item2 bg-white dark:bg-gray-800 dark:border-gray-600 ${
+              isActive
+                ? "dark:bg-gray-300 dark:text-black bg-darkBlue text-white"
+                : ""
+            }`
+          }
         >
           Ürünlerim
         </NavLink>

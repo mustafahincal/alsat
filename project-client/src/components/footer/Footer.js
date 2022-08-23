@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <div className="flex justify-between items-center py-6 px-32 bg-darkBlue text-white  border-gray-300">
+    <div className="flex justify-between items-center py-6 px-32 bg-darkBlue text-white  border-gray-300 dark:bg-gray-100 dark:text-black">
       <div className="flex justify-between gap-3 text-sm">
         <p className="font-bold">Resmi bağlantılar</p>
         <p>Şartlar ve Koşullar</p>

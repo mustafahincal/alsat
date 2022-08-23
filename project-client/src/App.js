@@ -29,7 +29,10 @@ export default function App() {
       <div className="font-poppins bg-gray-100 min-h-screen flex flex-col justify-between">
         <div>
           <Navi />
-          <div className="py-4" onClick={handleVisible}>
+          <div
+            className="py-4 dark:bg-gray-700 dark:text-white"
+            onClick={handleVisible}
+          >
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/main/*" element={<Main />} />
