@@ -51,6 +51,7 @@ function Controlcolors() {
                 toast.success(response.message);
                 getColors().then((result) => setColors(result.data));
                 values.name = "";
+                setUpdateColorStatus(false);
               }
             })
             .catch((err) => console.log(err));
@@ -137,7 +138,7 @@ function Controlcolors() {
                 name="name"
                 type="text"
                 className="text-darkBlue py-2 px-4 w-full"
-                placeholder="Color"
+                placeholder="Renk"
                 required
               />
               {errors.name && touched.name && (

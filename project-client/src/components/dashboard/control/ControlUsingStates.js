@@ -59,6 +59,7 @@ function ControlUsingStates() {
                 toast.success(response.message);
                 getUsingStates().then((result) => setUsingStates(result.data));
                 values.name = "";
+                setUpdateUsingStateStatus(false);
               }
             })
             .catch((err) => console.log(err));

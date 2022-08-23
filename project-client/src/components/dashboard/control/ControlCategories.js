@@ -51,6 +51,7 @@ function ControlCategories() {
                 toast.success(response.message);
                 getCategories().then((result) => setCategories(result.data));
                 values.name = "";
+                setUpdateCategoryStatus(false);
               }
             })
             .catch((err) => console.log(err));

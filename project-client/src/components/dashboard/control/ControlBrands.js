@@ -51,6 +51,7 @@ function ControlBrands() {
                 toast.success(response.message);
                 getBrands().then((result) => setBrands(result.data));
                 values.name = "";
+                setUpdateBrandStatus(false);
               }
             })
             .catch((err) => console.log(err));
