@@ -31,6 +31,7 @@ function ControlBrands() {
       },
       onSubmit: (values) => {
         if (!updateBrandStatus) {
+          values = { name: capitalize(values.name) };
           postBrand(values)
             .then((response) => {
               if (response.success) {
@@ -39,11 +40,11 @@ function ControlBrands() {
                 values.name = "";
               }
             })
-            .catch((err) => console.log(err));
+            .catch((err) => toast.error(err.response.data.message));
         } else {
           const data = {
             brandId: selectedBrand.brandId,
-            name: values.name,
+            name: capitalize(values.name),
           };
           updateBrand(data)
             .then((response) => {
@@ -54,7 +55,7 @@ function ControlBrands() {
                 setUpdateBrandStatus(false);
               }
             })
-            .catch((err) => console.log(err));
+            .catch((err) => toast.error(err.response.data.message));
         }
       },
       validationSchema: ControlSchema,
@@ -83,6 +84,10 @@ function ControlBrands() {
       name: brandName,
     };
     setSelectedBrand(brand);
+  };
+
+  const capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
   return (

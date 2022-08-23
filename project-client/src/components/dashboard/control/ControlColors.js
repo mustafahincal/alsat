@@ -31,6 +31,7 @@ function Controlcolors() {
       },
       onSubmit: (values) => {
         if (!updateColorStatus) {
+          values = { name: capitalize(values.name) };
           postColor(values)
             .then((response) => {
               if (response.success) {
@@ -39,11 +40,11 @@ function Controlcolors() {
                 values.name = "";
               }
             })
-            .catch((err) => console.log(err));
+            .catch((err) => toast.error(err.response.data.message));
         } else {
           const data = {
             colorId: selectedColor.colorId,
-            name: values.name,
+            name: capitalize(values.name),
           };
           updateColor(data)
             .then((response) => {
@@ -54,7 +55,7 @@ function Controlcolors() {
                 setUpdateColorStatus(false);
               }
             })
-            .catch((err) => console.log(err));
+            .catch((err) => toast.error(err.response.data.message));
         }
       },
       validationSchema: ControlSchema,
@@ -83,6 +84,10 @@ function Controlcolors() {
       name: colorName,
     };
     setSelectedColor(color);
+  };
+
+  const capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
   return (

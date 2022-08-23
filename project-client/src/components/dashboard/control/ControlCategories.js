@@ -31,6 +31,7 @@ function ControlCategories() {
       },
       onSubmit: (values) => {
         if (!updateCategoryStatus) {
+          values = { name: capitalize(values.name) };
           postCategory(values)
             .then((response) => {
               if (response.success) {
@@ -39,11 +40,11 @@ function ControlCategories() {
                 values.name = "";
               }
             })
-            .catch((err) => console.log(err));
+            .catch((err) => toast.error(err.response.data.message));
         } else {
           const data = {
             categoryId: selectedCategory.categoryId,
-            name: values.name,
+            name: capitalize(values.name),
           };
           updateCategory(data)
             .then((response) => {
@@ -54,7 +55,7 @@ function ControlCategories() {
                 setUpdateCategoryStatus(false);
               }
             })
-            .catch((err) => console.log(err));
+            .catch((err) => toast.error(err.response.data.message));
         }
       },
       validationSchema: ControlSchema,
@@ -83,6 +84,10 @@ function ControlCategories() {
       name: categoryName,
     };
     setSelectedCategory(category);
+  };
+
+  const capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
   return (

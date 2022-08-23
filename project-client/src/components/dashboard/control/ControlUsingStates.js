@@ -39,6 +39,7 @@ function ControlUsingStates() {
       },
       onSubmit: (values) => {
         if (!updateUsingStateStatus) {
+          values = { name: capitalize(values.name) };
           postUsingState(values)
             .then((response) => {
               if (response.success) {
@@ -47,11 +48,11 @@ function ControlUsingStates() {
                 values.name = "";
               }
             })
-            .catch((err) => console.log(err));
+            .catch((err) => toast.error(err.response.data.message));
         } else {
           const data = {
             usingStateId: selectedUsingState.usingStateId,
-            name: values.name,
+            name: capitalize(values.name),
           };
           updateUsingState(data)
             .then((response) => {
@@ -62,7 +63,7 @@ function ControlUsingStates() {
                 setUpdateUsingStateStatus(false);
               }
             })
-            .catch((err) => console.log(err));
+            .catch((err) => toast.error(err.response.data.message));
         }
       },
       validationSchema: ControlSchema,
@@ -91,6 +92,10 @@ function ControlUsingStates() {
       name: usingStateName,
     };
     setSelectedUsingState(usingState);
+  };
+
+  const capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
   return (
