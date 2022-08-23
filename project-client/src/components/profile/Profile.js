@@ -14,50 +14,53 @@ function Profile() {
   return (
     <div className="grid grid-cols-10 w-full px-32 m-auto">
       <div className="col-span-2 py-10 pr-5">
-        <div className="bg-white  rounded-lg flex flex-col shadow-item ">
+        <div className="bg-white dark:bg-gray-800 rounded-lg flex flex-col shadow-item ">
           <NavLink
             to={"profilDetails"}
-            className="px-2  rounded py-2 border-b-2 "
+            className="px-2  rounded py-2 border-b-2 dark:border-gray-600"
           >
             Hesabım
           </NavLink>
           <NavLink
             to={"givenOffers"}
-            className="px-2  rounded py-2 border-b-2 "
+            className="px-2  rounded py-2 border-b-2 dark:border-gray-600"
           >
             Verilen Teklifler
           </NavLink>
           <NavLink
             to={"takenOffers"}
-            className="px-2  rounded py-2 border-b-2 "
+            className="px-2  rounded py-2 border-b-2 dark:border-gray-600"
           >
             Alınan Teklifler
           </NavLink>
           <NavLink
             to={"soldedproducts"}
-            className="px-2  rounded py-2 border-b-2 "
+            className="px-2  rounded py-2 border-b-2 dark:border-gray-600"
           >
             Satılan Ürünler
           </NavLink>
           <NavLink
             to={"purchasedproducts"}
-            className="px-2  rounded py-2 border-b-2 "
+            className="px-2  rounded py-2 border-b-2 dark:border-gray-600"
           >
             Alınan Ürünler
           </NavLink>
           <NavLink
             to={"changePassword"}
-            className="px-2  rounded py-2 border-b-2  "
+            className="px-2  rounded py-2 border-b-2  dark:border-gray-600"
           >
             Şifre Değiştir
           </NavLink>
           <NavLink
             to={"creditCard"}
-            className="px-2  rounded py-2 border-b-2  "
+            className="px-2  rounded py-2 border-b-2 dark:border-gray-600"
           >
             Kayıtlı Kartlarım
           </NavLink>
-          <NavLink to={"updateUser"} className="px-2 rounded py-2 border-b-2 ">
+          <NavLink
+            to={"updateUser"}
+            className="px-2 rounded py-2 border-b-2 dark:border-gray-600"
+          >
             Bilgileri Değiştir
           </NavLink>
         </div>

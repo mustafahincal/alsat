@@ -110,11 +110,9 @@ function OfferForProduct() {
 
   return (
     <div className="py-20">
-      <div className="bg-white shadow-item w-10/12 m-auto px-10 py-10 flex justify-between gap-5">
+      <div className="bg-white dark:bg-gray-800 dark:text-white shadow-item w-10/12 m-auto px-10 py-10 flex justify-between gap-5">
         <div className="w-1/2 text-left">
-          <h1 className="font-extrabold text-3xl text-black mb-5">
-            Ürün Bilgileri
-          </h1>
+          <h1 className="font-extrabold text-3xl mb-5">Ürün Bilgileri</h1>
           <div className="w-full flex rounded-l-md">
             <div className="w-1/2">
               <img
@@ -156,7 +154,7 @@ function OfferForProduct() {
           </div>
         </div>
         <div className="w-1/2 text-right">
-          <h1 className="font-extrabold text-3xl text-black mb-5">Teklif</h1>
+          <h1 className="font-extrabold text-3xl  mb-5">Teklif</h1>
           {selectedOffer && (
             <div className="px-5 py-5 bg-red-500 bg-opacity-60 text-2xl text-white  text-center mb-5 ">
               Bu ürüne {selectedOffer.offeredPrice}₺ teklif verdiniz.

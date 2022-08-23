@@ -49,7 +49,7 @@ function ProductDetails() {
 
   return (
     <div className="py-24 flex justify-between px-36">
-      <div className="w-2/5 mb-16  bg-white rounded-md shadow-item mx-auto">
+      <div className="w-2/5 mb-16  bg-white dark:bg-gray-800 dark:text-white  rounded-md shadow-item mx-auto">
         <img
           src={
             selectedProduct.imagePath
@@ -60,39 +60,39 @@ function ProductDetails() {
           alt=""
         />
         <div>
-          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold dark:border-gray-700">
             <div>İsim</div>
             <div>{selectedProduct.productName}</div>
           </div>
-          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold dark:border-gray-700">
             <div>Kategori</div>
             <div>{selectedProduct.categoryName}</div>
           </div>
           {selectedProduct.brandName && (
-            <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+            <div className="w-full flex justify-between border-2 py-3 px-20 font-bold dark:border-gray-700">
               <div>Marka</div>
               <div>{selectedProduct.brandName}</div>
             </div>
           )}
           {selectedProduct.colorName && (
-            <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+            <div className="w-full flex justify-between border-2 py-3 px-20 font-bold dark:border-gray-700">
               <div>Renk</div>
               <div>{selectedProduct.colorName}</div>
             </div>
           )}
-          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold dark:border-gray-700">
             <div>Fiyat</div>
             <div>{selectedProduct.price}₺</div>
           </div>
-          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold dark:border-gray-700">
             <div>Kullanım Durumu</div>
             <div>{selectedProduct.usingStateName}</div>
           </div>
-          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold dark:border-gray-700">
             <div>Açıklama</div>
             <div>{selectedProduct.description}</div>
           </div>
-          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold">
+          <div className="w-full flex justify-between border-2 py-3 px-20 font-bold dark:border-gray-700">
             <div>Ürün Sahibi</div>
             <div>{selectedProduct.ownerName}</div>
           </div>
@@ -100,7 +100,7 @@ function ProductDetails() {
       </div>
 
       <div className="w-1/2 pt-20">
-        <div className="bg-white rounded-md w-1/2 m-auto p-10 flex flex-col gap-3 shadow-item text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-md w-1/2 m-auto p-10 flex flex-col gap-3 shadow-item text-center">
           {selectedProduct.ownerId != selectedUser.userId && (
             <div className="flex flex-col w-full">
               {selectedProduct.isOfferable && (

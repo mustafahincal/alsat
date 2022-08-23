@@ -54,24 +54,24 @@ function UpdateUser() {
 
   return (
     <div className="flex justify-between items-center p-16">
-      <div className="w-1/3  mx-auto  bg-white rounded-md shadow-item ">
-        <div className="w-full flex justify-between border-2 py-3 px-10 font-bold">
+      <div className="w-1/3  mx-auto  bg-white dark:bg-gray-800 dark:text-white rounded-md shadow-item ">
+        <div className="w-full flex justify-between border-2 py-3 px-10 font-bold dark:border-gray-700">
           <div>Ad</div>
           <div>{selectedUser.firstName}</div>
         </div>
-        <div className="w-full flex justify-between border-2 py-3 px-10 font-bold">
+        <div className="w-full flex justify-between border-2 py-3 px-10 font-bold dark:border-gray-700">
           <div>Soyad</div>
           <div>{selectedUser.lastName}</div>
         </div>
-        <div className="w-full flex justify-between border-2 py-3 px-10 font-bold">
+        <div className="w-full flex justify-between border-2 py-3 px-10 font-bold dark:border-gray-700">
           <div>Email</div>
           <div>{selectedUser.email}</div>
         </div>
       </div>
 
-      <div className="w-1/2  py-10 shadow-item  bg-white">
+      <div className="w-1/2  py-10 shadow-item  bg-white dark:bg-gray-800 dark:text-white">
         <div className="w-3/4 m-auto">
-          <h1 className="font-extrabold text-3xl text-black mb-5 text-center">
+          <h1 className="font-extrabold text-3xl mb-5 text-center">
             Kullanıcıyı Güncelle
           </h1>
           <form onSubmit={handleSubmit}>

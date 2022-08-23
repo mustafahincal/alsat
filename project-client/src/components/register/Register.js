@@ -65,11 +65,9 @@ function Register() {
   };
 
   return (
-    <div className="w-2/6 m-auto py-10 shadow-item mt-20 bg-white">
+    <div className="w-2/6 m-auto py-10 shadow-item mt-20 bg-white dark:bg-gray-800 dark:text-white">
       <div className="w-3/4 m-auto">
-        <h1 className="font-extrabold text-3xl text-black mb-5 text-center">
-          Kayıt Ol
-        </h1>
+        <h1 className="font-extrabold text-3xl  mb-5 text-center">Kayıt Ol</h1>
         <form onSubmit={handleSubmit}>
           <div className="w-full flex  flex-col bg-darkBlue text-gray-100  px-14 py-14 text-lg">
             <input

@@ -40,20 +40,20 @@ function ProfileMain() {
 
   return (
     <div>
-      <div className="w-1/3  bg-white rounded-md shadow-item mx-auto">
+      <div className="w-1/3  bg-white dark:bg-gray-800 rounded-md shadow-item mx-auto">
         <img
           src={profileDefaultImage}
           className="object-cover object-center rounded-t-md w-full"
           alt=""
         />
         <div className="text-center">
-          <div className="w-full  border-2 py-3 px-20 font-bold">
+          <div className="w-full dark:border-gray-700  border-2 py-3 px-20 font-bold">
             <div>{selectedUser.firstName + " " + selectedUser.lastName}</div>
           </div>
-          <div className="w-full border-2 py-3 px-20 font-bold">
+          <div className="w-full border-2 dark:border-gray-700  py-3 px-20 font-bold">
             <div>{selectedUser.email}</div>
           </div>
-          <div className="w-full  border-2 py-3 px-20 font-bold">
+          <div className="w-full  border-2 dark:border-gray-700  py-3 px-20 font-bold">
             <div>
               {selectedUser.status ? "Aktif Kullanıcı" : "Pasif Kullanıcı"}
             </div>
