@@ -18,14 +18,24 @@ namespace Business.Concrete
     public class UserManager : IUserService
     {
         IUserDal _userDal;
-        public UserManager(IUserDal userDal)
+        IUserOperationClaimService _userOperationClaimService;
+        public UserManager(IUserDal userDal, IUserOperationClaimService userOperationClaimService)
         {
             _userDal = userDal;
+            _userOperationClaimService = userOperationClaimService;
         }
         public IResult Add(User user)
         {
             _userDal.Add(user);
             _userDal.Commit();
+
+            UserOperationClaim userOperationClaimToAdd = new UserOperationClaim
+            {
+                UserId = user.UserId,
+                OperationClaimId = 2,
+            };
+            _userOperationClaimService.Add(userOperationClaimToAdd);
+
             return new SuccessResult("Kullanıcı eklendi");
         }
 
