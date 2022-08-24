@@ -35,19 +35,17 @@ function Products({ limit }) {
     } else {
       getProducts().then((result) => setProducts(result.data));
     }
-
-    //return () => console.log("component kapando");
   }, [brandId, colorId, categoryId, ownerId, usingStateId]);
 
   return (
     <div className="bg-gray-100 dark:bg-gray-700">
-      <div className="grid grid-cols-12 gap-x-8 gap-y-12">
+      <div className="grid grid-cols-12 gap-x-8 gap-y-10 sm:gap-y-10 md:gap-y-20">
         {products.map(
           (product, index) =>
             (limit ? index < limit : true) && (
               <NavLink
                 key={index}
-                className="flex flex-col justify-between rounded-md col-span-3 shadow-item mb-10 dark:bg-darkBlue dark:text-white"
+                className="flex flex-col justify-between rounded-md h-full  shadow-item mb-10 dark:bg-darkBlue dark:text-white col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3"
                 to={`/productdetails/${product.productId}`}
               >
                 <img
@@ -59,7 +57,7 @@ function Products({ limit }) {
                   className="rounded-t-md h-2/3 object-cover object-center w-full flex-shrink-0"
                   alt=""
                 />
-                <div className="text-center bg-white dark:bg-gray-800 flex flex-col justify-between py-2 px-5">
+                <div className="text-center bg-white dark:bg-gray-800 flex flex-col h-full justify-between py-3 px-5">
                   <div className="flex justify-between">
                     <p>Ürün</p>
                     <p>{product.productName}</p>

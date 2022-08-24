@@ -67,7 +67,7 @@ function Navi() {
 
   return (
     <div>
-      <nav className="flex justify-between items-center py-3 px-32 bg-white text-black font-bold border-b-2 border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white">
+      <nav className="flex justify-between items-center py-3 px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32 bg-white text-black font-bold border-b-2 border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white">
         <NavLink
           to="/"
           className={({ isActive }) => "logo text-6xl font-dancing"}
@@ -75,46 +75,48 @@ function Navi() {
           alsat
         </NavLink>
         <div className="flex  items-center text-xl">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              `group relative ${isActive ? "active-nav" : ""}`
-            }
-          >
-            Anasayfa
-            <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all dark:bg-white duration-75"></div>
-          </NavLink>
-          <NavLink
-            to="/main"
-            className={({ isActive }) =>
-              `ml-10 group  relative ${isActive ? "active-nav" : ""}`
-            }
-          >
-            Ürünler
-            <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all duration-75 dark:bg-white"></div>
-          </NavLink>
-
-          {isLogged && (
+          <div className="hidden md:block">
             <NavLink
-              to="/addProduct"
+              to="/"
               className={({ isActive }) =>
-                `group relative ml-10 mr-5 ${isActive ? "active-nav" : ""}`
+                `group relative ${isActive ? "active-nav" : ""}`
               }
             >
-              Ürün Sat
+              Anasayfa
+              <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all dark:bg-white duration-75"></div>
+            </NavLink>
+            <NavLink
+              to="/main"
+              className={({ isActive }) =>
+                `ml-10 group  relative ${isActive ? "active-nav" : ""}`
+              }
+            >
+              Ürünler
               <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all duration-75 dark:bg-white"></div>
             </NavLink>
-          )}
-          {isLogged && isAdmin && (
-            <NavLink
-              className={({ isActive }) =>
-                "btn bg-sky-400 shadow-item2 text-white  text-base dark:bg-sky-300 dark:text-black"
-              }
-              to={"/dashboard"}
-            >
-              Kontrol Paneli
-            </NavLink>
-          )}
+
+            {isLogged && (
+              <NavLink
+                to="/addProduct"
+                className={({ isActive }) =>
+                  `group relative ml-10 mr-5 ${isActive ? "active-nav" : ""}`
+                }
+              >
+                Ürün Sat
+                <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all duration-75 dark:bg-white"></div>
+              </NavLink>
+            )}
+            {isLogged && isAdmin && (
+              <NavLink
+                className={({ isActive }) =>
+                  "btn bg-sky-400 shadow-item2 text-white  text-base dark:bg-sky-300 dark:text-black"
+                }
+                to={"/dashboard"}
+              >
+                Kontrol Paneli
+              </NavLink>
+            )}
+          </div>
 
           {!isLogged && (
             <div className="ml-10">

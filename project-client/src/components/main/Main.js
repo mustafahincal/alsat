@@ -14,8 +14,8 @@ function Main() {
   const { selectedUser } = useUserContext();
 
   return (
-    <div className="grid grid-cols-10 w-full px-32 m-auto">
-      <div className="col-span-2 py-10 pr-5">
+    <div className="grid grid-cols-10 w-full m-auto py-14 px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32">
+      <div className="col-span-10 order-2 md:order-1 md:col-span-2  md:pr-5">
         <NavLink
           to={`products/user/${selectedUser.userId}`}
           className={({ isActive }) =>
@@ -34,7 +34,7 @@ function Main() {
         <Colors />
         <UsingStates />
       </div>
-      <div className="col-span-8 py-10 pl-5">
+      <div className="col-span-10 mb-24 order-1 md:order-2 md:col-span-8 md:pl-5">
         <Routes>
           <Route path="/" element={<Products />} />
           <Route path="/products" element={<Products />} />

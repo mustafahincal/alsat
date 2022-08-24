@@ -12,7 +12,7 @@ function Home() {
   }, []);
 
   return (
-    <div className="px-32">
+    <div className=" px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32">
       <div className="h-[400px] w-full  bg-white rounded-2xl p-10  shadow-item2 bg-home-bg bg-cover bg-center flex items-end mt-10">
         <div className="flex">
           <NavLink
