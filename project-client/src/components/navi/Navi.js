@@ -3,8 +3,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import { useUserContext } from "../../context/UserContext";
 import { removeFromLocalStorage } from "../../services/localStorageService";
-
+import { GoThreeBars } from "react-icons/go";
 import { CgProfile } from "react-icons/cg";
+import { IoIosArrowDown } from "react-icons/io";
 import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
 import { useNaviContext } from "../../context/NaviContext";
 import { useProductContext } from "../../context/ProductContext";
@@ -148,8 +149,11 @@ function Navi() {
                   <div className="mr-3 flex justify-center items-center">
                     <CgProfile className="text-2xl" />
                   </div>
-                  <div>
+                  <div className="hidden sm:block">
                     {selectedUser.firstName + " " + selectedUser.lastName}
+                  </div>
+                  <div className="ml-0 sm:ml-3 flex justify-center items-center text-black">
+                    <IoIosArrowDown className="text-2xl" />
                   </div>
                 </span>
               </button>
