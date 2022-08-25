@@ -48,8 +48,8 @@ function ProductDetails() {
   };
 
   return (
-    <div className="py-24 flex justify-between px-36">
-      <div className="w-2/5 mb-16  bg-white dark:bg-gray-800 dark:text-white  rounded-md shadow-item mx-auto">
+    <div className="py-24 flex flex-col lg:flex-row lg:justify-between px-6 lg:px-36">
+      <div className="w-full sm:w-3/4 md:w-4/6 lg:w-1/2 xl:w-2/5 mb-16  bg-white dark:bg-gray-800 dark:text-white  rounded-md shadow-item mx-auto">
         <img
           src={
             selectedProduct.imagePath
@@ -99,8 +99,8 @@ function ProductDetails() {
         </div>
       </div>
 
-      <div className="w-1/2 pt-20">
-        <div className="bg-white dark:bg-gray-800 rounded-md w-1/2 m-auto p-10 flex flex-col gap-3 shadow-item text-center">
+      <div className="w-full sm:w-3/4 md:w-4/6 lg:w-1/3 xl:w-1/4 pt-20 mx-auto">
+        <div className="bg-white dark:bg-gray-800 rounded-md w-full m-auto p-10 flex flex-col gap-3 shadow-item text-center">
           {selectedProduct.ownerId != selectedUser.userId && (
             <div className="flex flex-col w-full">
               {selectedProduct.isOfferable && (

@@ -109,7 +109,7 @@ function Navi() {
             {isLogged && isAdmin && (
               <NavLink
                 className={({ isActive }) =>
-                  "btn bg-sky-400 shadow-item2 text-white  text-base dark:bg-sky-300 dark:text-black"
+                  "btn bg-sky-400 shadow-item2 text-white  text-base dark:bg-sky-300 dark:text-black ml-3"
                 }
                 to={"/dashboard"}
               >

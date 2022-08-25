@@ -91,9 +91,9 @@ function AddProduct() {
     });
 
   return (
-    <div className="flex justify-between items-start min-h-screen">
-      <div className="w-2/5 m-auto py-10 shadow-item mt-14 bg-white  dark:bg-gray-800 dark:text-white">
-        <div className="w-3/4 mx-auto">
+    <div className="flex flex-col lg:flex-row lg:justify-between items-start min-h-screen px-6 sm:px-0">
+      <div className="w-full sm:w-3/4 md:w-3/5 lg:w-2/5 m-auto py-10 shadow-item mt-14 bg-white  dark:bg-gray-800 dark:text-white">
+        <div className="w-5/6 xl:w-3/4 mx-auto">
           <h1 className="font-extrabold text-3xl  mb-5 text-center">
             Ürün Ekle
           </h1>
@@ -253,7 +253,7 @@ function AddProduct() {
           </form>
         </div>
       </div>
-      <div className="w-1/3 mx-auto py-3 px-14 shadow-item mt-14 bg-white dark:bg-gray-800 dark:text-white">
+      <div className="w-full sm:w-3/4 md:w-3/5 lg:w-1/3 mx-auto py-3 px-10 xl:px-14 shadow-item bg-white dark:bg-gray-800 dark:text-white my-10 sm:my-14">
         <div className="mx-auto text-center pt-10 pb-14">
           <h1 className="font-extrabold text-3xl mb-5 text-center">
             Fotoğraf Ekle

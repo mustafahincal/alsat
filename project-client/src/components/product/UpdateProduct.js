@@ -137,8 +137,8 @@ function Updateproduct() {
   };
 
   return (
-    <div className="flex justify-between items-center px-16 py-8">
-      <div className="w-2/5  mx-auto  bg-white dark:bg-gray-800 dark:text-white rounded-md shadow-item ">
+    <div className="flex flex-col lg:flex-row lg:justify-between px-6 lg:px-16 items-center lg:py-8 py-20">
+      <div className="w-full sm:w-3/4 md:w-4/6 lg:mx-5 lg:w-1/2 xl:w-2/5 xl:mx-auto  bg-white dark:bg-gray-800 dark:text-white rounded-md shadow-item ">
         <img
           src={
             selectedProduct.imagePath
@@ -191,9 +191,9 @@ function Updateproduct() {
         </div>
       </div>
 
-      <div className="flex flex-col items-start min-h-screen w-1/2">
-        <div className="w-4/5 m-auto py-10 shadow-item mt-14 bg-white dark:bg-gray-800 dark:text-white">
-          <div className="w-3/4 mx-auto">
+      <div className="flex flex-col mx-auto items-start min-h-screen w-full sm:w-3/4 md:w-4/6  lg:w-1/2 xl:w-2/5">
+        <div className="w-full py-10 shadow-item mt-14 bg-white dark:bg-gray-800 dark:text-white">
+          <div className="w-10/12 lg:w-4/5 xl:w-3/4 mx-auto">
             <h1 className="font-extrabold text-3xl  mb-5 text-center">
               Ürün Güncelle
             </h1>
@@ -365,8 +365,8 @@ function Updateproduct() {
             </form>
           </div>
         </div>
-        <div className="w-4/5 mx-auto py-3 px-14 shadow-item mt-14 bg-white dark:bg-gray-800 dark:text-white">
-          <div className="mx-auto text-center py-8">
+        <div className="w-full py-3 px-14 shadow-item mt-14 bg-white dark:bg-gray-800 dark:text-white">
+          <div className="mx-auto  text-center py-8">
             <h1 className="font-extrabold text-3xl  mb-5 text-center">
               Fotoğraf Ekle
             </h1>
