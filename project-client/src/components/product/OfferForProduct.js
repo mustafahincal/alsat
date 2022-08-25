@@ -109,9 +109,9 @@ function OfferForProduct() {
     });
 
   return (
-    <div className="py-20">
-      <div className="bg-white dark:bg-gray-800 dark:text-white shadow-item w-10/12 m-auto px-10 py-10 flex justify-between gap-5">
-        <div className="w-1/2 text-left">
+    <div className="py-20 px-6 lg:px-0">
+      <div className="bg-white dark:bg-gray-800 dark:text-white shadow-item w-full sm:w-4/5 md:w-3/4 mx-auto lg:w-11/12 xl:w-10/12 m-auto px-10 py-10 flex flex-col lg:flex-row lg:justify-between gap-20 lg:gap-5">
+        <div className="w-full lg:w-1/2 text-left">
           <h1 className="font-extrabold text-3xl mb-5">Ürün Bilgileri</h1>
           <div className="w-full flex rounded-l-md">
             <div className="w-1/2">
@@ -153,7 +153,7 @@ function OfferForProduct() {
             </div>
           </div>
         </div>
-        <div className="w-1/2 text-right">
+        <div className="w-full lg:w-1/2 text-right">
           <h1 className="font-extrabold text-3xl  mb-5">Teklif</h1>
           {selectedOffer && (
             <div className="px-5 py-5 bg-red-500 bg-opacity-60 text-2xl text-white  text-center mb-5 ">

@@ -156,8 +156,8 @@ function Payment() {
   };
 
   return (
-    <div className="my-20">
-      <div className="w-2/5 m-auto py-12  px-16 shadow-item mt-20 bg-white dark:bg-gray-800 dark:text-white">
+    <div className="my-20 px-6 lg:px-0">
+      <div className="w-full sm:w-4/5 md:w-3/4 lg:w-1/2 xl:w-2/5 m-auto py-12  px-16 shadow-item mt-20 bg-white dark:bg-gray-800 dark:text-white">
         <form onSubmit={handleSubmit}>
           <div className="w-full m-auto">
             <h1 className="font-extrabold text-3xl  mb-5 text-center">
