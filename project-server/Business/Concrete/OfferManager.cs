@@ -31,7 +31,7 @@ namespace Business.Concrete
             var offerToDelete = _offerDal.Get(o => o.OfferId == offerId);
             _offerDal.Delete(offerToDelete);
             _offerDal.Commit();
-            return new SuccessResult("Teklif silindi");
+            return new SuccessResult("Teklif reddedildi");
         }
 
         public IResult Update(OfferForUpdateDto offerForUpdateDto)
