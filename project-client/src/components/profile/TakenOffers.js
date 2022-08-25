@@ -23,14 +23,14 @@ function TakenOffers() {
     );
   }, []);
 
-  // const handleRefuseOffer = (offerId) => {
-  //   deleteOffer(offerId).then((response) => {
-  //     toast.success(response.message);
-  //     getOfferDetailsByOwnerId(getFromLocalStorage("userId")).then((result) =>
-  //       setTakenOffers(result.data)
-  //     );
-  //   });
-  // };
+  const handleRefuseOffer = (offerId) => {
+    deleteOffer(offerId).then((response) => {
+      toast.success(response.message);
+      getOfferDetailsByOwnerId(getFromLocalStorage("userId")).then((result) =>
+        setTakenOffers(result.data)
+      );
+    });
+  };
 
   const handleApproveOffer = (offerId, productId, offeredPrice, userId) => {
     const data = {
@@ -118,14 +118,14 @@ function TakenOffers() {
                     </div>
                   )}
 
-                  {/* {!offer.isApproved && (
-                  <div
-                    onClick={() => handleRefuseOffer()}
-                    className="btn bg-red-500 cursor-pointer ml-3"
-                  >
-                    Teklifi Reddet
-                  </div>
-                )} */}
+                  {!offer.isApproved && (
+                    <div
+                      onClick={() => handleRefuseOffer(offer.offerId)}
+                      className="ml-5 btn border-2 box-border bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white cursor-pointer"
+                    >
+                      Teklifi Reddet
+                    </div>
+                  )}
 
                   {offer.isApproved && !offer.isSold && (
                     <div className="btn bg-indigo-500 ml-3 border-2 border-indigo-500">
