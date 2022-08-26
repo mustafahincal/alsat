@@ -45,8 +45,8 @@ function ChangePassword() {
     });
 
   return (
-    <div className="w-1/2  py-10 shadow-item  bg-white dark:bg-gray-800 dark:text-white mx-auto mt-14">
-      <div className="w-3/4 m-auto">
+    <div className="w-full md:w-3/4 lg:w-3/5 xl:w-1/2  py-10 shadow-item  bg-white dark:bg-gray-800 dark:text-white mx-auto mt-14">
+      <div className="w-10/12 sm:w-3/4 m-auto">
         <h1 className="font-extrabold text-3xl  mb-5 text-center">
           Şifre Değiştir
         </h1>

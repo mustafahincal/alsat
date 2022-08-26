@@ -12,8 +12,8 @@ import CreditCard from "./CreditCard";
 
 function Profile() {
   return (
-    <div className="grid grid-cols-10 w-full px-32 m-auto">
-      <div className="col-span-2 py-10 pr-5">
+    <div className="grid grid-cols-10 w-full px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32 m-auto">
+      <div className="col-span-10 lg:col-span-2 py-10 lg:pr-5 order-2 lg:order-1">
         <div className="bg-white dark:bg-gray-800 rounded-lg flex flex-col shadow-item ">
           <NavLink
             to={"profilDetails"}
@@ -65,7 +65,7 @@ function Profile() {
           </NavLink>
         </div>
       </div>
-      <div className="col-span-8 py-10 pl-5">
+      <div className="col-span-10 lg:col-span-8 py-10 lg:pl-5 order-1 lg:order-2">
         <Routes>
           <Route path="/" element={<ProfileMain />} />
           <Route path="/profilDetails" element={<ProfileMain />} />

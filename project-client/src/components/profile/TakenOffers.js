@@ -54,10 +54,10 @@ function TakenOffers() {
         <div>
           {takenOffers.map((offer, index) => (
             <div
-              className="h-52 flex hover:border-gray-700 border-2 rounded-md dark:border-gray-800 dark:hover:border-gray-200  border-gray-100 mb-5 shadow-item2"
+              className="md:h-52 flex hover:border-gray-700 border-2 rounded-md dark:border-gray-800 dark:hover:border-gray-200  border-gray-100 mb-5 shadow-item2"
               key={index}
             >
-              <div className="w-1/3 h-full">
+              <div className="w-1/3 h-full hidden md:block">
                 <img
                   src={
                     offer.imagePath
@@ -68,36 +68,31 @@ function TakenOffers() {
                   alt=""
                 />
               </div>
-              <div className="py-4 px-10 rounded w-full  flex flex-col justify-between text-xl transition-all duration-75 dark:bg-gray-800  bg-white">
-                <div className="flex justify-between">
-                  <div className="flex flex-col items-center  gap-1">
-                    <div>
-                      <div>Ürün Sahibi</div>
-                    </div>
+              <div className="py-4 px-3 lg:px-7 xl:px-10 rounded w-full flex flex-col text-xl transition-all duration-75 dark:bg-gray-800  bg-white  h-full justify-between">
+                <div className="flex flex-col sm:flex-row sm:justify-between text-md sm:text-lg">
+                  <div className="flex px-10 flex-row justify-between sm:flex-col sm:px-0 items-center  gap-1 ">
+                    <div>Ürün Sahibi</div>
+
                     <div>{offer.ownerName}</div>
                   </div>
-                  <div className="flex flex-col items-center  gap-1">
-                    <div>
-                      <div>Teklif Veren</div>
-                    </div>
+                  <div className="flex px-10 flex-row justify-between sm:flex-col sm:px-0 items-center  gap-1 ">
+                    <div>Teklif Veren</div>
+
                     <div>{offer.userName}</div>
                   </div>
-                  <div className="flex flex-col items-center  gap-1">
-                    <div>
-                      <div>Ürün Adı</div>
-                    </div>
+                  <div className="flex px-10 flex-row justify-between sm:flex-col sm:px-0 items-center  gap-1 ">
+                    <div>Ürün Adı</div>
+
                     <div>{offer.productName}</div>
                   </div>
-                  <div className="flex flex-col items-center gap-1">
-                    <div>
-                      <div>Ürün Fiyatı</div>
-                    </div>
+                  <div className="flex px-10 flex-row justify-between sm:flex-col sm:px-0 items-center  gap-1 ">
+                    <div>Ürün Fiyatı</div>
+
                     <div>{offer.price}</div>
                   </div>
-                  <div className="flex flex-col items-center  gap-1">
-                    <div>
-                      <div>Verdiğiniz Teklif</div>
-                    </div>
+                  <div className="flex px-10 flex-row justify-between sm:flex-col sm:px-0 items-center  gap-1 ">
+                    <div>Verdiğiniz Teklif</div>
+
                     <div>{offer.offeredPrice}</div>
                   </div>
                 </div>

@@ -40,7 +40,7 @@ function ProfileMain() {
 
   return (
     <div>
-      <div className="w-1/3  bg-white dark:bg-gray-800 rounded-md shadow-item mx-auto">
+      <div className="w-full sm:w-2/3 md:w-1/2 lg:w-2/5  bg-white dark:bg-gray-800 rounded-md shadow-item mx-auto">
         <img
           src={profileDefaultImage}
           className="object-cover object-center rounded-t-md w-full"

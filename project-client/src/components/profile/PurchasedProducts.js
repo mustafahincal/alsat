@@ -28,7 +28,7 @@ function PurchasedProducts() {
           {purchasedProducts.map((product, index) => (
             <div
               key={index}
-              className="shadow-item2  rounded-tl-md rounded-tr-md cursor-pointer bg-white dark:bg-gray-800 border-gray-100 col-span-4"
+              className="cursor-pointer shadow-item2 rounded-tl-md rounded-tr-md bg-white dark:bg-gray-800 col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-4"
             >
               <div>
                 <img
@@ -41,11 +41,23 @@ function PurchasedProducts() {
                   alt=""
                 />
               </div>
-              <div className="p-7 rounded-b-md items-center gap-2 w-full mb-3 flex flex-col justify-between text-xl dark:bg-gray-800 dark:text-white bg-white">
-                <div>Ürünü Satan = {product.userName}</div>
-                <div>Ürün Adı = {product.productName}</div>
-                <div>Ürün Fiyatı = {product.price}</div>
-                <div>Satın Alınan Fiyat = {product.offeredPrice}</div>
+              <div className="p-6 items-center rounded-b-md gap-2 w-full mb-3 flex flex-col justify-between dark:bg-gray-800 dark:text-white  text-xl bg-white ">
+                <div className="flex justify-between w-full">
+                  <div>Ürünü Satan</div>
+                  <div>{product.userName}</div>
+                </div>
+                <div className="flex justify-between w-full">
+                  <div>Ürün Adı</div>
+                  <div>{product.productName}</div>
+                </div>
+                <div className="flex justify-between w-full">
+                  <div>Ürün Fiyatı</div>
+                  <div>{product.price}</div>
+                </div>
+                <div className="flex justify-between w-full">
+                  <div>Satılan Fiyat</div>
+                  <div>{product.offeredPrice}</div>
+                </div>
               </div>
             </div>
           ))}
