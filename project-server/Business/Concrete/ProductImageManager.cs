@@ -26,30 +26,32 @@ namespace Business.Concrete
             _fileHelper = fileHelper;
         }
 
-        public Core.Utilities.Results.IResult Add(IFormFile file, int productId)
+        public async Task<Core.Utilities.Results.IResult> Add(IFormFile file, int productId)
         {
-            Core.Utilities.Results.IResult result = BusinessRules.Run(
-                CheckIfImageSizeInvalid(file)
+            Core.Utilities.Results.IResult result = await BusinessRules.Run(
+                await CheckIfImageSizeInvalid(file)
                 ); ;
 
             if (result != null)
             {
                 return new ErrorDataResult<List<Product>>(result.Message);
             }
+
+
             ProductImage productImageToAdd = new ProductImage
             {
                 ImagePath = _fileHelper.Upload(file, FilePath.ImagesPath),
                 ProductId = productId
             };
             _productImageDal.Add(productImageToAdd);
-            _productImageDal.Commit();
+            await _productImageDal.Commit();
             return new SuccessResult("Fotoğraf eklendi");
         }
 
-        public Core.Utilities.Results.IResult Update(IFormFile file, int productImageId)
+        public async Task<Core.Utilities.Results.IResult> Update(IFormFile file, int productImageId)
         {
-            Core.Utilities.Results.IResult result = BusinessRules.Run(
-                CheckIfImageSizeInvalid(file)
+            Core.Utilities.Results.IResult result = await BusinessRules.Run(
+                await CheckIfImageSizeInvalid(file)
                 ); ;
 
             if (result != null)
@@ -57,53 +59,53 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<Product>>(result.Message);
             }
 
-            ProductImage productImageToUpdate = _productImageDal.Get(image => image.ProductImageId == productImageId);
+            ProductImage productImageToUpdate =await _productImageDal.Get(image => image.ProductImageId == productImageId);
 
             productImageToUpdate.ImagePath = _fileHelper.Update(file, FilePath.ImagesPath + productImageToUpdate.ImagePath, FilePath.ImagesPath);
             productImageToUpdate.ProductId = productImageToUpdate.ProductId;
             productImageToUpdate.ProductImageId = productImageToUpdate.ProductImageId;
             _productImageDal.Update(productImageToUpdate);
-            _productImageDal.Commit();
+            await _productImageDal.Commit();
             return new SuccessResult("Fotoğraf Güncellendi");
         }
 
        
 
 
-        public Core.Utilities.Results.IResult Delete(int productImageId)
+        public async Task<Core.Utilities.Results.IResult> Delete(int productImageId)
         {
-            var productImageToDelete = _productImageDal.Get(productImage => productImage.ProductImageId == productImageId);
+            var productImageToDelete =await _productImageDal.Get(productImage => productImage.ProductImageId == productImageId);
             _fileHelper.Delete(FilePath.ImagesPath + productImageToDelete.ImagePath);
             _productImageDal.Delete(productImageToDelete);
-            _productImageDal.Commit();
+            await _productImageDal.Commit();
             return new SuccessResult("Fotoğraf Silindi");
         }
 
-        public IDataResult<List<ProductImage>> GetAll()
+        public async Task<IDataResult<List<ProductImage>>> GetAll()
         {
-            return new SuccessDataResult<List<ProductImage>>(_productImageDal.GetAll(), "Araba fotoğrafları getirildi");
+            return new SuccessDataResult<List<ProductImage>>(await _productImageDal.GetAll(), "Araba fotoğrafları getirildi");
         }
 
-        public IDataResult<List<ProductImage>> GetByProductId(int productId)
+        public async Task<IDataResult<List<ProductImage>>> GetByProductId(int productId)
         {
-            var result = BusinessRules.Run(CheckCarImage(productId));
+            var result = await BusinessRules.Run( await CheckCarImage(productId));
             if (result != null)
             {
                 return new ErrorDataResult<List<ProductImage>>("default image");
             }
-            return new SuccessDataResult<List<ProductImage>>(_productImageDal.GetAll(p => p.ProductId == productId));
+            return new SuccessDataResult<List<ProductImage>>(await _productImageDal.GetAll(p => p.ProductId == productId));
         }
 
-        public IDataResult<ProductImage> GetByImageId(int imageId)
+        public async Task<IDataResult<ProductImage>> GetByImageId(int imageId)
         {
-            var result = _productImageDal.Get(p => p.ProductImageId == imageId);
-            return new SuccessDataResult<ProductImage>(_productImageDal.Get(p => p.ProductImageId == imageId));
+            var result =await _productImageDal.Get(p => p.ProductImageId == imageId);
+            return new SuccessDataResult<ProductImage>(await _productImageDal.Get(p => p.ProductImageId == imageId));
         }
 
         
-        private Core.Utilities.Results.IResult CheckCarImage(int productId)
+        private async Task<Core.Utilities.Results.IResult> CheckCarImage(int productId)
         {
-            var result = _productImageDal.GetAll(p => p.ProductId == productId).Count;
+            var result = (await _productImageDal.GetAll(p => p.ProductId == productId)).Count;
             if (result > 0)
             {
                 return new SuccessResult();
@@ -111,7 +113,7 @@ namespace Business.Concrete
             return new ErrorResult();
         }
 
-        private Core.Utilities.Results.IResult CheckIfImageSizeInvalid(IFormFile file)
+        private async Task<Core.Utilities.Results.IResult> CheckIfImageSizeInvalid(IFormFile file)
         {
             var size = file.Length;
             var limit = 400 * Math.Pow(2, 10);

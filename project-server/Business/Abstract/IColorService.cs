@@ -11,10 +11,10 @@ namespace Business.Abstract
 {
     public interface IColorService
     {
-        IDataResult<List<Color>> GetAll();
-        IDataResult<Color> GetById(int colorId);
-        IResult Add(Color color);
-        IResult Delete(int colorId);
-        IResult Update(ColorForUpdateDto colorForUpdateDto);
+        Task<IDataResult<List<Color>>> GetAll();
+        Task<IDataResult<Color>> GetById(int colorId);
+        Task<IResult> Add(Color color);
+        Task<IResult> Delete(int colorId);
+        Task<IResult> Update(ColorForUpdateDto colorForUpdateDto);
     }
 }

@@ -22,14 +22,14 @@ namespace Business.Concrete
         private IUserService _userService;
         private ITokenHelper _tokenHelper;
 
-     
+
         public AuthManager(IUserService userService, ITokenHelper tokenHelper)
         {
             _userService = userService;
             _tokenHelper = tokenHelper;
         }
 
-        public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
+        public async Task<IDataResult<User>> Register(UserForRegisterDto userForRegisterDto, string password)
         {
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
@@ -45,14 +45,14 @@ namespace Business.Concrete
 
             string messageHeader = "Aramıza Hoşgeldinn..!!";
             string messageBody = "ALSAT'a Merhaba De!";
-            SendMessage(userForRegisterDto.Email,messageBody,messageHeader);
-            _userService.Add(user);
+            SendMessage(userForRegisterDto.Email, messageBody, messageHeader);
+            await _userService.Add(user);
             return new SuccessDataResult<User>(user, Messages.UserRegistered);
         }
 
-        public IDataResult<User> Login(UserForLoginDto userForLoginDto)
+        public async Task<IDataResult<User>> Login(UserForLoginDto userForLoginDto)
         {
-            var userToCheck = _userService.GetByMail(userForLoginDto.Email).Data;
+            var userToCheck = (await _userService.GetByMail(userForLoginDto.Email)).Data;
             if (userToCheck == null)
             {
                 return new ErrorDataResult<User>(Messages.UserNotFound);
@@ -66,9 +66,9 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(userToCheck, Messages.SuccessfulLogin);
         }
 
-        public IResult BlockUser(string email)
+        public async Task<IResult> BlockUser(string email)
         {
-            var userToCheck = _userService.GetByMail(email).Data;
+            var userToCheck = (await _userService.GetByMail(email)).Data;
             var userForUpdate = new UserForUpdateDto
             {
                 UserId = userToCheck.UserId,
@@ -79,16 +79,16 @@ namespace Business.Concrete
                 Email = userToCheck.Email
             };
             userForUpdate.Status = false;
-            _userService.Update(userForUpdate);
+            await _userService.Update(userForUpdate);
             string messageHeader = "Hesabın Bloke Edildi";
             string messageBody = "3 kez hatalı şifre girdiğinizden dolayı hesabınız bloke edildi.";
             SendMessage(email, messageBody, messageHeader);
             return new SuccessResult("Kullanıcı bloke edildi");
         }
 
-        public IResult UnBlockUser(int id)
+        public async Task<IResult> UnBlockUser(int id)
         {
-            var userToCheck = _userService.GetById(id).Data;
+            var userToCheck = (await _userService.GetById(id)).Data;
             var userForUpdate = new UserForUpdateDto
             {
                 UserId = userToCheck.UserId,
@@ -99,13 +99,13 @@ namespace Business.Concrete
                 Email = userToCheck.Email
             };
             userForUpdate.Status = true;
-            _userService.Update(userForUpdate);
+            await _userService.Update(userForUpdate);
             return new SuccessResult("Kullanıcı blokesi kaldırıldı");
         }
 
         public void SendMessage(string email, string messageBody, string messageHeader)
         {
-            
+
             MailMessage message = new MailMessage();
             message.To.Add(new MailAddress(email));
             message.From = new MailAddress("denemehncal@gmail.com");
@@ -132,10 +132,10 @@ namespace Business.Concrete
             }
         }
 
-        public IResult ChangePassword(ChangePasswordDto changePasswordDto)
+        public async Task<IResult> ChangePassword(ChangePasswordDto changePasswordDto)
         {
             byte[] passwordHash, passwordSalt;
-            var userToCheck = _userService.GetByMail(changePasswordDto.UserEmail).Data;
+            var userToCheck = (await _userService.GetByMail(changePasswordDto.UserEmail)).Data;
             if (userToCheck == null)
             {
                 return new ErrorDataResult<User>("Email geçersiz");
@@ -145,7 +145,7 @@ namespace Business.Concrete
                 return new ErrorDataResult<User>("Eski şifre geçersiz");
             }
             HashingHelper.CreatePasswordHash(changePasswordDto.NewPass, out passwordHash, out passwordSalt);
-          
+
 
             var userForUpdate = new UserForUpdateDto
             {
@@ -158,31 +158,31 @@ namespace Business.Concrete
                 Status = userToCheck.Status
             };
 
-            _userService.Update(userForUpdate);
-            
+            await _userService.Update(userForUpdate);
+
             return new SuccessResult("Şifre başarıyla değiştirildi");
 
         }
 
-        public IResult UserExists(string email)
+        public async Task<IResult> UserExists(string email)
         {
-            if (_userService.GetByMail(email).Data != null)
+            if ((await _userService.GetByMail(email)).Data != null)
             {
                 return new ErrorResult(Messages.UserAlreadyExists);
             }
             return new SuccessResult();
         }
 
-        public IDataResult<AccessToken> CreateAccessTokenForRegister(User user)
+        public async Task<IDataResult<AccessToken>> CreateAccessTokenForRegister(User user)
         {
-            var claims = _userService.GetClaims(user).Data;
+            var claims = (await _userService.GetClaims(user)).Data;
             var accessToken = _tokenHelper.CreateToken(user, claims);
             return new SuccessDataResult<AccessToken>(accessToken, Messages.UserRegistered);
         }
 
-        public IDataResult<AccessToken> CreateAccessTokenForLogin(User user)
+        public async Task<IDataResult<AccessToken>> CreateAccessTokenForLogin(User user)
         {
-            var claims = _userService.GetClaims(user).Data;
+            var claims = (await _userService.GetClaims(user)).Data;
             var accessToken = _tokenHelper.CreateToken(user, claims);
             return new SuccessDataResult<AccessToken>(accessToken, Messages.SuccessfulLogin);
         }

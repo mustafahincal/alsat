@@ -17,9 +17,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getall")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = _userService.GetAll();
+            var result = await _userService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -28,9 +28,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var result = _userService.GetById(id);
+            var result = await _userService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -39,9 +39,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(User user)
+        public async Task<IActionResult> Add(User user)
         {
-            var result = _userService.Add(user);
+            var result = await _userService.Add(user);
             if (result.Success)
             {
                 return Ok(result);
@@ -50,9 +50,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("delete")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var result = _userService.Delete(id);
+            var result = await _userService.Delete(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -61,9 +61,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(UserForUpdateDto userForUpdateDto)
+        public async Task<IActionResult> Update(UserForUpdateDto userForUpdateDto)
         {
-            var result = _userService.Update(userForUpdateDto);
+            var result = await _userService.Update(userForUpdateDto);
             if (result.Success)
             {
                 return Ok(result);
@@ -72,9 +72,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getuserdetails")]
-        public IActionResult GetUserDetails()
+        public async Task<IActionResult> GetUserDetails()
         {
-            var result = _userService.GetUserDetails();
+            var result = await _userService.GetUserDetails();
             if (result.Success)
             {
                 return Ok(result);
@@ -83,9 +83,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getuserdetailsbyid")]
-        public IActionResult GetUserDetailsById(int id)
+        public async Task<IActionResult> GetUserDetailsById(int id)
         {
-            var result = _userService.GetUserDetailsById(id);
+            var result = await _userService.GetUserDetailsById(id);
             if (result.Success)
             {
                 return Ok(result);

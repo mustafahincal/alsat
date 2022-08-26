@@ -12,6 +12,6 @@ namespace DataAccess.Abstract
 {
     public interface IOfferDal : IEntityRepository<Offer>
     {
-        List<OfferDetailDto> GetOfferDetails(Expression<Func<OfferDetailDto, bool>> filter = null);
+        Task<List<OfferDetailDto>> GetOfferDetails(Expression<Func<OfferDetailDto, bool>> filter = null);
     }
 }

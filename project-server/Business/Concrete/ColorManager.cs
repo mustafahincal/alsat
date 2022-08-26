@@ -22,21 +22,21 @@ namespace Business.Concrete
             _colorDal = colorDal;
         }
 
-        public IDataResult<List<Color>> GetAll()
+        public async Task<IDataResult<List<Color>>> GetAll()
         {
-            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), "Renkler getirildi");
+            return new SuccessDataResult<List<Color>>(await _colorDal.GetAll(), "Renkler getirildi");
         }
 
-        public IDataResult<Color> GetById(int colorId)
+        public async Task<IDataResult<Color>> GetById(int colorId)
         {
-            return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == colorId), "Renkler getirildi");
+            return new SuccessDataResult<Color>(await _colorDal.Get(c => c.ColorId == colorId), "Renkler getirildi");
         }
 
-        public IResult Add(Color color)
+        public async Task<IResult> Add(Color color)
         {
 
-            IResult result = BusinessRules.Run(
-                CheckIfColorNameExists(color.Name)
+            IResult result = await BusinessRules.Run(
+                await CheckIfColorNameExists(color.Name)
                 );
 
 
@@ -46,23 +46,23 @@ namespace Business.Concrete
             }
 
             _colorDal.Add(color);
-            _colorDal.Commit();
+            await _colorDal.Commit();
             return new SuccessResult("Renk eklendi");
         }
 
-        public IResult Delete(int colorId)
+        public async Task<IResult> Delete(int colorId)
         {
-            var colorToDelete = _colorDal.Get(c => c.ColorId == colorId);
+            var colorToDelete = await _colorDal.Get(c => c.ColorId == colorId);
             _colorDal.Delete(colorToDelete);
-            _colorDal.Commit();
+            await _colorDal.Commit();
             return new SuccessResult("Renk silindi");
         }
 
-        public IResult Update(ColorForUpdateDto colorForUpdateDto)
+        public async Task< IResult> Update(ColorForUpdateDto colorForUpdateDto)
         {
 
-            IResult result = BusinessRules.Run(
-                CheckIfColorNameExists(colorForUpdateDto.Name)
+            IResult result = await BusinessRules.Run(
+                await CheckIfColorNameExists(colorForUpdateDto.Name)
                 );
 
 
@@ -71,16 +71,16 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<Color>>(result.Message);
             }
 
-            var colorToUpdate = _colorDal.Get(c => c.ColorId == colorForUpdateDto.ColorId);
+            var colorToUpdate = await _colorDal.Get(c => c.ColorId == colorForUpdateDto.ColorId);
             colorToUpdate.Name = colorForUpdateDto.Name;
             _colorDal.Update(colorToUpdate);
-            _colorDal.Commit();
+            await _colorDal.Commit();
             return new SuccessResult("Renk güncellendi");
         }
 
-        private IResult CheckIfColorNameExists(string colorName)
+        private async Task<IResult> CheckIfColorNameExists(string colorName)
         {
-            var result = _colorDal.GetAll(c => c.Name == colorName).Any();
+            var result = (await _colorDal.GetAll(c => c.Name == colorName)).Any();
             if (result)
             {
                 return new ErrorResult(Messages.ColorNameAlreadyExists);

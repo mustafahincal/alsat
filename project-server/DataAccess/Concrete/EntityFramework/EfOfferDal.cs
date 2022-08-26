@@ -9,6 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -20,7 +21,7 @@ namespace DataAccess.Concrete.EntityFramework
             _primeforContext = primeforContext;
         }
 
-        public List<OfferDetailDto> GetOfferDetails(Expression<Func<OfferDetailDto, bool>> filter = null)
+        public async Task<List<OfferDetailDto>> GetOfferDetails(Expression<Func<OfferDetailDto, bool>> filter = null)
         {
            
                 var result = from o in _primeforContext.Offers
@@ -47,8 +48,8 @@ namespace DataAccess.Concrete.EntityFramework
                                  ImagePath = (from pi in _primeforContext.ProductImages where pi.ProductId == p.ProductId select pi.ImagePath).FirstOrDefault(),
                              };
                 return filter == null
-                ? result.ToList()
-                : result.Where(filter).ToList();
+                ? await result.ToListAsync()
+                : await result.Where(filter).ToListAsync();
             
         }
     }

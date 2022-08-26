@@ -16,9 +16,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getall")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = _usingStateService.GetAll();
+            var result = await _usingStateService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -27,9 +27,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var result = _usingStateService.GetById(id);
+            var result = await _usingStateService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -38,9 +38,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(UsingState usingState)
+        public async Task<IActionResult> Add(UsingState usingState)
         {
-            var result = _usingStateService.Add(usingState);
+            var result = await _usingStateService.Add(usingState);
             if (result.Success)
             {
                 return Ok(result);
@@ -49,9 +49,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("delete")]
-        public IActionResult Delete(int usingStateId)
+        public async Task<IActionResult> Delete(int usingStateId)
         {
-            var result = _usingStateService.Delete(usingStateId);
+            var result = await _usingStateService.Delete(usingStateId);
             if (result.Success)
             {
                 return Ok(result);
@@ -60,9 +60,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(UsingStateForUpdateDto usingStateForUpdateDto)
+        public async Task<IActionResult> Update(UsingStateForUpdateDto usingStateForUpdateDto)
         {
-            var result = _usingStateService.Update(usingStateForUpdateDto);
+            var result = await _usingStateService.Update(usingStateForUpdateDto);
             if (result.Success)
             {
                 return Ok(result);

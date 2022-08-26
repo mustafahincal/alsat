@@ -24,13 +24,13 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(ProductValidator))]
-        public IDataResult<List<Product>> Add(ProductForAddDto productForAddDto)
+        public async Task<IDataResult<List<Product>>> Add(ProductForAddDto productForAddDto)
         {
 
-            IResult result = BusinessRules.Run(
-                CheckIfProductNameExists(productForAddDto.Name)
+            IResult result = await BusinessRules.Run(
+                await CheckIfProductNameExists(productForAddDto.Name)
                 ); ;
-            
+
 
             if (result != null)
             {
@@ -59,20 +59,21 @@ namespace Business.Concrete
             };
 
             _productDal.Add(productToAdd);
-            _productDal.Commit();
+            await _productDal.Commit();
             ProductImage productImageToAdd = new ProductImage
             {
                 ProductId = productToAdd.ProductId
             };
-            _productImageService.Add(productForAddDto.file, productToAdd.ProductId);
+
+            await _productImageService.Add(productForAddDto.file, productToAdd.ProductId);
             
-            var productInfo = _productDal.GetAll(p => p.ProductId == productToAdd.ProductId);
+            var productInfo =await _productDal.GetAll(p => p.ProductId == productToAdd.ProductId);
             return new SuccessDataResult<List<Product>>(productInfo, Messages.ProductAdded);
         }
 
-        public IResult Update(ProductForUpdateDto productForUpdateDto)
+        public async Task<IResult> Update(ProductForUpdateDto productForUpdateDto)
         {
-            var productToUpdate = _productDal.Get(p => p.ProductId == productForUpdateDto.ProductId);
+            var productToUpdate = await _productDal.Get(p => p.ProductId == productForUpdateDto.ProductId);
             productToUpdate.ColorId = productForUpdateDto.ColorId;
             productToUpdate.BrandId = productForUpdateDto.BrandId;
             productToUpdate.CategoryId = productForUpdateDto.CategoryId;
@@ -85,85 +86,85 @@ namespace Business.Concrete
 
             if (productToUpdate.IsSold)
             {
-                var offersToDelete = _offerService.GetAllByProductId(productToUpdate.ProductId);
+                var offersToDelete = await _offerService.GetAllByProductId(productToUpdate.ProductId);
                 foreach(Offer offer in offersToDelete)
                 {
                     if (offer.OfferId != productForUpdateDto.OfferId)
                     {
-                        _offerService.Delete(offer.OfferId);
+                        await _offerService.Delete(offer.OfferId);
                     }
                 }
             }
 
             _productDal.Update(productToUpdate);
-            _productDal.Commit();
+            await _productDal.Commit();
             return new SuccessResult(Messages.ProductUpdated);
         }
 
-        public IResult Delete(int productId)
+        public async Task<IResult> Delete(int productId)
         {
-            var productToDelete = _productDal.Get(p => p.ProductId == productId);
+            var productToDelete =await  _productDal.Get(p => p.ProductId == productId);
             _productDal.Delete(productToDelete);
-            _productDal.Commit();
+            await _productDal.Commit();
             return new SuccessResult(Messages.ProductDeleted);
         }
 
-        public IDataResult<List<Product>> GetAll()
+        public async Task<IDataResult<List<Product>>> GetAll()
         {
 
-            return new SuccessDataResult<List<Product>>(_productDal.GetAll(), Messages.ProductsListed);
+            return new SuccessDataResult<List<Product>>(await _productDal.GetAll(), Messages.ProductsListed);
         }
 
-        public IDataResult<List<Product>> GetAllByCategoryId(int id)
+        public async Task<IDataResult<List<Product>>> GetAllByCategoryId(int id)
         {
-            return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == id));
+            return new SuccessDataResult<List<Product>>(await _productDal.GetAll(p => p.CategoryId == id));
         }
 
-        public IDataResult<Product> GetById(int productId)
+        public async Task<IDataResult<Product>> GetById(int productId)
         {
-            return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == productId));
+            return new SuccessDataResult<Product>( await _productDal.Get(p => p.ProductId == productId));
         }
-        public IDataResult<List<ProductDetailDto>> GetProductDetailsById(int id)
+        public async Task<IDataResult<List<ProductDetailDto>>> GetProductDetailsById(int id)
         {
-            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.ProductId == id), "Ürün Listelendi");
-        }
-
-        public IDataResult<List<ProductDetailDto>> GetProductDetailsByCategoryId(int categoryId)
-        {
-            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.CategoryId == categoryId), "Ürün Listelendi");
+            return new SuccessDataResult<List<ProductDetailDto>>(await _productDal.GetProductDetails(p => p.ProductId == id), "Ürün Listelendi");
         }
 
-        public IDataResult<List<Product>> GetByUnitPrice(decimal min, decimal max)
+        public async Task<IDataResult<List<ProductDetailDto>>> GetProductDetailsByCategoryId(int categoryId)
         {
-            return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.Price <= max && p.Price >= min));
+            return new SuccessDataResult<List<ProductDetailDto>>(await _productDal.GetProductDetails(p => p.CategoryId == categoryId), "Ürün Listelendi");
         }
 
-        public IDataResult<List<ProductDetailDto>> GetProductDetails()
+        public async Task<IDataResult<List<Product>>> GetByUnitPrice(decimal min, decimal max)
         {
-            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(), Messages.ProductsListed);
+            return new SuccessDataResult<List<Product>>(await _productDal.GetAll(p => p.Price <= max && p.Price >= min));
         }
 
-        public IDataResult<List<ProductDetailDto>> GetProductDetailsByBrandId(int brandId)
+        public async Task<IDataResult<List<ProductDetailDto>>> GetProductDetails()
         {
-            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.BrandId == brandId), Messages.ProductsListed);
-        }
-        public IDataResult<List<ProductDetailDto>> GetProductDetailsByColorId(int colorId)
-        {
-            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.ColorId == colorId), Messages.ProductsListed);
-        }
-        public IDataResult<List<ProductDetailDto>> GetProductDetailsByUsingStateId(int usingStateId)
-        {
-            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.UsingStateId == usingStateId), Messages.ProductsListed);
+            return new SuccessDataResult<List<ProductDetailDto>>(await _productDal.GetProductDetails(), Messages.ProductsListed);
         }
 
-        public IDataResult<List<ProductDetailDto>> GetProductDetailsByOwnerId(int ownerId)
+        public async Task<IDataResult<List<ProductDetailDto>>> GetProductDetailsByBrandId(int brandId)
         {
-            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.OwnerId == ownerId), Messages.ProductsListed);
+            return new SuccessDataResult<List<ProductDetailDto>>( await _productDal.GetProductDetails(p => p.BrandId == brandId), Messages.ProductsListed);
+        }
+        public async Task<IDataResult<List<ProductDetailDto>>> GetProductDetailsByColorId(int colorId)
+        {
+            return new SuccessDataResult<List<ProductDetailDto>>(await _productDal.GetProductDetails(p => p.ColorId == colorId), Messages.ProductsListed);
+        }
+        public async Task<IDataResult<List<ProductDetailDto>>> GetProductDetailsByUsingStateId(int usingStateId)
+        {
+            return new SuccessDataResult<List<ProductDetailDto>>(await _productDal.GetProductDetails(p => p.UsingStateId == usingStateId), Messages.ProductsListed);
         }
 
-        private IResult CheckIfProductNameExists(string productName)
+        public  async Task<IDataResult<List<ProductDetailDto>>> GetProductDetailsByOwnerId(int ownerId)
         {
-            var result = _productDal.GetAll(p => p.Name == productName).Any();
+            return new SuccessDataResult<List<ProductDetailDto>>(await _productDal.GetProductDetails(p => p.OwnerId == ownerId), Messages.ProductsListed);
+        }
+
+        private async Task<IResult> CheckIfProductNameExists(string productName)
+        {
+            var result =(await _productDal.GetAll(p => p.Name == productName)).Any();
             if (result)
             {
                 return new ErrorResult(Messages.ProductNameAlreadyExists);

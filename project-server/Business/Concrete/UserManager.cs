@@ -24,62 +24,62 @@ namespace Business.Concrete
             _userDal = userDal;
             _userOperationClaimService = userOperationClaimService;
         }
-        public IResult Add(User user)
+        public async Task<IResult> Add(User user)
         {
             _userDal.Add(user);
-            _userDal.Commit();
+            await _userDal.Commit();
 
             UserOperationClaim userOperationClaimToAdd = new UserOperationClaim
             {
                 UserId = user.UserId,
                 OperationClaimId = 2,
             };
-            _userOperationClaimService.Add(userOperationClaimToAdd);
+            await _userOperationClaimService.Add(userOperationClaimToAdd);
 
             return new SuccessResult("Kullanıcı eklendi");
         }
 
-        public IResult Delete(int id)
+        public async Task<IResult> Delete(int id)
         {
-            var userToDelete = _userDal.Get(p => p.UserId == id);
+            var userToDelete = await _userDal.Get(p => p.UserId == id);
             _userDal.Delete(userToDelete);
-            _userDal.Commit();
+            await _userDal.Commit();
             return new SuccessResult("Kullanıcı silindi");
         }
 
-        public IDataResult<List<User>> GetAll()
+        public async Task<IDataResult<List<User>>> GetAll()
         {
-            return new SuccessDataResult<List<User>>(_userDal.GetAll());
+            return new SuccessDataResult<List<User>>(await _userDal.GetAll());
         }
 
-        public IDataResult<User> GetById(int userId)
+        public async Task<IDataResult<User>> GetById(int userId)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u => u.UserId == userId));
+            return new SuccessDataResult<User>(await _userDal.Get(u => u.UserId == userId));
         }
 
-        public IDataResult<User> GetByMail(string email)
+        public async Task<IDataResult<User>> GetByMail(string email)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
+            return new SuccessDataResult<User>(await _userDal.Get(u => u.Email == email));
         }
 
-        public IDataResult<List<OperationClaim>> GetClaims(User user)
+        public async Task<IDataResult<List<OperationClaim>>> GetClaims(User user)
         {
-            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
+            return new SuccessDataResult<List<OperationClaim>>(await _userDal.GetClaims(user));
         }
 
-        public IDataResult<List<UserDetailDto>> GetUserDetails()
+        public async Task<IDataResult<List<UserDetailDto>>> GetUserDetails()
         {
-            return new SuccessDataResult<List<UserDetailDto>>(_userDal.GetUserDetails(), "Kullanıcılar Listelendi");
+            return new SuccessDataResult<List<UserDetailDto>>(await _userDal.GetUserDetails(), "Kullanıcılar Listelendi");
         }
-        public IDataResult<List<UserDetailDto>> GetUserDetailsById(int userId)
+        public async Task<IDataResult<List<UserDetailDto>>> GetUserDetailsById(int userId)
         {
-            return new SuccessDataResult<List<UserDetailDto>>(_userDal.GetUserDetails(u => u.UserId == userId), "Kullanıcı Listelendi");
+            return new SuccessDataResult<List<UserDetailDto>>(await _userDal.GetUserDetails(u => u.UserId == userId), "Kullanıcı Listelendi");
         }
 
 
-        public IResult Update(UserForUpdateDto userForUpdateDto)
+        public async Task<IResult> Update(UserForUpdateDto userForUpdateDto)
         {
-            var userToUpdate = _userDal.Get(u => u.UserId == userForUpdateDto.UserId);
+            var userToUpdate =await _userDal.Get(u => u.UserId == userForUpdateDto.UserId);
             userToUpdate.Status = userForUpdateDto.Status;
             userToUpdate.Email = userForUpdateDto.Email;
             userToUpdate.FirstName = userForUpdateDto.FirstName;
@@ -88,7 +88,7 @@ namespace Business.Concrete
             userToUpdate.PasswordSalt = userForUpdateDto.PasswordSalt;
 
             _userDal.Update(userToUpdate);
-            _userDal.Commit();
+            await _userDal.Commit();
             return new SuccessResult();
         }
     }

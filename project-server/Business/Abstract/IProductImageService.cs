@@ -11,12 +11,11 @@ namespace Business.Abstract
 {
     public interface IProductImageService
     {
-        Core.Utilities.Results.IResult Add(IFormFile file, int productId);
-        Core.Utilities.Results.IResult Delete(int productImageId);
-        Core.Utilities.Results.IResult Update(IFormFile file, int productImageId);
-
-        IDataResult<List<ProductImage>> GetAll();
-        IDataResult<List<ProductImage>> GetByProductId(int productId);
-        IDataResult<ProductImage> GetByImageId(int imageId);
+        Task<Core.Utilities.Results.IResult> Add(IFormFile file, int productId);
+        Task<Core.Utilities.Results.IResult> Delete(int productImageId);
+        Task<Core.Utilities.Results.IResult> Update(IFormFile file, int productImageId);
+        Task<IDataResult<List<ProductImage>>> GetAll();
+        Task<IDataResult<List<ProductImage>>> GetByProductId(int productId);
+        Task<IDataResult<ProductImage>> GetByImageId(int imageId);
     }
 }

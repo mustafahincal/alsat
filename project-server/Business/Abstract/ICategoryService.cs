@@ -12,10 +12,10 @@ namespace Business.Abstract
     public interface ICategoryService
     {
 
-        IResult Add(Category category);
-        IResult Delete(int categoryId);
-        IResult Update(CategoryForUpdateDto categoryForUpdateDto);
-        IDataResult<List<Category>> GetAll();
-        IDataResult<Category> GetById(int categoryId);
+        Task<IResult> Add(Category category);
+        Task<IResult> Delete(int categoryId);
+        Task<IResult> Update(CategoryForUpdateDto categoryForUpdateDto);
+        Task<IDataResult<List<Category>>> GetAll();
+        Task<IDataResult<Category>> GetById(int categoryId);
     }
 }

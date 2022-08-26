@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Entities.Dtos;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -20,7 +21,7 @@ namespace DataAccess.Concrete.EntityFramework
             _primeforContext = primeforContext;
         }
 
-        public List<CreditCardDetailDto> GetCreditCardDetails(Expression<Func<CreditCardDetailDto, bool>> filter = null)
+        public async Task< List<CreditCardDetailDto>> GetCreditCardDetails(Expression<Func<CreditCardDetailDto, bool>> filter = null)
         {
 
             var result = from cc in _primeforContext.CreditCards
@@ -40,8 +41,8 @@ namespace DataAccess.Concrete.EntityFramework
                              CreditCardId = cc.CreditCardId
                          };
             return filter == null
-            ? result.ToList()
-            : result.Where(filter).ToList();
+            ? await result.ToListAsync()
+            : await result.Where(filter).ToListAsync();
 
         }
     }

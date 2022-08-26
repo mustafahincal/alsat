@@ -19,9 +19,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getall")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = _categoryService.GetAll();
+            var result = await _categoryService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -30,9 +30,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var result = _categoryService.GetById(id);
+            var result = await _categoryService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -43,9 +43,9 @@ namespace WebAPI.Controllers
       
 
         [HttpPost("add")]
-        public IActionResult Add(Category category)
+        public async Task<IActionResult> Add(Category category)
         {
-            var result = _categoryService.Add(category);
+            var result = await _categoryService.Add(category);
             if (result.Success)
             {
                 return Ok(result);
@@ -54,9 +54,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("delete")]
-        public IActionResult Delete(int categoryId)
+        public async Task<IActionResult> Delete(int categoryId)
         {
-            var result = _categoryService.Delete(categoryId);
+            var result = await _categoryService.Delete(categoryId);
             if (result.Success)
             {
                 return Ok(result);
@@ -65,9 +65,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(CategoryForUpdateDto categoryForUpdateDto)
+        public async Task<IActionResult> Update(CategoryForUpdateDto categoryForUpdateDto)
         {
-            var result = _categoryService.Update(categoryForUpdateDto);
+            var result = await _categoryService.Update(categoryForUpdateDto);
             if (result.Success)
             {
                 return Ok(result);

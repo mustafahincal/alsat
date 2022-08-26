@@ -20,11 +20,11 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add([FromForm] IFormFile file, [FromForm] string body)
+        public async Task<IActionResult> Add([FromForm] IFormFile file, [FromForm] string body)
         {
             var productForAddDto = JsonConvert.DeserializeObject<ProductForAddDto>(body);
             productForAddDto.file = file;
-            var result = _productService.Add(productForAddDto);
+            var result = await _productService.Add(productForAddDto);
             if (result.Success)
             {
                 return Ok(result);
@@ -33,9 +33,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("delete")]
-        public IActionResult Delete(int productId)
+        public async Task<IActionResult> Delete(int productId)
         {
-            var result = _productService.Delete(productId);
+            var result = await _productService.Delete(productId);
             if (result.Success)
             {
                 return Ok(result);
@@ -44,9 +44,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(ProductForUpdateDto productForUpdateDto)
+        public async Task<IActionResult> Update(ProductForUpdateDto productForUpdateDto)
         {
-            var result = _productService.Update(productForUpdateDto);
+            var result = await _productService.Update(productForUpdateDto);
             if (result.Success)
             {
                 return Ok(result);
@@ -55,9 +55,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getall")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = _productService.GetAll();
+            var result = await _productService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -66,9 +66,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var result = _productService.GetById(id);
+            var result = await _productService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -77,9 +77,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getproductdetails")]
-        public IActionResult GetProductDetails()
+        public async Task<IActionResult> GetProductDetails()
         {
-            var result = _productService.GetProductDetails();
+            var result = await _productService.GetProductDetails();
             if (result.Success)
             {
                 return Ok(result);
@@ -88,9 +88,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getproductdetailsbyid")]
-        public IActionResult GetProductDetailsById(int id)
+        public async Task<IActionResult> GetProductDetailsById(int id)
         {
-            var result = _productService.GetProductDetailsById(id);
+            var result = await _productService.GetProductDetailsById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -99,9 +99,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getproductdetailsbybrandid")]
-        public IActionResult GetProductDetailsByBrandId(int brandId)
+        public async Task<IActionResult> GetProductDetailsByBrandId(int brandId)
         {
-            var result = _productService.GetProductDetailsByBrandId(brandId);
+            var result = await _productService.GetProductDetailsByBrandId(brandId);
             if (result.Success)
             {
                 return Ok(result);
@@ -110,9 +110,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getproductdetailsbycategoryid")]
-        public IActionResult GetProductDetailsByCategoryId(int categoryId)
+        public async Task<IActionResult> GetProductDetailsByCategoryId(int categoryId)
         {
-            var result = _productService.GetProductDetailsByCategoryId(categoryId);
+            var result = await _productService.GetProductDetailsByCategoryId(categoryId);
             if (result.Success)
             {
                 return Ok(result);
@@ -121,9 +121,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getproductdetailsbycolorid")]
-        public IActionResult GetProductDetailsByColorId(int colorId)
+        public async Task<IActionResult> GetProductDetailsByColorId(int colorId)
         {
-            var result = _productService.GetProductDetailsByColorId(colorId);
+            var result = await _productService.GetProductDetailsByColorId(colorId);
             if (result.Success)
             {
                 return Ok(result);
@@ -132,9 +132,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getproductdetailsbyusingstateid")]
-        public IActionResult GetProductDetailsByUsingStateId(int usingStateId)
+        public async Task<IActionResult> GetProductDetailsByUsingStateId(int usingStateId)
         {
-            var result = _productService.GetProductDetailsByUsingStateId(usingStateId);
+            var result = await _productService.GetProductDetailsByUsingStateId(usingStateId);
             if (result.Success)
             {
                 return Ok(result);
@@ -143,9 +143,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getproductdetailsbyownerid")]
-        public IActionResult GetProductDetailsByOwnerId(int ownerId)
+        public async Task<IActionResult> GetProductDetailsByOwnerId(int ownerId)
         {
-            var result = _productService.GetProductDetailsByOwnerId(ownerId);
+            var result = await _productService.GetProductDetailsByOwnerId(ownerId);
             if (result.Success)
             {
                 return Ok(result);

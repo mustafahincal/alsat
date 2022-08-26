@@ -7,8 +7,6 @@ namespace DataAccess.Concrete.EntityFramework.Context
 {
     public class PrimeforContext : DbContext
     {
-     
-
         public PrimeforContext(DbContextOptions options) : base(options)
         {
 

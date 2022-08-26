@@ -22,21 +22,21 @@ namespace Business.Concrete
             _usingStateDal = usingStateDal;
         }
 
-        public IDataResult<List<UsingState>> GetAll()
+        public async Task<IDataResult<List<UsingState>>> GetAll()
         {
-            return new SuccessDataResult<List<UsingState>>(_usingStateDal.GetAll(), "Kullanım Durumları getirildi");
+            return new SuccessDataResult<List<UsingState>>(await _usingStateDal.GetAll(), "Kullanım Durumları getirildi");
         }
 
-        public IDataResult<UsingState> GetById(int usingStateId)
+        public async Task<IDataResult<UsingState>> GetById(int usingStateId)
         {
-            return new SuccessDataResult<UsingState>(_usingStateDal.Get(us => us.UsingStateId == usingStateId), "Kullanım Durumları getirildi");
+            return new SuccessDataResult<UsingState>(await _usingStateDal.Get(us => us.UsingStateId == usingStateId), "Kullanım Durumları getirildi");
         }
 
-        public IResult Add(UsingState usingState)
+        public async Task<IResult> Add(UsingState usingState)
         {
 
-            IResult result = BusinessRules.Run(
-                CheckIfUsingStateNameExists(usingState.Name)
+            IResult result =await BusinessRules.Run(
+                await CheckIfUsingStateNameExists(usingState.Name)
                 );
 
 
@@ -46,23 +46,23 @@ namespace Business.Concrete
             }
 
             _usingStateDal.Add(usingState);
-            _usingStateDal.Commit();
+            await _usingStateDal.Commit();
             return new SuccessResult("Kullanım Durumu eklendi");
         }
 
-        public IResult Delete(int usingStateId)
+        public async Task<IResult> Delete(int usingStateId)
         {
-            var usingStateToDelete = _usingStateDal.Get(u => u.UsingStateId == usingStateId);
+            var usingStateToDelete = await _usingStateDal.Get(u => u.UsingStateId == usingStateId);
             _usingStateDal.Delete(usingStateToDelete);
-            _usingStateDal.Commit();
+            await _usingStateDal.Commit();
             return new SuccessResult("Kullanım Durumu silindi");
         }
 
-        public IResult Update(UsingStateForUpdateDto usingStateForUpdateDto)
+        public async Task<IResult> Update(UsingStateForUpdateDto usingStateForUpdateDto)
         {
 
-            IResult result = BusinessRules.Run(
-                CheckIfUsingStateNameExists(usingStateForUpdateDto.Name)
+            IResult result =await BusinessRules.Run(
+                await CheckIfUsingStateNameExists(usingStateForUpdateDto.Name)
                 );
 
 
@@ -71,16 +71,16 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<UsingState>>(result.Message);
             }
 
-            var usingStateToUpdate = _usingStateDal.Get(u => u.UsingStateId == usingStateForUpdateDto.UsingStateId);
+            var usingStateToUpdate =await _usingStateDal.Get(u => u.UsingStateId == usingStateForUpdateDto.UsingStateId);
             usingStateToUpdate.Name = usingStateForUpdateDto.Name;
             _usingStateDal.Update(usingStateToUpdate);
-            _usingStateDal.Commit();
+            await _usingStateDal.Commit();
             return new SuccessResult("Kullanım Durumu güncellendi");
         }
 
-        private IResult CheckIfUsingStateNameExists(string usingState)
+        private async Task<IResult> CheckIfUsingStateNameExists(string usingState)
         {
-            var result = _usingStateDal.GetAll(u => u.Name == usingState).Any();
+            var result = (await  _usingStateDal.GetAll(u => u.Name == usingState)).Any();
             if (result)
             {
                 return new ErrorResult(Messages.UsingStateNameAlreadyExists);

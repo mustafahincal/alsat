@@ -16,10 +16,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add([FromForm] IFormFile file, [FromForm] int productId)
+        public async Task<IActionResult> Add([FromForm] IFormFile file, [FromForm] int productId)
         {
            
-            var result = _productImageService.Add(file, productId);
+            var result = await _productImageService.Add(file, productId);
             if (result.Success)
             {
                 return Ok(result);
@@ -28,10 +28,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update([FromForm] IFormFile file, [FromForm] int productImageId)
+        public async Task<IActionResult> Update([FromForm] IFormFile file, [FromForm] int productImageId)
         { 
 
-            var result = _productImageService.Update(file, productImageId);
+            var result = await _productImageService.Update(file, productImageId);
             if (result.Success)
             {
                 return Ok(result);
@@ -40,9 +40,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("delete")]
-        public IActionResult Delete(int productImageId)
+        public async Task<IActionResult> Delete(int productImageId)
         {
-            var result = _productImageService.Delete(productImageId);
+            var result = await _productImageService.Delete(productImageId);
             if (result.Success)
             {
                 return Ok(result);
@@ -53,9 +53,9 @@ namespace WebAPI.Controllers
        
 
         [HttpGet("getall")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = _productImageService.GetAll();
+            var result = await _productImageService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -64,9 +64,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetByProductId(int id)
+        public async Task<IActionResult> GetByProductId(int id)
         {
-            var result = _productImageService.GetByProductId(id);
+            var result = await _productImageService.GetByProductId(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -75,9 +75,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyimageid")]
-        public IActionResult GetByImageId(int imageId)
+        public async Task<IActionResult> GetByImageId(int imageId)
         {
-            var result = _productImageService.GetByImageId(imageId);
+            var result = await _productImageService.GetByImageId(imageId);
             if (result.Success)
             {
                 return Ok(result);

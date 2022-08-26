@@ -22,10 +22,10 @@ namespace Business.Concrete
             _categortDal = categortDal;
         }
 
-        public IResult Add(Category category)
+        public async Task<IResult> Add(Category category)
         {
-            IResult result = BusinessRules.Run(
-                CheckIfCategoryNameExists(category.Name)
+            IResult result = await BusinessRules.Run(
+                await CheckIfCategoryNameExists(category.Name)
                 ); 
 
 
@@ -35,22 +35,22 @@ namespace Business.Concrete
             }
 
             _categortDal.Add(category);
-            _categortDal.Commit();
+            await _categortDal.Commit();
             return new SuccessResult("Kategori eklendi");
         }
 
-        public IResult Delete(int categoryId)
+        public async Task<IResult> Delete(int categoryId)
         {
-            var categoryToDelete = _categortDal.Get(c => c.CategoryId == categoryId); 
+            var categoryToDelete = await _categortDal.Get(c => c.CategoryId == categoryId); 
             _categortDal.Delete(categoryToDelete);
-            _categortDal.Commit();
+            await _categortDal.Commit();
             return new SuccessResult("Kategori silindi");
         }
 
-        public IResult Update(CategoryForUpdateDto categoryForUpdateDto)
+        public async Task<IResult> Update(CategoryForUpdateDto categoryForUpdateDto)
         {
-            IResult result = BusinessRules.Run(
-                CheckIfCategoryNameExists(categoryForUpdateDto.Name)
+            IResult result = await  BusinessRules.Run(
+                await CheckIfCategoryNameExists(categoryForUpdateDto.Name)
                 );
 
 
@@ -59,27 +59,27 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<Category>>(result.Message);
             }
 
-            var categoryToUpdate = _categortDal.Get(c => c.CategoryId == categoryForUpdateDto.CategoryId);
+            var categoryToUpdate = await  _categortDal.Get(c => c.CategoryId == categoryForUpdateDto.CategoryId);
             categoryToUpdate.Name = categoryForUpdateDto.Name;
             _categortDal.Update(categoryToUpdate);
-            _categortDal.Commit();
+            await _categortDal.Commit();
             return new SuccessResult("Kategori güncellendi");
         }
 
-        public IDataResult<List<Category>> GetAll()
+        public async Task<IDataResult<List<Category>>> GetAll()
         {
-            return new SuccessDataResult<List<Category>>(_categortDal.GetAll());
+            return new SuccessDataResult<List<Category>>(await _categortDal.GetAll());
         }
 
-        public IDataResult<Category> GetById(int categoryId)
+        public async Task< IDataResult<Category>> GetById(int categoryId)
         {
-            return new SuccessDataResult<Category>(_categortDal.Get(c => c.CategoryId == categoryId));
+            return new SuccessDataResult<Category>(await _categortDal.Get(c => c.CategoryId == categoryId));
 
         }
 
-        private IResult CheckIfCategoryNameExists(string categoryName)
+        private async Task<IResult> CheckIfCategoryNameExists(string categoryName)
         {
-            var result = _categortDal.GetAll(c => c.Name == categoryName).Any();
+            var result = (await _categortDal.GetAll(c => c.Name == categoryName)).Any();
             if (result)
             {
                 return new ErrorResult(Messages.CategoryNameAlreadyExists);

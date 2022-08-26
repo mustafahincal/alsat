@@ -3,14 +3,8 @@ using Business.Constants;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework.UnitOfWork;
 using Entities.Concrete;
 using Entities.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
@@ -22,21 +16,21 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
-        public IDataResult<List<Brand>> GetAll()
+        public async Task<IDataResult<List<Brand>>> GetAll()
         {
-            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), "Markalar getirildi");
+            return new SuccessDataResult<List<Brand>>(await _brandDal.GetAll(), "Markalar getirildi");
         }
 
-        public IDataResult<Brand> GetById(int brandId)
+        public async Task<IDataResult<Brand>> GetById(int brandId)
         {
-            return new SuccessDataResult<Brand>(_brandDal.Get(b => b.BrandId == brandId), "Marka getirildi");
+            return new SuccessDataResult<Brand>(await _brandDal.Get(b => b.BrandId == brandId), "Marka getirildi");
         }
 
-        public IResult Add(Brand brand)
+        public async Task<IResult> Add(Brand brand)
         {
 
-            IResult result = BusinessRules.Run(
-                CheckIfBrandNameExists(brand.Name)
+            IResult result = await BusinessRules.Run(
+                await CheckIfBrandNameExists(brand.Name)
                 ); ;
 
 
@@ -46,23 +40,23 @@ namespace Business.Concrete
             }
 
             _brandDal.Add(brand);
-            _brandDal.Commit();
+            await _brandDal.Commit();
             return new SuccessResult("Marka eklendi");
         }
 
-        public IResult Delete(int brandId)
+        public async Task<IResult> Delete(int brandId)
         {
-            var brandToDelete = _brandDal.Get(b => b.BrandId == brandId);
+            var brandToDelete = await _brandDal.Get(b => b.BrandId == brandId);
             _brandDal.Delete(brandToDelete);
-            _brandDal.Commit();
+            await _brandDal.Commit();
             return new SuccessResult("Marka silindi");
         }
 
-        public IResult Update(BrandForUpdateDto brandForUpdateDto)
+        public async Task<IResult> Update(BrandForUpdateDto brandForUpdateDto)
         {
 
-            IResult result = BusinessRules.Run(
-               CheckIfBrandNameExists(brandForUpdateDto.Name)
+            IResult result = await BusinessRules.Run(
+               await CheckIfBrandNameExists(brandForUpdateDto.Name)
                ); ;
 
 
@@ -71,16 +65,16 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<Brand>>(result.Message);
             }
 
-            var brandToUpdate = _brandDal.Get(b => b.BrandId == brandForUpdateDto.BrandId);
+            var brandToUpdate = await _brandDal.Get(b => b.BrandId == brandForUpdateDto.BrandId);
             brandToUpdate.Name = brandForUpdateDto.Name;
             _brandDal.Update(brandToUpdate);
-            _brandDal.Commit();
+            await _brandDal.Commit();
             return new SuccessResult("Marka güncellendi");
         }
 
-        private IResult CheckIfBrandNameExists(string brandName)
+        private async Task<IResult> CheckIfBrandNameExists(string brandName)
         {
-            var result = _brandDal.GetAll(b => b.Name == brandName).Any();
+            var result = (await _brandDal.GetAll(b => b.Name == brandName)).Any();
             if (result)
             {
                 return new ErrorResult(Messages.BrandNameAlreadyExists);

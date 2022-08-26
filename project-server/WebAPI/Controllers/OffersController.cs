@@ -19,9 +19,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getall")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = _offerService.GetAll();
+            var result = await _offerService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -30,9 +30,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var result = _offerService.GetById(id);
+            var result = await _offerService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -42,9 +42,9 @@ namespace WebAPI.Controllers
 
 
         [HttpGet("getofferdetails")]
-        public IActionResult GetOfferDetails()
+        public async Task<IActionResult> GetOfferDetails()
         {
-            var result = _offerService.GetOfferDetails();
+            var result = await _offerService.GetOfferDetails();
             if (result.Success)
             {
                 return Ok(result);
@@ -53,9 +53,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getofferdetailsbyuserid")]
-        public IActionResult GetOfferDetailsByUserId(int userId)
+        public async Task<IActionResult> GetOfferDetailsByUserId(int userId)
         {
-            var result = _offerService.GetOfferDetailsByUserId(userId);
+            var result = await _offerService.GetOfferDetailsByUserId(userId);
             if (result.Success)
             {
                 return Ok(result);
@@ -64,9 +64,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getofferdetailsbyownerid")]
-        public IActionResult GetOfferDetailsByOwnerId(int ownerId)
+        public async Task<IActionResult> GetOfferDetailsByOwnerId(int ownerId)
         {
-            var result = _offerService.GetOfferDetailsByOwnerId(ownerId);
+            var result = await _offerService.GetOfferDetailsByOwnerId(ownerId);
             if (result.Success)
             {
                 return Ok(result);
@@ -75,9 +75,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getofferdetailsbyid")]
-        public IActionResult GetOfferDetailsById(int id)
+        public async Task<IActionResult> GetOfferDetailsById(int id)
         {
-            var result = _offerService.GetOfferDetailsById(id);
+            var result = await _offerService.GetOfferDetailsById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -87,9 +87,9 @@ namespace WebAPI.Controllers
 
 
         [HttpPost("add")]
-        public IActionResult Add(Offer offer)
+        public async Task<IActionResult> Add(Offer offer)
         {
-            var result = _offerService.Add(offer);
+            var result = await _offerService.Add(offer);
             if (result.Success)
             {
                 return Ok(result);
@@ -98,9 +98,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("delete")]
-        public IActionResult Delete(int offerId)
+        public async Task<IActionResult> Delete(int offerId)
         {
-            var result = _offerService.Delete(offerId);
+            var result = await _offerService.Delete(offerId);
             if (result.Success)
             {
                 return Ok(result);
@@ -109,9 +109,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(OfferForUpdateDto offerForUpdateDto)
+        public async Task<IActionResult> Update(OfferForUpdateDto offerForUpdateDto)
         {
-            var result = _offerService.Update(offerForUpdateDto);
+            var result = await _offerService.Update(offerForUpdateDto);
             if (result.Success)
             {
                 return Ok(result);

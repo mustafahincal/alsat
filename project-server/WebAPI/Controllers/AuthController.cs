@@ -16,15 +16,15 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("login")]
-        public ActionResult Login(UserForLoginDto userForLoginDto)
+        public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
-            var userToLogin = _authService.Login(userForLoginDto);
+            var userToLogin = await _authService.Login(userForLoginDto);
             if (!userToLogin.Success)
             {
                 return BadRequest(userToLogin);
             }
 
-            var result = _authService.CreateAccessTokenForLogin(userToLogin.Data);
+            var result = await _authService.CreateAccessTokenForLogin(userToLogin.Data);
             if (result.Success)
             {
 
@@ -35,17 +35,17 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("register")]
-        public ActionResult Register(UserForRegisterDto userForRegisterDto)
+        public async Task<ActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
-            var userExists = _authService.UserExists(userForRegisterDto.Email);
+            var userExists = await _authService.UserExists(userForRegisterDto.Email);
             if (!userExists.Success)
             {
                 return BadRequest(userExists);
             }
 
-            var registerResult = _authService.Register(userForRegisterDto, userForRegisterDto.Password);
+            var registerResult = await _authService.Register(userForRegisterDto, userForRegisterDto.Password);
 
-            var result = _authService.CreateAccessTokenForRegister(registerResult.Data);
+            var result = await _authService.CreateAccessTokenForRegister(registerResult.Data);
             if (result.Success)
             {
                 return Ok(result);
@@ -55,9 +55,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("changepassword")]
-        public ActionResult ChangeUserPassword(ChangePasswordDto changePasswordDto)
+        public async Task<IActionResult> ChangeUserPassword(ChangePasswordDto changePasswordDto)
         {
-            var changePasswordResult = _authService.ChangePassword(changePasswordDto);
+            var changePasswordResult = await _authService.ChangePassword(changePasswordDto);
 
             if (changePasswordResult.Success)
             {
@@ -68,9 +68,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("block")]
-        public ActionResult BlockUser(string email)
+        public async Task<IActionResult> BlockUser(string email)
         {
-            var result = _authService.BlockUser(email);
+            var result = await _authService.BlockUser(email);
 
             if (result.Success)
             {
@@ -81,9 +81,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("unblock")]
-        public ActionResult UnBlockUser(int id)
+        public async Task<IActionResult> UnBlockUser(int id)
         {
-            var result = _authService.UnBlockUser(id);
+            var result = await _authService.UnBlockUser(id);
 
             if (result.Success)
             {

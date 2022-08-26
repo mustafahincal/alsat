@@ -17,9 +17,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getall")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = _brandService.GetAll();
+            var result = await _brandService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -29,9 +29,9 @@ namespace WebAPI.Controllers
 
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var result = _brandService.GetById(id);
+            var result = await _brandService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -39,20 +39,20 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("add")]
-        public IActionResult Add(Brand brand)
+        public async Task<IActionResult> Add(Brand brand)
         {
-            var result = _brandService.Add(brand);
+            var result = await _brandService.Add(brand);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-
+        // evet reactta fark etmez ama şunlara dikkat etmen gerek bu awaitleri unutursan farklı veri döner react'e aynen
         [HttpGet("delete")]
-        public IActionResult Delete(int brandId)
+        public async Task<IActionResult> Delete(int brandId)
         {
-            var result = _brandService.Delete(brandId);
+            var result = await _brandService.Delete(brandId);
             if (result.Success)
             {
                 return Ok(result);
@@ -61,9 +61,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(BrandForUpdateDto brandForUpdateDto)
+        public async Task<IActionResult> Update(BrandForUpdateDto brandForUpdateDto)
         {
-            var result = _brandService.Update(brandForUpdateDto);
+            var result = await _brandService.Update(brandForUpdateDto);
             if (result.Success)
             {
                 return Ok(result);

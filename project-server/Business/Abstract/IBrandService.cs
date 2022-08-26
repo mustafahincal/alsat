@@ -12,10 +12,10 @@ namespace Business.Abstract
     public interface IBrandService
     {
 
-        IDataResult<List<Brand>> GetAll();
-        IDataResult<Brand> GetById(int brandId);
-        IResult Add(Brand brand);
-        IResult Delete(int brandId);
-        IResult Update(BrandForUpdateDto brandForUpdateDto);
+        Task<IDataResult<List<Brand>>> GetAll();
+        Task<IDataResult<Brand>> GetById(int brandId);
+        Task<IResult> Add(Brand brand);
+        Task<IResult> Delete(int brandId);
+        Task<IResult> Update(BrandForUpdateDto brandForUpdateDto);
     }
 }

@@ -11,19 +11,19 @@ namespace Business.Abstract
 {
     public interface IOfferService
     {
-        IDataResult<List<Offer>> GetAll();
-        IDataResult<Offer> GetById(int offerId);
-        IResult Add(Offer offer);
-        IResult Delete(int offerId);
-        IResult Update(OfferForUpdateDto offerForUpdateDto);
+        Task<IDataResult<List<Offer>>> GetAll();
+        Task<IDataResult<Offer>> GetById(int offerId);
+        Task<IResult> Add(Offer offer);
+        Task<IResult> Delete(int offerId);
+        Task<IResult> Update(OfferForUpdateDto offerForUpdateDto);
 
-        IDataResult<List<Offer>> GetByUserId(int userId);
+        Task<IDataResult<List<Offer>>> GetByUserId(int userId);
 
-        List<Offer> GetAllByProductId(int productId);
+        Task<List<Offer>> GetAllByProductId(int productId);
 
-        IDataResult<List<OfferDetailDto>> GetOfferDetails();
-        IDataResult<List<OfferDetailDto>> GetOfferDetailsByUserId(int userId);
-        IDataResult<List<OfferDetailDto>> GetOfferDetailsByOwnerId(int ownerId);
-        IDataResult<List<OfferDetailDto>> GetOfferDetailsById(int id);
+        Task<IDataResult<List<OfferDetailDto>>> GetOfferDetails();
+        Task<IDataResult<List<OfferDetailDto>>> GetOfferDetailsByUserId(int userId);
+        Task<IDataResult<List<OfferDetailDto>>> GetOfferDetailsByOwnerId(int ownerId);
+        Task<IDataResult<List<OfferDetailDto>>> GetOfferDetailsById(int id);
     }
 }

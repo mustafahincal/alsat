@@ -21,37 +21,38 @@ namespace Business.Concrete
             _userOperationClaimDal = userOperationClaimDal;
         }
 
-        public IDataResult<List<UserOperationClaim>> GetAll()
+        public async Task<IDataResult<List<UserOperationClaim>>> GetAll()
         {
-            return new SuccessDataResult<List<UserOperationClaim>>(_userOperationClaimDal.GetAll());
+            return new SuccessDataResult<List<UserOperationClaim>>(await _userOperationClaimDal.GetAll());
         }
 
-        public IDataResult<UserOperationClaim> GetById(int userOperationClaimId)
+        public async Task<IDataResult<UserOperationClaim>> GetById(int userOperationClaimId)
         {
-            return new SuccessDataResult<UserOperationClaim>(_userOperationClaimDal.Get(uc => uc.UserOperationClaimId == userOperationClaimId));
+            return new SuccessDataResult<UserOperationClaim>(await _userOperationClaimDal.Get(uc => uc.UserOperationClaimId == userOperationClaimId));
         }
 
-        public IResult Add(UserOperationClaim userOperationClaim)
+        public async Task<IResult> Add(UserOperationClaim userOperationClaim)
         {
             _userOperationClaimDal.Add(userOperationClaim);
-            _userOperationClaimDal.Commit();
+            await _userOperationClaimDal.Commit();
             return new SuccessResult("OperationClaim eklendi");
         }
 
-        public IResult Delete(int userOperationClaimId)
+        public async Task<IResult> Delete(int userOperationClaimId)
         {
-            var userOperationClaimToDelete = _userOperationClaimDal.Get(uc => uc.UserOperationClaimId == userOperationClaimId);
+            var userOperationClaimToDelete = await  _userOperationClaimDal.Get(uc => uc.UserOperationClaimId == userOperationClaimId);
             _userOperationClaimDal.Delete(userOperationClaimToDelete);
-            _userOperationClaimDal.Commit();
+            await _userOperationClaimDal.Commit();
             return new SuccessResult("OperationClaim silindi");
         }
 
-        public IResult Update(UserOperationClaim userOperationClaim)
+        public async Task<IResult> Update(UserOperationClaim userOperationClaim)
         {
             //var colorToUpdate = _userOperationClaimDal.Get(c => c.ColorId == colorForUpdateDto.ColorId);
             //colorToUpdate.Name = colorForUpdateDto.Name;
             //_userOperationClaimDal.Update(colorToUpdate);
             //_userOperationClaimDal.Commit();
+            
             return new SuccessResult("OperationClaim ....");
         }
     }

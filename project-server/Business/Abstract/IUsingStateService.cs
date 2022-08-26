@@ -11,10 +11,10 @@ namespace Business.Abstract
 {
     public interface IUsingStateService
     {
-        IDataResult<List<UsingState>> GetAll();
-        IDataResult<UsingState> GetById(int usingStateId);
-        IResult Add(UsingState usingState);
-        IResult Delete(int usingStateId);
-        IResult Update(UsingStateForUpdateDto usingStateForUpdateDto);
+        Task<IDataResult<List<UsingState>>> GetAll();
+        Task<IDataResult<UsingState>> GetById(int usingStateId);
+        Task<IResult> Add(UsingState usingState);
+        Task<IResult> Delete(int usingStateId);
+        Task<IResult> Update(UsingStateForUpdateDto usingStateForUpdateDto);
     }
 }

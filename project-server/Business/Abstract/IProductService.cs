@@ -11,20 +11,20 @@ namespace Business.Abstract
 {
     public interface IProductService
     {
-        IDataResult<List<Product>> GetAll();
-        IDataResult<List<Product>> GetAllByCategoryId(int id);
-        IDataResult<List<Product>> GetByUnitPrice(decimal min, decimal max);
-        IDataResult<List<ProductDetailDto>> GetProductDetails();
-        IDataResult<Product> GetById(int productId);
-        IDataResult<List<Product>> Add(ProductForAddDto productForAddDto);
-        IResult Delete(int productId);
-        IResult Update(ProductForUpdateDto productForUpdateDto);
+        Task<IDataResult<List<Product>>> GetAll();
+        Task<IDataResult<List<Product>>> GetAllByCategoryId(int id);
+        Task<IDataResult<List<Product>>> GetByUnitPrice(decimal min, decimal max);
+        Task<IDataResult<List<ProductDetailDto>>> GetProductDetails();
+        Task<IDataResult<Product>> GetById(int productId);
+        Task<IDataResult<List<Product>>> Add(ProductForAddDto productForAddDto);
+        Task<IResult> Delete(int productId);
+        Task<IResult> Update(ProductForUpdateDto productForUpdateDto);
 
-        IDataResult<List<ProductDetailDto>> GetProductDetailsById(int id);
-        IDataResult<List<ProductDetailDto>> GetProductDetailsByBrandId(int brandId);
-        IDataResult<List<ProductDetailDto>> GetProductDetailsByColorId(int colorId);
-        IDataResult<List<ProductDetailDto>> GetProductDetailsByUsingStateId(int usingStateId);
-        IDataResult<List<ProductDetailDto>> GetProductDetailsByCategoryId(int categoryId);
-        IDataResult<List<ProductDetailDto>> GetProductDetailsByOwnerId(int ownerId);
+        Task<IDataResult<List<ProductDetailDto>>> GetProductDetailsById(int id);
+        Task<IDataResult<List<ProductDetailDto>>> GetProductDetailsByBrandId(int brandId);
+        Task<IDataResult<List<ProductDetailDto>>> GetProductDetailsByColorId(int colorId);
+        Task<IDataResult<List<ProductDetailDto>>> GetProductDetailsByUsingStateId(int usingStateId);
+        Task<IDataResult<List<ProductDetailDto>>> GetProductDetailsByCategoryId(int categoryId);
+        Task<IDataResult<List<ProductDetailDto>>> GetProductDetailsByOwnerId(int ownerId);
     }
 }

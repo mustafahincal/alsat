@@ -13,15 +13,15 @@ namespace Business.Abstract
 {
     public interface IUserService
     {
-        IDataResult<List<User>> GetAll();
-        IDataResult<User> GetById(int userId);
-        IDataResult<List<OperationClaim>> GetClaims(User user);
-        IDataResult<List<UserDetailDto>> GetUserDetails();
-        IDataResult<List<UserDetailDto>> GetUserDetailsById(int userId);
-        IDataResult<User> GetByMail(string email);
-        IResult Add(User user);
-        IResult Delete(int id);
-        IResult Update(UserForUpdateDto userForUpdateDto);
+        Task<IDataResult<List<User>>> GetAll();
+        Task<IDataResult<User>> GetById(int userId);
+        Task<IDataResult<List<OperationClaim>>> GetClaims(User user);
+        Task<IDataResult<List<UserDetailDto>>> GetUserDetails();
+        Task<IDataResult<List<UserDetailDto>>> GetUserDetailsById(int userId);
+        Task<IDataResult<User>> GetByMail(string email);
+        Task<IResult> Add(User user);
+        Task<IResult> Delete(int id);
+        Task<IResult> Update(UserForUpdateDto userForUpdateDto);
 
     }
 }

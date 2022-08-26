@@ -16,9 +16,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getall")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = _creditCardService.GetAll();
+            var result = await _creditCardService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -27,9 +27,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var result = _creditCardService.GetById(id);
+            var result = await _creditCardService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -38,9 +38,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(CreditCard creditCard)
+        public async Task<IActionResult> Add(CreditCard creditCard)
         {
-            var result = _creditCardService.Add(creditCard);
+            var result = await _creditCardService.Add(creditCard);
             if (result.Success)
             {
                 return Ok(result);
@@ -49,9 +49,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("delete")]
-        public IActionResult Delete(int creditCardId)
+        public async Task<IActionResult> Delete(int creditCardId)
         {
-            var result = _creditCardService.Delete(creditCardId);
+            var result = await _creditCardService.Delete(creditCardId);
             if (result.Success)
             {
                 return Ok(result);
@@ -60,9 +60,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(CreditCardForUpdateDto creditCardForUpdateDto)
+        public async Task<IActionResult> Update(CreditCardForUpdateDto creditCardForUpdateDto)
         {
-            var result = _creditCardService.Update(creditCardForUpdateDto);
+            var result = await _creditCardService.Update(creditCardForUpdateDto);
             if (result.Success)
             {
                 return Ok(result);
@@ -71,9 +71,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getcreditcarddetails")]
-        public IActionResult GetCreditCardDetails()
+        public async Task<IActionResult> GetCreditCardDetails()
         {
-            var result = _creditCardService.GetCreditCardDetails();
+            var result = await _creditCardService.GetCreditCardDetails();
             if (result.Success)
             {
                 return Ok(result);
@@ -82,9 +82,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getcreditcarddetailsbyid")]
-        public IActionResult GetCreditCardDetailsById(int id)
+        public async Task<IActionResult> GetCreditCardDetailsById(int id)
         {
-            var result = _creditCardService.GetCreditCardDetailsById(id);
+            var result = await _creditCardService.GetCreditCardDetailsById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -93,9 +93,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getcreditcarddetailsbyuserid")]
-        public IActionResult GetCreditCardDetailsByUserId(int userId)
+        public async Task<IActionResult> GetCreditCardDetailsByUserId(int userId)
         {
-            var result = _creditCardService.GetCreditCardDetailsByUserId(userId);
+            var result = await _creditCardService.GetCreditCardDetailsByUserId(userId);
             if (result.Success)
             {
                 return Ok(result);

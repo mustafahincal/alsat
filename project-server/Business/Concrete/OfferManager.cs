@@ -19,68 +19,68 @@ namespace Business.Concrete
             _offerDal = offerDal;
         }
 
-         public IResult Add(Offer offer)
+         public async Task<IResult > Add(Offer offer)
         {
             _offerDal.Add(offer);
-            _offerDal.Commit();
+            await _offerDal.Commit();
             return new SuccessResult("Teklif eklendi");
         }
 
-        public IResult Delete(int offerId)
+        public async Task<IResult> Delete(int offerId)
         {
-            var offerToDelete = _offerDal.Get(o => o.OfferId == offerId);
+            var offerToDelete = await _offerDal.Get(o => o.OfferId == offerId);
             _offerDal.Delete(offerToDelete);
-            _offerDal.Commit();
+            await _offerDal.Commit();
             return new SuccessResult("Teklif reddedildi");
         }
 
-        public IResult Update(OfferForUpdateDto offerForUpdateDto)
+        public async Task<IResult> Update(OfferForUpdateDto offerForUpdateDto)
         {
-            var offerToUpdate = _offerDal.Get(o => o.OfferId == offerForUpdateDto.OfferId);
+            var offerToUpdate = await _offerDal.Get(o => o.OfferId == offerForUpdateDto.OfferId);
             offerToUpdate.OfferedPrice = offerForUpdateDto.OfferedPrice;
             offerToUpdate.IsApproved = offerForUpdateDto.IsApproved;
              _offerDal.Update(offerToUpdate);
-            _offerDal.Commit();
+            await _offerDal.Commit();
             return new SuccessResult("Teklif güncellendi");
         }
-        public IDataResult<List<Offer>> GetAll()
+        public async Task<IDataResult<List<Offer>>> GetAll()
         {
-            return new SuccessDataResult<List<Offer>>(_offerDal.GetAll(), "Teklifler listelendi");
+            return new SuccessDataResult<List<Offer>>(await _offerDal.GetAll(), "Teklifler listelendi");
         }
 
-        public List<Offer> GetAllByProductId(int productId)
+        public async Task<List<Offer>> GetAllByProductId(int productId)
         {
-            return new List<Offer>(_offerDal.GetAll(offer => offer.ProductId == productId));
+            return new List<Offer>(await _offerDal.GetAll(offer => offer.ProductId == productId));
         }
 
-        public IDataResult<Offer> GetById(int offerId)
+        public async Task<IDataResult<Offer>> GetById(int offerId)
         {
             throw new NotImplementedException();
         }
 
-        public IDataResult<List<Offer>> GetByUserId(int userId)
+        public async Task<IDataResult<List<Offer>>> GetByUserId(int userId)
         {
-            return new SuccessDataResult<List<Offer>>(_offerDal.GetAll(o => o.UserId == userId));
+            return new SuccessDataResult<List<Offer>>(await _offerDal.GetAll(o => o.UserId == userId));
         }
 
-        public IDataResult<List<OfferDetailDto>> GetOfferDetails()
+        public async Task<IDataResult<List<OfferDetailDto>>> GetOfferDetails()
         {
-            return new SuccessDataResult<List<OfferDetailDto>>(_offerDal.GetOfferDetails(), "Teklifler listelendi");
+            return new SuccessDataResult<List<OfferDetailDto>>(await _offerDal.GetOfferDetails(), "Teklifler listelendi");
         }
 
-        public IDataResult<List<OfferDetailDto>> GetOfferDetailsByOwnerId(int ownerId)
+        public async Task<IDataResult<List<OfferDetailDto>>> GetOfferDetailsByOwnerId(int ownerId)
         {
-            return new SuccessDataResult<List<OfferDetailDto>>(_offerDal.GetOfferDetails(o => o.OwnerId == ownerId), "Teklifler listelendi");
+            return new SuccessDataResult<List<OfferDetailDto>>(await _offerDal.GetOfferDetails(o => o.OwnerId == ownerId), "Teklifler listelendi");
         }
 
-        public IDataResult<List<OfferDetailDto>> GetOfferDetailsByUserId(int userId)
+        public async Task<IDataResult<List<OfferDetailDto>>> GetOfferDetailsByUserId(int userId)
         {
-            return new SuccessDataResult<List<OfferDetailDto>>(_offerDal.GetOfferDetails(o => o.UserId == userId), "Teklifler listelendi");
+            return new SuccessDataResult<List<OfferDetailDto>>(await _offerDal.GetOfferDetails(o => o.UserId == userId), "Teklifler listelendi");
         }
 
-        public IDataResult<List<OfferDetailDto>> GetOfferDetailsById(int id)
+        public async Task<IDataResult<List<OfferDetailDto>>> GetOfferDetailsById(int id)
         {
-            return new SuccessDataResult<List<OfferDetailDto>>(_offerDal.GetOfferDetails(o => o.OfferId == id), "Teklifler getirildi");
+            return new SuccessDataResult<List<OfferDetailDto>>(await _offerDal.GetOfferDetails(o => o.OfferId == id), "Teklifler getirildi");
         }
     }
 }

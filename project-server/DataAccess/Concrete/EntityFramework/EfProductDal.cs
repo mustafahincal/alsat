@@ -9,10 +9,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfProductDal : EfEntityRepositoryBase<Product> , IProductDal
+    public class EfProductDal : EfEntityRepositoryBase<Product>, IProductDal
     {
         PrimeforContext _primeforContext;
         public EfProductDal(PrimeforContext primeforContext) : base(primeforContext)
@@ -20,9 +21,9 @@ namespace DataAccess.Concrete.EntityFramework
             _primeforContext = primeforContext;
         }
 
-        public List<ProductDetailDto> GetProductDetails(Expression<Func<ProductDetailDto, bool>> filter = null)
+        public async Task<List<ProductDetailDto>> GetProductDetails(Expression<Func<ProductDetailDto, bool>> filter = null)
         {
-
+         
             var result = from p in _primeforContext.Products
                          join c in _primeforContext.Categories
                          on p.CategoryId equals c.CategoryId
@@ -50,12 +51,11 @@ namespace DataAccess.Concrete.EntityFramework
                              IsSold = p.IsSold,
                              ImagePath = (from pi in _primeforContext.ProductImages where pi.ProductId == p.ProductId select pi.ImagePath).FirstOrDefault(),
                              ProductImageId = (from pi in _primeforContext.ProductImages where pi.ProductId == p.ProductId select pi.ProductImageId).FirstOrDefault()
-                             };
-                return filter == null
-                ? result.ToList()
-                : result.Where(filter).ToList();
+                         };
+            return filter == null
+            ? await result.ToListAsync()
+            : await result.Where(filter).ToListAsync();
+        }
 
-            }
-        
     }
 }
