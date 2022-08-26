@@ -109,7 +109,7 @@ function Login() {
           <NavLink
             to={"/register"}
             type="submit"
-            className="mt-5 border-2 border-darkBlue text-darkBlue bg-white  w-full py-2 text-center text-lg hover:bg-darkBlue hover:text-white transition-all duration-200 rounded dark:bg-gray-800 dark:text-white dark:border-white dark:hover:bg-white dark:hover:text-gray-800"
+            className="mt-5 border-2 border-darkBlue text-darkBlue bg-white  w-full py-2 text-center text-lg hover:bg-darkBlue hover:text-white transition-all duration-200 rounded dark:bg-gray-800 dark:text-white dark:border-white dark:hover:bg-white dark:hover:text-gray-800 hover:mt-6"
           >
             Hesabın yok mu? Kayıt Ol!
           </NavLink>
