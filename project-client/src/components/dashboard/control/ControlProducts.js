@@ -46,13 +46,13 @@ function ControlProducts() {
   };
 
   return (
-    <div>
+    <div className="flex flex-wrap">
       {products.map((product, index) => (
         <div
-          className=" dark:bg-gray-800 hover:border-gray-300 border-2 rounded-tl-md rounded-bl-md  transition-all duration-75 border-gray-100 rounded w-full h-52  mb-5 flex justify-between items-center shadow-item2 dark:border-gray-600 dark:hover:border-gray-700 "
+          className=" dark:bg-gray-800 hover:border-gray-300 border-2 rounded-tl-md rounded-bl-md  transition-all duration-75 border-gray-100 rounded w-full sm:w-1/2 md:w-full md:h-52  mb-5 flex flex-col md:flex-row md:justify-between md:items-center shadow-item2 dark:border-gray-600 dark:hover:border-gray-700 "
           key={index}
         >
-          <div className="w-1/3 h-full">
+          <div className="w-full md:w-1/3 h-1/2 md:h-full">
             <img
               src={
                 product.imagePath
@@ -63,7 +63,7 @@ function ControlProducts() {
               alt=""
             />
           </div>
-          <div className="flex flex-col w-1/3 h-full justify-between self-stretch py-2 px-14 text-md flex-1">
+          <div className="flex flex-col w-full md:w-1/3 md:h-full justify-between md:self-stretch py-10 sm:py-2 px-5 lg:px-14 text-md flex-1">
             <div className="flex justify-between">
               <div>Ürün Id</div>
               <div>{product.productId}</div>
@@ -91,7 +91,7 @@ function ControlProducts() {
               {product.isSold ? "Satıldı" : "Satılmadı"}
             </div>
           </div>
-          <div className="flex justify-between items-center px-10 w-1/3">
+          <div className="flex sm:px-6 py-5 justify-center items-center  lg:px-10 w-full md:w-1/3">
             <NavLink
               to={`/productDetails/${product.productId}`}
               className="btn border-2 box-border bg-white  border-indigo-600 transition-all text-indigo-500 hover:bg-indigo-500 hover:text-white"

@@ -91,8 +91,8 @@ function ControlBrands() {
   };
 
   return (
-    <div className="flex justify-between items-center p-16">
-      <div className="w-1/3  mx-auto  bg-white dark:bg-gray-800 rounded-md shadow-item px-4 py-5">
+    <div className="flex flex-col md:flex-row md:justify-between items-center pt-16 lg:pb-16 md:px-16">
+      <div className="w-full sm:w-2/3 md:w-1/3  mx-auto  bg-white dark:bg-gray-800 rounded-md shadow-item px-4 py-5 order-2 md:order-1">
         <div className="flex flex-col gap-2">
           {brands.map((brand) => (
             <div
@@ -129,7 +129,7 @@ function ControlBrands() {
         </div>
       </div>
 
-      <div className="w-1/2 mx-auto  py-10 shadow-item  bg-white  dark:bg-gray-800 dark:text-white">
+      <div className="w-full sm:w-2/3 md:w-1/2 mx-auto mb-16  py-10 shadow-item  bg-white dark:bg-gray-800 dark:text-white order-1 md:order-2">
         <div className="w-3/4 m-auto">
           <h1 className="font-extrabold text-3xl  mb-5 text-center">
             {updateBrandStatus ? "Marka Güncelle" : "Marka Ekle"}

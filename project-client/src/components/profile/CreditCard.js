@@ -32,7 +32,7 @@ function CreditCard() {
         <div>
           {creditCards.map((creditCard, index) => (
             <div
-              className="py-4 px-3 sm:px-10 rounded w-full mb-3 flex justify-between text-xl transition-all duration-75  bg-white hover:border-gray-800 border-2 border-gray-100 dark:border-gray-700  dark:bg-gray-800 dark:hover:border-gray-100"
+              className="py-4 px-3 sm:px-10 rounded w-full mb-3 flex justify-between  transition-all duration-75  bg-white hover:border-gray-800 border-2 border-gray-100 dark:border-gray-700  dark:bg-gray-800 dark:hover:border-gray-100"
               key={index}
             >
               <div className="flex flex-col xl:flex-row xl:justify-between w-full sm:pr-10">
