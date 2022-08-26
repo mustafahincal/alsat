@@ -158,7 +158,7 @@ function ProductDetails() {
                 <div className="flex flex-col">
                   <p className="text-2xl"> Ürün Satılmıştır</p>
                   <NavLink
-                    className="btn bg-white border-4 border-darkBlue text-darkBlue hover:bg-darkBlue hover:text-white transition-all  text-2xl mt-4"
+                    className="btn dark:bg-gray-800 bg-white border-4 dark:border-white dark:text-white border-darkBlue text-darkBlue hover:bg-darkBlue dark:hover:bg-white dark:hover:text-darkBlue hover:text-white transition-all  text-2xl mt-4"
                     to={"/main"}
                   >
                     Diğer Ürünler

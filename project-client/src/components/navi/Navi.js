@@ -153,7 +153,7 @@ function Navi() {
                     {selectedUser.firstName + " " + selectedUser.lastName}
                   </div>
                   <div className="ml-0 sm:ml-3 flex justify-center items-center text-black">
-                    <IoIosArrowDown className="text-2xl" />
+                    <IoIosArrowDown className="text-2xl dark:text-black text-white" />
                   </div>
                 </span>
               </button>
