@@ -8,7 +8,7 @@ import { setToLocalStorage } from "../../services/localStorageService";
 import jwtDecode from "jwt-decode";
 import { useUserContext } from "../../context/UserContext";
 import { getUserById } from "../../services/userService";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Login() {
   const { setIsLogged, counter, setCounter, setIsAdmin } = useAuthContext();
@@ -106,8 +106,15 @@ function Login() {
               )}
             </div>
           </div>
+          <NavLink
+            to={"/register"}
+            type="submit"
+            className="mt-5 border-2 border-darkBlue text-darkBlue bg-white  w-full py-2 text-center text-lg hover:bg-darkBlue hover:text-white transition-all duration-200 rounded dark:bg-gray-800 dark:text-white dark:border-white dark:hover:bg-white dark:hover:text-gray-800"
+          >
+            Hesabın yok mu? Kayıt Ol!
+          </NavLink>
           <div className="text-right mt-5">
-            <button type="submit" className="btn text-lg">
+            <button type="submit" className="btn text-lg py-2">
               Giriş Yap
             </button>
           </div>

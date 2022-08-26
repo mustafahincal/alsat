@@ -49,7 +49,7 @@ function ProductDetails() {
 
   return (
     <div className="py-24 flex flex-col lg:flex-row lg:justify-between px-6 lg:px-36">
-      <div className="w-full sm:w-3/4 md:w-4/6 lg:w-1/2 xl:w-2/5 mb-16  bg-white dark:bg-gray-800 dark:text-white  rounded-md shadow-item mx-auto">
+      <div className="w-full sm:w-3/4 md:w-4/6 lg:w-1/2 xl:w-1/2 mb-16  bg-white dark:bg-gray-800 dark:text-white  rounded-md shadow-item mx-auto">
         <img
           src={
             selectedProduct.imagePath
