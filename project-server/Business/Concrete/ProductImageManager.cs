@@ -28,7 +28,7 @@ namespace Business.Concrete
 
         public async Task<Core.Utilities.Results.IResult> Add(IFormFile file, int productId)
         {
-            Core.Utilities.Results.IResult result = await BusinessRules.Run(
+            Core.Utilities.Results.IResult result =  BusinessRules.Run(
                 await CheckIfImageSizeInvalid(file)
                 ); ;
 
@@ -50,7 +50,7 @@ namespace Business.Concrete
 
         public async Task<Core.Utilities.Results.IResult> Update(IFormFile file, int productImageId)
         {
-            Core.Utilities.Results.IResult result = await BusinessRules.Run(
+            Core.Utilities.Results.IResult result =  BusinessRules.Run(
                 await CheckIfImageSizeInvalid(file)
                 ); ;
 
@@ -88,7 +88,7 @@ namespace Business.Concrete
 
         public async Task<IDataResult<List<ProductImage>>> GetByProductId(int productId)
         {
-            var result = await BusinessRules.Run( await CheckCarImage(productId));
+            var result =  BusinessRules.Run( await CheckCarImage(productId));
             if (result != null)
             {
                 return new ErrorDataResult<List<ProductImage>>("default image");

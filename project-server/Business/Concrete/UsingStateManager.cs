@@ -35,7 +35,7 @@ namespace Business.Concrete
         public async Task<IResult> Add(UsingState usingState)
         {
 
-            IResult result =await BusinessRules.Run(
+            IResult result = BusinessRules.Run(
                 await CheckIfUsingStateNameExists(usingState.Name)
                 );
 
@@ -61,7 +61,7 @@ namespace Business.Concrete
         public async Task<IResult> Update(UsingStateForUpdateDto usingStateForUpdateDto)
         {
 
-            IResult result =await BusinessRules.Run(
+            IResult result = BusinessRules.Run(
                 await CheckIfUsingStateNameExists(usingStateForUpdateDto.Name)
                 );
 

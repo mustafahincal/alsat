@@ -29,7 +29,7 @@ namespace Business.Concrete
         public async Task<IResult> Add(Brand brand)
         {
 
-            IResult result = await BusinessRules.Run(
+            IResult result =  BusinessRules.Run(
                 await CheckIfBrandNameExists(brand.Name)
                 ); ;
 
@@ -55,7 +55,7 @@ namespace Business.Concrete
         public async Task<IResult> Update(BrandForUpdateDto brandForUpdateDto)
         {
 
-            IResult result = await BusinessRules.Run(
+            IResult result =  BusinessRules.Run(
                await CheckIfBrandNameExists(brandForUpdateDto.Name)
                ); ;
 

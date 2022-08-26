@@ -9,10 +9,10 @@ namespace Core.Utilities.Business
 {
     public class BusinessRules
     {
-        public static Task<IResult> Run(params IResult[] logics) {
+        public static IResult Run(params IResult[] logics) {
             foreach (var logic in logics) {
                 if (!logic.Success) {
-                    return Task.FromResult(logic);
+                    return (logic);
                 }
             }
             return null;

@@ -35,7 +35,7 @@ namespace Business.Concrete
         public async Task<IResult> Add(Color color)
         {
 
-            IResult result = await BusinessRules.Run(
+            IResult result = BusinessRules.Run(
                 await CheckIfColorNameExists(color.Name)
                 );
 
@@ -61,7 +61,7 @@ namespace Business.Concrete
         public async Task< IResult> Update(ColorForUpdateDto colorForUpdateDto)
         {
 
-            IResult result = await BusinessRules.Run(
+            IResult result =  BusinessRules.Run(
                 await CheckIfColorNameExists(colorForUpdateDto.Name)
                 );
 

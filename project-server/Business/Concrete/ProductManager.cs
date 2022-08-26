@@ -27,8 +27,8 @@ namespace Business.Concrete
         public async Task<IDataResult<List<Product>>> Add(ProductForAddDto productForAddDto)
         {
 
-            IResult result = await BusinessRules.Run(
-                await CheckIfProductNameExists(productForAddDto.Name)
+            IResult result =  BusinessRules.Run(
+                 await CheckIfProductNameExists(productForAddDto.Name)
                 ); ;
 
 
@@ -114,12 +114,10 @@ namespace Business.Concrete
 
             return new SuccessDataResult<List<Product>>(await _productDal.GetAll(), Messages.ProductsListed);
         }
-
         public async Task<IDataResult<List<Product>>> GetAllByCategoryId(int id)
         {
             return new SuccessDataResult<List<Product>>(await _productDal.GetAll(p => p.CategoryId == id));
         }
-
         public async Task<IDataResult<Product>> GetById(int productId)
         {
             return new SuccessDataResult<Product>( await _productDal.Get(p => p.ProductId == productId));
@@ -128,22 +126,18 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<ProductDetailDto>>(await _productDal.GetProductDetails(p => p.ProductId == id), "Ürün Listelendi");
         }
-
         public async Task<IDataResult<List<ProductDetailDto>>> GetProductDetailsByCategoryId(int categoryId)
         {
             return new SuccessDataResult<List<ProductDetailDto>>(await _productDal.GetProductDetails(p => p.CategoryId == categoryId), "Ürün Listelendi");
         }
-
         public async Task<IDataResult<List<Product>>> GetByUnitPrice(decimal min, decimal max)
         {
             return new SuccessDataResult<List<Product>>(await _productDal.GetAll(p => p.Price <= max && p.Price >= min));
         }
-
         public async Task<IDataResult<List<ProductDetailDto>>> GetProductDetails()
         {
             return new SuccessDataResult<List<ProductDetailDto>>(await _productDal.GetProductDetails(), Messages.ProductsListed);
         }
-
         public async Task<IDataResult<List<ProductDetailDto>>> GetProductDetailsByBrandId(int brandId)
         {
             return new SuccessDataResult<List<ProductDetailDto>>( await _productDal.GetProductDetails(p => p.BrandId == brandId), Messages.ProductsListed);
@@ -156,12 +150,10 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<ProductDetailDto>>(await _productDal.GetProductDetails(p => p.UsingStateId == usingStateId), Messages.ProductsListed);
         }
-
         public  async Task<IDataResult<List<ProductDetailDto>>> GetProductDetailsByOwnerId(int ownerId)
         {
             return new SuccessDataResult<List<ProductDetailDto>>(await _productDal.GetProductDetails(p => p.OwnerId == ownerId), Messages.ProductsListed);
         }
-
         private async Task<IResult> CheckIfProductNameExists(string productName)
         {
             var result =(await _productDal.GetAll(p => p.Name == productName)).Any();

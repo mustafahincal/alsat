@@ -24,7 +24,7 @@ namespace Business.Concrete
 
         public async Task<IResult> Add(Category category)
         {
-            IResult result = await BusinessRules.Run(
+            IResult result =  BusinessRules.Run(
                 await CheckIfCategoryNameExists(category.Name)
                 ); 
 
@@ -49,7 +49,7 @@ namespace Business.Concrete
 
         public async Task<IResult> Update(CategoryForUpdateDto categoryForUpdateDto)
         {
-            IResult result = await  BusinessRules.Run(
+            IResult result =  BusinessRules.Run(
                 await CheckIfCategoryNameExists(categoryForUpdateDto.Name)
                 );
 
