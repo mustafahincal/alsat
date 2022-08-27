@@ -8,7 +8,7 @@ namespace DataAccess.Repository.EntityFramework
 {
     public class EfEntityRepositoryBase<T> : IUnitOfWork, IEntityRepository<T> where T : class, IEntity, new()
     {
-        protected PrimeforContext _primeforContext;
+        protected PrimeforContext _primeforContext { get; set; }
 
         public EfEntityRepositoryBase(PrimeforContext primeforContext)
         {
@@ -20,7 +20,7 @@ namespace DataAccess.Repository.EntityFramework
             return filter == null ? await _primeforContext.Set<T>().ToListAsync() : await _primeforContext.Set<T>().Where(filter).ToListAsync();
         }
 
-        public async Task<T> Get(Expression<Func<T, bool>> filter = null)
+        public async Task<T> Get(Expression<Func<T, bool>> filter)
         {
             return await _primeforContext.Set<T>().Where(filter).FirstOrDefaultAsync();
         }

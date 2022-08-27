@@ -11,6 +11,9 @@
           "Business": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.7",
           "Microsoft.EntityFrameworkCore.Tools": "6.0.7",
+          "Serilog.AspNetCore": "6.0.1",
+          "Serilog.Settings.Configuration": "3.3.0",
+          "Serilog.Sinks.File": "5.0.0",
           "Swashbuckle.AspNetCore": "6.2.3"
         },
         "runtime": {

@@ -13,10 +13,12 @@ namespace WebAPI.Controllers
         IProductService _productService;
         IProductImageService _productImageService;
 
-        public ProductsController(IProductService productService, IProductImageService productImageService)
+        private readonly ILogger<ProductsController> _logger;
+        public ProductsController(IProductService productService, IProductImageService productImageService, ILogger<ProductsController> logger)
         {
             _productService = productService;
             _productImageService = productImageService;
+            _logger = logger;
         }
 
         [HttpPost("add")]
@@ -57,6 +59,7 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public async Task<IActionResult> GetAll()
         {
+
             var result = await _productService.GetAll();
             if (result.Success)
             {
@@ -65,7 +68,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbyid")]
+        [HttpGet("getbyid")] 
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _productService.GetById(id);
