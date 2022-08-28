@@ -14,6 +14,7 @@ function CreditCard() {
   const { creditCards, setCreditCards } = useCreditCardContext();
   const { isSubmitting, setIsSubmitting } = useSubmitContext();
   useEffect(() => {
+    setIsSubmitting(false);
     getCreditCardDetailsByUserId(getFromLocalStorage("userId")).then((result) =>
       setCreditCards(result.data)
     );

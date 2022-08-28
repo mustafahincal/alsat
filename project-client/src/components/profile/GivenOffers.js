@@ -9,20 +9,25 @@ import { getFromLocalStorage } from "../../services/localStorageService";
 import { toast } from "react-toastify";
 import { useNavigate, NavLink } from "react-router-dom";
 import defaultImage from "../../assets/default.png";
+import { useSubmitContext } from "../../context/SubmitContext";
 
 function GivenOffers() {
   const { givenOffers, setGivenOffers } = useOfferContext();
   const apiImagesUrl = "https://localhost:44350/uploads/images/";
+  const { isSubmitting, setIsSubmitting } = useSubmitContext();
   const { selectedUser } = useUserContext();
   useEffect(() => {
+    setIsSubmitting(false);
     getOfferDetailsByUserId(getFromLocalStorage("userId")).then((result) =>
       setGivenOffers(result.data)
     );
   }, []);
 
   const handleCancelOffer = (offerId) => {
+    setIsSubmitting(true);
     deleteOffer(offerId).then((response) => {
-      toast.success(response.message);
+      toast.success("Teklif geri çekildi");
+      setIsSubmitting(false);
       getOfferDetailsByUserId(getFromLocalStorage("userId")).then((result) =>
         setGivenOffers(result.data)
       );
@@ -80,7 +85,11 @@ function GivenOffers() {
                 <div className="flex mt-5 justify-center text-sm sm:text-lg">
                   {!offer.isApproved && (
                     <NavLink
-                      to={`/offerForProduct/${offer.productId}`}
+                      to={
+                        isSubmitting
+                          ? ""
+                          : `/offerForProduct/${offer.productId}`
+                      }
                       className="btn border-2 box-border bg-white border-emerald-600 transition-all text-emerald-500 hover:bg-emerald-500 hover:text-white cursor-pointer"
                     >
                       Teklifi Artır
@@ -88,12 +97,15 @@ function GivenOffers() {
                   )}
 
                   {!offer.isApproved && (
-                    <div
+                    <button
                       onClick={() => handleCancelOffer(offer.offerId)}
-                      className="btn border-2 box-border bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white  ml-3 cursor-pointer"
+                      className={`btn border-2 box-border bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white  ml-3 cursor-pointer ${
+                        isSubmitting ? "submitting" : ""
+                      }`}
+                      disabled={isSubmitting}
                     >
                       Teklifi Geri Çek
-                    </div>
+                    </button>
                   )}
 
                   {offer.isApproved && !offer.isSold && (
@@ -102,7 +114,9 @@ function GivenOffers() {
                         Teklif Kabul Edildi
                       </div>
                       <NavLink
-                        to={`/payment/offer/${offer.offerId}`}
+                        to={
+                          isSubmitting ? "" : `/payment/offer/${offer.offerId}`
+                        }
                         className="btn border-2 box-border bg-white border-sky-500 transition-all text-sky-500 hover:bg-sky-500 hover:text-white ml-3 cursor-pointer"
                       >
                         Ödeme Yap

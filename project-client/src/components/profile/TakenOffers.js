@@ -12,20 +12,25 @@ import { toast } from "react-toastify";
 import { getProduct, updateProduct } from "../../services/productService";
 import { useProductContext } from "../../context/ProductContext";
 import defaultImage from "../../assets/default.png";
+import { useSubmitContext } from "../../context/SubmitContext";
 
 function TakenOffers() {
+  const { isSubmitting, setIsSubmitting } = useSubmitContext();
   const { takenOffers, setTakenOffers } = useOfferContext();
   const apiImagesUrl = "https://localhost:44350/uploads/images/";
   const { seledtedProduct, setSelectedProduct } = useProductContext();
   useEffect(() => {
+    setIsSubmitting(false);
     getOfferDetailsByOwnerId(getFromLocalStorage("userId")).then((result) =>
       setTakenOffers(result.data)
     );
   }, []);
 
   const handleRefuseOffer = (offerId) => {
+    setIsSubmitting(true);
     deleteOffer(offerId).then((response) => {
       toast.success(response.message);
+      setIsSubmitting(false);
       getOfferDetailsByOwnerId(getFromLocalStorage("userId")).then((result) =>
         setTakenOffers(result.data)
       );
@@ -33,6 +38,7 @@ function TakenOffers() {
   };
 
   const handleApproveOffer = (offerId, productId, offeredPrice, userId) => {
+    setIsSubmitting(true);
     const data = {
       offerId,
       productId,
@@ -42,6 +48,7 @@ function TakenOffers() {
     };
     updateOffer(data).then((response) => {
       toast.success(response.message);
+      setIsSubmitting(false);
       getOfferDetailsByOwnerId(getFromLocalStorage("userId")).then((result) =>
         setTakenOffers(result.data)
       );
@@ -98,7 +105,7 @@ function TakenOffers() {
                 </div>
                 <div className="flex mt-5 justify-center">
                   {!offer.isApproved && (
-                    <div
+                    <button
                       onClick={() =>
                         handleApproveOffer(
                           offer.offerId,
@@ -107,19 +114,25 @@ function TakenOffers() {
                           offer.userId
                         )
                       }
-                      className="btn border-2 box-border bg-white border-emerald-600 transition-all text-emerald-500 hover:bg-emerald-500 hover:text-white cursor-pointer"
+                      className={`btn border-2 box-border bg-white border-emerald-600 transition-all text-emerald-500 hover:bg-emerald-500 hover:text-white cursor-pointer ${
+                        isSubmitting ? "submitting" : ""
+                      }`}
+                      disabled={isSubmitting}
                     >
                       Teklifi Onayla
-                    </div>
+                    </button>
                   )}
 
                   {!offer.isApproved && (
-                    <div
+                    <button
                       onClick={() => handleRefuseOffer(offer.offerId)}
-                      className="ml-5 btn border-2 box-border bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white cursor-pointer"
+                      className={`ml-5 btn border-2 box-border bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white cursor-pointer ${
+                        isSubmitting ? "submitting" : ""
+                      }`}
+                      disabled={isSubmitting}
                     >
                       Teklifi Reddet
-                    </div>
+                    </button>
                   )}
 
                   {offer.isApproved && !offer.isSold && (

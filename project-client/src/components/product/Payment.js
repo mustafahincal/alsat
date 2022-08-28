@@ -25,12 +25,14 @@ import { useUserContext } from "../../context/UserContext";
 import { getUserById } from "../../services/userService";
 import { getFromLocalStorage } from "../../services/localStorageService";
 import { usePaymentContext } from "../../context/PaymentContext";
+import { useSubmitContext } from "../../context/SubmitContext";
 
 function Payment() {
   const { productId, offerId } = useParams();
   const { selectedProduct, setSelectedProduct, products, setProducts } =
     useProductContext();
   const { selectedOffer, setSelectedOffer } = useOfferContext();
+  const { isSubmitting, setIsSubmitting } = useSubmitContext();
   const {
     saveCardModalActive,
     setSaveCardModalActive,
@@ -40,6 +42,7 @@ function Payment() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    setIsSubmitting(false);
     getCreditCardById(getFromLocalStorage("userId")).then((result) =>
       setSelectedCreditCard(result.data)
     );
@@ -89,6 +92,7 @@ function Payment() {
     });
 
   const handleSaveCreditCardModal = (controlSave) => {
+    setIsSubmitting(true);
     setSaveCardModalActive(false);
     if (controlSave && selectedCreditCard) {
       const data = {
@@ -96,6 +100,7 @@ function Payment() {
         creditCardId: selectedCreditCard.creditCardId,
       };
       updateCreditCard(data).then((result) => {
+        setIsSubmitting(false);
         handleBuyProduct();
         navigate("/");
       });
@@ -120,6 +125,7 @@ function Payment() {
   };
 
   const handleBuyProduct = () => {
+    setIsSubmitting(true);
     const data = {
       productId: selectedProduct.productId,
       name: selectedProduct.productName,
@@ -146,9 +152,10 @@ function Payment() {
     };
     updateProduct(data)
       .then((response) => {
-        toast.success("Satın Alma İşlemi Başarılı");
+        setIsSubmitting(false);
         getProducts().then((result) => {
           setProducts(result.data);
+          toast.success("Satın Alma İşlemi Başarılı");
           navigate("/");
         });
       })
@@ -248,7 +255,11 @@ function Payment() {
                 </div>
               )}
 
-              <button type="submit" className="btn text-lg">
+              <button
+                disabled={isSubmitting}
+                type="submit"
+                className={`btn text-lg ${isSubmitting ? "submitting" : ""}`}
+              >
                 Ödemeyi Tamamla
               </button>
             </div>

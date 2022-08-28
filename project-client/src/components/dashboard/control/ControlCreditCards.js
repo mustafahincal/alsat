@@ -7,16 +7,21 @@ import {
   getCreditCardDetails,
 } from "../../../services/creditCardService";
 import { useCreditCardContext } from "../../../context/CreditCardContext";
+import { useSubmitContext } from "../../../context/SubmitContext";
 
 function ControlCreditCards() {
   const { creditCards, setCreditCards } = useCreditCardContext();
+  const { isSubmitting, setIsSubmitting } = useSubmitContext();
   useEffect(() => {
+    setIsSubmitting(false);
     getCreditCardDetails().then((result) => setCreditCards(result.data));
   }, []);
 
   const handleDeleteCreditCard = (creditCardId) => {
+    setIsSubmitting(true);
     deleteCreditCard(creditCardId).then((result) => {
       toast.success("Kredi Kartı Kaldırıldı");
+      setIsSubmitting(false);
       getCreditCardDetails().then((result) => setCreditCards(result.data));
     });
   };
@@ -56,8 +61,11 @@ function ControlCreditCards() {
               </div>
             </div>
             <div
-              className="cursor-pointer btn border-2 box-border bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white ml-3 flex justify-center items-center"
+              className={`cursor-pointer btn border-2 box-border bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white ml-3 flex justify-center items-center ${
+                isSubmitting ? "submitting" : ""
+              }`}
               onClick={() => handleDeleteCreditCard(creditCard.creditCardId)}
+              disabled={isSubmitting}
             >
               <AiFillDelete className="text-2xl" />
             </div>

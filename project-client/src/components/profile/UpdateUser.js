@@ -6,11 +6,13 @@ import { getUserById, updateUser } from "../../services/userService";
 import { getFromLocalStorage } from "../../services/localStorageService";
 import { UpdateUserSchema } from "../../validations/updateUserSchema";
 import { toast } from "react-toastify";
+import { useSubmitContext } from "../../context/SubmitContext";
 
 function UpdateUser() {
   const { selectedUser, setSelectedUser } = useUserContext();
-
+  const { isSubmitting, setIsSubmitting } = useSubmitContext();
   useEffect(() => {
+    setIsSubmitting(false);
     getUserById(getFromLocalStorage("userId")).then((result) =>
       setSelectedUser(result.data[0])
     );
@@ -24,6 +26,7 @@ function UpdateUser() {
         email: "",
       },
       onSubmit: (values) => {
+        setIsSubmitting(true);
         const data = {
           userId: selectedUser.userId,
           firstName: capitalize(values.firstName),
@@ -35,7 +38,8 @@ function UpdateUser() {
         };
         updateUser(data)
           .then((result) => {
-            toast.success(result.message);
+            toast.success("Kullanıcı bilgileri başarıyla güncellendi");
+            setIsSubmitting(false);
             getUserById(getFromLocalStorage("userId")).then((result) =>
               setSelectedUser(result.data[0])
             );
@@ -43,7 +47,10 @@ function UpdateUser() {
             values.lastName = "";
             values.email = "";
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            console.log(err);
+            setIsSubmitting(false);
+          });
       },
       validationSchema: UpdateUserSchema,
     });
@@ -69,7 +76,7 @@ function UpdateUser() {
         </div>
       </div>
 
-      <div className="w-full sm:w-3/4 md:w-1/2 lg:w-1/2 xl:w-1/3  py-10 shadow-item mx-auto  bg-white dark:bg-gray-800 dark:text-white">
+      <div className="w-full sm:w-3/4 md:w-1/2 lg:w-1/2 xl:w-5/12  py-10 shadow-item mx-auto  bg-white dark:bg-gray-800 dark:text-white">
         <div className="w-10/12 sm:w-3/4 m-auto">
           <h1 className="font-extrabold text-3xl mb-5 text-center">
             Kullanıcıyı Güncelle
@@ -122,7 +129,11 @@ function UpdateUser() {
               </div>
             </div>
             <div className="text-right mt-5">
-              <button type="submit" className="btn text-lg">
+              <button
+                type="submit"
+                className={`btn text-lg ${isSubmitting ? "submitting" : ""}`}
+                disabled={isSubmitting}
+              >
                 Güncelle
               </button>
             </div>

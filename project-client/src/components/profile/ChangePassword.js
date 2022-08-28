@@ -7,11 +7,14 @@ import { ChangePasswordSchema } from "../../validations/changePasswordSchema";
 import { getFromLocalStorage } from "../../services/localStorageService";
 import { changePassword } from "../../services/authService";
 import { toast } from "react-toastify";
+import { useSubmitContext } from "../../context/SubmitContext";
 
 function ChangePassword() {
   const { selectedUser, setSelectedUser } = useUserContext();
   const navigate = useNavigate();
+  const { isSubmitting, setIsSubmitting } = useSubmitContext();
   useEffect(() => {
+    setIsSubmitting(false);
     getUserById(getFromLocalStorage("userId")).then((result) =>
       setSelectedUser(result.data[0])
     );
@@ -26,6 +29,7 @@ function ChangePassword() {
         newPassConfirm: "",
       },
       onSubmit: (values) => {
+        setIsSubmitting(true);
         const data = {
           userId: selectedUser.userId,
           userEmail: values.userEmail,
@@ -37,6 +41,7 @@ function ChangePassword() {
             if (result.success) {
               toast.success(result.message);
             }
+            setIsSubmitting(false);
             navigate("/profile");
           })
           .catch((err) => toast.error(err.response.data.message));
@@ -109,7 +114,11 @@ function ChangePassword() {
             </div>
           </div>
           <div className="text-right mt-5">
-            <button type="submit" className="btn text-lg">
+            <button
+              type="submit"
+              className={`btn text-lg ${isSubmitting ? "submitting" : ""}`}
+              disabled={isSubmitting}
+            >
               Değiştir
             </button>
           </div>

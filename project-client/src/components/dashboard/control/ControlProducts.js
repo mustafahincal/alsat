@@ -17,6 +17,7 @@ function ControlProducts() {
   const apiImagesUrl = "https://localhost:44350/uploads/images/";
   const { isSubmitting, setIsSubmitting } = useSubmitContext();
   useEffect(() => {
+    setIsSubmitting(false);
     getProducts().then((result) => setProducts(result.data));
   }, []);
 
@@ -57,7 +58,7 @@ function ControlProducts() {
     <div className="flex flex-wrap">
       {products.map((product, index) => (
         <div
-          className=" dark:bg-gray-800 hover:border-gray-300 border-2 rounded-tl-md rounded-bl-md  transition-all duration-75 border-gray-100 rounded w-full sm:w-1/2 md:w-full md:h-52  mb-5 flex flex-col md:flex-row md:justify-between md:items-center shadow-item2 dark:border-gray-600 dark:hover:border-gray-700 "
+          className=" dark:bg-gray-800 hover:border-gray-800 border-2 rounded-tl-md rounded-bl-md  transition-all duration-75 border-gray-100 rounded w-full sm:w-1/2 md:w-full md:h-52  mb-5 flex flex-col md:flex-row md:justify-between md:items-center shadow-item2 dark:border-gray-600 dark:hover:border-gray-100 "
           key={index}
         >
           <div className="w-full md:w-1/3 h-1/2 md:h-full">
@@ -71,7 +72,7 @@ function ControlProducts() {
               alt=""
             />
           </div>
-          <div className="flex flex-col w-full md:w-1/3 md:h-full justify-between md:self-stretch py-10 sm:py-2 px-5 lg:px-14 text-md flex-1">
+          <div className="flex flex-col w-full md:w-1/3 md:h-full justify-between md:self-stretch py-10 sm:py-2 px-5 lg:px-14 lg:py-3 text-md flex-1">
             <div className="flex justify-between">
               <div>Ürün Id</div>
               <div>{product.productId}</div>
