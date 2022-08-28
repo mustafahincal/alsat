@@ -8,9 +8,11 @@ import {
 } from "../../services/creditCardService";
 import { AiFillDelete } from "react-icons/ai";
 import { getFromLocalStorage } from "../../services/localStorageService";
+import { useSubmitContext } from "../../context/SubmitContext";
 
 function CreditCard() {
   const { creditCards, setCreditCards } = useCreditCardContext();
+  const { isSubmitting, setIsSubmitting } = useSubmitContext();
   useEffect(() => {
     getCreditCardDetailsByUserId(getFromLocalStorage("userId")).then((result) =>
       setCreditCards(result.data)
@@ -18,8 +20,10 @@ function CreditCard() {
   }, []);
 
   const handleDeleteCreditCard = (creditCardId) => {
+    setIsSubmitting(true);
     deleteCreditCard(creditCardId).then((result) => {
       toast.success("Kredi Kartı Kaldırıldı");
+      setIsSubmitting(false);
       getCreditCardDetailsByUserId(getFromLocalStorage("userId")).then(
         (result) => setCreditCards(result.data)
       );
@@ -62,8 +66,11 @@ function CreditCard() {
                 </div>
               </div>
               <div
-                className="cursor-pointer btn border-2 box-border bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white ml-3 flex justify-center items-center"
+                className={`cursor-pointer btn border-2 box-border bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white ml-3 flex justify-center items-center ${
+                  isSubmitting ? "submitting" : ""
+                }`}
                 onClick={() => handleDeleteCreditCard(creditCard.creditCardId)}
+                disabled={isSubmitting}
               >
                 <AiFillDelete className="text-2xl" />
               </div>

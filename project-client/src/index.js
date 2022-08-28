@@ -17,6 +17,7 @@ import { NaviProvider } from "./context/NaviContext";
 import { PaymentProvider } from "./context/PaymentContext";
 import { CreditCardProvider } from "./context/CreditCardContext";
 import { ThemeProvider } from "./context/ThemeContext";
+import { SubmitProvider } from "./context/SubmitContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -34,7 +35,9 @@ root.render(
                         <PaymentProvider>
                           <CreditCardProvider>
                             <ThemeProvider>
-                              <App />
+                              <SubmitProvider>
+                                <App />
+                              </SubmitProvider>
                             </ThemeProvider>
                           </CreditCardProvider>
                         </PaymentProvider>

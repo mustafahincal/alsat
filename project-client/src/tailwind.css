@@ -25,6 +25,9 @@
   .modal.activeModal {
     @apply visible;
   }
+  .submitting {
+    @apply opacity-70;
+  }
 }
 .active {
   @apply bg-darkBlue text-white dark:bg-gray-300 dark:text-black;

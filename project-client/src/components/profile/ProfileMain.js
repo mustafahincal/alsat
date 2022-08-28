@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import profileDefaultImage from "../../assets/profileDefaultImage.jpg";
 import { useAuthContext } from "../../context/AuthContext";
+import { useSubmitContext } from "../../context/SubmitContext";
 import { useUserContext } from "../../context/UserContext";
 import {
   getFromLocalStorage,
@@ -14,6 +15,7 @@ import { deleteAccount, getUserById } from "../../services/userService";
 function ProfileMain() {
   const { selectedUser, setSelectedUser } = useUserContext();
   const { setIsLogged } = useAuthContext();
+  const { isSubmitting, setIsSubmitting } = useSubmitContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,6 +25,7 @@ function ProfileMain() {
   }, []);
 
   const handleDeleteAccount = () => {
+    setIsSubmitting(true);
     deleteAccount(selectedUser.userId)
       .then((response) => {
         if (response.success) {
@@ -34,6 +37,7 @@ function ProfileMain() {
           removeFromLocalStorage("productId");
           navigate("/");
         }
+        setIsSubmitting(false);
       })
       .catch((err) => console.log(err));
   };
@@ -62,8 +66,11 @@ function ProfileMain() {
       </div>
       <div className="text-center mt-7">
         <button
-          className="btn bg-white text-red-500 border-red-500 border-2 hover:bg-red-500 hover:text-white transition-all"
+          className={`btn bg-white text-red-500 border-red-500 border-2 hover:bg-red-500 hover:text-white transition-all ${
+            isSubmitting ? "submitting" : ""
+          }`}
           onClick={handleDeleteAccount}
+          disabled={isSubmitting}
         >
           Hesabı Sil
         </button>

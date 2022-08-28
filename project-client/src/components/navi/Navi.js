@@ -88,11 +88,13 @@ function Navi() {
           <NavLink
             to="/main"
             className={({ isActive }) =>
-              `ml-10 relative ${isActive ? "active-nav" : ""} hidden md:block`
+              `ml-10 group relative ${
+                isActive ? "active-nav" : ""
+              } hidden md:block`
             }
           >
             Ürünler
-            <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all duration-75 dark:bg-white"></div>
+            <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all dark:bg-white duration-75"></div>
           </NavLink>
 
           {isLogged && (
@@ -105,10 +107,10 @@ function Navi() {
               }
             >
               Ürün Sat
-              <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all duration-75 dark:bg-white "></div>
+              <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all dark:bg-white duration-75"></div>
             </NavLink>
           )}
-          {isLogged && isAdmin && (
+          {isLogged && (
             <NavLink
               className={({ isActive }) =>
                 "btn bg-sky-400 shadow-item2 text-white  text-base dark:bg-sky-300 dark:text-black ml-3 hidden md:block"

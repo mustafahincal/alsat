@@ -53,8 +53,8 @@ function UpdateUser() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row md:justify-between items-center md:py-16">
-      <div className="mb-10 w-full sm:w-3/4 md:w-1/3 md:mb-0 lg:w-1/3  mx-auto  bg-white dark:bg-gray-800 dark:text-white rounded-md shadow-item ">
+    <div className="flex flex-col md:flex-row md:justify-between items-center px-6 sm:px-0 py-28">
+      <div className="mb-10 w-full sm:w-3/4 md:w-1/3 md:mb-0 lg:w-1/3 xl:w-1/4  mx-auto  bg-white dark:bg-gray-800 dark:text-white rounded-md shadow-item ">
         <div className="w-full flex justify-between border-2 py-3 px-10 font-bold dark:border-gray-700">
           <div>Ad</div>
           <div>{selectedUser.firstName}</div>
@@ -69,7 +69,7 @@ function UpdateUser() {
         </div>
       </div>
 
-      <div className="w-full sm:w-3/4 md:w-1/2 lg:w-1/2  py-10 shadow-item  bg-white dark:bg-gray-800 dark:text-white">
+      <div className="w-full sm:w-3/4 md:w-1/2 lg:w-1/2 xl:w-1/3  py-10 shadow-item mx-auto  bg-white dark:bg-gray-800 dark:text-white">
         <div className="w-10/12 sm:w-3/4 m-auto">
           <h1 className="font-extrabold text-3xl mb-5 text-center">
             Kullanıcıyı Güncelle

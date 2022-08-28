@@ -10,15 +10,18 @@ import {
 } from "../../../services/productService";
 import defaultImage from "../../../assets/default.png";
 import { AiFillDelete } from "react-icons/ai";
+import { useSubmitContext } from "../../../context/SubmitContext";
 
 function ControlProducts() {
   const { products, setProducts } = useProductContext();
   const apiImagesUrl = "https://localhost:44350/uploads/images/";
+  const { isSubmitting, setIsSubmitting } = useSubmitContext();
   useEffect(() => {
     getProducts().then((result) => setProducts(result.data));
   }, []);
 
   const handleDeleteProduct = async (productId) => {
+    setIsSubmitting(true);
     const result = await getProduct(productId);
     const selectedProduct = result.data[0];
 
@@ -29,6 +32,7 @@ function ControlProducts() {
             deleteProduct(selectedProduct.productId)
               .then((response) => {
                 toast.success(response.message);
+                setIsSubmitting(false);
                 getProducts().then((result) => setProducts(result.data));
               })
               .catch((err) => console.log(err));
@@ -39,9 +43,13 @@ function ControlProducts() {
       deleteProduct(selectedProduct.productId)
         .then((response) => {
           toast.success(response.message);
+          setIsSubmitting(false);
           getProducts().then((result) => setProducts(result.data));
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          setIsSubmitting(false);
+        });
     }
   };
 
@@ -106,7 +114,10 @@ function ControlProducts() {
             </NavLink>
             <button
               onClick={() => handleDeleteProduct(product.productId)}
-              className="btn border-2 box-border bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white"
+              className={`btn border-2 box-border bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white ${
+                isSubmitting ? "submitting" : ""
+              }`}
+              disabled={isSubmitting}
             >
               <AiFillDelete className="text-2xl" />
             </button>
