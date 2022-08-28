@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
@@ -26,12 +27,13 @@ namespace Business.Concrete
             return new SuccessDataResult<Brand>(await _brandDal.Get(b => b.BrandId == brandId), "Marka getirildi");
         }
 
+        //[SecuredOperation("Admin")]
         public async Task<IResult> Add(Brand brand)
         {
 
             IResult result =  BusinessRules.Run(
                 await CheckIfBrandNameExists(brand.Name)
-                ); ;
+                );
 
 
             if (result != null)

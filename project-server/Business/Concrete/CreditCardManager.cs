@@ -39,7 +39,8 @@ namespace Business.Concrete
 
         public async Task<IResult> Delete(int creditCardId)
         {
-            var creditCardToDelete =await _creditCardDal.Get(cc => cc.CreditCardId == creditCardId);
+            var creditCardToDelete = await _creditCardDal.Get(cc => cc.CreditCardId == creditCardId);
+            _creditCardDal.Delete(creditCardToDelete);
             await _creditCardDal.Commit();
             return new SuccessResult("Kredi Kartı silindi");
         }
