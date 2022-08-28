@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { RegisterSchema } from "../../validations/registerSchema";
 import { register } from "../../services/authService";
@@ -9,12 +9,19 @@ import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../context/UserContext";
 import jwtDecode from "jwt-decode";
 import { getUserById } from "../../services/userService";
+import { useSubmitContext } from "../../context/SubmitContext";
 
 function Register() {
   let registerDto = {};
   const { setSelectedUser } = useUserContext();
   const { setIsLogged } = useAuthContext();
   const navigate = useNavigate();
+  const { isSubmitting, setIsSubmitting } = useSubmitContext();
+
+  useEffect(() => {
+    setIsSubmitting(false);
+  }, []);
+
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
       initialValues: {
@@ -25,6 +32,7 @@ function Register() {
         passwordConfirm: "",
       },
       onSubmit: (values) => {
+        setIsSubmitting(true);
         register(setRegisterDto())
           .then(async (response) => {
             if (response.success) {
@@ -42,10 +50,14 @@ function Register() {
               setSelectedUser(responseUser.data[0]);
               setToLocalStorage("userId", responseUser.data[0].userId);
               setIsLogged(true);
+              setIsSubmitting(false);
               navigate("/");
             }
           })
-          .catch((err) => toast.error(err.response.data.message));
+          .catch((err) => {
+            toast.error(err.response.data.message);
+            setIsSubmitting(false);
+          });
       },
       validationSchema: RegisterSchema,
     });
@@ -143,7 +155,11 @@ function Register() {
           </div>
 
           <div className="text-right mt-5">
-            <button type="submit" className="btn text-lg">
+            <button
+              type="submit"
+              className={`btn text-lg ${isSubmitting ? "submitting" : ""}`}
+              disabled={isSubmitting}
+            >
               Kayıt Ol
             </button>
           </div>

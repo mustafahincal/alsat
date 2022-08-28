@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { LoginSchema } from "../../validations/loginSchema";
 import { block, blockUser, login } from "../../services/authService";
@@ -9,11 +9,17 @@ import jwtDecode from "jwt-decode";
 import { useUserContext } from "../../context/UserContext";
 import { getUserById } from "../../services/userService";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useSubmitContext } from "../../context/SubmitContext";
 
 function Login() {
   const { setIsLogged, counter, setCounter, setIsAdmin } = useAuthContext();
   const { setSelectedUser } = useUserContext();
+  const { isSubmitting, setIsSubmitting } = useSubmitContext();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsSubmitting(false);
+  }, []);
 
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
@@ -22,6 +28,7 @@ function Login() {
         password: "",
       },
       onSubmit: (values) => {
+        setIsSubmitting(true);
         login(values)
           .then(async (response) => {
             if (response.success) {
@@ -51,6 +58,7 @@ function Login() {
               } else {
                 toast.error("Hesabınız Bloke Edilmiştir");
               }
+              setIsSubmitting(false);
             }
           })
           .catch((err) => {
@@ -58,6 +66,7 @@ function Login() {
             if (err.response.data.message === "Şifre hatalı")
               setCounter(counter + 1);
             if (counter === 2) blockUser(values.email);
+            setIsSubmitting(false);
           });
       },
       validationSchema: LoginSchema,
@@ -114,7 +123,11 @@ function Login() {
             Hesabın yok mu? Kayıt Ol!
           </NavLink>
           <div className="text-right mt-5">
-            <button type="submit" className="btn text-lg py-2">
+            <button
+              type="submit"
+              className={`btn text-lg py-2 ${isSubmitting ? "submitting" : ""}`}
+              disabled={isSubmitting}
+            >
               Giriş Yap
             </button>
           </div>
