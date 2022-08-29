@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "3Tl5d0cth1Ui5SmhKkG9rrUsdnJ9NbjNHtwESoK4Jbo=",
+  "Hash": "nd+MvDXm9H/Y0S+Dio7NX04bB0m1zJ88h/Hoglkwav8=",
   "Source": "WebAPI",
   "BasePath": "_content/WebAPI",
   "Mode": "Default",
@@ -51,12 +51,12 @@
       "OriginalItemSpec": "wwwroot\\Uploads\\Images\\1fadb002-22dd-4474-b271-70d3558e3314.jpg"
     },
     {
-      "Identity": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\Uploads\\Images\\4dab21e5-4fc2-4e7b-8d83-5c516604619a.jpg",
+      "Identity": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\Uploads\\Images\\2d54c2bd-7d4c-4537-a385-8279406c1ae0.jpg",
       "SourceId": "WebAPI",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\",
       "BasePath": "_content/WebAPI",
-      "RelativePath": "Uploads/Images/4dab21e5-4fc2-4e7b-8d83-5c516604619a.jpg",
+      "RelativePath": "Uploads/Images/2d54c2bd-7d4c-4537-a385-8279406c1ae0.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -65,7 +65,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Uploads\\Images\\4dab21e5-4fc2-4e7b-8d83-5c516604619a.jpg"
+      "OriginalItemSpec": "wwwroot\\Uploads\\Images\\2d54c2bd-7d4c-4537-a385-8279406c1ae0.jpg"
     },
     {
       "Identity": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\Uploads\\Images\\62bf5f92-0519-4449-807a-64129221c78b.jpg",
@@ -85,12 +85,12 @@
       "OriginalItemSpec": "wwwroot\\Uploads\\Images\\62bf5f92-0519-4449-807a-64129221c78b.jpg"
     },
     {
-      "Identity": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\Uploads\\Images\\ba3b04ab-276f-4181-af5a-4ee5581d05ac.jpg",
+      "Identity": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\Uploads\\Images\\8b40efe0-a02f-47b4-a44e-e9e9dda220e9.png",
       "SourceId": "WebAPI",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\",
       "BasePath": "_content/WebAPI",
-      "RelativePath": "Uploads/Images/ba3b04ab-276f-4181-af5a-4ee5581d05ac.jpg",
+      "RelativePath": "Uploads/Images/8b40efe0-a02f-47b4-a44e-e9e9dda220e9.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -99,15 +99,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Uploads\\Images\\ba3b04ab-276f-4181-af5a-4ee5581d05ac.jpg"
+      "OriginalItemSpec": "wwwroot\\Uploads\\Images\\8b40efe0-a02f-47b4-a44e-e9e9dda220e9.png"
     },
     {
-      "Identity": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\Uploads\\Images\\d21d8ecd-6b85-41e8-8b11-64e37bacfebd.jpg",
+      "Identity": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\Uploads\\Images\\8ba67090-909e-4548-9384-b5f0c7916a45.png",
       "SourceId": "WebAPI",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\",
       "BasePath": "_content/WebAPI",
-      "RelativePath": "Uploads/Images/d21d8ecd-6b85-41e8-8b11-64e37bacfebd.jpg",
+      "RelativePath": "Uploads/Images/8ba67090-909e-4548-9384-b5f0c7916a45.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -116,15 +116,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Uploads\\Images\\d21d8ecd-6b85-41e8-8b11-64e37bacfebd.jpg"
+      "OriginalItemSpec": "wwwroot\\Uploads\\Images\\8ba67090-909e-4548-9384-b5f0c7916a45.png"
     },
     {
-      "Identity": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\Uploads\\Images\\d8fc036e-9236-41c4-b85f-5cf06fcc6e93.jpg",
+      "Identity": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\Uploads\\Images\\ba78aea8-3e4d-4a3e-85a2-46ac7b5557e7.png",
       "SourceId": "WebAPI",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\",
       "BasePath": "_content/WebAPI",
-      "RelativePath": "Uploads/Images/d8fc036e-9236-41c4-b85f-5cf06fcc6e93.jpg",
+      "RelativePath": "Uploads/Images/ba78aea8-3e4d-4a3e-85a2-46ac7b5557e7.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -133,7 +133,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Uploads\\Images\\d8fc036e-9236-41c4-b85f-5cf06fcc6e93.jpg"
+      "OriginalItemSpec": "wwwroot\\Uploads\\Images\\ba78aea8-3e4d-4a3e-85a2-46ac7b5557e7.png"
+    },
+    {
+      "Identity": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\Uploads\\Images\\e934ff4c-0192-4542-a403-f54da450322a.jpg",
+      "SourceId": "WebAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\",
+      "BasePath": "_content/WebAPI",
+      "RelativePath": "Uploads/Images/e934ff4c-0192-4542-a403-f54da450322a.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Images\\e934ff4c-0192-4542-a403-f54da450322a.jpg"
     }
   ]
 }

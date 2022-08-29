@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -32,6 +34,7 @@ namespace Business.Concrete
             return new SuccessDataResult<UsingState>(await _usingStateDal.Get(us => us.UsingStateId == usingStateId), "Kullanım Durumları getirildi");
         }
 
+        [ValidationAspect(typeof(UsingStateValidator))]
         public async Task<IResult> Add(UsingState usingState)
         {
 

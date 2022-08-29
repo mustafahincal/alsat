@@ -12,8 +12,8 @@ namespace Entities.Dtos
     {
         public int ProductId { get; set; }
         public int CategoryId { get; set; }
-        public int BrandId { get; set; }
-        public int ColorId { get; set; }
+        public int? BrandId { get; set; }
+        public int? ColorId { get; set; }
         public int UsingStateId { get; set; }
         public string Name { get; set; }
         public int Price { get; set; }
@@ -21,7 +21,7 @@ namespace Entities.Dtos
         public bool IsOfferable { get; set; }
         public bool IsSold { get; set; }
         public int OwnerId { get; set; }
-
+        public int UserId { get; set; }
         public int OfferId { get; set; }
 
 

@@ -25,5 +25,6 @@ namespace Business.Abstract
         Task<IDataResult<List<OfferDetailDto>>> GetOfferDetailsByUserId(int userId);
         Task<IDataResult<List<OfferDetailDto>>> GetOfferDetailsByOwnerId(int ownerId);
         Task<IDataResult<List<OfferDetailDto>>> GetOfferDetailsById(int id);
+        Task<IDataResult<List<Offer>>> GetByProductId(int productId);
     }
 }

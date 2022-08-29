@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -22,6 +24,7 @@ namespace Business.Concrete
             _categortDal = categortDal;
         }
 
+        [ValidationAspect(typeof(CategoryValidator))]
         public async Task<IResult> Add(Category category)
         {
             IResult result =  BusinessRules.Run(

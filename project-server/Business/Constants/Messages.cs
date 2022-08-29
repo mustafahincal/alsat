@@ -37,7 +37,7 @@ namespace Business.Constants
         public static string Updated = "Güncellendi";
         public static string Listed = "Listelendi";
 
-        public static string ProductImageSizeInvalid = "Araba görseli en fazla 400KB olmalı";
+        public static string ProductImageSizeInvalid = "Ürün görseli en fazla 400KB olmalı";
 
 
     }

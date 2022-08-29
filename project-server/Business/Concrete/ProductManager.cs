@@ -96,6 +96,19 @@ namespace Business.Concrete
                 }
             }
 
+            var offerControl = await _offerService.GetByProductId(productToUpdate.ProductId);
+            if (offerControl.Message == null)
+            {
+                Offer offerToAdd = new Offer
+                {
+                    OfferedPrice = productForUpdateDto.Price,
+                    IsApproved = true,
+                    ProductId = productForUpdateDto.ProductId,
+                    UserId = productForUpdateDto.UserId,
+                };
+                await _offerService.Add(offerToAdd);
+            }
+           
             _productDal.Update(productToUpdate);
             await _productDal.Commit();
             return new SuccessResult(Messages.ProductUpdated);

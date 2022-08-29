@@ -62,6 +62,10 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Offer>>(await _offerDal.GetAll(o => o.UserId == userId));
         }
+        public async Task<IDataResult<List<Offer>>> GetByProductId(int productId)
+        {
+            return new SuccessDataResult<List<Offer>>(await _offerDal.GetAll(o => o.ProductId == productId));
+        }
 
         public async Task<IDataResult<List<OfferDetailDto>>> GetOfferDetails()
         {
