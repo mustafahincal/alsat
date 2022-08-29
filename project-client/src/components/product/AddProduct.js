@@ -16,6 +16,7 @@ import { getUsingStates } from "../../services/usingStateService";
 import { UseUsingStateContext } from "../../context/UsingStateContext";
 import { useProductContext } from "../../context/ProductContext";
 import { addImage } from "../../services/productImageService";
+import { useSubmitContext } from "../../context/SubmitContext";
 
 function AddProduct() {
   const { brands, setBrands } = useBrandContext();
@@ -25,8 +26,10 @@ function AddProduct() {
   const { products, setProducts } = useProductContext();
   const { usingStates, setUsingStates } = UseUsingStateContext();
   const navigate = useNavigate();
+  const { isSubmitting, setIsSubmitting } = useSubmitContext();
 
   useEffect(() => {
+    setIsSubmitting(false);
     getBrands().then((result) => setBrands(result.data));
     getColors().then((result) => setColors(result.data));
     getCategories().then((result) => setCategories(result.data));
@@ -49,6 +52,7 @@ function AddProduct() {
       },
       onSubmit: (values, actions) => {
         if (file) {
+          setIsSubmitting(true);
           const isOfferableBool = values.isOfferable === "true" ? true : false;
           const data = {
             ...values,
@@ -78,10 +82,11 @@ function AddProduct() {
                 setFile(false);
                 navigate("/main");
               }
+              setIsSubmitting(false);
             })
             .catch((err) => {
-              console.log(err);
               toast.error(err.response.data.message);
+              setIsSubmitting(false);
             });
         } else {
           toast.error("Lütfen ürün görseli ekleyiniz");
@@ -246,7 +251,11 @@ function AddProduct() {
             </div>
 
             <div className="text-right mt-5">
-              <button type="submit" className="btn text-lg">
+              <button
+                type="submit"
+                className={`btn text-lg ${isSubmitting ? "submitting" : ""}`}
+                disabled={isSubmitting}
+              >
                 Ürünü Ekle
               </button>
             </div>
@@ -262,13 +271,16 @@ function AddProduct() {
             <input
               type="file"
               onChange={(e) => setFile(e.target.files[0])}
-              className="block w-full text-sm text-slate-300
+              className={`block w-full text-sm text-slate-300
                     file:mr-4 file:py-2 file:px-4
                     file:rounded-full file:border-0
                     file:text-sm file:font-semibold
                     file:bg-violet-100 file:text-darkBlue
                     hover:file:bg-violet-300 hover:file:text-black
-                    file:cursor-pointer cursor-pointer"
+                    file:cursor-pointer cursor-pointer ${
+                      isSubmitting ? "submitting" : ""
+                    }`}
+              disabled={isSubmitting}
             />
           </div>
         </div>

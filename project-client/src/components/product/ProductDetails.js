@@ -8,6 +8,7 @@ import { setToLocalStorage } from "../../services/localStorageService";
 import { deleteProduct, getProduct } from "../../services/productService";
 import { toast } from "react-toastify";
 import { deleteProductImage } from "../../services/productImageService";
+import { useSubmitContext } from "../../context/SubmitContext";
 
 function ProductDetails() {
   const apiImagesUrl = "https://localhost:44350/uploads/images/";
@@ -16,7 +17,9 @@ function ProductDetails() {
   const { isAdmin } = useAuthContext();
   const { id } = useParams();
   const navigate = useNavigate();
+  const { isSubmitting, setIsSubmitting } = useSubmitContext();
   useEffect(() => {
+    setIsSubmitting(false);
     getProduct(id).then((result) => {
       setSelectedProduct(result.data[0]);
       setToLocalStorage("productId", result.data[0].productId);
@@ -24,22 +27,27 @@ function ProductDetails() {
   }, []);
 
   const handleDeleteProduct = () => {
+    setIsSubmitting(true);
     if (selectedProduct.productImageId) {
-      deleteProductImage(selectedProduct.productImageId)
-        .then((result) => {
-          if (result.success) {
-            deleteProduct(selectedProduct.productId)
-              .then((response) => {
-                toast.success(response.message);
-                navigate("/main");
-              })
-              .catch((err) => console.log(err));
-          }
-        })
-        .catch((err) => console.log(err));
+      setTimeout(() => {
+        deleteProductImage(selectedProduct.productImageId)
+          .then((result) => {
+            if (result.success) {
+              deleteProduct(selectedProduct.productId)
+                .then((response) => {
+                  toast.success(response.message);
+                  setIsSubmitting(false);
+                  navigate("/main");
+                })
+                .catch((err) => console.log(err));
+            }
+          })
+          .catch((err) => console.log(err));
+      }, 2000);
     } else {
       deleteProduct(selectedProduct.productId)
         .then((response) => {
+          setIsSubmitting(false);
           toast.success(response.message);
           navigate("/main");
         })
@@ -142,14 +150,23 @@ function ProductDetails() {
               {!selectedProduct.isSold ? (
                 <div className="flex flex-col w-full">
                   <NavLink
-                    to={`/updateProduct/${selectedProduct.productId}`}
-                    className="rounded text-lg border-2 border-littleDarkBlue bg-littleDarkBlue py-2 text-white"
+                    to={
+                      isSubmitting
+                        ? ""
+                        : `/updateProduct/${selectedProduct.productId}`
+                    }
+                    className={`rounded text-lg border-2 border-littleDarkBlue bg-littleDarkBlue py-2 text-white  ${
+                      isSubmitting ? "submitting" : ""
+                    }`}
                   >
                     Ürünü Güncelle
                   </NavLink>
                   <button
                     onClick={handleDeleteProduct}
-                    className="rounded bg-transparent text-lg text-red-500 border-2 border-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 py-2 mt-4"
+                    className={`rounded bg-transparent text-lg text-red-500 border-2 border-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 py-2 mt-4 ${
+                      isSubmitting ? "submitting" : ""
+                    }`}
+                    disabled={isSubmitting}
                   >
                     Ürünü Sil
                   </button>

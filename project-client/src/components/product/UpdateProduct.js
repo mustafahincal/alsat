@@ -22,6 +22,7 @@ import { Navigate, useParams } from "react-router-dom";
 import { updateProduct } from "../../services/productService";
 import { getUsingStates } from "../../services/usingStateService";
 import { UseUsingStateContext } from "../../context/UsingStateContext";
+import { useSubmitContext } from "../../context/SubmitContext";
 
 function Updateproduct() {
   const { brands, setBrands } = useBrandContext();
@@ -29,11 +30,13 @@ function Updateproduct() {
   const { categories, setCategories } = useCategoryContext();
   const { selectedProduct, setSelectedProduct } = useProductContext();
   const { usingStates, setUsingStates } = UseUsingStateContext();
+  const { isSubmitting, setIsSubmitting } = useSubmitContext();
   const { file, setFile } = useFileContext();
   const { id } = useParams();
   const apiImagesUrl = "https://localhost:44350/uploads/images/";
 
   useEffect(() => {
+    setIsSubmitting(false);
     getBrands().then((result) => setBrands(result.data));
     getColors().then((result) => setColors(result.data));
     getCategories().then((result) => setCategories(result.data));
@@ -56,6 +59,7 @@ function Updateproduct() {
         ownerId: getFromLocalStorage("userId"),
       },
       onSubmit: (values) => {
+        setIsSubmitting(true);
         const isOfferableBool = values.isOfferable === "true" ? true : false;
         const data = {
           productId: selectedProduct.productId,
@@ -84,21 +88,26 @@ function Updateproduct() {
           .then((response) => {
             if (response.success) {
               toast.success(response.message);
+
               getProduct(id).then((result) =>
                 setSelectedProduct(result.data[0])
               );
             }
+            setIsSubmitting(false);
           })
-          .catch((err) =>
-            err.Errors.map((error) => toast.error(error.ErrorMessage))
-          );
+          .catch((err) => {
+            err.Errors.map((error) => toast.error(error.ErrorMessage));
+            setIsSubmitting(false);
+          });
       },
       validationSchema: ProductSchema,
     });
 
   const handleAddFile = () => {
+    setIsSubmitting(true);
     if (!file) {
       toast.error("Lütfen fotoğraf seçiniz");
+      setIsSubmitting(false);
       return;
     }
 
@@ -120,18 +129,22 @@ function Updateproduct() {
           getProduct(id).then((result) => setSelectedProduct(result.data[0]));
           setFile(false);
         }
+        setIsSubmitting(false);
       })
       .catch((err) => {
         console.log(err);
+        setIsSubmitting(false);
         toast.error(err.response.data.message);
       });
   };
 
   const handleDeleteImage = () => {
+    setIsSubmitting(true);
     deleteProductImage(selectedProduct.productImageId).then((result) => {
       if (result.success) {
         toast.success(result.message);
       }
+      setIsSubmitting(false);
       getProduct(id).then((result) => setSelectedProduct(result.data[0]));
     });
   };
@@ -358,7 +371,11 @@ function Updateproduct() {
                 )}
               </div>
               <div className="text-right mt-5">
-                <button type="submit" className="btn text-lg">
+                <button
+                  type="submit"
+                  className={`btn text-lg ${isSubmitting ? "submitting" : ""}`}
+                  disabled={isSubmitting}
+                >
                   Güncelle
                 </button>
               </div>
@@ -374,26 +391,36 @@ function Updateproduct() {
               <input
                 type="file"
                 onChange={(e) => setFile(e.target.files[0])}
-                className="block w-full text-sm text-slate-300
+                className={`block w-full text-sm text-slate-300
                     file:mr-4 file:py-2 file:px-4
                     file:rounded-full file:border-0
                     file:text-sm file:font-semibold
                     file:bg-violet-100 file:text-darkBlue
                     hover:file:bg-violet-300 hover:file:text-black
-                    file:cursor-pointer cursor-pointer"
+                    file:cursor-pointer cursor-pointer ${
+                      isSubmitting ? "submitting" : ""
+                    }`}
+                disabled={isSubmitting}
               />
             </div>
             <div className="flex justify-between mt-5">
               {selectedProduct.imagePath && (
                 <button
-                  className="btn border-2 bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white"
                   onClick={handleDeleteImage}
+                  className={`btn border-2 bg-white border-red-600 transition-all text-red-500 hover:bg-red-500 hover:text-white ${
+                    isSubmitting ? "submitting" : ""
+                  }`}
+                  disabled={isSubmitting}
                 >
                   Fotoğrafı Sil
                 </button>
               )}
               <div className="text-right">
-                <button onClick={handleAddFile} className="btn text-lg">
+                <button
+                  onClick={handleAddFile}
+                  className={`btn text-lg ${isSubmitting ? "submitting" : ""}`}
+                  disabled={isSubmitting}
+                >
                   Ekle
                 </button>
               </div>

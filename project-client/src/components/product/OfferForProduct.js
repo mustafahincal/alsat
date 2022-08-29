@@ -14,6 +14,7 @@ import {
   updateOffer,
 } from "../../services/offerService";
 import { useOfferContext } from "../../context/OfferContext";
+import { useSubmitContext } from "../../context/SubmitContext";
 
 function OfferForProduct() {
   const { selectedProduct, setSelectedProduct } = useProductContext();
@@ -22,8 +23,10 @@ function OfferForProduct() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { selectedOffer, setSelectedOffer } = useOfferContext();
+  const { isSubmitting, setIsSubmitting } = useSubmitContext();
 
   useEffect(() => {
+    setIsSubmitting(false);
     getProduct(id).then((result) => {
       setSelectedProduct(result.data[0]);
     });
@@ -53,6 +56,7 @@ function OfferForProduct() {
           );
           values.offeredPercent = 0;
         } else if (selectedOffer) {
+          setIsSubmitting(true);
           const data = {
             offerId: selectedOffer.offerId,
             productId: selectedOffer.productId,
@@ -72,6 +76,7 @@ function OfferForProduct() {
                       (offer) => offer.productId == selectedProduct.productId
                     );
                     setSelectedOffer(theOffer);
+                    setIsSubmitting(false);
                     navigate("/main");
                   }
                 );
@@ -79,6 +84,7 @@ function OfferForProduct() {
             })
             .catch((err) => console.log(err));
         } else {
+          setIsSubmitting(true);
           const data = {
             productId: getFromLocalStorage("productId"),
             userId: getFromLocalStorage("userId"),
@@ -97,6 +103,7 @@ function OfferForProduct() {
                       (offer) => offer.productId == selectedProduct.productId
                     );
                     setSelectedOffer(theOffer);
+                    setIsSubmitting(false);
                     navigate("/main");
                   }
                 );
@@ -191,7 +198,13 @@ function OfferForProduct() {
               </div>
             </div>
             <div>
-              <button type="submit" className="btn text-lg  py-3 mt-2">
+              <button
+                type="submit"
+                className={`btn text-lg  py-3 mt-6 ${
+                  isSubmitting ? "submitting" : ""
+                }`}
+                disabled={isSubmitting}
+              >
                 Teklif ver
               </button>
             </div>
