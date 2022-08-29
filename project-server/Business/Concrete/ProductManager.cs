@@ -26,7 +26,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(ProductValidator))]
         public async Task<IDataResult<List<Product>>> Add(ProductForAddDto productForAddDto)
         {
-
+            
             IResult result =  BusinessRules.Run(
                  await CheckIfProductNameExists(productForAddDto.Name)
                 ); ;
