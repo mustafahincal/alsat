@@ -120,7 +120,7 @@ function OfferForProduct() {
       <div className="bg-white dark:bg-gray-800 dark:text-white shadow-item w-full sm:w-4/5 md:w-3/4 mx-auto lg:w-11/12 xl:w-10/12 m-auto px-10 py-10 flex flex-col lg:flex-row lg:justify-between gap-20 lg:gap-5">
         <div className="w-full lg:w-1/2 text-left">
           <h1 className="font-extrabold text-3xl mb-5">Ürün Bilgileri</h1>
-          <div className="w-full flex rounded-l-md">
+          <div className="w-full h-72 flex rounded-l-md">
             <div className="w-1/2">
               <img
                 src={

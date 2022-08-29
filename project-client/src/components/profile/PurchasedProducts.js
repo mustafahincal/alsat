@@ -44,7 +44,7 @@ function PurchasedProducts() {
               <div className="p-6 items-center rounded-b-md gap-2 w-full mb-3 flex flex-col justify-between dark:bg-gray-800 dark:text-white  text-xl bg-white ">
                 <div className="flex justify-between w-full">
                   <div>Ürünü Satan</div>
-                  <div>{product.userName}</div>
+                  <div>{product.ownerName}</div>
                 </div>
                 <div className="flex justify-between w-full">
                   <div>Ürün Adı</div>

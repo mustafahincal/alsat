@@ -43,8 +43,8 @@ function ControlCategories() {
                 toast.success(response.message);
                 setIsSubmitting(false);
                 getCategories().then((result) => setCategories(result.data));
-                values.name = "";
               }
+              values.name = "";
             })
             .catch((err) => {
               toast.error(err.response.data.message);

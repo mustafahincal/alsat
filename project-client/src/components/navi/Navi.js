@@ -146,7 +146,7 @@ function Navi() {
                 </NavLink>
               )}
             </div>
-            {isLogged && (
+            {isLogged && isAdmin && (
               <NavLink
                 className={({ isActive }) =>
                   "btn bg-sky-400 shadow-item2 text-white  text-base dark:bg-sky-300 dark:text-black md:ml-3 order-2 md:order-2"

@@ -58,7 +58,7 @@ function ControlProducts() {
     <div className="flex flex-wrap">
       {products.map((product, index) => (
         <div
-          className=" dark:bg-gray-800 hover:border-gray-800 border-2 rounded-tl-md rounded-bl-md  transition-all duration-75 border-gray-100 rounded w-full sm:w-1/2 md:w-full md:h-52  mb-5 flex flex-col md:flex-row md:justify-between md:items-center shadow-item2 dark:border-gray-600 dark:hover:border-gray-100 "
+          className="bg-white dark:bg-gray-800 hover:border-gray-800 border-2 rounded-tl-md rounded-bl-md  transition-all duration-75 border-gray-100 rounded w-full sm:w-1/2 md:w-full md:h-52  mb-5 flex flex-col md:flex-row md:justify-between md:items-center shadow-item2 dark:border-gray-600 dark:hover:border-gray-100 "
           key={index}
         >
           <div className="w-full md:w-1/3 h-1/2 md:h-full">

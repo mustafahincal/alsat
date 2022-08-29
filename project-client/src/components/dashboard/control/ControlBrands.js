@@ -42,7 +42,6 @@ function ControlBrands() {
                 toast.success(response.message);
                 setIsSubmitting(false);
                 getBrands().then((result) => setBrands(result.data));
-                values.name = "";
               }
             })
             .catch((err) => {
