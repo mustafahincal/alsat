@@ -39,6 +39,7 @@ function Navi() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    setBar(false);
     setSidebarStatus(false);
   }, []);
 

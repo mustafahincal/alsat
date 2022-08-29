@@ -78,6 +78,10 @@ function ControlProducts() {
               <div>{product.productId}</div>
             </div>
             <div className="flex justify-between">
+              <div>Ürün İsmi</div>
+              <div>{product.productName}</div>
+            </div>
+            <div className="flex justify-between">
               <div>Marka</div>
               <div>{product.brandName}</div>
             </div>

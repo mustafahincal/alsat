@@ -149,6 +149,7 @@ function Payment() {
       isSold: true,
       isOfferable: false,
       offerId: selectedOffer.offerId,
+      userId: Number(getFromLocalStorage("userId")),
     };
     updateProduct(data)
       .then((response) => {

@@ -38,7 +38,7 @@ function SoldedProducts() {
                       ? apiImagesUrl + product.imagePath
                       : defaultImage
                   }
-                  className="rounded-tl-md rounded-tr-md object-cover object-center w-full"
+                  className="rounded-tl-md rounded-tr-md object-cover object-center w-full h-96"
                   alt=""
                 />
               </div>
