@@ -21,7 +21,9 @@ function Navi() {
     useAuthContext();
   const { selectedUser, setSelectedUser } = useUserContext();
   const { setSelectedCreditCard } = usePaymentContext();
-  const { visible, setVisible } = useNaviContext();
+  const { visible, setVisible, bar, setBar, setSidebarStatus, sidebarStatus } =
+    useNaviContext();
+
   const {
     setProducts,
     setSelectedProduct,
@@ -35,6 +37,10 @@ function Navi() {
     useOfferContext();
   const { handleDarkMode } = useThemeContext();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setSidebarStatus(false);
+  }, []);
 
   const handleLogOut = () => {
     setIsLogged(false);
@@ -66,81 +72,116 @@ function Navi() {
     navigate("/");
   };
 
+  const sidebar = () => {
+    setBar(!bar);
+  };
+
+  const windowSize = () => {
+    if (window.innerWidth < 768) {
+      setSidebarStatus(true);
+    } else {
+      setSidebarStatus(false);
+    }
+  };
+
+  window.addEventListener("resize", windowSize);
+
   return (
     <div>
-      <nav className="flex justify-between items-center py-3 px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32 bg-white text-black font-bold border-b-2 border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white">
+      <nav className="flex justify-between items-center py-3 px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32 bg-white text-black font-bold border-b-2 border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white relative">
+        <button className="text-4xl md:hidden" onClick={sidebar}>
+          <GoThreeBars />
+        </button>
         <NavLink
           to="/"
-          className={({ isActive }) => "logo text-6xl font-dancing"}
+          className={({ isActive }) =>
+            "logo text-6xl font-dancing flex items-center"
+          }
         >
           alsat
         </NavLink>
-        <div className="flex  items-center text-xl">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              `group relative ${isActive ? "active-nav" : ""} hidden md:block`
-            }
+        <div className="flex  items-center text-xl ">
+          <div
+            className={`${bar ? "activeSide" : " "} ${
+              sidebarStatus ? "sidebar" : " "
+            }  flex items-center`}
           >
-            Anasayfa
-            <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all dark:bg-white duration-75"></div>
-          </NavLink>
-          <NavLink
-            to="/main"
-            className={({ isActive }) =>
-              `ml-10 group relative ${
-                isActive ? "active-nav" : ""
-              } hidden md:block`
-            }
-          >
-            Ürünler
-            <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all dark:bg-white duration-75"></div>
-          </NavLink>
-
-          {isLogged && (
-            <NavLink
-              to="/addProduct"
-              className={({ isActive }) =>
-                `group relative ml-10 mr-5 ${
-                  isActive ? "active-nav" : ""
-                } hidden md:block`
-              }
-            >
-              Ürün Sat
-              <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all dark:bg-white duration-75"></div>
-            </NavLink>
-          )}
-          {isLogged && (
-            <NavLink
-              className={({ isActive }) =>
-                "btn bg-sky-400 shadow-item2 text-white  text-base dark:bg-sky-300 dark:text-black ml-3 hidden md:block"
-              }
-              to={"/dashboard"}
-            >
-              Kontrol Paneli
-            </NavLink>
-          )}
-
-          {!isLogged && (
-            <div className="ml-10">
+            <div className="flex order-3 md:order-1 flex-col md:flex-row mt-5 md:mt-0">
               <NavLink
+                to="/"
                 className={({ isActive }) =>
-                  "btn  bg-darkBlue shadow-item text-white mr-5 text-base"
+                  `group relative ${isActive ? "active-nav" : ""} `
                 }
-                to={"/login"}
+                onClick={sidebar}
               >
-                Giriş Yap
+                Anasayfa
+                <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all dark:bg-white duration-75"></div>
               </NavLink>
               <NavLink
+                to="/main"
                 className={({ isActive }) =>
-                  "btn bg-darkBlue shadow-item text-white text-base"
+                  `mt-5 md:mt-0 md:ml-10 group relative ${
+                    isActive ? "active-nav" : ""
+                  }
+                   `
                 }
-                to={"/register"}
+                onClick={sidebar}
               >
-                Kayıt Ol
+                Ürünler
+                <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all dark:bg-white duration-75"></div>
               </NavLink>
+
+              {isLogged && (
+                <NavLink
+                  to="/addProduct"
+                  className={({ isActive }) =>
+                    `mt-5 md:mt-0 group relative md:ml-10 md:mr-5 ${
+                      isActive ? "active-nav" : ""
+                    } `
+                  }
+                  onClick={sidebar}
+                >
+                  Ürün Sat
+                  <div className="w-0 h-[3px] rounded-lg bg-black absolute top group-hover:w-full transition-all dark:bg-white duration-75"></div>
+                </NavLink>
+              )}
             </div>
-          )}
+            {isLogged && (
+              <NavLink
+                className={({ isActive }) =>
+                  "btn bg-sky-400 shadow-item2 text-white  text-base dark:bg-sky-300 dark:text-black md:ml-3 order-2 md:order-2"
+                }
+                to={"/dashboard"}
+                onClick={sidebar}
+              >
+                Kontrol Paneli
+              </NavLink>
+            )}
+
+            {!isLogged && (
+              <div className="md:ml-10 flex items-center order-1 md:order-3">
+                <NavLink
+                  className={({ isActive }) =>
+                    "btn  bg-darkBlue shadow-item text-white mr-2 sm:mr-5 text-base"
+                  }
+                  to={"/login"}
+                  onClick={sidebar}
+                >
+                  Giriş Yap
+                </NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    "btn bg-darkBlue shadow-item text-white text-base"
+                  }
+                  to={"/register"}
+                  onClick={sidebar}
+                >
+                  Kayıt Ol
+                </NavLink>
+              </div>
+            )}
+          </div>
+
           {isLogged && (
             <div className="group relative">
               <button className="flex items-center bg-darkBlue shadow-item2 text-white py-2 rounded-md px-4 text-base ml-6 dark:bg-gray-200 dark:text-black">
@@ -241,7 +282,7 @@ function Navi() {
           <div
             href="#"
             onClick={handleDarkMode}
-            className="btn bg-gray-700 text-white text-base ml-6 cursor-pointer dark:bg-yellow-300 dark:text-black py-3"
+            className="btn bg-gray-700 text-white text-base ml-3 sm:ml-6 cursor-pointer dark:bg-yellow-300 dark:text-black py-3"
           >
             <span className="dark:hidden flex items-center  justify-between">
               <BsFillMoonFill />

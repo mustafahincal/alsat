@@ -78,60 +78,68 @@ function Login() {
   };
 
   return (
-    <div className="w-2/6 m-auto py-10 shadow-item mt-20 bg-white dark:bg-gray-800 dark:text-white">
-      <div className="w-3/4 m-auto">
-        <h1 className="font-extrabold text-3xl  mb-5 text-center">Giriş Yap</h1>
+    <div className="px-6 sm:px-0">
+      <div className="w-full sm:w-3/4 md:w-3/5 lg:w-1/2 xl:w-1/3 m-auto py-10 shadow-item mt-20  bg-white dark:bg-gray-800 dark:text-white">
+        <div className="w-10/12 sm:w-3/4 m-auto">
+          <h1 className="font-extrabold text-3xl  mb-5 text-center">
+            Giriş Yap
+          </h1>
 
-        <form onSubmit={handleSubmit}>
-          <div className="w-full flex  flex-col bg-darkBlue text-gray-100  px-14 py-14 text-lg">
-            <div>
-              <input
-                value={values.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                name="email"
-                type="text"
-                className="text-darkBlue py-2 px-4 w-full"
-                placeholder="Email"
-              />
-              {errors.email && touched.email && (
-                <div className="text-red-400 my-2 text-sm">{errors.email}</div>
-              )}
+          <form onSubmit={handleSubmit}>
+            <div className="w-full flex  flex-col bg-darkBlue text-gray-100 px-14 py-14 text-lg">
+              <div>
+                <input
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  name="email"
+                  type="text"
+                  className="text-darkBlue py-2 px-4 w-full"
+                  placeholder="Email"
+                />
+                {errors.email && touched.email && (
+                  <div className="text-red-400 my-2 text-sm">
+                    {errors.email}
+                  </div>
+                )}
+              </div>
+              <div className="mt-5">
+                <input
+                  value={values.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  name="password"
+                  type="password"
+                  className="text-darkBlue py-2 px-4 w-full"
+                  placeholder="Şifre"
+                />
+                {errors.password && touched.password && (
+                  <div className="text-red-400 my-2 text-sm">
+                    {errors.password}
+                  </div>
+                )}
+              </div>
             </div>
-            <div className="mt-5">
-              <input
-                value={values.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                name="password"
-                type="password"
-                className="text-darkBlue py-2 px-4 w-full"
-                placeholder="Şifre"
-              />
-              {errors.password && touched.password && (
-                <div className="text-red-400 my-2 text-sm">
-                  {errors.password}
-                </div>
-              )}
-            </div>
-          </div>
-          <NavLink
-            to={"/register"}
-            type="submit"
-            className="mt-5 border-2 border-darkBlue text-darkBlue bg-white  w-full py-2 text-center text-lg hover:bg-darkBlue hover:text-white transition-all duration-200 rounded dark:bg-gray-800 dark:text-white dark:border-white dark:hover:bg-white dark:hover:text-gray-800 hover:mt-6"
-          >
-            Hesabın yok mu? Kayıt Ol!
-          </NavLink>
-          <div className="text-right mt-5">
-            <button
+            <NavLink
+              to={"/register"}
               type="submit"
-              className={`btn text-lg py-2 ${isSubmitting ? "submitting" : ""}`}
-              disabled={isSubmitting}
+              className="mt-5 border-2 border-darkBlue text-darkBlue bg-white  w-full py-2 text-center text-lg hover:bg-darkBlue hover:text-white transition-all duration-200 rounded dark:bg-gray-800 dark:text-white dark:border-white dark:hover:bg-white dark:hover:text-gray-800 hover:mt-6"
             >
-              Giriş Yap
-            </button>
-          </div>
-        </form>
+              Hesabın yok mu? Kayıt Ol!
+            </NavLink>
+            <div className="text-right mt-5">
+              <button
+                type="submit"
+                className={`btn text-lg py-2 ${
+                  isSubmitting ? "submitting" : ""
+                }`}
+                disabled={isSubmitting}
+              >
+                Giriş Yap
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -28,6 +28,12 @@
   .submitting {
     @apply opacity-50;
   }
+  .sidebar {
+    @apply absolute top-full left-7 sm:left-10 flex flex-col bg-white text-black  min-h-screen border-2  rounded-lg shadow-item2 py-10 text-center w-11/12 mx-auto mt-5 invisible dark:bg-gray-800 dark:text-white;
+  }
+  .sidebar.activeSide {
+    @apply visible;
+  }
 }
 .active {
   @apply bg-darkBlue text-white dark:bg-gray-300 dark:text-black;
