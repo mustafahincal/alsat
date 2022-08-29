@@ -17,6 +17,7 @@ import {
   updateUsingState,
   updateUsingStates,
 } from "../../../services/usingStateService";
+import { useSubmitContext } from "../../../context/SubmitContext";
 
 function ControlUsingStates() {
   const {
@@ -27,7 +28,9 @@ function ControlUsingStates() {
     updateUsingStateStatus,
     setUpdateUsingStateStatus,
   } = UseUsingStateContext();
+  const { isSubmitting, setIsSubmitting } = useSubmitContext();
   useEffect(() => {
+    setIsSubmitting(false);
     getUsingStates().then((result) => setUsingStates(result.data));
     setUpdateUsingStateStatus(false);
   }, []);
@@ -38,46 +41,63 @@ function ControlUsingStates() {
         name: "",
       },
       onSubmit: (values) => {
+        setIsSubmitting(true);
         if (!updateUsingStateStatus) {
           values = { name: capitalize(values.name) };
+
           postUsingState(values)
             .then((response) => {
               if (response.success) {
                 toast.success(response.message);
                 getUsingStates().then((result) => setUsingStates(result.data));
-                values.name = "";
               }
+              values.name = "";
+              setIsSubmitting(false);
             })
-            .catch((err) => toast.error(err.response.data.message));
+            .catch((err) => {
+              toast.error(err.response.data.message);
+              setIsSubmitting(false);
+            });
         } else {
           const data = {
             usingStateId: selectedUsingState.usingStateId,
             name: capitalize(values.name),
           };
+
           updateUsingState(data)
             .then((response) => {
               if (response.success) {
                 toast.success(response.message);
+                setIsSubmitting(false);
                 getUsingStates().then((result) => setUsingStates(result.data));
                 values.name = "";
                 setUpdateUsingStateStatus(false);
               }
             })
-            .catch((err) => toast.error(err.response.data.message));
+            .catch((err) => {
+              toast.error(err.response.data.message);
+              setIsSubmitting(false);
+            });
         }
       },
       validationSchema: ControlSchema,
     });
 
   const handleDeleteUsingState = (usingStateId) => {
+    values.name = "";
+    setIsSubmitting(true);
     deleteUsingState(usingStateId)
       .then((response) => {
         if (response.success) {
           toast.success(response.message);
           getUsingStates().then((result) => setUsingStates(result.data));
         }
+        setIsSubmitting(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setIsSubmitting(false);
+      });
   };
 
   const handleUpdateUsingState = (usingStateId, usingStateName) => {
@@ -110,39 +130,51 @@ function ControlUsingStates() {
               <div>{usingState.name}</div>
               <div className="flex">
                 {updateUsingStateStatus ? (
-                  <div
-                    className="bg-indigo-500 text-white px-2 flex items-center justify-center rounded cursor-pointer mr-2"
+                  <button
                     onClick={() =>
                       handleUpdateUsingState(
                         usingState.usingStateId,
                         usingState.name
                       )
                     }
+                    className={`bg-indigo-500 text-white  px-2 flex items-center justify-center rounded cursor-pointer mr-2 ${
+                      isSubmitting ? "submitting" : ""
+                    }`}
+                    disabled={isSubmitting}
                   >
                     Düzenlemeyi Sonlandır
-                  </div>
+                  </button>
                 ) : (
-                  <div
-                    className="bg-blue-500 text-white px-2 flex items-center justify-center rounded cursor-pointer mr-2"
+                  <button
                     onClick={() =>
                       handleUpdateUsingState(
                         usingState.usingStateId,
                         usingState.name
                       )
                     }
+                    className={`bg-blue-500 text-white px-2 flex items-center justify-center rounded cursor-pointer mr-2 ${
+                      isSubmitting ? "submitting" : ""
+                    }`}
+                    disabled={isSubmitting}
                   >
                     Düzenle
-                  </div>
+                  </button>
                 )}
 
-                <div
-                  className="bg-red-500 text-white w-7 h-7 flex items-center justify-center rounded cursor-pointer"
+                <button
                   onClick={() =>
-                    handleDeleteUsingState(usingState.usingStateId)
+                    handleDeleteUsingState(
+                      usingState.usingStateId,
+                      usingState.name
+                    )
                   }
+                  className={`bg-red-500 text-white w-7 h-7 flex items-center justify-center rounded cursor-pointer ${
+                    isSubmitting ? "submitting" : ""
+                  }`}
+                  disabled={isSubmitting}
                 >
                   &#215;
-                </div>
+                </button>
               </div>
             </div>
           ))}
@@ -164,7 +196,10 @@ function ControlUsingStates() {
                 onBlur={handleBlur}
                 name="name"
                 type="text"
-                className="text-darkBlue py-2 px-4 w-full"
+                className={`text-darkBlue py-2 px-4 w-full ${
+                  isSubmitting ? "submitting" : ""
+                }`}
+                disabled={isSubmitting}
                 placeholder="Kullanım Durumu"
                 required
               />
@@ -174,11 +209,19 @@ function ControlUsingStates() {
             </div>
             <div className="text-right mt-5">
               {updateUsingStateStatus ? (
-                <button type="submit" className="btn  text-lg">
+                <button
+                  type="submit"
+                  className={`btn text-lg ${isSubmitting ? "submitting" : ""}`}
+                  disabled={isSubmitting}
+                >
                   Güncelle
                 </button>
               ) : (
-                <button type="submit" className="btn text-lg">
+                <button
+                  type="submit"
+                  className={`btn text-lg ${isSubmitting ? "submitting" : ""}`}
+                  disabled={isSubmitting}
+                >
                   Ekle
                 </button>
               )}

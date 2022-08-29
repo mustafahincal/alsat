@@ -9,6 +9,7 @@ import {
 } from "../../../services/brandService";
 import { toast } from "react-toastify";
 import { ControlSchema } from "../../../validations/controlSchema";
+import { useSubmitContext } from "../../../context/SubmitContext";
 
 function ControlBrands() {
   const {
@@ -19,7 +20,9 @@ function ControlBrands() {
     updateBrandStatus,
     setUpdateBrandStatus,
   } = useBrandContext();
+  const { isSubmitting, setIsSubmitting } = useSubmitContext();
   useEffect(() => {
+    setIsSubmitting(false);
     getBrands().then((result) => setBrands(result.data));
     setUpdateBrandStatus(false);
   }, []);
@@ -30,17 +33,22 @@ function ControlBrands() {
         name: "",
       },
       onSubmit: (values) => {
+        setIsSubmitting(true);
         if (!updateBrandStatus) {
           values = { name: capitalize(values.name) };
           postBrand(values)
             .then((response) => {
               if (response.success) {
                 toast.success(response.message);
+                setIsSubmitting(false);
                 getBrands().then((result) => setBrands(result.data));
                 values.name = "";
               }
             })
-            .catch((err) => toast.error(err.response.data.message));
+            .catch((err) => {
+              toast.error(err.response.data.message);
+              setIsSubmitting(false);
+            });
         } else {
           const data = {
             brandId: selectedBrand.brandId,
@@ -50,26 +58,36 @@ function ControlBrands() {
             .then((response) => {
               if (response.success) {
                 toast.success(response.message);
+                setIsSubmitting(false);
                 getBrands().then((result) => setBrands(result.data));
                 values.name = "";
                 setUpdateBrandStatus(false);
               }
             })
-            .catch((err) => toast.error(err.response.data.message));
+            .catch((err) => {
+              toast.error(err.response.data.message);
+              setIsSubmitting(false);
+            });
         }
       },
       validationSchema: ControlSchema,
     });
 
   const handleDeleteBrand = (brandId) => {
+    values.name = "";
+    setIsSubmitting(true);
     deleteBrand(brandId)
       .then((response) => {
         if (response.success) {
           toast.success(response.message);
+          setIsSubmitting(false);
           getBrands().then((result) => setBrands(result.data));
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setIsSubmitting(false);
+      });
   };
 
   const handleUpdateBrand = (brandId, brandName) => {
@@ -102,27 +120,36 @@ function ControlBrands() {
               <div>{brand.name}</div>
               <div className="flex">
                 {updateBrandStatus ? (
-                  <div
-                    className="bg-indigo-500 text-white px-2 flex items-center justify-center rounded cursor-pointer mr-2"
+                  <button
                     onClick={() => handleUpdateBrand(brand.brandId, brand.name)}
+                    className={`bg-indigo-500 text-white  px-2 flex items-center justify-center rounded cursor-pointer mr-2 ${
+                      isSubmitting ? "submitting" : ""
+                    }`}
+                    disabled={isSubmitting}
                   >
                     Düzenlemeyi Sonlandır
-                  </div>
+                  </button>
                 ) : (
-                  <div
-                    className="bg-blue-500 text-white px-2 flex items-center justify-center rounded cursor-pointer mr-2"
+                  <button
                     onClick={() => handleUpdateBrand(brand.brandId, brand.name)}
+                    className={`bg-blue-500 text-white px-2 flex items-center justify-center rounded cursor-pointer mr-2 ${
+                      isSubmitting ? "submitting" : ""
+                    }`}
+                    disabled={isSubmitting}
                   >
                     Düzenle
-                  </div>
+                  </button>
                 )}
 
-                <div
-                  className="bg-red-500 text-white w-7 h-7 flex items-center justify-center rounded cursor-pointer"
-                  onClick={() => handleDeleteBrand(brand.brandId)}
+                <button
+                  onClick={() => handleDeleteBrand(brand.brandId, brand.name)}
+                  className={`bg-red-500 text-white w-7 h-7 flex items-center justify-center rounded cursor-pointer ${
+                    isSubmitting ? "submitting" : ""
+                  }`}
+                  disabled={isSubmitting}
                 >
                   &#215;
-                </div>
+                </button>
               </div>
             </div>
           ))}
@@ -142,7 +169,10 @@ function ControlBrands() {
                 onBlur={handleBlur}
                 name="name"
                 type="text"
-                className="text-darkBlue py-2 px-4 w-full"
+                className={`text-darkBlue py-2 px-4 w-full ${
+                  isSubmitting ? "submitting" : ""
+                }`}
+                disabled={isSubmitting}
                 placeholder="Marka"
                 required
               />
@@ -152,11 +182,19 @@ function ControlBrands() {
             </div>
             <div className="text-right mt-5">
               {updateBrandStatus ? (
-                <button type="submit" className="btn  text-lg">
+                <button
+                  type="submit"
+                  className={`btn  text-lg ${isSubmitting ? "submitting" : ""}`}
+                  disabled={isSubmitting}
+                >
                   Güncelle
                 </button>
               ) : (
-                <button type="submit" className="btn text-lg">
+                <button
+                  type="submit"
+                  className={`btn text-lg ${isSubmitting ? "submitting" : ""}`}
+                  disabled={isSubmitting}
+                >
                   Ekle
                 </button>
               )}

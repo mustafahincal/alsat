@@ -9,6 +9,7 @@ import {
 } from "../../../services/colorService";
 import { toast } from "react-toastify";
 import { ControlSchema } from "../../../validations/controlSchema";
+import { useSubmitContext } from "../../../context/SubmitContext";
 
 function Controlcolors() {
   const {
@@ -19,7 +20,9 @@ function Controlcolors() {
     updateColorStatus,
     setUpdateColorStatus,
   } = useColorContext();
+  const { isSubmitting, setIsSubmitting } = useSubmitContext();
   useEffect(() => {
+    setIsSubmitting(false);
     getColors().then((result) => setColors(result.data));
     setUpdateColorStatus(false);
   }, []);
@@ -30,17 +33,24 @@ function Controlcolors() {
         name: "",
       },
       onSubmit: (values) => {
+        setIsSubmitting(true);
         if (!updateColorStatus) {
           values = { name: capitalize(values.name) };
-          postColor(values)
-            .then((response) => {
-              if (response.success) {
-                toast.success(response.message);
-                getColors().then((result) => setColors(result.data));
-                values.name = "";
-              }
-            })
-            .catch((err) => toast.error(err.response.data.message));
+          setTimeout(() => {
+            postColor(values)
+              .then((response) => {
+                if (response.success) {
+                  toast.success(response.message);
+                  setIsSubmitting(false);
+                  getColors().then((result) => setColors(result.data));
+                  values.name = "";
+                }
+              })
+              .catch((err) => {
+                toast.error(err.response.data.message);
+                setIsSubmitting(false);
+              });
+          }, 2000);
         } else {
           const data = {
             colorId: selectedColor.colorId,
@@ -50,26 +60,36 @@ function Controlcolors() {
             .then((response) => {
               if (response.success) {
                 toast.success(response.message);
+
                 getColors().then((result) => setColors(result.data));
                 values.name = "";
                 setUpdateColorStatus(false);
               }
+              setIsSubmitting(false);
             })
-            .catch((err) => toast.error(err.response.data.message));
+            .catch((err) => {
+              toast.error(err.response.data.message);
+              setIsSubmitting(false);
+            });
         }
       },
       validationSchema: ControlSchema,
     });
 
   const handleDeleteColor = (colorId) => {
+    values.name = "";
     deleteColor(colorId)
       .then((response) => {
         if (response.success) {
           toast.success(response.message);
           getColors().then((result) => setColors(result.data));
         }
+        setIsSubmitting(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setIsSubmitting(false);
+      });
   };
 
   const handleUpdateColor = (colorId, colorName) => {
@@ -102,27 +122,36 @@ function Controlcolors() {
               <div>{color.name}</div>
               <div className="flex">
                 {updateColorStatus ? (
-                  <div
-                    className="bg-indigo-500 text-white px-2 flex items-center justify-center rounded cursor-pointer mr-2"
+                  <button
                     onClick={() => handleUpdateColor(color.colorId, color.name)}
+                    className={`bg-indigo-500 text-white  px-2 flex items-center justify-center rounded cursor-pointer mr-2 ${
+                      isSubmitting ? "submitting" : ""
+                    }`}
+                    disabled={isSubmitting}
                   >
                     Düzenlemeyi Sonlandır
-                  </div>
+                  </button>
                 ) : (
-                  <div
-                    className="bg-blue-500 text-white px-2 flex items-center justify-center rounded cursor-pointer mr-2"
+                  <button
                     onClick={() => handleUpdateColor(color.colorId, color.name)}
+                    className={`bg-blue-500 text-white px-2 flex items-center justify-center rounded cursor-pointer mr-2 ${
+                      isSubmitting ? "submitting" : ""
+                    }`}
+                    disabled={isSubmitting}
                   >
                     Düzenle
-                  </div>
+                  </button>
                 )}
 
-                <div
-                  className="bg-red-500 text-white w-7 h-7 flex items-center justify-center rounded cursor-pointer"
-                  onClick={() => handleDeleteColor(color.colorId)}
+                <button
+                  onClick={() => handleDeleteColor(color.colorId, color.name)}
+                  className={`bg-red-500 text-white w-7 h-7 flex items-center justify-center rounded cursor-pointer ${
+                    isSubmitting ? "submitting" : ""
+                  }`}
+                  disabled={isSubmitting}
                 >
                   &#215;
-                </div>
+                </button>
               </div>
             </div>
           ))}
@@ -142,7 +171,10 @@ function Controlcolors() {
                 onBlur={handleBlur}
                 name="name"
                 type="text"
-                className="text-darkBlue py-2 px-4 w-full"
+                className={`text-darkBlue py-2 px-4 w-full ${
+                  isSubmitting ? "submitting" : ""
+                }`}
+                disabled={isSubmitting}
                 placeholder="Renk"
                 required
               />
@@ -152,11 +184,19 @@ function Controlcolors() {
             </div>
             <div className="text-right mt-5">
               {updateColorStatus ? (
-                <button type="submit" className="btn  text-lg">
+                <button
+                  type="submit"
+                  className={`btn  text-lg ${isSubmitting ? "submitting" : ""}`}
+                  disabled={isSubmitting}
+                >
                   Güncelle
                 </button>
               ) : (
-                <button type="submit" className="btn text-lg">
+                <button
+                  type="submit"
+                  className={`btn text-lg ${isSubmitting ? "submitting" : ""}`}
+                  disabled={isSubmitting}
+                >
                   Ekle
                 </button>
               )}

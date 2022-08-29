@@ -9,6 +9,7 @@ import {
 import { useCategoryContext } from "../../../context/CategoryContext";
 import { postCategory } from "../../../services/categoryService";
 import { ControlSchema } from "../../../validations/controlSchema";
+import { useSubmitContext } from "../../../context/SubmitContext";
 
 function ControlCategories() {
   const {
@@ -19,7 +20,9 @@ function ControlCategories() {
     selectedCategory,
     setSelectedCategory,
   } = useCategoryContext();
+  const { isSubmitting, setIsSubmitting } = useSubmitContext();
   useEffect(() => {
+    setIsSubmitting(false);
     getCategories().then((result) => setCategories(result.data));
     setUpdateCategoryStatus(false);
   }, []);
@@ -30,46 +33,63 @@ function ControlCategories() {
         name: "",
       },
       onSubmit: (values) => {
+        setIsSubmitting(true);
         if (!updateCategoryStatus) {
           values = { name: capitalize(values.name) };
+
           postCategory(values)
             .then((response) => {
               if (response.success) {
                 toast.success(response.message);
+                setIsSubmitting(false);
                 getCategories().then((result) => setCategories(result.data));
                 values.name = "";
               }
             })
-            .catch((err) => toast.error(err.response.data.message));
+            .catch((err) => {
+              toast.error(err.response.data.message);
+              setIsSubmitting(false);
+            });
         } else {
           const data = {
             categoryId: selectedCategory.categoryId,
             name: capitalize(values.name),
           };
+
           updateCategory(data)
             .then((response) => {
               if (response.success) {
                 toast.success(response.message);
+                setIsSubmitting(false);
                 getCategories().then((result) => setCategories(result.data));
                 values.name = "";
                 setUpdateCategoryStatus(false);
               }
             })
-            .catch((err) => toast.error(err.response.data.message));
+            .catch((err) => {
+              toast.error(err.response.data.message);
+              setIsSubmitting(false);
+            });
         }
       },
       validationSchema: ControlSchema,
     });
 
   const handleDeleteCategory = (categoryId) => {
+    values.name = "";
+    setIsSubmitting(true);
     deleteCategory(categoryId)
       .then((response) => {
         if (response.success) {
           toast.success(response.message);
+          setIsSubmitting(false);
           getCategories().then((result) => setCategories(result.data));
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setIsSubmitting(false);
+      });
   };
 
   const handleUpdateCategory = (categoryId, categoryName) => {
@@ -102,33 +122,42 @@ function ControlCategories() {
               <div>{category.name}</div>
               <div className="flex">
                 {updateCategoryStatus ? (
-                  <div
-                    className="bg-indigo-500 text-white  px-2 flex items-center justify-center rounded cursor-pointer mr-2"
+                  <button
                     onClick={() =>
                       handleUpdateCategory(category.categoryId, category.name)
                     }
+                    className={`bg-indigo-500 text-white  px-2 flex items-center justify-center rounded cursor-pointer mr-2 ${
+                      isSubmitting ? "submitting" : ""
+                    }`}
+                    disabled={isSubmitting}
                   >
                     Düzenlemeyi Sonlandır
-                  </div>
+                  </button>
                 ) : (
-                  <div
-                    className="bg-blue-500 text-white px-2 flex items-center justify-center rounded cursor-pointer mr-2"
+                  <button
                     onClick={() =>
                       handleUpdateCategory(category.categoryId, category.name)
                     }
+                    className={`bg-blue-500 text-white px-2 flex items-center justify-center rounded cursor-pointer mr-2 ${
+                      isSubmitting ? "submitting" : ""
+                    }`}
+                    disabled={isSubmitting}
                   >
                     Düzenle
-                  </div>
+                  </button>
                 )}
 
-                <div
-                  className="bg-red-500 text-white w-7 h-7 flex items-center justify-center rounded cursor-pointer"
+                <button
                   onClick={() =>
                     handleDeleteCategory(category.categoryId, category.name)
                   }
+                  className={`bg-red-500 text-white w-7 h-7 flex items-center justify-center rounded cursor-pointer ${
+                    isSubmitting ? "submitting" : ""
+                  }`}
+                  disabled={isSubmitting}
                 >
                   &#215;
-                </div>
+                </button>
               </div>
             </div>
           ))}
@@ -148,7 +177,10 @@ function ControlCategories() {
                 onBlur={handleBlur}
                 name="name"
                 type="text"
-                className="text-darkBlue py-2 px-4 w-full"
+                className={`text-darkBlue py-2 px-4 w-full ${
+                  isSubmitting ? "submitting" : ""
+                }`}
+                disabled={isSubmitting}
                 placeholder="Kategori"
               />
               {errors.name && touched.name && (
@@ -157,11 +189,19 @@ function ControlCategories() {
             </div>
             <div className="text-right mt-5">
               {updateCategoryStatus ? (
-                <button type="submit" className="btn  text-lg">
+                <button
+                  type="submit"
+                  className={`btn  text-lg ${isSubmitting ? "submitting" : ""}`}
+                  disabled={isSubmitting}
+                >
                   Güncelle
                 </button>
               ) : (
-                <button type="submit" className="btn text-lg">
+                <button
+                  type="submit"
+                  className={`btn text-lg ${isSubmitting ? "submitting" : ""}`}
+                  disabled={isSubmitting}
+                >
                   Ekle
                 </button>
               )}
