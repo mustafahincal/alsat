@@ -26,5 +26,6 @@ namespace Business.Abstract
         Task<IDataResult<List<ProductDetailDto>>> GetProductDetailsByUsingStateId(int usingStateId);
         Task<IDataResult<List<ProductDetailDto>>> GetProductDetailsByCategoryId(int categoryId);
         Task<IDataResult<List<ProductDetailDto>>> GetProductDetailsByOwnerId(int ownerId);
+        Task<IDataResult<List<Product>>> GetAllByOwnerId(int ownerId);
     }
 }

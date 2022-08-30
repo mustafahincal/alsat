@@ -132,6 +132,10 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Product>>(await _productDal.GetAll(), Messages.ProductsListed);
         }
+        public async Task<IDataResult<List<Product>>> GetAllByOwnerId(int ownerId)
+        {
+            return new SuccessDataResult<List<Product>>(await _productDal.GetAll(p => p.OwnerId == ownerId));
+        }
         public async Task<IDataResult<List<Product>>> GetAllByCategoryId(int id)
         {
             return new SuccessDataResult<List<Product>>(await _productDal.GetAll(p => p.CategoryId == id));
