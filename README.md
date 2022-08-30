@@ -34,119 +34,86 @@
 - **"React Toastify"**
 - **"React Icons"**
 - **Google Fonts**
-
-<br>
-
-## **Prerequisites**
-
-What is needed to set up the dev environment. For instance, global dependencies or any other tools. include download links.
-
-<br>
+  <br>
 
 ## **Installing / Getting started (Yükleme / Projeyi çalıştırma)**
 
-Here's a brief intro about what a developer must do in order to start developing
-the project further:
-
 ```shell
-git clone https://github.com/payologllc/primefor-2022-staj-mustafahincal.git
+1) git clone https://github.com/payologllc/primefor-2022-staj-mustafahincal.git
 ```
 
 ### **Backend**
 
 ```shell
-1) Click project-server file (project-server dosyasına tıkla)
-2) Click project-server.sln and open it Visual Studio (project-server.sln dosyasına tıkla ve Visual Studio'da aç)
-3) Navigate to Build - Rebuild Solution
-4) Navigate to Tools - Extensions and Updates
-5) Click Online located on the left side and search for Open Command Line and install (restart Visual Studio)
-6) Click on ContosoUniversity.API project on the Solution Explorer, and press ALT + SPACE to open up CLI
-7) Run this migration command: dotnet ef migrations add InitialDatabase -c ContosoContext
-8) Run another command which creates database: dotnet ef database update -c ContosoContext
-9) In Startup.cs, uncomment seeder.InitializeData().Wait(); from Configure method
-10) Press F5 to run the project. (Make sure ContosoUniversity.API is set as startup project)
+2) Click project-server file (project-server dosyasına tıkla)
+3) Click project-server.sln and open it Visual Studio (project-server.sln dosyasına tıkla ve Visual Studio da aç
+4) Navigate to Build - Rebuild Solution (Build penceresinden projeyi yeniden derle)
+5) Navigate to Package Manager Console. Make sure DataAccess is set as default project. (Package Manager konsoluna gidiniz. DataAccess in default project olarak ayarlandığından emin olunuz.)
+6) update-database
+7) Click Run to run the project. Make sure WebAPI is set as startup project. (Projeyi çalıştırmak için Run a tıklayınız. WebAPI nin başlangıç projesi olarak ayarlandığından emin olunuz)
 ```
 
 ### **Frontend**
 
 ```shell
-1) cd project-client/
-2) npm install
-3) npm run start
+8) cd project-client/
+9) npm install
+10) npm run start
 ```
-
-And state what happens step-by-step. If there is any virtual environment, local server or database feeder needed, explain here.
 
 <br>
 
-## **Building**
-
-If your project needs some additional steps for the developer to build the
-project after some code changes, state them here. for example:
+## **Admin Login (Admin Girişi)**
 
 ```shell
-./configure
-make
-make install
+Email : admin@mail.com
+Şifre : 12345678
 ```
 
-Here again you should state what actually happens when the code above gets
-executed.
-
 <br>
-
-## **Versioning**
-
-We can maybe use [SemVer](http://semver.org/) for versioning. For the versions available, see the [link to tags on this repository](/tags).
-
-<br>
-
-## **Configuration**
-
-Here you should write what are all of the configurations a user can enter when using the project.
-
-<br>
-
-## **Style guide**
-
-Explain your code style and show how to check it.
-
-<br>
-
-## **Api Reference**
-
-If the api is external, link to api documentation. If not describe your api including authentication methods as well as explaining all the endpoints with their required parameters.
 
 <br>
 
 ## **Database (Veri Tabanı)**
 
-Explaining what database (and version) has been used. Provide download links.
-Documents your database design and schemas, relations etc...
-
 ![](screenshots-readme/database.png)
-
 <br>
 
-## **Licensing**
+## **Swagger Images (Swagger Ekran Görüntüleri)**
 
-State what the license is and how to find the text version of the license.
+### **_Login (Giriş Yap)_**
 
+![](screenshots-readme/34-swagger-login.png)
 <br>
 
-## **Project Images (Proje Fotoğraf)**
+### **_Controller Methods (Kontrolör Metodları)_**
+
+![](screenshots-readme/35-swagger-1.png)
+<br>
+
+![](screenshots-readme/35-swagger-2.png)
+<br>
+
+![](screenshots-readme/35-swagger-productmethods.png)
+<br>
+
+![](screenshots-readme/36-swagger-3.png)
+<br>
+
+![](screenshots-readme/37-swagger-4.png)
+<br>
+
+## **Project Images (Proje Ekran Görüntüleri)**
 
 ### **_Login (Giriş Yap)_**
 
 ![](screenshots-readme/1-login.png)
 ![](screenshots-readme/2-login-darkmode.png)
-
 <br>
 
 ### **_Register (Kayıt Ol)_**
 
 ![](screenshots-readme/2-register.png)
-
 <br>
 
 ### **_Home (Anasayfa)_**
@@ -294,3 +261,17 @@ State what the license is and how to find the text version of the license.
 ### **_Dashboard - Credit Cards (Kontrol Paneli - Kredi Kartları)_**
 
 ![](screenshots-readme/31-dashboard-creditcards.png)
+<br>
+
+<div style="text-align:center">
+
+### **_Products - Responsive (Ürünler - Responsive)_**
+
+![](screenshots-readme/32-products-responsive.png)
+<br>
+
+### **_Profile - Responsive (Hesabım - Responsive)_**
+
+![](screenshots-readme/33-profile-responsive.png)
+
+</div>
