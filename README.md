@@ -61,18 +61,12 @@
 10) npm run start
 ```
 
-<br>
-
 ## **Admin Login (Admin Girişi)**
 
 ```shell
 Email : admin@mail.com
 Şifre : 12345678
 ```
-
-<br>
-
-<br>
 
 ## **Database (Veri Tabanı)**
 
@@ -263,7 +257,7 @@ Email : admin@mail.com
 ![](screenshots-readme/31-dashboard-creditcards.png)
 <br>
 
-<div style="text-align:center">
+<div align="center">
 
 ### **_Products - Responsive (Ürünler - Responsive)_**
 
