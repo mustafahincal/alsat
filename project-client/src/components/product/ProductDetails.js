@@ -29,21 +29,19 @@ function ProductDetails() {
   const handleDeleteProduct = () => {
     setIsSubmitting(true);
     if (selectedProduct.productImageId) {
-      setTimeout(() => {
-        deleteProductImage(selectedProduct.productImageId)
-          .then((result) => {
-            if (result.success) {
-              deleteProduct(selectedProduct.productId)
-                .then((response) => {
-                  toast.success(response.message);
-                  setIsSubmitting(false);
-                  navigate("/main");
-                })
-                .catch((err) => console.log(err));
-            }
-          })
-          .catch((err) => console.log(err));
-      }, 2000);
+      deleteProductImage(selectedProduct.productImageId)
+        .then((result) => {
+          if (result.success) {
+            deleteProduct(selectedProduct.productId)
+              .then((response) => {
+                toast.success(response.message);
+                setIsSubmitting(false);
+                navigate("/main");
+              })
+              .catch((err) => console.log(err));
+          }
+        })
+        .catch((err) => console.log(err));
     } else {
       deleteProduct(selectedProduct.productId)
         .then((response) => {
