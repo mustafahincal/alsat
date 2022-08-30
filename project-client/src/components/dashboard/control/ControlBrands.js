@@ -41,6 +41,7 @@ function ControlBrands() {
               if (response.success) {
                 toast.success(response.message);
                 setIsSubmitting(false);
+                values.name = "";
                 getBrands().then((result) => setBrands(result.data));
               }
             })

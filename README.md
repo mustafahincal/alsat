@@ -4,8 +4,6 @@
 
 > Sıfır veya ikinci el ürünleri satabileceğiniz, ilanlara teklif verebileceğiniz bir internet sitesi. Kolayca al ve sat.
 
-<br>
-
 ## **Technologies and techniques used in the project (Projede kullanılan teknikler ve teknolojiler)**
 
 ### **Backend**
