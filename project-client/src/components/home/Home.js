@@ -3,12 +3,17 @@ import { getCategories } from "../../services/categoryService";
 import { useCategoryContext } from "../../context/CategoryContext";
 import { NavLink } from "react-router-dom";
 import Products from "../product/Products";
+import { useProductContext } from "../../context/ProductContext";
+import { getProducts } from "../../services/productService";
+import defaultImage from "../../assets/default.png";
+import { useAuthContext } from "../../context/AuthContext";
 
 function Home() {
-  const { categories, setCategories } = useCategoryContext();
-
+  const { products, setProducts } = useProductContext();
+  const { isLogged } = useAuthContext();
+  const apiImagesUrl = "https://localhost:44350/uploads/images/";
   useEffect(() => {
-    getCategories().then((result) => setCategories(result.data));
+    getProducts().then((result) => setProducts(result.data));
   }, []);
 
   return (
@@ -31,7 +36,83 @@ function Home() {
       </div>
       <div className="w-11/12 m-auto my-24">
         <div className="text-3xl mb-5 font-bold">Güncel İlanlar</div>
-        <Products limit={8} />
+        <div className="bg-gray-100 dark:bg-gray-700">
+          <div className="grid grid-cols-12 gap-x-8 gap-y-10 sm:gap-y-10 md:gap-y-20">
+            {products.map(
+              (product, index) =>
+                index < 8 &&
+                !product.isSold && (
+                  <NavLink
+                    key={index}
+                    className="flex flex-col justify-between rounded-md h-full  shadow-item mb-10 dark:bg-darkBlue dark:text-white col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3"
+                    to={
+                      isLogged
+                        ? `/productdetails/${product.productId}`
+                        : "/login"
+                    }
+                  >
+                    <img
+                      src={
+                        product.imagePath
+                          ? apiImagesUrl + product.imagePath
+                          : defaultImage
+                      }
+                      className="rounded-t-md h-2/3 object-cover object-center w-full flex-shrink-0"
+                      alt=""
+                    />
+                    <div className="text-center bg-white dark:bg-gray-800 flex flex-col h-full justify-between py-3 px-5">
+                      <div className="flex justify-between">
+                        <p>Ürün</p>
+                        <p>{product.productName}</p>
+                      </div>
+                      <div className="flex justify-between">
+                        <p>Kategori</p>
+                        <p>{product.categoryName}</p>
+                      </div>
+                      {product.brandName && (
+                        <div className="flex justify-between">
+                          <p>Marka</p>
+                          <p>{product.brandName}</p>
+                        </div>
+                      )}
+                      {product.colorName && (
+                        <div className="flex justify-between">
+                          <p>Renk</p>
+                          <p>{product.colorName}</p>
+                        </div>
+                      )}
+                      <div className="flex justify-between">
+                        <p>Fiyat</p>
+                        <p>{product.price}₺</p>
+                      </div>
+                    </div>
+
+                    <div>
+                      {product.isOfferable ? (
+                        <div className="py-1 bg-teal-500 text-white text-center text-sm">
+                          Teklif Verilebilir
+                        </div>
+                      ) : (
+                        <div className="py-1 bg-indigo-500  text-white text-center text-sm">
+                          Teklif Verilemez
+                        </div>
+                      )}
+
+                      {product.isSold ? (
+                        <div className="py-1 bg-rose-500 rounded-b text-white text-center text-sm ">
+                          Satıldı
+                        </div>
+                      ) : (
+                        <div className="py-1 bg-lime-500 rounded-b text-white text-center text-sm">
+                          Satılmadı
+                        </div>
+                      )}
+                    </div>
+                  </NavLink>
+                )
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

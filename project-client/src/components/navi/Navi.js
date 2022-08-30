@@ -48,7 +48,6 @@ function Navi() {
     setIsAdmin(false);
     setSelectedUser({});
     setSelectedCreditCard({});
-    setProducts([]);
     setSoldedProducts([]);
     setSelectedProduct({});
     setPurchasedProducts([]);
@@ -259,6 +258,15 @@ function Navi() {
                   }
                 >
                   Şifre Değiştir
+                </NavLink>
+                <NavLink
+                  onClick={() => setVisible(!visible)}
+                  to="/profile/updateUser"
+                  className={({ isActive }) =>
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2  dark:hover:bg-gray-700 dark:border-gray-700"
+                  }
+                >
+                  Bilgileri Değiştir
                 </NavLink>
                 <NavLink
                   onClick={() => setVisible(!visible)}
