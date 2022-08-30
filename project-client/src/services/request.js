@@ -1,13 +1,14 @@
 import { getFromLocalStorage } from "./localStorageService";
 import axios from "axios";
-axios.defaults.headers.common = {
-  Authorization: `Bearer ${getFromLocalStorage("token")}`,
-};
 
 function requestGet(url) {
   return new Promise((resolve, reject) => {
     axios
-      .get(url)
+      .get(url, {
+        headers: {
+          Authorization: `Bearer ${getFromLocalStorage("token")}`,
+        },
+      })
       .then((response) => resolve(response.data))
       .catch((error) => reject(error));
   });
@@ -16,7 +17,11 @@ function requestGet(url) {
 function requestPost(url, data) {
   return new Promise((resolve, reject) => {
     axios
-      .post(url, data)
+      .post(url, data, {
+        headers: {
+          Authorization: `Bearer ${getFromLocalStorage("token")}`,
+        },
+      })
       .then((response) => resolve(response.data))
       .catch((error) => reject(error));
   });

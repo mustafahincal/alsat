@@ -82,7 +82,6 @@ function Payment() {
         ) {
           console.log("true");
           handleBuyProduct();
-          navigate("/");
         } else {
           setSaveCardModalActive(true);
           console.log("false");
@@ -92,7 +91,6 @@ function Payment() {
     });
 
   const handleSaveCreditCardModal = (controlSave) => {
-    setIsSubmitting(true);
     setSaveCardModalActive(false);
     if (controlSave && selectedCreditCard) {
       const data = {
@@ -100,9 +98,7 @@ function Payment() {
         creditCardId: selectedCreditCard.creditCardId,
       };
       updateCreditCard(data).then((result) => {
-        setIsSubmitting(false);
         handleBuyProduct();
-        navigate("/");
       });
     } else if (controlSave) {
       saveCreditCard(values).then((result) => {

@@ -36,21 +36,20 @@ function Controlcolors() {
         setIsSubmitting(true);
         if (!updateColorStatus) {
           values = { name: capitalize(values.name) };
-          setTimeout(() => {
-            postColor(values)
-              .then((response) => {
-                if (response.success) {
-                  toast.success(response.message);
-                  setIsSubmitting(false);
-                  getColors().then((result) => setColors(result.data));
-                  values.name = "";
-                }
-              })
-              .catch((err) => {
-                toast.error(err.response.data.message);
+
+          postColor(values)
+            .then((response) => {
+              if (response.success) {
+                toast.success(response.message);
                 setIsSubmitting(false);
-              });
-          }, 2000);
+                getColors().then((result) => setColors(result.data));
+                values.name = "";
+              }
+            })
+            .catch((err) => {
+              toast.error(err.response.data.message);
+              setIsSubmitting(false);
+            });
         } else {
           const data = {
             colorId: selectedColor.colorId,
