@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "B8c+j2MwrrMEf0pQGZ6MX7gezrkvsKdMbuX2sakcprw=",
+  "Hash": "dz1eIR8fX/x1fpLaTSVUtl/qr9ecwqHvgTMAg+ZWqbw=",
   "Source": "WebAPI",
   "BasePath": "_content/WebAPI",
   "Mode": "Default",
@@ -32,6 +32,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\Images\\02cc7a15-d779-4e65-8c30-570a94160937.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\Uploads\\Images\\0c10b13d-6afc-4c35-a02c-523e0dcc6d14.jpg",
+      "SourceId": "WebAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\",
+      "BasePath": "_content/WebAPI",
+      "RelativePath": "Uploads/Images/0c10b13d-6afc-4c35-a02c-523e0dcc6d14.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Images\\0c10b13d-6afc-4c35-a02c-523e0dcc6d14.jpg"
     },
     {
       "Identity": "C:\\Users\\musta\\Desktop\\primefor-2022-staj-mustafahincal\\project-server\\WebAPI\\wwwroot\\Uploads\\Images\\1b497d1f-10e9-4d34-94f8-06b082dce205.jpg",

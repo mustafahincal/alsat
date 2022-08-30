@@ -28,7 +28,7 @@ namespace Business.Concrete
         {
             
             IResult result =  BusinessRules.Run(
-                 await CheckIfProductNameExists(productForAddDto.Name)
+                 // await CheckIfProductNameExists(productForAddDto.Name)
                 ); ;
 
 
