@@ -19,10 +19,12 @@ namespace Business.Concrete
     {
         IUserDal _userDal;
         IUserOperationClaimService _userOperationClaimService;
-        public UserManager(IUserDal userDal, IUserOperationClaimService userOperationClaimService)
+        IProductService _productService;
+        public UserManager(IUserDal userDal, IUserOperationClaimService userOperationClaimService, IProductService productService)
         {
             _userDal = userDal;
             _userOperationClaimService = userOperationClaimService;
+            _productService = productService;
         }
         public async Task<IResult> Add(User user)
         {
@@ -41,10 +43,15 @@ namespace Business.Concrete
 
         public async Task<IResult> Delete(int id)
         {
-            var userToDelete = await _userDal.Get(p => p.UserId == id);
-            _userDal.Delete(userToDelete);
+            var userToDelete = await _userDal.Get(u => u.UserId == id);
+            var productsToDelete = await _productService.GetAllByOwnerId(userToDelete.UserId);
 
-            
+            foreach (var product in productsToDelete.Data)
+            {
+                await _productService.Delete(product.ProductId);
+            }
+
+            _userDal.Delete(userToDelete);
             await _userDal.Commit();
             return new SuccessResult("Kullanıcı silindi");
         }
