@@ -45,20 +45,31 @@
 ### **Backend**
 
 ```shell
-2) Click project-server file (project-server dosyasına tıkla)
-3) Click project-server.sln and open it Visual Studio (project-server.sln dosyasına tıkla ve Visual Studio da aç
-4) Navigate to Build - Rebuild Solution (Build penceresinden projeyi yeniden derle)
-5) Navigate to Package Manager Console. Make sure DataAccess is set as default project. (Package Manager konsoluna gidiniz. DataAccess in default project olarak ayarlandığından emin olunuz.)
-6) update-database
-7) Click Run to run the project. Make sure WebAPI is set as startup project. (Projeyi çalıştırmak için Run a tıklayınız. WebAPI nin başlangıç projesi olarak ayarlandığından emin olunuz)
+2) Click project-server file
+(project-server dosyasına tıkla)
+3) Click project-server.sln and open it Visual Studio
+(project-server.sln dosyasına tıkla ve Visual Studio da aç)
+4) Navigate to Build - Rebuild Solution
+(Build penceresinden projeyi yeniden derle)
+5) Navigate to Package Manager Console. Make sure DataAccess is set as default project.
+(Package Manager konsoluna gidiniz. DataAccess in default project olarak
+ayarlandığından emin olunuz.)
+6) If you wish delete, you can delete the migrations and add a new migration (add-migration mig1) or
+you can skip this step.
+(Dilerseniz var olan migrationları silebilir ve yeni bir migration ekleyebilirsiniz (add-migration mig1)
+ya da bu adımı geçebilirsiniz.)
+7) update-database
+8) Click Run to run the project. Make sure WebAPI is set as startup project.
+(Projeyi çalıştırmak için Run a tıklayınız. WebAPI nin başlangıç projesi olarak
+ayarlandığından emin olunuz)
 ```
 
 ### **Frontend**
 
 ```shell
-8) cd project-client/
-9) npm install
-10) npm run start
+9) cd project-client/
+10) npm install
+11) npm run start
 ```
 
 ## **Admin Login (Admin Girişi)**
