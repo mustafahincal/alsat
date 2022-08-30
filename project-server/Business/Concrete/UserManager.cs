@@ -43,6 +43,8 @@ namespace Business.Concrete
         {
             var userToDelete = await _userDal.Get(p => p.UserId == id);
             _userDal.Delete(userToDelete);
+
+            
             await _userDal.Commit();
             return new SuccessResult("Kullanıcı silindi");
         }

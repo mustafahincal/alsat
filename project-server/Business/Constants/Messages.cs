@@ -38,6 +38,7 @@ namespace Business.Constants
         public static string Listed = "Listelendi";
 
         public static string ProductImageSizeInvalid = "Ürün görseli en fazla 400KB olmalı";
+        public static string ProductImageTypeInvalid = "Ürün görseli jpg, png ve jpeg olabilir";
 
 
     }

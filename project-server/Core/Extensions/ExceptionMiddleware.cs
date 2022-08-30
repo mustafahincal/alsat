@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 namespace Core.Extensions
 {
     public class ExceptionMiddleware
     {
         private RequestDelegate _next;
+        private readonly ILogger<ExceptionMiddleware> _logger;
 
-        public ExceptionMiddleware(RequestDelegate next)
+        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
         {
             _next = next;
+            _logger = logger;
         }
 
         public async Task InvokeAsync(HttpContext httpContext)
@@ -26,15 +29,7 @@ namespace Core.Extensions
             }
             catch (Exception e)
             {
-                //File.AppendAllText("log.txt", Environment.NewLine + "**********************************************" + Environment.NewLine);
-                //File.AppendAllText("log.txt", Environment.UserName);
-                //File.AppendAllText("log.txt", Environment.NewLine);
-                //File.AppendAllText("log.txt", DateTime.Now.ToString("dd.MM.yyyy HH:mm"));
-                //File.AppendAllText("log.txt", Environment.NewLine);
-                //File.AppendAllText("log.txt", e.Message);
-                //File.AppendAllText("log.txt", "@");
-                //File.AppendAllText("log.txt", e.StackTrace);
-                //File.AppendAllText("log.txt", Environment.NewLine +"**********************************************"+Environment.NewLine);
+                _logger.Log(LogLevel.Error, e.Message);
 
                 await HandleExceptionAsync(httpContext, e);
             }

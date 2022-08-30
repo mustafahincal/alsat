@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -24,6 +25,7 @@ namespace Business.Concrete
             _categortDal = categortDal;
         }
 
+        [SecuredOperation("Admin")]
         [ValidationAspect(typeof(CategoryValidator))]
         public async Task<IResult> Add(Category category)
         {
@@ -41,7 +43,7 @@ namespace Business.Concrete
             await _categortDal.Commit();
             return new SuccessResult("Kategori eklendi");
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IResult> Delete(int categoryId)
         {
             var categoryToDelete = await _categortDal.Get(c => c.CategoryId == categoryId); 
@@ -49,7 +51,7 @@ namespace Business.Concrete
             await _categortDal.Commit();
             return new SuccessResult("Kategori silindi");
         }
-
+        [SecuredOperation("Admin")]
         public async Task<IResult> Update(CategoryForUpdateDto categoryForUpdateDto)
         {
             IResult result =  BusinessRules.Run(

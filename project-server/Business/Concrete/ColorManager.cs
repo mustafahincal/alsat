@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -34,6 +35,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Color>(await _colorDal.Get(c => c.ColorId == colorId), "Renkler getirildi");
         }
 
+        [SecuredOperation("Admin")]
         [ValidationAspect(typeof(ColorValidator))]
         public async Task<IResult> Add(Color color)
         {
@@ -53,6 +55,7 @@ namespace Business.Concrete
             return new SuccessResult("Renk eklendi");
         }
 
+        [SecuredOperation("Admin")]
         public async Task<IResult> Delete(int colorId)
         {
             var colorToDelete = await _colorDal.Get(c => c.ColorId == colorId);
@@ -61,6 +64,7 @@ namespace Business.Concrete
             return new SuccessResult("Renk silindi");
         }
 
+        [SecuredOperation("Admin")]
         public async Task< IResult> Update(ColorForUpdateDto colorForUpdateDto)
         {
 

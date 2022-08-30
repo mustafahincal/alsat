@@ -4,6 +4,7 @@ using DataAccess.Concrete.EntityFramework.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(PrimeforContext))]
-    partial class PrimeforContextModelSnapshot : ModelSnapshot
+    [Migration("20220829203044_mig6")]
+    partial class mig6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,11 +45,6 @@ namespace DataAccess.Migrations
                         {
                             OperationClaimId = 1,
                             Name = "Admin"
-                        },
-                        new
-                        {
-                            OperationClaimId = 2,
-                            Name = "Kullanıcı"
                         });
                 });
 
@@ -92,10 +89,10 @@ namespace DataAccess.Migrations
                             UserId = 1,
                             Email = "admin@mail.com",
                             FirstName = "Admin",
-                            LastName = "Admin",
-                            PasswordHash = new byte[] { 165, 97, 63, 88, 190, 89, 69, 219, 25, 242, 132, 183, 85, 250, 134, 131, 235, 182, 77, 239, 128, 178, 156, 252, 117, 33, 4, 123, 25, 50, 152, 13, 90, 86, 118, 234, 200, 165, 167, 102, 173, 244, 209, 2, 224, 88, 54, 218, 121, 204, 240, 216, 28, 235, 211, 223, 167, 48, 61, 125, 43, 160, 144, 117 },
-                            PasswordSalt = new byte[] { 174, 88, 169, 225, 250, 26, 168, 159, 219, 24, 198, 22, 26, 43, 158, 243, 83, 78, 242, 225, 36, 8, 47, 123, 162, 245, 158, 173, 64, 230, 2, 224, 168, 236, 83, 15, 173, 144, 149, 247, 90, 72, 77, 30, 91, 140, 13, 224, 242, 17, 4, 165, 202, 89, 103, 140, 252, 8, 114, 248, 219, 0, 233, 237, 71, 210, 234, 164, 22, 239, 229, 55, 183, 54, 115, 62, 181, 189, 8, 231, 209, 60, 123, 112, 1, 213, 94, 239, 234, 80, 204, 145, 245, 140, 18, 133, 3, 198, 34, 232, 149, 163, 40, 13, 95, 221, 190, 164, 186, 147, 199, 142, 229, 135, 181, 156, 131, 2, 124, 58, 10, 16, 26, 59, 209, 215, 244, 88 },
-                            Status = true
+                            LastName = "AdminLastName",
+                            PasswordHash = new byte[] { 250, 132, 234, 135, 254, 28, 88, 100, 164, 56, 85, 171, 9, 129, 139, 47, 58, 51, 184, 98, 142, 220, 242, 155, 201, 31, 123, 101, 103, 36, 78, 46, 109, 199, 130, 107, 206, 75, 160, 236, 116, 207, 184, 93, 61, 222, 78, 160, 26, 189, 8, 140, 121, 124, 173, 233, 131, 184, 241, 60, 247, 32, 90, 109 },
+                            PasswordSalt = new byte[] { 128, 79, 133, 175, 102, 193, 200, 242, 192, 50, 178, 149, 41, 67, 171, 181, 97, 36, 144, 9, 250, 49, 178, 108, 160, 185, 229, 58, 212, 138, 23, 101, 222, 171, 130, 117, 10, 67, 245, 77, 6, 225, 47, 124, 215, 237, 13, 7, 194, 12, 210, 95, 158, 122, 102, 108, 230, 149, 38, 208, 89, 120, 244, 1, 153, 26, 163, 58, 186, 243, 241, 137, 180, 121, 243, 96, 243, 1, 178, 75, 57, 232, 220, 216, 113, 190, 96, 116, 69, 23, 191, 216, 211, 141, 157, 35, 33, 130, 106, 181, 247, 28, 94, 99, 186, 27, 141, 26, 170, 30, 103, 25, 74, 139, 248, 7, 205, 39, 99, 244, 216, 174, 211, 86, 250, 31, 138, 127 },
+                            Status = false
                         });
                 });
 

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -34,6 +35,7 @@ namespace Business.Concrete
             return new SuccessDataResult<UsingState>(await _usingStateDal.Get(us => us.UsingStateId == usingStateId), "Kullanım Durumları getirildi");
         }
 
+        [SecuredOperation("Admin")]
         [ValidationAspect(typeof(UsingStateValidator))]
         public async Task<IResult> Add(UsingState usingState)
         {
@@ -53,6 +55,7 @@ namespace Business.Concrete
             return new SuccessResult("Kullanım Durumu eklendi");
         }
 
+        [SecuredOperation("Admin")]
         public async Task<IResult> Delete(int usingStateId)
         {
             var usingStateToDelete = await _usingStateDal.Get(u => u.UsingStateId == usingStateId);
@@ -61,6 +64,7 @@ namespace Business.Concrete
             return new SuccessResult("Kullanım Durumu silindi");
         }
 
+        [SecuredOperation("Admin")]
         public async Task<IResult> Update(UsingStateForUpdateDto usingStateForUpdateDto)
         {
 

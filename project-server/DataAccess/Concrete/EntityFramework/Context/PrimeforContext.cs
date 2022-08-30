@@ -1,5 +1,5 @@
 ﻿using Core.Entities.Concrete;
-using Core.Utilities.Configurations;
+using Core.Utilities.Security.Hashing;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,5 +23,31 @@ namespace DataAccess.Concrete.EntityFramework.Context
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<UsingState> UsingStates { get; set; }
         public DbSet<CreditCard> CreditCards { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            HashingHelper.CreatePasswordHash("12345678", out byte[] hash, out byte[] salt);
+            User[] users = {
+                new User
+                {
+                    UserId = 1,
+                    Email = "admin@mail.com",
+                    FirstName = "Admin",
+                    LastName = "Admin",
+                    Status=true,
+                    PasswordHash=hash,
+                    PasswordSalt=salt
+                }
+            };
+            OperationClaim[] operationClaims = { 
+                new OperationClaim { OperationClaimId = 1, Name = "Admin" },
+                new OperationClaim { OperationClaimId = 2, Name = "Kullanıcı" } 
+            };
+            UserOperationClaim[] userOperationClaims = { new UserOperationClaim { UserOperationClaimId = 1, UserId = 1, OperationClaimId = 1 } };
+            modelBuilder.Entity<User>().HasData(users);
+            modelBuilder.Entity<UserOperationClaim>().HasData(userOperationClaims);
+            modelBuilder.Entity<OperationClaim>().HasData(operationClaims);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

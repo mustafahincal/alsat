@@ -44,6 +44,12 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<Product>>(Messages.ProductImageSizeInvalid);
             }
 
+            var extension = System.IO.Path.GetExtension(productForAddDto.file.FileName);
+            if(!(extension == ".jpg" || extension == ".png" || extension == ".jpeg"))
+            {
+                return new ErrorDataResult<List<Product>>(Messages.ProductImageTypeInvalid);
+            }
+
             Product productToAdd = new Product
             {
                 Name = productForAddDto.Name,
@@ -97,7 +103,7 @@ namespace Business.Concrete
             }
 
             var offerControl = await _offerService.GetByProductId(productToUpdate.ProductId);
-            if (offerControl.Message == null)
+            if (offerControl.Data.Count == 0)
             {
                 Offer offerToAdd = new Offer
                 {
@@ -116,7 +122,7 @@ namespace Business.Concrete
 
         public async Task<IResult> Delete(int productId)
         {
-            var productToDelete =await  _productDal.Get(p => p.ProductId == productId);
+            var productToDelete = await  _productDal.Get(p => p.ProductId == productId);
             _productDal.Delete(productToDelete);
             await _productDal.Commit();
             return new SuccessResult(Messages.ProductDeleted);
@@ -124,7 +130,6 @@ namespace Business.Concrete
 
         public async Task<IDataResult<List<Product>>> GetAll()
         {
-
             return new SuccessDataResult<List<Product>>(await _productDal.GetAll(), Messages.ProductsListed);
         }
         public async Task<IDataResult<List<Product>>> GetAllByCategoryId(int id)

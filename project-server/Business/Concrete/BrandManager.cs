@@ -29,7 +29,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Brand>(await _brandDal.Get(b => b.BrandId == brandId), "Marka getirildi");
         }
 
-        //[SecuredOperation("Admin")]
+        [SecuredOperation("Admin")]
         [ValidationAspect(typeof(BrandValidator))]
         public async Task<IResult> Add(Brand brand)
         {
@@ -49,6 +49,7 @@ namespace Business.Concrete
             return new SuccessResult("Marka eklendi");
         }
 
+        [SecuredOperation("Admin")]
         public async Task<IResult> Delete(int brandId)
         {
             var brandToDelete = await _brandDal.Get(b => b.BrandId == brandId);
@@ -57,6 +58,7 @@ namespace Business.Concrete
             return new SuccessResult("Marka silindi");
         }
 
+        [SecuredOperation("Admin")]
         public async Task<IResult> Update(BrandForUpdateDto brandForUpdateDto)
         {
 
