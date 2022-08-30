@@ -9,6 +9,7 @@ export const NaviProvider = ({ children }) => {
 
   useEffect(() => {
     setVisible(false);
+    setSidebarStatus(false);
   }, []);
 
   const values = {

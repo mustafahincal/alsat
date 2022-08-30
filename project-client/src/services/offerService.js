@@ -3,6 +3,8 @@ const apiUrl = "https://localhost:44350/api";
 
 export const getOffers = () => get(apiUrl + "/offers/getall");
 
+export const getOfferDetails = () => get(apiUrl + "/offers/getofferdetails");
+
 export const getOfferDetailsByUserId = (userId) =>
   get(apiUrl + "/offers/getofferdetailsbyuserid?userId=" + userId);
 

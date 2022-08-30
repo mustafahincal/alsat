@@ -6,6 +6,7 @@ export const OfferProvider = ({ children }) => {
   const [takenOffers, setTakenOffers] = useState([]);
   const [givenOffers, setGivenOffers] = useState([]);
   const [selectedOffer, setSelectedOffer] = useState({});
+  const [offers, setOffers] = useState([]);
 
   const values = {
     givenOffers,
@@ -14,6 +15,8 @@ export const OfferProvider = ({ children }) => {
     setTakenOffers,
     selectedOffer,
     setSelectedOffer,
+    offers,
+    setOffers,
   };
 
   return (

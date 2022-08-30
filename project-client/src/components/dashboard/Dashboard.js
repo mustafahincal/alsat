@@ -8,6 +8,7 @@ import ControlCategories from "./control/ControlCategories";
 import ControlUsingStates from "./control/ControlUsingStates";
 import ControlProducts from "./control/ControlProducts";
 import ControlCreditCards from "./control/ControlCreditCards";
+import ControlOffers from "./control/ControlOffers";
 
 function DashBoard() {
   return (
@@ -45,6 +46,12 @@ function DashBoard() {
             Kullanım Durumları
           </NavLink>
           <NavLink
+            to={`controlOffers`}
+            className="px-2  rounded py-2 border-b-2 dark:border-gray-600"
+          >
+            Teklifler
+          </NavLink>
+          <NavLink
             to={`users`}
             className="px-2 rounded py-2 border-b-2 dark:border-gray-600"
           >
@@ -68,6 +75,7 @@ function DashBoard() {
           <Route path="/controlCategories" element={<ControlCategories />} />
           <Route path="/controlUsingStates" element={<ControlUsingStates />} />
           <Route path="/controlCreditCards" element={<ControlCreditCards />} />
+          <Route path="/controlOffers" element={<ControlOffers />} />
         </Routes>
       </div>
     </div>
