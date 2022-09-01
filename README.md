@@ -10,11 +10,11 @@
 
 - **N-Tier Architecture**
 - **AOP**
-- **"Entity Framework"**
-- **"Autofac"**
-- **"Fluent Validation"**
-- **"Json Web Token"**
-- **"API"**
+- **Entity Framework**
+- **Autofac**
+- **Fluent Validation**
+- **Json Web Token**
+- **API**
 - **"LINQ"**
 - **Interceptors**
 - **Aspects**
@@ -30,9 +30,10 @@
 - **React**
 - **Tailwind CSS**
 - **Context**
-- **"Formik"**
-- **"React Toastify"**
-- **"React Icons"**
+- **Formik**
+- **Axios**
+- **React Toastify**
+- **React Icons**
 - **Google Fonts**
   <br>
 
