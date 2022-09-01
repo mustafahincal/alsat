@@ -15,7 +15,7 @@
 - **Fluent Validation**
 - **Json Web Token**
 - **API**
-- **"LINQ"**
+- **LINQ**
 - **Interceptors**
 - **Aspects**
 - **Repository Design Pattern**
