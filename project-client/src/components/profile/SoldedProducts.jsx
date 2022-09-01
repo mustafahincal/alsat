@@ -1,15 +1,6 @@
 import React, { useEffect } from "react";
-import {
-  deleteOffer,
-  getOfferDetailsByOwnerId,
-  getOfferDetailsByUserId,
-} from "../../services/offerService";
-import { useOfferContext } from "../../context/OfferContext";
-import { useUserContext } from "../../context/UserContext";
+import { getOfferDetailsByOwnerId } from "../../services/offerService";
 import { getFromLocalStorage } from "../../services/localStorageService";
-import { toast } from "react-toastify";
-import { useNavigate, NavLink } from "react-router-dom";
-import { deleteProduct } from "../../services/productService";
 import { useProductContext } from "../../context/ProductContext";
 import defaultImage from "../../assets/default.png";
 

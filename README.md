@@ -274,6 +274,11 @@ Email : admin@mail.com
 ![](screenshots-readme/31-dashboard-creditcards.png)
 <br>
 
+### **_Not Found Page (Sayfa Bulunamadı)_**
+
+![](screenshots-readme/33-notFoundPage.png)
+<br>
+
 <div align="center">
 
 ### **_Products - Responsive (Ürünler - Responsive)_**
