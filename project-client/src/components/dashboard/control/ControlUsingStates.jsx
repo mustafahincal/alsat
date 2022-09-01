@@ -1,12 +1,5 @@
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
-import { useColorContext } from "../../../context/ColorContext";
-import {
-  deleteColor,
-  getColors,
-  postColor,
-  updateColor,
-} from "../../../services/colorService";
 import { toast } from "react-toastify";
 import { ControlSchema } from "../../../validations/controlSchema";
 import { UseUsingStateContext } from "../../../context/UsingStateContext";
@@ -15,7 +8,6 @@ import {
   getUsingStates,
   postUsingState,
   updateUsingState,
-  updateUsingStates,
 } from "../../../services/usingStateService";
 import { useSubmitContext } from "../../../context/SubmitContext";
 

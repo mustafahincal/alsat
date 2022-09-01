@@ -1,7 +1,6 @@
 import React from "react";
 import { Routes, Route, NavLink } from "react-router-dom";
 import ControlUsers from "./control/ControlUsers";
-import Products from "../product/Products";
 import ControlBrands from "./control/ControlBrands";
 import ControlColors from "./control/ControlColors";
 import ControlCategories from "./control/ControlCategories";

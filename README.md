@@ -244,6 +244,11 @@ Email : admin@mail.com
 ![](screenshots-readme/27-dashboard-categories.png)
 <br>
 
+### **_Dashboard - Categories - Editing (Kontrol Paneli - Kategoriler - Düzenleme)_**
+
+![](screenshots-readme/32-categories-editting.png)
+<br>
+
 ### **_Dashboard - Brands (Kontrol Paneli - Markalar)_**
 
 ![](screenshots-readme/28-dashboard-brands.png)

@@ -1,7 +1,5 @@
 import { useEffect } from "react";
-import { getBrands } from "../../services/brandService";
 import { NavLink } from "react-router-dom";
-import { useBrandContext } from "../../context/BrandContext";
 import { useCategoryContext } from "../../context/CategoryContext";
 import { getCategories } from "../../services/categoryService";
 

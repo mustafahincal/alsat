@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { toast } from "react-toastify";
-
 import { AiFillDelete } from "react-icons/ai";
 import {
   deleteCreditCard,
