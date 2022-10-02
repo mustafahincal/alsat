@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  * {
+    @apply box-border;
+  }
+  .btn {
+    @apply bg-darkBlue text-white py-2 px-5 rounded-md;
+  }
+  html {
+    @apply text-[11px];
+  }
+  .nav-item {
+    @apply hover:border-b-4 border-darkBlue rounded-md transition-all duration-75 dark:border-white;
+  }
+
+  .modal {
+    @apply w-full min-h-full absolute top-0 left-0 bg-black bg-opacity-80 flex justify-center items-center invisible;
+  }
+  .modal.activeModal {
+    @apply visible;
+  }
+  .submitting {
+    @apply opacity-50;
+  }
+  .sidebar {
+    @apply absolute top-full left-7 sm:left-10 flex flex-col bg-white text-black  min-h-screen border-2  rounded-lg shadow-item2 py-10 text-center w-11/12 mx-auto mt-5 invisible dark:bg-gray-800 dark:text-white;
+  }
+  .sidebar.activeSide {
+    @apply visible;
+  }
+}
+.active {
+  @apply bg-darkBlue text-white dark:bg-gray-300 dark:text-black;
+}
+.active-nav {
+  @apply border-b-4 border-black rounded-md dark:border-white;
+}
