@@ -13,6 +13,7 @@
 - **Entity Framework**
 - **Autofac**
 - **Fluent Validation**
+- **SeriLog**
 - **Json Web Token**
 - **API**
 - **LINQ**
