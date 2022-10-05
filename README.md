@@ -40,7 +40,7 @@
 ## **Installing / Getting started (Yükleme / Projeyi çalıştırma)**
 
 ```shell
-1) git clone https://github.com/payologllc/primefor-2022-staj-mustafahincal.git
+1) git clone https://github.com/mustafahincal/alsat.git
 ```
 
 ### **Backend**
