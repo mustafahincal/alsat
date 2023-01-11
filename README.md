@@ -40,13 +40,13 @@
 
 ## **Installing / Getting started (Yükleme / Projeyi çalıştırma)**
 
-```shell
+
 1) git clone https://github.com/mustafahincal/alsat.git
-```
+
 
 ### **Backend**
 
-```shell
+
 2) Click project-server file
 (project-server dosyasına tıkla)
 3) Click project-server.sln and open it Visual Studio
@@ -64,15 +64,15 @@ ya da bu adımı geçebilirsiniz.)
 8) Click Run to run the project. Make sure WebAPI is set as startup project.
 (Projeyi çalıştırmak için Run a tıklayınız. WebAPI nin başlangıç projesi olarak
 ayarlandığından emin olunuz)
-```
+
 
 ### **Frontend**
 
-```shell
+
 9) cd project-client/
 10) npm install
 11) npm run start
-```
+
 
 ## **Admin Login (Admin Girişi)**
 
