@@ -84,30 +84,7 @@ Email : admin@mail.com
 ## **Database (Veri Tabanı)**
 
 ![](screenshots-readme/database.png)
-<br>
 
-## **Swagger Images (Swagger Ekran Görüntüleri)**
-
-### **_Login (Giriş Yap)_**
-
-![](screenshots-readme/34-swagger-login.png)
-<br>
-
-### **_Controller Methods (Kontrolör Metodları)_**
-
-![](screenshots-readme/35-swagger-1.png)
-<br>
-
-![](screenshots-readme/35-swagger-2.png)
-<br>
-
-![](screenshots-readme/35-swagger-productmethods.png)
-<br>
-
-![](screenshots-readme/36-swagger-3.png)
-<br>
-
-![](screenshots-readme/37-swagger-4.png)
 <br>
 
 ## **Project Images (Proje Ekran Görüntüleri)**
