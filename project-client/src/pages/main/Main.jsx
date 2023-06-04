@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import Products from "../product/Products";
-import Brands from "../brand/Brands";
-import Colors from "../color/Colors";
+import Brands from "../../components/brand/Brands";
+import Colors from "../../components/color/Colors";
 import { Routes, Route, NavLink } from "react-router-dom";
-import Categories from "../category/Categories";
+import Categories from "../../components/category/Categories";
 import { useUserContext } from "../../context/UserContext";
 import { getUserById } from "../../services/userService";
 import { getFromLocalStorage } from "../../services/localStorageService";
 import { useNaviContext } from "../../context/NaviContext";
-import UsingStates from "../usingState/UsingStates";
+import UsingStates from "../../components/usingState/UsingStates";
 
 function Main() {
   const { selectedUser } = useUserContext();

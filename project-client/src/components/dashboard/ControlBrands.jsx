@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
-import { useBrandContext } from "../../../context/BrandContext";
+import { useBrandContext } from "../../context/BrandContext";
 import {
   deleteBrand,
   getBrands,
   postBrand,
   updateBrand,
-} from "../../../services/brandService";
+} from "../../services/brandService";
 import { toast } from "react-toastify";
-import { ControlSchema } from "../../../validations/controlSchema";
-import { useSubmitContext } from "../../../context/SubmitContext";
+import { ControlSchema } from "../../validations/controlSchema";
+import { useSubmitContext } from "../../context/SubmitContext";
 
 function ControlBrands() {
   const {

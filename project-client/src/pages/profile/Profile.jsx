@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { Routes, Route, NavLink } from "react-router-dom";
-import ChangePassword from "./ChangePassword";
-import UpdateUser from "./UpdateUser";
+import ChangePassword from "../../components/profile/ChangePassword";
+import UpdateUser from "../../components/profile/UpdateUser";
 import { useUserContext } from "../../context/UserContext";
-import TakenOffers from "./TakenOffers";
-import GivenOffers from "./GivenOffers";
-import ProfileMain from "./ProfileMain";
-import SoldedProducts from "./SoldedProducts";
-import PurchasedProducts from "./PurchasedProducts";
-import CreditCard from "./CreditCard";
+import TakenOffers from "../../components/profile/TakenOffers";
+import GivenOffers from "../../components/profile/GivenOffers";
+import ProfileMain from "../../components/profile/ProfileMain";
+import SoldedProducts from "../../components/profile/SoldedProducts";
+import PurchasedProducts from "../../components/profile/PurchasedProducts";
+import CreditCard from "../../components/profile/CreditCard";
 
 function Profile() {
   return (

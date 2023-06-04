@@ -16,7 +16,7 @@ import { useOfferContext } from "../../context/OfferContext";
 import { usePaymentContext } from "../../context/PaymentContext";
 import { useThemeContext } from "../../context/ThemeContext";
 
-function Navi() {
+function Navbar() {
   const { isAdmin, isLogged, setIsLogged, setIsAdmin, setCounter } =
     useAuthContext();
   const { selectedUser, setSelectedUser } = useUserContext();
@@ -306,4 +306,4 @@ function Navi() {
   );
 }
 
-export default Navi;
+export default Navbar;
